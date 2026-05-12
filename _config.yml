@@ -1,0 +1,23 @@
+title: 崔之行的博客
+description: 记录技术、学习与成长
+url: "https://changer-changer.github.io"
+baseurl: ""
+
+markdown: kramdown
+highlighter: rouge
+permalink: /:year/:month/:day/:title/
+
+plugins:
+  - jekyll-paginate
+
+paginate: 10
+paginate_path: "/page:num/"
+
+# Social links
+github_username: changer-changer
+
+# Build settings
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
