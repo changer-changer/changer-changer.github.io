@@ -1,0 +1,36 @@
+---
+layout: default
+title: "标签"
+permalink: /tags/
+---
+
+<h1 class="page-title">🏷️ 标签</h1>
+<p class="page-desc">点击标签查看相关文章</p>
+
+<div class="tags-cloud">
+  {% assign sorted_tags = site.tags | sort %}
+  {% for tag in sorted_tags %}
+    <a href="#{{ tag[0] }}" class="tag-pill">
+      {{ tag[0] }} <span class="tag-count">{{ tag[1].size }}</span>
+    </a>
+  {% endfor %}
+</div>
+
+<div class="tags-list">
+  {% for tag in sorted_tags %}
+  <div class="tag-section" id="{{ tag[0] }}">
+    <h2 class="tag-heading">
+      #{{ tag[0] }}
+      <span class="tag-count-label">{{ tag[1].size }} 篇</span>
+    </h2>
+    <ul class="post-list">
+      {% for post in tag[1] %}
+      <li>
+        <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        <div class="post-date">{{ post.date | date: "%Y-%m-%d" }}</div>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endfor %}
+</div>
