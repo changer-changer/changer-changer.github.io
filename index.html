@@ -5,10 +5,22 @@ layout: default
 
 <ul class="post-list">
   {% for post in paginator.posts %}
-  <li>
+  <li class="post-item">
     <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
-    <div class="post-date">{{ post.date | date: "%Y年%m月%d日" }}</div>
+    <div class="post-meta-row">
+      <span class="post-date">{{ post.date | date: "%Y-%m-%d" }}</span>
+      {% if post.categories.size > 0 %}
+        <span class="post-cat">{{ post.categories | first }}</span>
+      {% endif %}
+    </div>
     <div class="post-excerpt">{{ post.excerpt | strip_html | truncate: 120 }}</div>
+    {% if post.tags.size > 0 %}
+    <div class="post-tags-row">
+      {% for tag in post.tags limit:4 %}
+        <a href="{{ '/tags/' | relative_url }}#{{ tag }}" class="tag small">#{{ tag }}</a>
+      {% endfor %}
+    </div>
+    {% endif %}
   </li>
   {% endfor %}
 </ul>
