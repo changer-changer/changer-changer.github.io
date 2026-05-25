@@ -9,7 +9,7 @@ layout: default
       {% if page.categories.size > 0 %}
         <span class="categories">
           {% for cat in page.categories %}
-            <span class="tag">{{ cat }}</span>
+            <a href="{{ '/categories/' | relative_url }}#{{ cat }}" class="tag clickable">{{ cat }}</a>
           {% endfor %}
         </span>
       {% endif %}
@@ -23,7 +23,7 @@ layout: default
   {% if page.tags.size > 0 %}
   <div class="post-tags">
     {% for tag in page.tags %}
-      <span class="tag">#{{ tag }}</span>
+      <a href="{{ '/tags/' | relative_url }}#{{ tag }}" class="tag clickable">#{{ tag }}</a>
     {% endfor %}
   </div>
   {% endif %}
