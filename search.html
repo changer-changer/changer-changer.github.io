@@ -1,0 +1,93 @@
+---
+layout: default
+title: "搜索"
+permalink: /search/
+---
+
+<h1 class="page-title">🔍 搜索</h1>
+
+<div class="search-box">
+  <input type="text" id="search-input" placeholder="输入关键词搜索文章..." autofocus>
+</div>
+
+<div id="search-results" class="search-results"></div>
+
+<div id="search-hint" class="search-hint">
+  <p>支持搜索标题、内容、标签</p>
+  <div class="search-tags">
+    <span class="hint-label">热门标签：</span>
+    {% assign sorted_tags = site.tags | sort %}
+    {% for tag in sorted_tags limit:15 %}
+      <a href="#" class="tag-pill small" onclick="searchTag('{{ tag[0] }}'); return false;">{{ tag[0] }}</a>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+var posts = [
+  {% for post in site.posts %}
+  {
+    "title": {{ post.title | jsonify }},
+    "url": "{{ post.url | relative_url }}",
+    "date": "{{ post.date | date: '%Y-%m-%d' }}",
+    "tags": {{ post.tags | jsonify }},
+    "categories": {{ post.categories | jsonify }},
+    "excerpt": {{ post.excerpt | strip_html | truncate: 200 | jsonify }}
+  }{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+];
+
+var searchInput = document.getElementById('search-input');
+var searchResults = document.getElementById('search-results');
+var searchHint = document.getElementById('search-hint');
+
+searchInput.addEventListener('input', function() {
+  var query = this.value.trim().toLowerCase();
+  if (query.length < 2) {
+    searchResults.innerHTML = '';
+    searchHint.style.display = '';
+    return;
+  }
+  searchHint.style.display = 'none';
+  
+  var results = posts.filter(function(post) {
+    var text = (post.title + ' ' + post.excerpt + ' ' + 
+                post.tags.join(' ') + ' ' + post.categories.join(' ')).toLowerCase();
+    // 支持多关键词搜索（空格分隔）
+    var keywords = query.split(/\s+/);
+    return keywords.every(function(kw) { return text.indexOf(kw) !== -1; });
+  });
+  
+  if (results.length === 0) {
+    searchResults.innerHTML = '<div class="no-results">没有找到相关文章</div>';
+    return;
+  }
+  
+  var html = '<div class="results-count">找到 ' + results.length + ' 篇文章</div>';
+  results.forEach(function(post) {
+    html += '<div class="result-item">';
+    html += '<a href="' + post.url + '" class="result-title">' + post.title + '</a>';
+    html += '<div class="result-meta">' + post.date;
+    if (post.categories && post.categories.length) {
+      html += ' · ' + post.categories.join(', ');
+    }
+    html += '</div>';
+    if (post.tags && post.tags.length) {
+      html += '<div class="result-tags">';
+      post.tags.forEach(function(tag) {
+        html += '<span class="tag small">#' + tag + '</span> ';
+      });
+      html += '</div>';
+    }
+    html += '<div class="result-excerpt">' + post.excerpt + '</div>';
+    html += '</div>';
+  });
+  
+  searchResults.innerHTML = html;
+});
+
+function searchTag(tag) {
+  searchInput.value = tag;
+  searchInput.dispatchEvent(new Event('input'));
+}
+</script>
