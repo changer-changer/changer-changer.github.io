@@ -35,7 +35,7 @@ body {
   backdrop-filter: blur(10px);
 }
 .navbar .container {
-  max-width: var(--max-w);
+  max-width: 900px;
   margin: 0 auto;
   padding: 1rem 1.5rem;
   display: flex;
@@ -48,18 +48,20 @@ body {
   color: var(--fg);
   text-decoration: none;
 }
-.nav-links { display: flex; gap: 1.5rem; }
+.nav-links { display: flex; gap: 1.2rem; flex-wrap: wrap; }
 .nav-links a {
   color: var(--muted);
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   transition: color 0.2s;
+  padding: 0.2rem 0;
+  border-bottom: 2px solid transparent;
 }
-.nav-links a:hover { color: var(--accent); }
+.nav-links a:hover { color: var(--accent); border-bottom-color: var(--accent); }
 
 /* Main */
 main.container {
-  max-width: var(--max-w);
+  max-width: 900px;
   margin: 0 auto;
   padding: 2rem 1.5rem;
   flex: 1;
@@ -69,7 +71,7 @@ main.container {
 .post-list { list-style: none; }
 .post-list li { margin-bottom: 2rem; }
 .post-list .post-link {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 600;
   color: var(--fg);
   text-decoration: none;
@@ -83,8 +85,27 @@ main.container {
 }
 .post-list .post-excerpt {
   color: var(--muted);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   margin-top: 0.25rem;
+}
+
+/* Post meta row on index */
+.post-meta-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  margin-top: 0.3rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.post-cat {
+  background: var(--code-bg);
+  padding: 0.1rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+}
+.post-tags-row {
+  margin-top: 0.5rem;
 }
 
 /* Single Post */
@@ -95,8 +116,9 @@ main.container {
   font-size: 0.9rem;
   margin-top: 0.5rem;
   display: flex;
-  gap: 1rem;
+  gap: 0.75rem;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 /* Post Content */
@@ -150,6 +172,7 @@ main.container {
   width: 100%;
   border-collapse: collapse;
   margin: 1.25rem 0;
+  font-size: 0.95rem;
 }
 .post-content th, .post-content td {
   border: 1px solid var(--border);
@@ -167,7 +190,179 @@ main.container {
   padding: 0.2rem 0.6rem;
   border-radius: 4px;
   font-size: 0.8rem;
-  margin-right: 0.5rem;
+  margin-right: 0.4rem;
+  margin-bottom: 0.4rem;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.tag.clickable:hover {
+  background: var(--accent);
+  color: #fff;
+}
+.tag.small {
+  font-size: 0.7rem;
+  padding: 0.15rem 0.45rem;
+}
+
+/* Tags Cloud */
+.tags-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+.tag-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--fg);
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.tag-pill:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+.tag-pill.small {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.6rem;
+}
+.tag-count {
+  background: var(--code-bg);
+  color: var(--muted);
+  padding: 0.1rem 0.4rem;
+  border-radius: 10px;
+  font-size: 0.7rem;
+}
+.tag-pill:hover .tag-count {
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+}
+
+/* Tag sections */
+.tags-list { margin-top: 2rem; }
+.tag-section { margin-bottom: 2.5rem; scroll-margin-top: 80px; }
+.tag-heading {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.tag-count-label {
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+/* Categories */
+.page-desc {
+  color: var(--muted);
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+}
+.categories-grid { display: flex; flex-direction: column; gap: 2rem; }
+.category-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  scroll-margin-top: 80px;
+}
+.category-heading {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.cat-count {
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+/* Search */
+.search-box {
+  margin-bottom: 1.5rem;
+}
+.search-box input {
+  width: 100%;
+  padding: 0.8rem 1.2rem;
+  font-size: 1.1rem;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  outline: none;
+  font-family: var(--font);
+  transition: border-color 0.2s;
+  background: var(--card);
+}
+.search-box input:focus {
+  border-color: var(--accent);
+}
+.search-hint {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.search-tags {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: center;
+}
+.hint-label {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-right: 0.3rem;
+}
+.search-results { margin-top: 1rem; }
+.results-count {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+.result-item {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.result-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--fg);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.result-title:hover { color: var(--accent); }
+.result-meta {
+  color: var(--muted);
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+}
+.result-tags {
+  margin-top: 0.4rem;
+}
+.result-excerpt {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-top: 0.4rem;
+  line-height: 1.5;
+}
+.no-results {
+  text-align: center;
+  color: var(--muted);
+  padding: 2rem 0;
+  font-size: 1.1rem;
 }
 
 /* Post Navigation */
@@ -221,11 +416,13 @@ main.container {
 }
 
 /* Page header */
-.page-title { font-size: 2rem; font-weight: 800; margin-bottom: 1.5rem; }
+.page-title { font-size: 2rem; font-weight: 800; margin-bottom: 1rem; }
 
 /* Responsive */
 @media (max-width: 640px) {
   .post-title { font-size: 1.5rem; }
-  .nav-links { gap: 1rem; }
-  .nav-links a { font-size: 0.8rem; }
+  .nav-links { gap: 0.8rem; }
+  .nav-links a { font-size: 0.75rem; }
+  .navbar .container { flex-direction: column; gap: 0.5rem; }
+  .tag-pill { font-size: 0.8rem; padding: 0.3rem 0.6rem; }
 }
