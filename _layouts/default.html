@@ -28,6 +28,7 @@
       <div class="nav-links">
         <a {% if page.url == "/" %}aria-current="page"{% endif %} href="{{ '/' | relative_url }}">首页</a>
         <a {% if page.url contains "/theory/" %}aria-current="page"{% endif %} href="{{ '/theory/' | relative_url }}">理论</a>
+        <a {% if page.url contains "/sparks/" %}aria-current="page"{% endif %} href="{{ '/sparks/' | relative_url }}">火花</a>
         <a {% if page.url contains "/categories/" %}aria-current="page"{% endif %} href="{{ '/categories/' | relative_url }}">主题</a>
         <a {% if page.url contains "/tags/" %}aria-current="page"{% endif %} href="{{ '/tags/' | relative_url }}">标签</a>
         <a {% if page.url contains "/archive/" %}aria-current="page"{% endif %} href="{{ '/archive/' | relative_url }}">归档</a>

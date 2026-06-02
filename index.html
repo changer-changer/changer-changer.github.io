@@ -56,6 +56,33 @@ layout: default
   </div>
 </section>
 
+{% if site.data.sparks.size > 0 %}
+<section class="section-band sparks-band">
+  <div class="section-head">
+    <p class="eyebrow">Sparks</p>
+    <h2>火花</h2>
+    <a class="text-link" href="{{ '/sparks/' | relative_url }}">查看全部</a>
+  </div>
+  <div class="sparks-home">
+    {% assign spark_index = site.time | date: "%s" | modulo: site.data.sparks.size %}
+    {% assign spark = site.data.sparks[spark_index] %}
+    {% assign linked_post = nil %}
+    {% for post in site.posts %}
+      {% if post.slug == spark.slug or post.url contains spark.slug %}
+        {% assign linked_post = post %}
+        {% break %}
+      {% endif %}
+    {% endfor %}
+    <blockquote class="spark-card">
+      <p>{{ spark.text }}</p>
+      {% if linked_post %}
+        <cite><a href="{{ linked_post.url | relative_url }}">→ {{ linked_post.title }}</a></cite>
+      {% endif %}
+    </blockquote>
+  </div>
+</section>
+{% endif %}
+
 <section class="section-band topic-map">
   <div class="section-head">
     <p class="eyebrow">Map</p>
