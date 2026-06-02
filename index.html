@@ -1,48 +1,128 @@
 ---
 layout: default
 ---
-<h1 class="page-title">最新文章</h1>
 
-<ul class="post-list">
-  {% for post in paginator.posts %}
-  <li class="post-item">
-    <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
-    <div class="post-meta-row">
-      <span class="post-date">{{ post.date | date: "%Y-%m-%d" }}</span>
-      {% if post.categories.size > 0 %}
-        <span class="post-cat">{{ post.categories | first }}</span>
+{% assign latest_post = site.posts | first %}
+
+<section class="home-hero">
+  <div class="hero-copy">
+    <p class="eyebrow">Personal research log</p>
+    <h1>把技术、认知和个人演化写成可检索的长期系统。</h1>
+    <p class="hero-lede">这里记录 AI、深度学习、认知科学、社会观察和“大一统生存理论”。目标不是堆笔记，而是把正在形成的判断、模型和行动原则沉淀成可复用的知识地图。</p>
+    <div class="hero-actions">
+      <button class="button primary search-open" type="button">搜索文章</button>
+      <a class="button secondary" href="{{ '/theory/' | relative_url }}">进入理论体系</a>
+      <a class="text-link" href="https://github.com/{{ site.github_username }}">GitHub</a>
+    </div>
+  </div>
+
+  <div class="hero-panel" aria-label="博客概览">
+    <div class="metric-row">
+      <div><strong>{{ site.posts | size }}</strong><span>篇文章</span></div>
+      <div><strong>{{ site.categories | size }}</strong><span>个主题</span></div>
+      <div><strong>{{ site.tags | size }}</strong><span>个标签</span></div>
+    </div>
+    {% if latest_post %}
+    <a class="latest-note" href="{{ latest_post.url | relative_url }}">
+      <span>最新文章</span>
+      <strong>{{ latest_post.title }}</strong>
+      <em>{{ latest_post.date | date: "%Y-%m-%d" }}</em>
+    </a>
+    {% endif %}
+  </div>
+</section>
+
+<section class="section-band">
+  <div class="section-head">
+    <p class="eyebrow">Featured</p>
+    <h2>最近的思考</h2>
+    <a class="text-link" href="{{ '/archive/' | relative_url }}">查看全部</a>
+  </div>
+  <div class="featured-grid">
+    {% for post in site.posts limit:3 %}
+      {% assign words = post.content | number_of_words %}
+      {% assign minutes = words | divided_by: 320 | plus: 1 %}
+      <article class="featured-card{% if forloop.first %} primary-card{% endif %}">
+        <a href="{{ post.url | relative_url }}">
+          <span class="card-meta">{{ post.date | date: "%Y-%m-%d" }} · {{ minutes }} 分钟</span>
+          <h3>{{ post.title }}</h3>
+          <p>{{ post.excerpt | strip_html | truncate: 150 }}</p>
+          {% if post.categories.size > 0 %}
+            <span class="card-category">{{ post.categories | first }}</span>
+          {% endif %}
+        </a>
+      </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section-band topic-map">
+  <div class="section-head">
+    <p class="eyebrow">Map</p>
+    <h2>按主题进入</h2>
+    <a class="text-link" href="{{ '/categories/' | relative_url }}">主题索引</a>
+  </div>
+  <div class="topic-grid">
+    {% assign sorted_cats = site.categories | sort %}
+    {% for cat in sorted_cats limit:8 %}
+      <a class="topic-card" href="{{ '/categories/' | relative_url }}#{{ cat[0] }}">
+        <span>{{ cat[1].size }} 篇</span>
+        <strong>{{ cat[0] }}</strong>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section-band latest-list-section">
+  <div class="section-head">
+    <p class="eyebrow">Latest</p>
+    <h2>最新文章</h2>
+  </div>
+
+  <div class="post-list refined">
+    {% for post in paginator.posts %}
+      {% assign words = post.content | number_of_words %}
+      {% assign minutes = words | divided_by: 320 | plus: 1 %}
+      <article class="post-item">
+        <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        <div class="post-meta-row">
+          <time>{{ post.date | date: "%Y-%m-%d" }}</time>
+          <span>{{ minutes }} 分钟读完</span>
+          {% if post.categories.size > 0 %}
+            <a class="post-cat" href="{{ '/categories/' | relative_url }}#{{ post.categories | first }}">{{ post.categories | first }}</a>
+          {% endif %}
+        </div>
+        <p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 140 }}</p>
+        {% if post.tags.size > 0 %}
+        <div class="post-tags-row">
+          {% for tag in post.tags limit:4 %}
+            <a href="{{ '/tags/' | relative_url }}#{{ tag }}" class="tag small">#{{ tag }}</a>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </article>
+    {% endfor %}
+  </div>
+
+  {% if paginator.total_pages > 1 %}
+  <nav class="pagination" aria-label="分页">
+    {% if paginator.previous_page %}
+      <a href="{{ paginator.previous_page_path | relative_url }}">上一页</a>
+    {% endif %}
+
+    {% for page_num in (1..paginator.total_pages) %}
+      {% if page_num == paginator.page %}
+        <span class="current">{{ page_num }}</span>
+      {% elsif page_num == 1 %}
+        <a href="{{ '/' | relative_url }}">{{ page_num }}</a>
+      {% else %}
+        <a href="{{ site.paginate_path | replace: ':num', page_num | relative_url }}">{{ page_num }}</a>
       {% endif %}
-    </div>
-    <div class="post-excerpt">{{ post.excerpt | strip_html | truncate: 120 }}</div>
-    {% if post.tags.size > 0 %}
-    <div class="post-tags-row">
-      {% for tag in post.tags limit:4 %}
-        <a href="{{ '/tags/' | relative_url }}#{{ tag }}" class="tag small">#{{ tag }}</a>
-      {% endfor %}
-    </div>
+    {% endfor %}
+
+    {% if paginator.next_page %}
+      <a href="{{ paginator.next_page_path | relative_url }}">下一页</a>
     {% endif %}
-  </li>
-  {% endfor %}
-</ul>
-
-{% if paginator.total_pages > 1 %}
-<div class="pagination">
-  {% if paginator.previous_page %}
-    <a href="{{ paginator.previous_page_path | relative_url }}">&laquo; 上一页</a>
+  </nav>
   {% endif %}
-
-  {% for page in (1..paginator.total_pages) %}
-    {% if page == paginator.page %}
-      <span class="current">{{ page }}</span>
-    {% elsif page == 1 %}
-      <a href="{{ '/' | relative_url }}">{{ page }}</a>
-    {% else %}
-      <a href="{{ site.paginate_path | replace: ':num', page | relative_url }}">{{ page }}</a>
-    {% endif %}
-  {% endfor %}
-
-  {% if paginator.next_page %}
-    <a href="{{ paginator.next_page_path | relative_url }}">下一页 &raquo;</a>
-  {% endif %}
-</div>
-{% endif %}
+</section>

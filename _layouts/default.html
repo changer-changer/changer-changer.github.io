@@ -5,32 +5,185 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
   <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | truncate: 160 }}">
+  <meta name="author" content="{{ site.author | default: site.title }}">
+  <meta name="theme-color" content="#f6f7f4">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  <meta property="og:title" content="{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}">
+  <meta property="og:description" content="{{ page.excerpt | default: site.description | strip_html | truncate: 160 }}">
+  <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✍️</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%23141713'/%3E%3Ctext x='50' y='60' text-anchor='middle' font-size='36' font-family='Arial, sans-serif' font-weight='700' fill='%23f6f7f4'%3ECZ%3C/text%3E%3C/svg%3E">
 </head>
 <body>
+  <a class="skip-link" href="#content">跳到正文</a>
+  <div class="reading-progress" aria-hidden="true"><span id="reading-progress-bar"></span></div>
+
   <nav class="navbar">
-    <div class="container">
-      <a href="{{ '/' | relative_url }}" class="site-title">{{ site.title }}</a>
+    <div class="nav-container">
+      <a href="{{ '/' | relative_url }}" class="site-title" aria-label="{{ site.title }} 首页">
+        <span class="site-mark">CZ</span>
+        <span class="site-name">{{ site.title }}</span>
+      </a>
       <div class="nav-links">
-        <a href="{{ '/' | relative_url }}">首页</a>
-        <a href="{{ '/tags/' | relative_url }}">标签</a>
-        <a href="{{ '/categories/' | relative_url }}">分类</a>
-        <a href="{{ '/search/' | relative_url }}">搜索</a>
-        <a href="{{ '/archive' | relative_url }}">归档</a>
-        <a href="{{ '/theory/' | relative_url }}">理论</a>
+        <a {% if page.url == "/" %}aria-current="page"{% endif %} href="{{ '/' | relative_url }}">首页</a>
+        <a {% if page.url contains "/theory/" %}aria-current="page"{% endif %} href="{{ '/theory/' | relative_url }}">理论</a>
+        <a {% if page.url contains "/categories/" %}aria-current="page"{% endif %} href="{{ '/categories/' | relative_url }}">主题</a>
+        <a {% if page.url contains "/tags/" %}aria-current="page"{% endif %} href="{{ '/tags/' | relative_url }}">标签</a>
+        <a {% if page.url contains "/archive/" %}aria-current="page"{% endif %} href="{{ '/archive/' | relative_url }}">归档</a>
+        <a {% if page.url contains "/about/" %}aria-current="page"{% endif %} href="{{ '/about/' | relative_url }}">关于</a>
+      </div>
+      <div class="nav-actions">
+        <button class="icon-button search-open search-button" type="button" aria-label="打开快捷搜索" title="搜索">
+          <span>搜索</span>
+          <kbd>Ctrl K</kbd>
+        </button>
+        <button class="icon-button theme-toggle" type="button" aria-label="切换主题" title="切换主题">亮</button>
       </div>
     </div>
   </nav>
 
-  <main class="container">
+  <main id="content" class="site-main page-{{ page.layout | default: 'default' }}">
     {{ content }}
   </main>
 
   <footer class="footer">
-    <div class="container">
-      <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }} · Powered by GitHub Pages</p>
+    <div class="footer-inner">
+      <div>
+        <strong>{{ site.title }}</strong>
+        <p>技术、认知、理论体系与个人成长的长期记录。</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/{{ site.github_username }}" rel="me">GitHub</a>
+        <a href="{{ '/archive/' | relative_url }}">Archive</a>
+        <a href="{{ '/search/' | relative_url }}">Search</a>
+      </div>
     </div>
   </footer>
+
+  <div class="command-palette" id="command-palette" aria-hidden="true">
+    <div class="command-backdrop" data-command-close></div>
+    <section class="command-panel" role="dialog" aria-modal="true" aria-labelledby="command-title">
+      <div class="command-header">
+        <h2 id="command-title">快速搜索</h2>
+        <button type="button" class="icon-button" data-command-close aria-label="关闭搜索">Esc</button>
+      </div>
+      <input id="command-input" class="command-input" type="search" placeholder="搜索标题、摘要、标签或分类" autocomplete="off">
+      <div id="command-results" class="command-results" aria-live="polite"></div>
+    </section>
+  </div>
+
+  <script>
+    (function() {
+      var root = document.documentElement;
+      var storedTheme = localStorage.getItem('cz-theme');
+      if (storedTheme) root.setAttribute('data-theme', storedTheme);
+
+      var themeButton = document.querySelector('.theme-toggle');
+      function syncThemeButton() {
+        var current = root.getAttribute('data-theme') || 'light';
+        if (themeButton) themeButton.textContent = current === 'dark' ? '暗' : '亮';
+      }
+      syncThemeButton();
+      if (themeButton) {
+        themeButton.addEventListener('click', function() {
+          var next = (root.getAttribute('data-theme') || 'light') === 'dark' ? 'light' : 'dark';
+          root.setAttribute('data-theme', next);
+          localStorage.setItem('cz-theme', next);
+          syncThemeButton();
+        });
+      }
+
+      var progressBar = document.getElementById('reading-progress-bar');
+      function updateProgress() {
+        if (!progressBar) return;
+        var scrollTop = window.scrollY || document.documentElement.scrollTop;
+        var max = document.documentElement.scrollHeight - window.innerHeight;
+        var pct = max > 0 ? Math.min(100, Math.max(0, (scrollTop / max) * 100)) : 0;
+        progressBar.style.width = pct + '%';
+      }
+      window.addEventListener('scroll', updateProgress, { passive: true });
+      updateProgress();
+
+      var posts = [
+        {% for post in site.posts %}
+        {
+          title: {{ post.title | jsonify }},
+          url: "{{ post.url | relative_url }}",
+          date: "{{ post.date | date: '%Y-%m-%d' }}",
+          tags: {{ post.tags | jsonify }},
+          categories: {{ post.categories | jsonify }},
+          excerpt: {{ post.excerpt | strip_html | truncate: 180 | jsonify }}
+        }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ];
+
+      var palette = document.getElementById('command-palette');
+      var input = document.getElementById('command-input');
+      var results = document.getElementById('command-results');
+      var openButtons = document.querySelectorAll('.search-open');
+
+      function escapeHtml(value) {
+        return String(value).replace(/[&<>"']/g, function(char) {
+          return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' })[char];
+        });
+      }
+
+      function renderResults(query) {
+        var normalized = query.trim().toLowerCase();
+        var matches = posts;
+        if (normalized.length) {
+          var keywords = normalized.split(/\s+/);
+          matches = posts.filter(function(post) {
+            var text = [post.title, post.excerpt, post.date, post.tags.join(' '), post.categories.join(' ')].join(' ').toLowerCase();
+            return keywords.every(function(keyword) { return text.indexOf(keyword) !== -1; });
+          });
+        }
+        matches = matches.slice(0, 8);
+        if (!matches.length) {
+          results.innerHTML = '<p class="command-empty">没有匹配文章。试试“AI”“认知科学”“理论体系”。</p>';
+          return;
+        }
+        results.innerHTML = matches.map(function(post) {
+          var meta = [post.date].concat(post.categories || []).join(' · ');
+          return '<a class="command-result" href="' + post.url + '">' +
+            '<span class="command-result-title">' + escapeHtml(post.title) + '</span>' +
+            '<span class="command-result-meta">' + escapeHtml(meta) + '</span>' +
+            '<span class="command-result-excerpt">' + escapeHtml(post.excerpt) + '</span>' +
+            '</a>';
+        }).join('');
+      }
+
+      function openPalette(seed) {
+        if (!palette || !input) return;
+        palette.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('no-scroll');
+        input.value = seed || '';
+        renderResults(input.value);
+        setTimeout(function() { input.focus(); }, 30);
+      }
+
+      function closePalette() {
+        if (!palette) return;
+        palette.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('no-scroll');
+      }
+
+      openButtons.forEach(function(button) {
+        button.addEventListener('click', function() { openPalette(''); });
+      });
+      document.querySelectorAll('[data-command-close]').forEach(function(element) {
+        element.addEventListener('click', closePalette);
+      });
+      if (input) input.addEventListener('input', function() { renderResults(input.value); });
+      document.addEventListener('keydown', function(event) {
+        if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
+          event.preventDefault();
+          openPalette('');
+        }
+        if (event.key === 'Escape') closePalette();
+      });
+    })();
+  </script>
 </body>
 </html>

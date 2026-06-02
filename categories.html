@@ -4,26 +4,34 @@ title: "分类"
 permalink: /categories/
 ---
 
-<h1 class="page-title">📂 分类</h1>
-<p class="page-desc">按主题浏览文章</p>
+<section class="page-hero">
+  <p class="eyebrow">Topics</p>
+  <h1>主题索引</h1>
+  <p>按主线阅读：技术、理论体系、认知、社会观察、学习与生活。</p>
+</section>
 
-<div class="categories-grid">
+<section class="categories-grid">
   {% assign sorted_cats = site.categories | sort %}
   {% for cat in sorted_cats %}
-  <div class="category-card" id="{{ cat[0] }}">
-    <h2 class="category-heading">
-      {% if cat[0] == "理论体系" %}📖{% elsif cat[0] == "技术" %}🤖{% elsif cat[0] == "思考" %}🧠{% elsif cat[0] == "社会" %}🌍{% elsif cat[0] == "学习" %}📚{% elsif cat[0] == "生活" %}💪{% elsif cat[0] == "商业" %}💼{% elsif cat[0] == "日记" %}📝{% else %}📌{% endif %}
-      {{ cat[0] }}
-      <span class="cat-count">{{ cat[1].size }} 篇</span>
-    </h2>
-    <ul class="post-list">
+  <article class="category-card" id="{{ cat[0] }}">
+    <header class="category-heading">
+      <div>
+        <p class="eyebrow">Topic</p>
+        <h2>{{ cat[0] }}</h2>
+      </div>
+      <span>{{ cat[1].size }} 篇</span>
+    </header>
+    <div class="post-list refined dense">
       {% for post in cat[1] %}
-      <li>
+      <article class="post-item">
         <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
-        <div class="post-date">{{ post.date | date: "%Y-%m-%d" }}</div>
-      </li>
+        <div class="post-meta-row">
+          <time>{{ post.date | date: "%Y-%m-%d" }}</time>
+          {% if post.tags.size > 0 %}<span>#{{ post.tags | first }}</span>{% endif %}
+        </div>
+      </article>
       {% endfor %}
-    </ul>
-  </div>
+    </div>
+  </article>
   {% endfor %}
-</div>
+</section>

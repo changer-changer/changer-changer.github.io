@@ -4,24 +4,29 @@ title: "搜索"
 permalink: /search/
 ---
 
-<h1 class="page-title">🔍 搜索</h1>
+<section class="page-hero">
+  <p class="eyebrow">Search</p>
+  <h1>搜索文章、标签和主题</h1>
+  <p>适合从关键词进入知识库。支持多关键词组合，例如“AI 学习”或“认知科学 执行”。</p>
+</section>
 
-<div class="search-box">
-  <input type="text" id="search-input" placeholder="输入关键词搜索文章..." autofocus>
-</div>
-
-<div id="search-results" class="search-results"></div>
-
-<div id="search-hint" class="search-hint">
-  <p>支持搜索标题、内容、标签</p>
-  <div class="search-tags">
-    <span class="hint-label">热门标签：</span>
-    {% assign sorted_tags = site.tags | sort %}
-    {% for tag in sorted_tags limit:15 %}
-      <a href="#" class="tag-pill small" onclick="searchTag('{{ tag[0] }}'); return false;">{{ tag[0] }}</a>
-    {% endfor %}
+<section class="search-surface">
+  <div class="search-box">
+    <input type="search" id="search-input" placeholder="输入关键词搜索文章" autofocus autocomplete="off">
   </div>
-</div>
+
+  <div id="search-hint" class="search-hint">
+    <div class="search-tags">
+      <span class="hint-label">常用入口</span>
+      {% assign sorted_tags = site.tags | sort %}
+      {% for tag in sorted_tags limit:18 %}
+        <a href="#" class="tag-pill small" onclick="searchTag('{{ tag[0] }}'); return false;">{{ tag[0] }}</a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div id="search-results" class="search-results"></div>
+</section>
 
 <script>
 var posts = [
@@ -32,7 +37,7 @@ var posts = [
     "date": "{{ post.date | date: '%Y-%m-%d' }}",
     "tags": {{ post.tags | jsonify }},
     "categories": {{ post.categories | jsonify }},
-    "excerpt": {{ post.excerpt | strip_html | truncate: 200 | jsonify }}
+    "excerpt": {{ post.excerpt | strip_html | truncate: 220 | jsonify }}
   }{% unless forloop.last %},{% endunless %}
   {% endfor %}
 ];
@@ -41,53 +46,55 @@ var searchInput = document.getElementById('search-input');
 var searchResults = document.getElementById('search-results');
 var searchHint = document.getElementById('search-hint');
 
-searchInput.addEventListener('input', function() {
-  var query = this.value.trim().toLowerCase();
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, function(char) {
+    return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' })[char];
+  });
+}
+
+function runSearch() {
+  var query = searchInput.value.trim().toLowerCase();
   if (query.length < 2) {
     searchResults.innerHTML = '';
     searchHint.style.display = '';
     return;
   }
   searchHint.style.display = 'none';
-  
+
+  var keywords = query.split(/\s+/);
   var results = posts.filter(function(post) {
-    var text = (post.title + ' ' + post.excerpt + ' ' + 
-                post.tags.join(' ') + ' ' + post.categories.join(' ')).toLowerCase();
-    // 支持多关键词搜索（空格分隔）
-    var keywords = query.split(/\s+/);
+    var text = (post.title + ' ' + post.excerpt + ' ' +
+      post.tags.join(' ') + ' ' + post.categories.join(' ')).toLowerCase();
     return keywords.every(function(kw) { return text.indexOf(kw) !== -1; });
   });
-  
+
   if (results.length === 0) {
-    searchResults.innerHTML = '<div class="no-results">没有找到相关文章</div>';
+    searchResults.innerHTML = '<div class="no-results"><strong>没有找到相关文章</strong><span>换一个更宽的关键词试试。</span></div>';
     return;
   }
-  
+
   var html = '<div class="results-count">找到 ' + results.length + ' 篇文章</div>';
   results.forEach(function(post) {
-    html += '<div class="result-item">';
-    html += '<a href="' + post.url + '" class="result-title">' + post.title + '</a>';
-    html += '<div class="result-meta">' + post.date;
-    if (post.categories && post.categories.length) {
-      html += ' · ' + post.categories.join(', ');
-    }
-    html += '</div>';
+    html += '<article class="result-item">';
+    html += '<a href="' + post.url + '" class="result-title">' + escapeHtml(post.title) + '</a>';
+    html += '<div class="result-meta">' + escapeHtml([post.date].concat(post.categories || []).join(' · ')) + '</div>';
+    html += '<p class="result-excerpt">' + escapeHtml(post.excerpt) + '</p>';
     if (post.tags && post.tags.length) {
       html += '<div class="result-tags">';
-      post.tags.forEach(function(tag) {
-        html += '<span class="tag small">#' + tag + '</span> ';
+      post.tags.slice(0, 5).forEach(function(tag) {
+        html += '<span class="tag small">#' + escapeHtml(tag) + '</span>';
       });
       html += '</div>';
     }
-    html += '<div class="result-excerpt">' + post.excerpt + '</div>';
-    html += '</div>';
+    html += '</article>';
   });
-  
   searchResults.innerHTML = html;
-});
+}
+
+searchInput.addEventListener('input', runSearch);
 
 function searchTag(tag) {
   searchInput.value = tag;
-  searchInput.dispatchEvent(new Event('input'));
+  runSearch();
 }
 </script>

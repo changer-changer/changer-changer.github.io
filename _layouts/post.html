@@ -1,39 +1,130 @@
 ---
 layout: default
 ---
-<article class="post">
-  <header class="post-header">
-    <h1 class="post-title">{{ page.title }}</h1>
-    <div class="post-meta">
-      <time>{{ page.date | date: "%Y年%m月%d日" }}</time>
-      {% if page.categories.size > 0 %}
-        <span class="categories">
-          {% for cat in page.categories %}
-            <a href="{{ '/categories/' | relative_url }}#{{ cat }}" class="tag clickable">{{ cat }}</a>
-          {% endfor %}
-        </span>
-      {% endif %}
+{% assign words = page.content | number_of_words %}
+{% assign read_minutes = words | divided_by: 320 | plus: 1 %}
+
+<article class="article-shell">
+  <aside class="article-aside" aria-label="文章工具">
+    <div class="toc-card">
+      <p class="eyebrow">On this page</p>
+      <nav id="article-toc" class="article-toc">
+        <a href="#article-start">文章开头</a>
+      </nav>
     </div>
-  </header>
+  </aside>
 
-  <div class="post-content">
-    {{ content }}
+  <div class="article-main">
+    <header id="article-start" class="post-header">
+      {% if page.categories.size > 0 %}
+      <div class="post-kicker">
+        {% for cat in page.categories limit:2 %}
+          <a href="{{ '/categories/' | relative_url }}#{{ cat }}">{{ cat }}</a>
+        {% endfor %}
+      </div>
+      {% endif %}
+      <h1 class="post-title">{{ page.title }}</h1>
+      <div class="post-meta">
+        <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y-%m-%d" }}</time>
+        <span>{{ read_minutes }} 分钟读完</span>
+        {% if page.tags.size > 0 %}<span>{{ page.tags.size }} 个标签</span>{% endif %}
+      </div>
+    </header>
+
+    <div class="post-content">
+      {% assign normalized_content = content | replace: '<h1', '<h2 class="content-heading"' | replace: '</h1>', '</h2>' %}
+      {{ normalized_content }}
+    </div>
+
+    <footer class="post-end">
+      {% if page.tags.size > 0 %}
+      <div class="post-tags">
+        <p class="eyebrow">Tags</p>
+        {% for tag in page.tags %}
+          <a href="{{ '/tags/' | relative_url }}#{{ tag }}" class="tag clickable">#{{ tag }}</a>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <div class="post-actions">
+        <button class="button secondary" type="button" id="copy-link">复制链接</button>
+        <a class="button secondary" href="#article-start">回到顶部</a>
+      </div>
+    </footer>
+
+    <nav class="post-nav" aria-label="上下篇文章">
+      {% if page.previous.url %}
+        <a class="prev" href="{{ page.previous.url | relative_url }}">
+          <span>上一篇</span>
+          {{ page.previous.title }}
+        </a>
+      {% endif %}
+      {% if page.next.url %}
+        <a class="next" href="{{ page.next.url | relative_url }}">
+          <span>下一篇</span>
+          {{ page.next.title }}
+        </a>
+      {% endif %}
+    </nav>
+
+    <section class="related-posts" aria-label="相关文章">
+      <div class="section-head compact">
+        <p class="eyebrow">Related</p>
+        <h2>继续读</h2>
+      </div>
+      <div class="related-grid">
+        {% assign related_count = 0 %}
+        {% for post in site.posts %}
+          {% if post.url != page.url and related_count < 3 %}
+            {% assign matched = false %}
+            {% for cat in page.categories %}
+              {% if post.categories contains cat %}
+                {% assign matched = true %}
+              {% endif %}
+            {% endfor %}
+            {% for tag in page.tags %}
+              {% if post.tags contains tag %}
+                {% assign matched = true %}
+              {% endif %}
+            {% endfor %}
+            {% if matched %}
+              {% assign related_count = related_count | plus: 1 %}
+              <a class="mini-post-card" href="{{ post.url | relative_url }}">
+                <span>{{ post.date | date: "%Y-%m-%d" }}</span>
+                <strong>{{ post.title }}</strong>
+              </a>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </section>
   </div>
-
-  {% if page.tags.size > 0 %}
-  <div class="post-tags">
-    {% for tag in page.tags %}
-      <a href="{{ '/tags/' | relative_url }}#{{ tag }}" class="tag clickable">#{{ tag }}</a>
-    {% endfor %}
-  </div>
-  {% endif %}
-
-  <nav class="post-nav">
-    {% if page.previous.url %}
-      <a class="prev" href="{{ page.previous.url | relative_url }}">&laquo; {{ page.previous.title }}</a>
-    {% endif %}
-    {% if page.next.url %}
-      <a class="next" href="{{ page.next.url | relative_url }}">{{ page.next.title }} &raquo;</a>
-    {% endif %}
-  </nav>
 </article>
+
+<script>
+  (function() {
+    var toc = document.getElementById('article-toc');
+    var content = document.querySelector('.post-content');
+    if (toc && content) {
+      var headings = content.querySelectorAll('h2, h3');
+      headings.forEach(function(heading, index) {
+        if (!heading.id) heading.id = 'section-' + (index + 1);
+        var link = document.createElement('a');
+        link.href = '#' + heading.id;
+        link.textContent = heading.textContent;
+        if (heading.tagName.toLowerCase() === 'h3') link.className = 'is-sub';
+        toc.appendChild(link);
+      });
+    }
+
+    var copyButton = document.getElementById('copy-link');
+    if (copyButton && navigator.clipboard) {
+      copyButton.addEventListener('click', function() {
+        navigator.clipboard.writeText(window.location.href).then(function() {
+          copyButton.textContent = '已复制';
+          setTimeout(function() { copyButton.textContent = '复制链接'; }, 1600);
+        });
+      });
+    }
+  })();
+</script>
