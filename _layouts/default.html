@@ -22,8 +22,8 @@
   <nav class="navbar">
     <div class="nav-container">
       <a href="{{ '/' | relative_url }}" class="site-title" aria-label="{{ site.title }} 首页">
-        <span class="site-mark">CZ</span>
-        <span class="site-name">{{ site.title }}</span>
+        <span class="site-mark">C<span>/</span>C</span>
+        <span class="site-name">CHANGER—CHANGER<span class="site-name-sub">/ FIELD NOTES</span></span>
       </a>
       <div class="nav-links">
         <a {% if page.url == "/" %}aria-current="page"{% endif %} href="{{ '/' | relative_url }}">首页</a>
@@ -36,10 +36,10 @@
       </div>
       <div class="nav-actions">
         <button class="icon-button search-open search-button" type="button" aria-label="打开快捷搜索" title="搜索">
-          <span>搜索</span>
+          <span>SEARCH</span>
           <kbd>Ctrl K</kbd>
         </button>
-        <button class="icon-button theme-toggle" type="button" aria-label="切换主题" title="切换主题">亮</button>
+        <button class="icon-button theme-toggle" type="button" aria-label="切换主题" title="切换主题"><span aria-hidden="true">◐</span></button>
       </div>
     </div>
   </nav>
@@ -51,7 +51,7 @@
   <footer class="footer">
     <div class="footer-inner">
       <div>
-        <strong>{{ site.title }}</strong>
+        <strong>CHANGER—CHANGER <span>© {{ site.time | date: "%Y" }}</span></strong>
         <p>技术、认知、理论体系与个人成长的长期记录。</p>
       </div>
       <div class="footer-links">
@@ -83,7 +83,12 @@
       var themeButton = document.querySelector('.theme-toggle');
       function syncThemeButton() {
         var current = root.getAttribute('data-theme') || 'light';
-        if (themeButton) themeButton.textContent = current === 'dark' ? '暗' : '亮';
+        if (themeButton) {
+          themeButton.innerHTML = current === 'dark' ? '<span aria-hidden="true">☼</span>' : '<span aria-hidden="true">◐</span>';
+          themeButton.setAttribute('aria-label', current === 'dark' ? '切换到浅色主题' : '切换到深色主题');
+        }
+        var themeMeta = document.querySelector('meta[name="theme-color"]');
+        if (themeMeta) themeMeta.setAttribute('content', current === 'dark' ? '#151613' : '#f2f0ea');
       }
       syncThemeButton();
       if (themeButton) {
