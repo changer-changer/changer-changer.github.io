@@ -7,6 +7,7 @@
   var reduced = reduceQuery.matches || motionStored === 'reduced';
   if (reduced) root.classList.add('motion-reduced');
   var visualAudit = new URLSearchParams(window.location.search).has('visual-audit');
+  if (visualAudit) root.classList.add('visual-audit');
 
   function hashString(value) {
     var hash = 2166136261;
@@ -97,14 +98,14 @@
   }
 
   var lenis = null;
-  if (!reduced && window.Lenis && window.innerWidth > 760) {
+  if (!reduced && !visualAudit && window.Lenis && window.innerWidth > 760) {
     lenis = new window.Lenis({ duration: 1.05, smoothWheel: true, wheelMultiplier: .88, anchors: true, stopInertiaOnNavigate: true });
     function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
     requestAnimationFrame(raf);
   }
 
   var cursor = document.querySelector('.cursor-orbit');
-  if (cursor && window.matchMedia('(pointer:fine)').matches && !reduced) {
+  if (cursor && window.matchMedia('(pointer:fine)').matches && !reduced && !visualAudit) {
     var cursorX = -100;
     var cursorY = -100;
     var targetX = -100;
@@ -318,7 +319,7 @@
     }, fieldHost);
   }
 
-  if (window.gsap && !reduced) {
+  if (window.gsap && !reduced && !visualAudit) {
     var gsap = window.gsap;
     if (window.ScrollTrigger) gsap.registerPlugin(window.ScrollTrigger);
     gsap.from('.experience-title .split-char', { yPercent: 115, rotate: 4, opacity: 0, duration: 1.05, stagger: .025, ease: 'expo.out', delay: .75 });
