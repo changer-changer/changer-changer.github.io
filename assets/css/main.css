@@ -495,7 +495,10 @@ html:not(.anim) [data-reveal] { opacity: 1 !important; }
 .story-card a { display: block; }
 .story-art {
   position: relative; aspect-ratio: 16 / 10; overflow: hidden;
-  border: 1px solid var(--line); background: var(--surface);
+  border: 1px solid color-mix(in srgb, var(--line) 55%, transparent);
+  background: var(--surface);
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgba(12, 16, 32, .04), 0 24px 60px -18px rgba(12, 16, 32, .28);
 }
 .story-art canvas { width: 100%; height: 100%; transition: transform .8s var(--ease-out); }
 .story-card:hover .story-art canvas { transform: scale(1.05); }

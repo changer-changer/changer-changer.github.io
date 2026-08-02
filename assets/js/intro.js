@@ -11,9 +11,7 @@
   if (!intro) return;
 
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var seen = false;
-  try { seen = sessionStorage.getItem('cz-intro-seen') === '1'; } catch (e) {}
-  var force = new URLSearchParams(window.location.search).has('intro');
+  var suppress = new URLSearchParams(window.location.search).has('nointro');
 
   function teardown(fast) {
     intro.classList.add('is-gone');
@@ -22,13 +20,17 @@
     setTimeout(function () { intro.remove(); }, fast ? 60 : 900);
   }
 
-  if ((seen && !force) || reduced) { teardown(true); return; }
+  if (suppress || reduced) { teardown(true); return; }
 
-  try { sessionStorage.setItem('cz-intro-seen', '1'); } catch (e) {}
   document.body.classList.add('no-scroll');
 
   var canvas2d = document.getElementById('intro-2d');
   var ctx2d = canvas2d.getContext('2d');
+  var burstCanvas = document.createElement('canvas');
+  burstCanvas.className = 'intro-burst-canvas';
+  burstCanvas.style.cssText = 'position:absolute;inset:0;z-index:2;width:100%;height:100%;opacity:0;transition:opacity .3s ease;';
+  intro.insertBefore(burstCanvas, intro.querySelector('.intro-hud'));
+  var ctxB = burstCanvas.getContext('2d');
   var glWrap = document.getElementById('intro-gl');
   var sceneNo = document.getElementById('intro-scene-no');
   var sceneName = document.getElementById('intro-scene-name');
@@ -38,6 +40,7 @@
   function resize() {
     W = window.innerWidth; H = window.innerHeight;
     canvas2d.width = W; canvas2d.height = H;
+    burstCanvas.width = W; burstCanvas.height = H;
   }
   resize();
   window.addEventListener('resize', resize);
@@ -496,19 +499,20 @@
   }
 
   function drawBurst(t) {
-    /* t: 0 → 1.3s */
-    ctx2d.globalCompositeOperation = 'source-over';
-    ctx2d.clearRect(0, 0, W, H);
-    ctx2d.globalCompositeOperation = 'lighter';
+    /* t: 0 → 1.35s，画在独立透明层上 */
+    ctxB.globalCompositeOperation = 'source-over';
+    ctxB.clearRect(0, 0, W, H);
+    ctxB.globalCompositeOperation = 'lighter';
+    ctxB.lineCap = 'round';
     var DUR = 1.15;
     /* 初始闪光环 */
-    if (t < .3) {
-      var fl = ctx2d.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, W * .24 * (t / .3) + 10);
-      fl.addColorStop(0, 'rgba(255,255,255,' + .5 * (1 - t / .3) + ')');
-      fl.addColorStop(.5, 'rgba(138,92,255,' + .3 * (1 - t / .3) + ')');
+    if (t < .32) {
+      var fl = ctxB.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, W * .24 * (t / .32) + 10);
+      fl.addColorStop(0, 'rgba(255,255,255,' + .5 * (1 - t / .32) + ')');
+      fl.addColorStop(.5, 'rgba(138,92,255,' + .3 * (1 - t / .32) + ')');
       fl.addColorStop(1, 'rgba(53,224,255,0)');
-      ctx2d.fillStyle = fl;
-      ctx2d.fillRect(0, 0, W, H);
+      ctxB.fillStyle = fl;
+      ctxB.fillRect(0, 0, W, H);
     }
     for (var i = 0; i < burst.length; i += 1) {
       var p = burst[i];
@@ -517,22 +521,31 @@
       var e = 1 - Math.pow(1 - Math.min(1, lt), 3);   /* easeOutCubic */
       var px2 = p.x + p.dx * p.dist * e;
       var py2 = p.y + p.dy * p.dist * e;
-      var tail = Math.max(0, e - .06 - lt * .1);
+      var tail = Math.max(0, e - .07 - lt * .09);
       var tx = p.x + p.dx * p.dist * tail;
       var ty = p.y + p.dy * p.dist * tail;
-      var fade = lt > .62 ? Math.max(0, 1 - (lt - .62) / .38) : 1;
-      ctx2d.globalAlpha = fade;
-      ctx2d.strokeStyle = p.c;
-      ctx2d.lineWidth = p.w;
-      ctx2d.beginPath();
-      ctx2d.moveTo(tx, ty);
-      ctx2d.lineTo(px2, py2);
-      ctx2d.stroke();
-      ctx2d.fillStyle = '#fff';
-      ctx2d.fillRect(px2 - .8, py2 - .8, 1.6, 1.6);
+      /* 提前渐隐：粒子在抵达屏幕边缘前柔和消失 */
+      var fade = lt > .55 ? Math.max(0, 1 - (lt - .55) / .4) : 1;
+      fade *= fade;
+      if (fade <= 0) continue;
+      var grad = ctxB.createLinearGradient(tx, ty, px2, py2);
+      grad.addColorStop(0, 'rgba(0,0,0,0)');
+      grad.addColorStop(.55, p.c);
+      grad.addColorStop(1, '#ffffff');
+      ctxB.globalAlpha = fade;
+      ctxB.strokeStyle = grad;
+      ctxB.lineWidth = p.w;
+      ctxB.beginPath();
+      ctxB.moveTo(tx, ty);
+      ctxB.lineTo(px2, py2);
+      ctxB.stroke();
+      ctxB.fillStyle = 'rgba(255,255,255,' + .9 * fade + ')';
+      ctxB.beginPath();
+      ctxB.arc(px2, py2, p.w * .7, 0, Math.PI * 2);
+      ctxB.fill();
     }
-    ctx2d.globalAlpha = 1;
-    ctx2d.globalCompositeOperation = 'source-over';
+    ctxB.globalAlpha = 1;
+    ctxB.globalCompositeOperation = 'source-over';
   }
 
   var landed = false;
@@ -544,14 +557,21 @@
     buildBurst();
     burstT = 0;
     intro.classList.add('is-burst');
+    /* 第三幕光域柔淡出，爆发层淡入 */
+    canvas2d.style.transition = 'opacity .55s ease';
+    canvas2d.style.opacity = '0';
+    burstCanvas.style.opacity = '1';
     var bt0 = performance.now();
     (function burstFrame(now) {
       burstT = (now - bt0) / 1000;
-      if (burstT < 1.35) {
+      if (burstT < 1.45) {
         drawBurst(burstT);
         requestAnimationFrame(burstFrame);
       } else {
-        intro.remove();
+        /* 收尾：整体淡出后移除，杜绝硬切 */
+        burstCanvas.style.transition = 'opacity .3s ease';
+        burstCanvas.style.opacity = '0';
+        setTimeout(function () { intro.remove(); }, 320);
       }
     })(bt0);
     document.body.classList.remove('no-scroll');
