@@ -6,6 +6,7 @@
   var motionStored = localStorage.getItem('cz-motion');
   var reduced = reduceQuery.matches || motionStored === 'reduced';
   if (reduced) root.classList.add('motion-reduced');
+  var visualAudit = new URLSearchParams(window.location.search).has('visual-audit');
 
   function hashString(value) {
     var hash = 2166136261;
@@ -28,6 +29,11 @@
   }
 
   var loaderStarted = false;
+  if (visualAudit) {
+    var auditLoader = document.querySelector('.site-loader');
+    if (auditLoader) auditLoader.classList.add('is-done');
+    loaderStarted = true;
+  }
   function finishLoader() {
     var loader = document.querySelector('.site-loader');
     if (!loader || loaderStarted) return;
