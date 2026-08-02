@@ -2,8 +2,6 @@
 layout: default
 ---
 
-{% assign latest_post = site.posts | first %}
-
 <section class="experience-hero" data-scene="origin">
   <div id="latent-field" class="latent-field" aria-hidden="true"></div>
   <div class="hero-coordinate hero-coordinate--top">PERSONAL RESEARCH INDEX<br>BEIJING · CN</div>
@@ -20,43 +18,47 @@ layout: default
   <div class="experience-intro">
     <p>关于人工智能、认知与个人演化的公开实验。记录还在运动中的判断，把思考变成能够被检索、连接与验证的长期系统。</p>
     <div class="experience-actions">
-      <button class="disc-button search-open" type="button" data-cursor="SEARCH"><span>探索<br>知识库</span><i aria-hidden="true">↗</i></button>
+      <button class="disc-button search-open" type="button" data-cursor="SEARCH"><i aria-hidden="true">↗</i><span>探索<br>知识库</span></button>
       <a class="quiet-link" href="{{ '/theory/' | relative_url }}">进入思考图谱 <span>→</span></a>
     </div>
   </div>
 
-  <a class="scroll-cue" href="#manifesto" aria-label="继续向下阅读"><span>SCROLL TO EXPLORE</span><i></i></a>
+  <div class="hero-ruler" aria-hidden="true"><span>SCROLL</span><i></i></div>
+  <div class="hero-readout" aria-hidden="true">
+    POINTER <strong>X <span data-readout-x>0.620</span> / Y <span data-readout-y>0.420</span></strong><br>
+    LOCAL <strong><span data-readout-t>--:--:--</span></strong> · UTC+8
+  </div>
 </section>
 
 <section id="manifesto" class="manifesto-stage" data-scene="manifesto">
   <div class="manifesto-track" aria-label="观察，连接，行动">
-    <span>OBSERVE</span><i>→</i><span>CONNECT</span><i>→</i><span>ACT</span>
+    <span>OBSERVE</span><i>→</i><span>CONNECT</span><i>→</i><span>ACT</span><i>→</i><span>OBSERVE</span><i>→</i><span>CONNECT</span>
   </div>
   <div class="manifesto-notes">
-    <p><strong>01</strong> 捕捉不稳定的想法</p>
-    <p><strong>02</strong> 建立跨领域的连接</p>
-    <p><strong>03</strong> 让判断进入现实</p>
+    <p data-reveal><strong>01</strong> 捕捉不稳定的想法</p>
+    <p data-reveal><strong>02</strong> 建立跨领域的连接</p>
+    <p data-reveal><strong>03</strong> 让判断进入现实</p>
   </div>
 </section>
 
 <section class="selected-stories scene-section" data-scene="stories">
   <header class="scene-header">
-    <p class="scene-index">01 / SELECTED NOTES</p>
-    <h2 data-split>最近留下的<br><em>思想指纹</em></h2>
-    <a href="{{ '/archive/' | relative_url }}" class="quiet-link">全部文章 <span>↗</span></a>
+    <p class="scene-index">SCENE 01 / SELECTED NOTES</p>
+    <h2 data-reveal>最近留下的<br><em>思想指纹</em></h2>
+    <a href="{{ '/archive/' | relative_url }}" class="quiet-link" data-reveal>全部文章 <span>↗</span></a>
   </header>
 
   <div class="story-grid">
     {% for post in site.posts limit:3 %}
-      {% assign words = post.content | number_of_words %}
-      {% assign minutes = words | divided_by: 320 | plus: 1 %}
-      <article class="story-card story-card--{{ forloop.index }}" data-cursor="OPEN">
+      {% assign rt_chars = post.content | strip_html | size %}
+      {% assign rt_min = rt_chars | divided_by: 400 | plus: 1 %}
+      <article class="story-card story-card--{{ forloop.index }}" data-cursor="OPEN" data-reveal>
         <a href="{{ post.url | relative_url }}">
           <div class="story-art"><canvas class="fingerprint-canvas" data-art-title="{{ post.title | escape }}" aria-hidden="true"></canvas><span>FP—0{{ forloop.index }}</span></div>
           <div class="story-copy">
-            <div class="story-meta"><time>{{ post.date | date: "%Y.%m.%d" }}</time><span>{{ minutes }} MIN</span></div>
+            <div class="story-meta"><time>{{ post.date | date: "%Y.%m.%d" }}</time><span>{{ rt_min }} MIN READ</span></div>
             <h3>{{ post.title }}</h3>
-            <p>{{ post.excerpt | strip_html | truncate: 120 }}</p>
+            <p>{{ post.excerpt | strip_html | truncate: 110 }}</p>
             <span class="story-arrow" aria-hidden="true">↗</span>
           </div>
         </a>
@@ -66,12 +68,14 @@ layout: default
 </section>
 
 <section class="theory-gateway" data-scene="theory">
-  <div class="theory-field" aria-hidden="true"><i></i><i></i><i></i><span>THEORY<br>IS A LENS</span></div>
-  <div class="theory-copy">
-    <p class="scene-index">02 / THE SYSTEM</p>
-    <h2 data-split>不是答案。<br>是一套持续<br class="mobile-break">更新的<br><em>观察装置。</em></h2>
-    <p>从生存倾向、认知抽象到社会结构，一组仍在连接、验证和修正的观察笔记。</p>
-    <a class="disc-button disc-button--light" href="{{ '/theory/' | relative_url }}" data-cursor="ENTER"><span>进入<br>思考图谱</span><i aria-hidden="true">→</i></a>
+  <div class="theory-inner">
+    <div class="theory-field" aria-hidden="true"><i></i><i></i><i></i><i></i><span>THEORY<br>IS A LENS</span></div>
+    <div class="theory-copy">
+      <p class="scene-index">SCENE 02 / THE SYSTEM</p>
+      <h2 data-reveal>不是答案。<br>是一套持续更新的<br><em>观察装置。</em></h2>
+      <p data-reveal>从生存倾向、认知抽象到社会结构，一组仍在连接、验证和修正的观察笔记。</p>
+      <a class="disc-button disc-button--light" href="{{ '/theory/' | relative_url }}" data-cursor="ENTER" data-reveal><i aria-hidden="true">→</i><span>进入<br>思考图谱</span></a>
+    </div>
   </div>
 </section>
 
@@ -81,24 +85,24 @@ layout: default
 {% assign linked_post = nil %}
 {% for post in site.posts %}{% if post.slug == spark.slug or post.url contains spark.slug %}{% assign linked_post = post %}{% break %}{% endif %}{% endfor %}
 <section class="spark-scene scene-section" data-scene="spark">
-  <p class="scene-index">03 / UNFINISHED THOUGHT</p>
-  <blockquote>
+  <p class="scene-index">SCENE 03 / UNFINISHED THOUGHT</p>
+  <blockquote data-reveal>
     <span aria-hidden="true">“</span>
     <p>{{ spark.text }}</p>
-    {% if linked_post %}<cite><a href="{{ linked_post.url | relative_url }}">沿着这束火花继续 →</a></cite>{% endif %}
+    {% if linked_post %}<cite><a class="quiet-link" href="{{ linked_post.url | relative_url }}">沿着这束火花继续 →</a></cite>{% endif %}
   </blockquote>
 </section>
 {% endif %}
 
 <section class="topic-scene scene-section" data-scene="topics">
-  <header class="scene-header scene-header--wide">
-    <p class="scene-index">04 / CONSTELLATIONS</p>
-    <h2 data-split>选择一条<br><em>思想路径</em></h2>
+  <header class="scene-header">
+    <p class="scene-index">SCENE 04 / CONSTELLATIONS</p>
+    <h2 data-reveal>选择一条<br><em>思想路径</em></h2>
   </header>
   <div class="constellation-list">
     {% assign sorted_cats = site.categories | sort %}
     {% for cat in sorted_cats limit:8 %}
-      <a href="{{ '/categories/' | relative_url }}#{{ cat[0] }}" data-cursor="{{ cat[1].size }} NOTES">
+      <a href="{{ '/categories/' | relative_url }}#{{ cat[0] }}" data-cursor="{{ cat[1].size }} NOTES" data-reveal>
         <span class="constellation-no">0{{ forloop.index }}</span>
         <strong>{{ cat[0] }}</strong>
         <span class="constellation-count">{{ cat[1].size }} 篇</span>
@@ -109,19 +113,19 @@ layout: default
 </section>
 
 <section class="index-scene scene-section" data-scene="index">
-  <header class="scene-header scene-header--wide">
-    <p class="scene-index">05 / LATEST TRANSMISSIONS</p>
-    <h2 data-split>持续写作，<br><em>持续修正</em></h2>
+  <header class="scene-header">
+    <p class="scene-index">SCENE 05 / LATEST TRANSMISSIONS</p>
+    <h2 data-reveal>持续写作，<br><em>持续修正</em></h2>
   </header>
   <div class="transmission-list">
     {% for post in paginator.posts %}
-      {% assign words = post.content | number_of_words %}
-      {% assign minutes = words | divided_by: 320 | plus: 1 %}
-      <article class="transmission-item" data-cursor="READ">
+      {% assign rt_chars = post.content | strip_html | size %}
+      {% assign rt_min = rt_chars | divided_by: 400 | plus: 1 %}
+      <article class="transmission-item" data-cursor="READ" data-reveal>
         <a href="{{ post.url | relative_url }}">
           <span class="transmission-no">{{ forloop.index | prepend: '0' }}</span>
           <h3>{{ post.title }}</h3>
-          <span class="transmission-meta">{{ post.date | date: "%Y.%m.%d" }} / {{ minutes }} MIN</span>
+          <span class="transmission-meta">{{ post.date | date: "%Y.%m.%d" }} · {{ rt_min }} MIN</span>
           <span class="transmission-arrow" aria-hidden="true">→</span>
         </a>
       </article>

@@ -6,33 +6,47 @@
   <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
   <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | truncate: 160 }}">
   <meta name="author" content="{{ site.author | default: site.title }}">
-  <meta name="theme-color" content="#eeeae0">
+  <meta name="theme-color" content="#EDE9DC">
   <link rel="canonical" href="{{ page.url | absolute_url }}">
   <meta property="og:title" content="{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}">
   <meta property="og:description" content="{{ page.excerpt | default: site.description | strip_html | truncate: 160 }}">
   <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
   <meta property="og:url" content="{{ page.url | absolute_url }}">
-  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-  <link rel="stylesheet" href="{{ '/assets/css/experience.css' | relative_url }}">
-  <noscript><style>.site-loader,.page-transition,.cursor-orbit{display:none!important}</style></noscript>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%23141713'/%3E%3Ctext x='50' y='60' text-anchor='middle' font-size='36' font-family='Arial, sans-serif' font-weight='700' fill='%23f6f7f4'%3ECZ%3C/text%3E%3C/svg%3E">
+  <script>
+    /* 首屏前执行：主题 + 动效标记，避免闪烁 */
+    (function () {
+      var root = document.documentElement;
+      try {
+        var theme = localStorage.getItem('cz-theme');
+        if (theme) root.setAttribute('data-theme', theme);
+        var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+          || localStorage.getItem('cz-motion') === 'reduced';
+        if (!reduced) root.classList.add('anim');
+      } catch (e) { root.classList.add('anim'); }
+    })();
+  </script>
+  <link rel="preload" href="{{ '/assets/fonts/noto-serif-sc-900.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ '/assets/fonts/instrument-serif-italic.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+  <noscript><style>.site-loader,.page-transition,.cursor-orbit{display:none!important}html.anim [data-reveal]{opacity:1!important}</style></noscript>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='50' fill='%23E0490F'/%3E%3Ctext x='50' y='62' text-anchor='middle' font-size='34' font-family='monospace' fill='%23FFF4E8'%3EC/C%3C/text%3E%3C/svg%3E">
 </head>
 <body class="site-shell page-kind-{{ page.layout | default: 'default' }}">
   <div class="site-loader" aria-hidden="true">
-    <div class="loader-counter"><span>00</span><em>%</em></div>
-    <div class="loader-word">CHANGER<br>CHANGER</div>
+    <div class="loader-mark">CHANGER<br><em>CHANGER</em></div>
+    <div class="loader-counter"><span>00</span><em>/100</em></div>
     <div class="loader-line"><span></span></div>
+    <div class="loader-coords">LAT 39.99 · LON 116.33 · BEIJING</div>
   </div>
   <div class="page-transition" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-  <div class="cursor-orbit" aria-hidden="true"><span></span></div>
-  <div class="ambient-glow" aria-hidden="true"></div>
+  <div class="cursor-orbit" aria-hidden="true"><i class="cursor-dot"></i><i class="cursor-ring"></i><span></span></div>
   <a class="skip-link" href="#content">跳到正文</a>
   <div class="reading-progress" aria-hidden="true"><span id="reading-progress-bar"></span></div>
 
   <nav class="navbar">
     <div class="nav-container">
       <a href="{{ '/' | relative_url }}" class="site-title" aria-label="{{ site.title }} 首页">
-        <span class="site-mark">C<span>/</span>C</span>
+        <span class="site-mark">C/C</span>
         <span class="site-name">CHANGER—CHANGER<span class="site-name-sub">/ FIELD NOTES</span></span>
       </a>
       <div class="nav-links">
@@ -48,7 +62,7 @@
       <div class="nav-actions">
         <button class="icon-button search-open search-button" type="button" aria-label="打开快捷搜索" title="搜索">
           <span>SEARCH</span>
-          <kbd>Ctrl K</kbd>
+          <kbd>⌘K</kbd>
         </button>
         <button class="icon-button theme-toggle" type="button" aria-label="切换主题" title="切换主题"><span aria-hidden="true">◐</span></button>
         <button class="icon-button motion-toggle" type="button" aria-label="关闭动态效果" title="动态效果"><span aria-hidden="true">M</span></button>
@@ -78,175 +92,76 @@
 
   <footer class="footer">
     <div class="footer-inner">
-      <div class="footer-identity">
-        <strong>CHANGER—CHANGER <span>© {{ site.time | date: "%Y" }}</span></strong>
-        <p>技术、认知、行动与个人经验的长期记录。</p>
-      </div>
-      <div class="footer-manifesto">KEEP<br>THINKING<br><em>IN PUBLIC</em></div>
-      <div class="footer-links">
-        <a href="https://github.com/{{ site.github_username }}" rel="me">GitHub</a>
-        <a href="{{ '/archive/' | relative_url }}">Archive</a>
-        <a href="{{ '/search/' | relative_url }}">Search</a>
+      <div class="footer-manifesto">KEEP THINKING<br><em>IN PUBLIC</em></div>
+      <div class="footer-grid">
+        <div class="footer-identity">
+          <strong>CHANGER—CHANGER <span>© {{ site.time | date: "%Y" }}</span></strong>
+          <p>技术、认知、行动与个人经验的长期记录。</p>
+        </div>
+        <div class="footer-col">
+          <p>SITEMAP</p>
+          <a href="{{ '/theory/' | relative_url }}">思考图谱</a>
+          <a href="{{ '/archive/' | relative_url }}">文章归档</a>
+          <a href="{{ '/sparks/' | relative_url }}">火花</a>
+          <a href="{{ '/about/' | relative_url }}">关于</a>
+        </div>
+        <div class="footer-col">
+          <p>ELSEWHERE</p>
+          <a href="https://github.com/{{ site.github_username }}" rel="me">GitHub ↗</a>
+          <a href="{{ '/search/' | relative_url }}">搜索</a>
+        </div>
       </div>
     </div>
+    <div class="footer-watermark" aria-hidden="true">C/C</div>
   </footer>
 
   <div class="command-palette" id="command-palette" aria-hidden="true">
     <div class="command-backdrop" data-command-close></div>
     <section class="command-panel" role="dialog" aria-modal="true" aria-labelledby="command-title">
       <div class="command-header">
-        <h2 id="command-title">快速搜索</h2>
-        <button type="button" class="icon-button" data-command-close aria-label="关闭搜索">Esc</button>
+        <h2 id="command-title">搜索知识库</h2>
+        <button type="button" class="icon-button" data-command-close aria-label="关闭搜索">ESC</button>
       </div>
-      <input id="command-input" class="command-input" type="search" placeholder="搜索标题、摘要、标签或分类" autocomplete="off">
+      <input id="command-input" class="command-input" type="search" placeholder="标题、摘要、标签或分类" autocomplete="off">
       <div id="command-results" class="command-results" aria-live="polite"></div>
     </section>
   </div>
 
   <script>
-    (function() {
+    window.CZ_POSTS = [
+      {% for post in site.posts %}
+      {
+        title: {{ post.title | jsonify }},
+        url: "{{ post.url | relative_url }}",
+        date: "{{ post.date | date: '%Y-%m-%d' }}",
+        tags: {{ post.tags | jsonify }},
+        categories: {{ post.categories | jsonify }},
+        excerpt: {{ post.excerpt | strip_html | truncate: 180 | jsonify }}
+      }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ];
+    /* 主题切换（轻量，放内联避免等主脚本） */
+    (function () {
       var root = document.documentElement;
-      var storedTheme = localStorage.getItem('cz-theme');
-      if (storedTheme) root.setAttribute('data-theme', storedTheme);
-
-      var themeButton = document.querySelector('.theme-toggle');
-      function syncThemeButton() {
+      var btn = document.querySelector('.theme-toggle');
+      function sync() {
         var current = root.getAttribute('data-theme') || 'light';
-        if (themeButton) {
-          themeButton.innerHTML = current === 'dark' ? '<span aria-hidden="true">☼</span>' : '<span aria-hidden="true">◐</span>';
-          themeButton.setAttribute('aria-label', current === 'dark' ? '切换到浅色主题' : '切换到深色主题');
-        }
-        var themeMeta = document.querySelector('meta[name="theme-color"]');
-        if (themeMeta) themeMeta.setAttribute('content', current === 'dark' ? '#11120f' : '#eeeae0');
+        if (btn) btn.setAttribute('aria-label', current === 'dark' ? '切换到浅色主题' : '切换到深色主题');
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', current === 'dark' ? '#131109' : '#EDE9DC');
       }
-      syncThemeButton();
-      if (themeButton) {
-        themeButton.addEventListener('click', function() {
-          var next = (root.getAttribute('data-theme') || 'light') === 'dark' ? 'light' : 'dark';
-          root.setAttribute('data-theme', next);
-          localStorage.setItem('cz-theme', next);
-          syncThemeButton();
-        });
-      }
-
-      var progressBar = document.getElementById('reading-progress-bar');
-      function updateProgress() {
-        if (!progressBar) return;
-        var scrollTop = window.scrollY || document.documentElement.scrollTop;
-        var max = document.documentElement.scrollHeight - window.innerHeight;
-        var pct = max > 0 ? Math.min(100, Math.max(0, (scrollTop / max) * 100)) : 0;
-        progressBar.style.width = pct + '%';
-      }
-      window.addEventListener('scroll', updateProgress, { passive: true });
-      updateProgress();
-
-      var glow = document.querySelector('.ambient-glow');
-      if (glow && window.matchMedia('(pointer: fine)').matches) {
-        window.addEventListener('pointermove', function(event) {
-          glow.style.setProperty('--pointer-x', event.clientX + 'px');
-          glow.style.setProperty('--pointer-y', event.clientY + 'px');
-        }, { passive: true });
-      }
-
-      var revealItems = document.querySelectorAll('.reveal-on-scroll');
-      if ('IntersectionObserver' in window) {
-        var revealObserver = new IntersectionObserver(function(entries) {
-          entries.forEach(function(entry) {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('is-visible');
-              revealObserver.unobserve(entry.target);
-            }
-          });
-        }, { rootMargin: '0px 0px -12% 0px' });
-        revealItems.forEach(function(item) { revealObserver.observe(item); });
-      } else {
-        revealItems.forEach(function(item) { item.classList.add('is-visible'); });
-      }
-
-      var posts = [
-        {% for post in site.posts %}
-        {
-          title: {{ post.title | jsonify }},
-          url: "{{ post.url | relative_url }}",
-          date: "{{ post.date | date: '%Y-%m-%d' }}",
-          tags: {{ post.tags | jsonify }},
-          categories: {{ post.categories | jsonify }},
-          excerpt: {{ post.excerpt | strip_html | truncate: 180 | jsonify }}
-        }{% unless forloop.last %},{% endunless %}
-        {% endfor %}
-      ];
-
-      var palette = document.getElementById('command-palette');
-      var input = document.getElementById('command-input');
-      var results = document.getElementById('command-results');
-      var openButtons = document.querySelectorAll('.search-open');
-
-      function escapeHtml(value) {
-        return String(value).replace(/[&<>"']/g, function(char) {
-          return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' })[char];
-        });
-      }
-
-      function renderResults(query) {
-        var normalized = query.trim().toLowerCase();
-        var matches = posts;
-        if (normalized.length) {
-          var keywords = normalized.split(/\s+/);
-          matches = posts.filter(function(post) {
-            var text = [post.title, post.excerpt, post.date, post.tags.join(' '), post.categories.join(' ')].join(' ').toLowerCase();
-            return keywords.every(function(keyword) { return text.indexOf(keyword) !== -1; });
-          });
-        }
-        matches = matches.slice(0, 8);
-        if (!matches.length) {
-          results.innerHTML = '<p class="command-empty">没有匹配文章。试试“AI”“认知科学”“思考图谱”。</p>';
-          return;
-        }
-        results.innerHTML = matches.map(function(post) {
-          var meta = [post.date].concat(post.categories || []).join(' · ');
-          return '<a class="command-result" href="' + post.url + '">' +
-            '<span class="command-result-title">' + escapeHtml(post.title) + '</span>' +
-            '<span class="command-result-meta">' + escapeHtml(meta) + '</span>' +
-            '<span class="command-result-excerpt">' + escapeHtml(post.excerpt) + '</span>' +
-            '</a>';
-        }).join('');
-      }
-
-      function openPalette(seed) {
-        if (!palette || !input) return;
-        palette.setAttribute('aria-hidden', 'false');
-        document.body.classList.add('no-scroll');
-        input.value = seed || '';
-        renderResults(input.value);
-        setTimeout(function() { input.focus(); }, 30);
-      }
-
-      function closePalette() {
-        if (!palette) return;
-        palette.setAttribute('aria-hidden', 'true');
-        document.body.classList.remove('no-scroll');
-      }
-
-      openButtons.forEach(function(button) {
-        button.addEventListener('click', function() { openPalette(''); });
-      });
-      document.querySelectorAll('[data-command-close]').forEach(function(element) {
-        element.addEventListener('click', closePalette);
-      });
-      if (input) input.addEventListener('input', function() { renderResults(input.value); });
-      document.addEventListener('keydown', function(event) {
-        if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
-          event.preventDefault();
-          openPalette('');
-        }
-        if (event.key === 'Escape') closePalette();
+      sync();
+      if (btn) btn.addEventListener('click', function () {
+        var next = (root.getAttribute('data-theme') || 'light') === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem('cz-theme', next); } catch (e) {}
+        sync();
       });
     })();
   </script>
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.8/p5.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.3.23/dist/lenis.min.js"></script>
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
-  <script defer src="{{ '/assets/js/experience.js' | relative_url }}"></script>
+  <script defer src="{{ '/assets/vendor/gsap.min.js' | relative_url }}"></script>
+  <script defer src="{{ '/assets/vendor/ScrollTrigger.min.js' | relative_url }}"></script>
+  <script defer src="{{ '/assets/vendor/lenis.min.js' | relative_url }}"></script>
+  <script defer src="{{ '/assets/js/main.js' | relative_url }}"></script>
 </body>
 </html>

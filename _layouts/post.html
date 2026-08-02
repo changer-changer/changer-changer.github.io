@@ -1,23 +1,11 @@
 ---
 layout: default
 ---
-{% assign words = page.content | number_of_words %}
-{% assign read_minutes = words | divided_by: 320 | plus: 1 %}
+{% assign rt_chars = page.content | strip_html | size %}
+{% assign read_minutes = rt_chars | divided_by: 400 | plus: 1 %}
 
 <article class="article-shell">
   <div class="article-fingerprint" aria-hidden="true"><canvas class="fingerprint-canvas" data-art-title="{{ page.title | escape }}"></canvas></div>
-  <aside class="article-aside" aria-label="文章工具">
-    <div class="toc-card">
-      <p class="eyebrow">On this page</p>
-      <nav id="article-toc" class="article-toc">
-        <a href="#article-start">文章开头</a>
-      </nav>
-    </div>
-    <div class="reading-tools" aria-label="阅读字号">
-      <button type="button" data-reading-size="down" aria-label="减小正文字号">A−</button>
-      <button type="button" data-reading-size="up" aria-label="增大正文字号">A+</button>
-    </div>
-  </aside>
 
   <div class="article-main">
     <header id="article-start" class="post-header">
@@ -31,7 +19,7 @@ layout: default
       <h1 class="post-title" data-split>{{ page.title }}</h1>
       <div class="post-meta">
         <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y-%m-%d" }}</time>
-        <span>{{ read_minutes }} 分钟读完</span>
+        <span>约 {{ read_minutes }} 分钟</span>
         {% if page.tags.size > 0 %}<span>{{ page.tags.size }} 个标签</span>{% endif %}
       </div>
       {% if page.categories contains "思考图谱" %}
@@ -63,13 +51,13 @@ layout: default
     <nav class="post-nav" aria-label="上下篇文章">
       {% if page.previous.url %}
         <a class="prev" href="{{ page.previous.url | relative_url }}">
-          <span>上一篇</span>
+          <span>上一篇 / PREV</span>
           {{ page.previous.title }}
         </a>
       {% endif %}
       {% if page.next.url %}
         <a class="next" href="{{ page.next.url | relative_url }}">
-          <span>下一篇</span>
+          <span>下一篇 / NEXT</span>
           {{ page.next.title }}
         </a>
       {% endif %}
@@ -107,32 +95,19 @@ layout: default
       </div>
     </section>
   </div>
+
+  <aside class="article-aside" aria-label="文章工具">
+    <div>
+      <div class="toc-card">
+        <p class="eyebrow">On this page</p>
+        <nav id="article-toc" class="article-toc">
+          <a href="#article-start">文章开头</a>
+        </nav>
+      </div>
+      <div class="reading-tools" aria-label="阅读字号">
+        <button type="button" data-reading-size="down" aria-label="减小正文字号">A−</button>
+        <button type="button" data-reading-size="up" aria-label="增大正文字号">A+</button>
+      </div>
+    </div>
+  </aside>
 </article>
-
-<script>
-  (function() {
-    var toc = document.getElementById('article-toc');
-    var content = document.querySelector('.post-content');
-    if (toc && content) {
-      var headings = content.querySelectorAll('h2, h3');
-      headings.forEach(function(heading, index) {
-        if (!heading.id) heading.id = 'section-' + (index + 1);
-        var link = document.createElement('a');
-        link.href = '#' + heading.id;
-        link.textContent = heading.textContent;
-        if (heading.tagName.toLowerCase() === 'h3') link.className = 'is-sub';
-        toc.appendChild(link);
-      });
-    }
-
-    var copyButton = document.getElementById('copy-link');
-    if (copyButton && navigator.clipboard) {
-      copyButton.addEventListener('click', function() {
-        navigator.clipboard.writeText(window.location.href).then(function() {
-          copyButton.textContent = '已复制';
-          setTimeout(function() { copyButton.textContent = '复制链接'; }, 1600);
-        });
-      });
-    }
-  })();
-</script>
