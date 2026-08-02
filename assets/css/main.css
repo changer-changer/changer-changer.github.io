@@ -1134,3 +1134,30 @@ body.menu-open .mobile-menu nav a:nth-child(8) { transition-delay: .43s; }
 .resume-section-heading { margin-bottom: clamp(2.5rem, 6vw, 5rem) !important; }
 .resume-entry-marker { justify-content: flex-start !important; gap: .7rem; align-items: center !important; }
 .resume-entry-marker i { width: 7px !important; height: 7px !important; box-shadow: 0 0 0 3px rgba(255,221,77,.18) !important; }
+
+/* ---------- Round-2 polish ---------- */
+/* 移动端正文左对齐，避免两端对齐的河流 */
+@media (max-width: 720px) {
+  .post-content p { text-align: left; }
+}
+/* 搜索框原生清除按钮主题化 */
+.search-box input::-webkit-search-cancel-button,
+.command-input::-webkit-search-cancel-button {
+  -webkit-appearance: none; appearance: none;
+  width: .9rem; height: .9rem; cursor: pointer;
+  background: var(--muted);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2 2l12 12M14 2L2 14' stroke='black' stroke-width='2'/%3E%3C/svg%3E") center/contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2 2l12 12M14 2L2 14' stroke='black' stroke-width='2'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+/* 星图编号牌：暗色玻璃 */
+.story-art > span {
+  background: rgba(8, 12, 24, .55);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  border-color: rgba(160, 185, 235, .28);
+  color: #C6D4F4;
+}
+/* 焦点可见性 */
+a:focus-visible, button:focus-visible, input:focus-visible {
+  outline: 1px dashed var(--accent);
+  outline-offset: 3px;
+}
