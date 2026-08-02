@@ -730,13 +730,13 @@ html:not(.anim) [data-reveal] { opacity: 1 !important; }
 @media (max-width: 1020px) { .article-shell { grid-template-columns: 1fr; } .article-aside { display: none; } }
 .article-main { min-width: 0; }
 
-.article-fingerprint {
-  position: absolute; top: 0; right: 0; width: min(42vw, 34rem); aspect-ratio: 1;
-  opacity: .25; pointer-events: none; z-index: 0;
+.article-starmap {
+  position: absolute; top: 0; right: 0; width: min(36vw, 30rem); aspect-ratio: 1;
+  opacity: .16; pointer-events: none; z-index: 0;
   -webkit-mask-image: radial-gradient(circle at 75% 25%, #000 20%, transparent 65%);
   mask-image: radial-gradient(circle at 75% 25%, #000 20%, transparent 65%);
 }
-.article-fingerprint canvas { width: 100%; height: 100%; }
+.article-starmap canvas { width: 100%; height: 100%; }
 .page-kind-post { position: relative; }
 
 .post-header { position: relative; z-index: 1; border-bottom: 1px solid var(--line); padding-bottom: 2.2rem; margin-bottom: 2.8rem; }
@@ -1064,3 +1064,57 @@ body.menu-open .mobile-menu nav a:nth-child(8) { transition-delay: .43s; }
   color: var(--muted); font-size: .84rem; line-height: 1.75;
   background: color-mix(in srgb, var(--accent) 5%, transparent);
 }
+
+/* ============================================================
+   入场四幕 INTRO
+   ============================================================ */
+.intro {
+  position: fixed; inset: 0; z-index: 380;
+  background: #04050e;
+  overflow: hidden;
+}
+.intro.is-gone { display: none; }
+.intro-panels { display: none; }
+.intro { transition: transform 1.05s var(--ease-out); }
+.intro.is-leaving { transform: translateY(-103%); }
+.intro-gl { position: absolute; inset: 0; z-index: 1; opacity: 0; transition: opacity .45s linear; }
+.intro-gl canvas { width: 100% !important; height: 100% !important; }
+.intro.is-leaving .intro-gl { opacity: 0 !important; }
+.intro-2d { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; transition: opacity .45s linear; }
+.intro.is-leaving .intro-2d { opacity: 0 !important; }
+
+.intro-hud {
+  position: absolute; inset: 0; z-index: 3; pointer-events: none;
+  display: flex; align-items: flex-end; justify-content: space-between;
+  padding: clamp(1.2rem, 3vw, 2.2rem);
+  transition: opacity .4s;
+}
+.intro.is-leaving .intro-hud { opacity: 0; }
+.intro-scene {
+  font-family: var(--f-mono); letter-spacing: .2em; text-transform: uppercase;
+  color: rgba(236, 240, 255, .55); font-size: .62rem;
+  display: flex; flex-direction: column; gap: .35rem;
+}
+.intro-scene span { color: #35e0ff; }
+.intro-scene em { font-style: normal; font-size: .85rem; letter-spacing: .3em; color: rgba(236, 240, 255, .9); }
+.intro-progress {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
+  background: rgba(236, 240, 255, .08);
+}
+.intro-progress span {
+  display: block; height: 100%; width: 0;
+  background: linear-gradient(90deg, #8a5cff, #35e0ff);
+  transition: width .2s linear;
+}
+.intro-skip {
+  pointer-events: auto;
+  font-family: var(--f-mono); font-size: .62rem; letter-spacing: .22em;
+  color: rgba(236, 240, 255, .5);
+  border: 1px solid rgba(236, 240, 255, .18);
+  padding: .55rem 1.1rem; border-radius: 999px;
+  transition: all .3s;
+}
+.intro-skip:hover { color: #35e0ff; border-color: #35e0ff; }
+
+/* 场景过渡：场景 2 压暗 2D 层 */
+.intro[data-scene="2"] .intro-2d { /* opacity 由 JS 驱动 */ }

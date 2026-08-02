@@ -44,7 +44,7 @@ layout: default
 <section class="selected-stories scene-section" data-scene="stories">
   <header class="scene-header">
     <p class="scene-index">SCENE 01 / SELECTED NOTES</p>
-    <h2 data-reveal>最近留下的<br><em>思想指纹</em></h2>
+    <h2 data-reveal>最近留下的<br><em>思想星图</em></h2>
     <a href="{{ '/archive/' | relative_url }}" class="quiet-link" data-reveal>全部文章 <span>↗</span></a>
   </header>
 
@@ -54,7 +54,7 @@ layout: default
       {% assign rt_min = rt_chars | divided_by: 400 | plus: 1 %}
       <article class="story-card story-card--{{ forloop.index }}" data-cursor="OPEN" data-reveal>
         <a href="{{ post.url | relative_url }}">
-          <div class="story-art"><canvas class="fingerprint-canvas" data-art-title="{{ post.title | escape }}" aria-hidden="true"></canvas><span>FP—0{{ forloop.index }}</span></div>
+          <div class="story-art"><canvas class="starmap-canvas" data-art-title="{{ post.title | escape }}" aria-hidden="true"></canvas><span>ST—0{{ forloop.index }}</span></div>
           <div class="story-copy">
             <div class="story-meta"><time>{{ post.date | date: "%Y.%m.%d" }}</time><span>{{ rt_min }} MIN READ</span></div>
             <h3>{{ post.title }}</h3>

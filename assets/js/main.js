@@ -182,8 +182,8 @@
   window.addEventListener('scroll', updateProgress, { passive: true });
   updateProgress();
 
-  /* ---------- 思想指纹（静态生成，主题感知） ---------- */
-  function drawFingerprint(canvas) {
+  /* ---------- 思想星图（每篇文章一幅生成式星图，主题感知） ---------- */
+  function drawStarMap(canvas) {
     var box = canvas.getBoundingClientRect();
     if (!box.width || !box.height) return;
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -191,46 +191,127 @@
     canvas.height = Math.round(box.height * dpr);
     var ctx = canvas.getContext('2d');
     ctx.scale(dpr, dpr);
-    var random = seededRandom(hashString(canvas.dataset.artTitle || 'changer'));
-    var ink = cssColor('--ink');
-    var accent = cssColor('--accent');
-    var surface = cssColor('--surface');
-    ctx.fillStyle = surface;
-    ctx.fillRect(0, 0, box.width, box.height);
-    var ccx = box.width * (.35 + random() * .3);
-    var ccy = box.height * (.3 + random() * .4);
-    var max = Math.max(box.width, box.height);
-    ctx.lineCap = 'round';
-    for (var ring = 0; ring < 46; ring += 1) {
-      var radius = max * (.02 + ring * .0135);
-      var segments = 90;
-      ctx.beginPath();
-      for (var s = 0; s <= segments; s += 1) {
-        var angle = (s / segments) * Math.PI * 2;
-        var distortion = Math.sin(angle * (3 + Math.floor(random() * 4)) + ring * .33) * (4 + ring * .2);
-        var x = ccx + Math.cos(angle) * (radius + distortion);
-        var y = ccy + Math.sin(angle) * (radius * .72 + distortion);
-        s === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    var random = seededRandom(hashString('starmap:' + (canvas.dataset.artTitle || 'changer')));
+    var accent = '#FF5A1F';
+    var starInk = '#E9EDF9';
+    var starSoft = 'rgba(198, 212, 244, ';
+    var W = box.width, H = box.height;
+    /* 深空盘：固定深色，昼夜主题一致 */
+    var bg = ctx.createLinearGradient(0, 0, W * .3, H);
+    bg.addColorStop(0, '#0E1322');
+    bg.addColorStop(1, '#070A14');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, W, H);
+
+    /* 星位：一到两个星团，黄金角螺旋 + 抖动 */
+    var count = 15 + Math.floor(random() * 6);
+    var cx = W * (.4 + random() * .2), cy = H * (.44 + random() * .12);
+    var spread = Math.min(W, H) * (.24 + random() * .08);
+    var twoClusters = random() < .5;
+    var cx2 = cx + (random() - .5) * spread * 3.4, cy2 = cy + (random() - .5) * spread * 1.8;
+    var stars = [];
+    for (var i = 0; i < count; i += 1) {
+      var inSecond = twoClusters && i > count * .55;
+      var baseX = inSecond ? cx2 : cx, baseY = inSecond ? cy2 : cy;
+      var a = i * 2.399963 + random() * .5;
+      var r = Math.sqrt(((inSecond ? i - count * .55 : i) + .6) / count) * spread * (0.5 + random() * .55);
+      stars.push({
+        x: baseX + Math.cos(a) * r * 1.5,
+        y: baseY + Math.sin(a) * r,
+        s: 1.1 + random() * 2,
+        tw: random() * Math.PI * 2
+      });
+    }
+    /* 星云微光 */
+    var neb = ctx.createRadialGradient(cx, cy, 0, cx, cy, spread * 2.2);
+    neb.addColorStop(0, 'rgba(46, 107, 255, .12)');
+    neb.addColorStop(.6, 'rgba(138, 92, 255, .05)');
+    neb.addColorStop(1, 'rgba(138, 92, 255, 0)');
+    ctx.fillStyle = neb;
+    ctx.fillRect(0, 0, W, H);
+
+    /* 黄道弧（虚线椭圆） */
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(-.32 + random() * .2);
+    ctx.strokeStyle = starSoft + '.5)';
+    ctx.globalAlpha = .2;
+    ctx.setLineDash([2, 5]);
+    ctx.lineWidth = .7;
+    ctx.beginPath();
+    ctx.ellipse(0, 0, spread * 1.7, spread * .62, 0, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.restore();
+
+    /* 星座连线：每颗星连最近邻 */
+    ctx.strokeStyle = starSoft + '1)';
+    ctx.lineWidth = .7;
+    var linked = {};
+    for (var j = 0; j < stars.length; j += 1) {
+      var best = -1, bestD = 1e9;
+      for (var k = 0; k < stars.length; k += 1) {
+        if (k === j) continue;
+        var dx = stars[j].x - stars[k].x, dy = stars[j].y - stars[k].y;
+        var d = dx * dx + dy * dy;
+        var key = Math.min(j, k) + '-' + Math.max(j, k);
+        if (d < bestD && !linked[key]) { bestD = d; best = k; }
       }
-      var isAccent = ring % 9 === 0;
-      ctx.strokeStyle = isAccent ? accent : ink;
-      ctx.globalAlpha = isAccent ? .8 : .16 + random() * .26;
-      ctx.lineWidth = isAccent ? 1.4 : .6;
-      ctx.stroke();
+      if (best >= 0) {
+        linked[Math.min(j, best) + '-' + Math.max(j, best)] = true;
+        ctx.globalAlpha = .3;
+        ctx.beginPath();
+        ctx.moveTo(stars[j].x, stars[j].y);
+        ctx.lineTo(stars[best].x, stars[best].y);
+        ctx.stroke();
+      }
     }
-    ctx.globalAlpha = 1;
-    ctx.fillStyle = accent;
-    for (var d = 0; d < 10; d += 1) {
-      ctx.beginPath();
-      ctx.arc(random() * box.width, random() * box.height, random() * 2 + .8, 0, Math.PI * 2);
-      ctx.fill();
+
+    /* 背景星尘 */
+    ctx.fillStyle = starInk;
+    for (var d = 0; d < 42; d += 1) {
+      ctx.globalAlpha = .08 + random() * .3;
+      ctx.fillRect(random() * W, random() * H, 1, 1);
     }
-    /* 十字丝角标 */
-    ctx.strokeStyle = ink;
-    ctx.globalAlpha = .5;
+
+    /* 恒星 */
+    stars.forEach(function (st, idx) {
+      var primary = idx === 0;
+      ctx.globalAlpha = 1;
+      if (primary) {
+        /* 主星：朱红 + 光晕 + 十字丝 */
+        ctx.strokeStyle = accent;
+        ctx.globalAlpha = .55;
+        ctx.lineWidth = .8;
+        ctx.beginPath(); ctx.arc(st.x, st.y, st.s + 5.5, 0, Math.PI * 2); ctx.stroke();
+        ctx.globalAlpha = .9;
+        ctx.beginPath();
+        ctx.moveTo(st.x - st.s - 10, st.y); ctx.lineTo(st.x - st.s - 5.5, st.y);
+        ctx.moveTo(st.x + st.s + 5.5, st.y); ctx.lineTo(st.x + st.s + 10, st.y);
+        ctx.moveTo(st.x, st.y - st.s - 10); ctx.lineTo(st.x, st.y - st.s - 5.5);
+        ctx.moveTo(st.x, st.y + st.s + 5.5); ctx.lineTo(st.x, st.y + st.s + 10);
+        ctx.stroke();
+        ctx.fillStyle = starInk;
+        ctx.beginPath(); ctx.arc(st.x, st.y, st.s + .8, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = accent;
+        ctx.beginPath(); ctx.arc(st.x, st.y, st.s * .55, 0, Math.PI * 2); ctx.fill();
+      } else {
+        ctx.fillStyle = starInk;
+        ctx.globalAlpha = .55 + random() * .45;
+        ctx.beginPath(); ctx.arc(st.x, st.y, st.s, 0, Math.PI * 2); ctx.fill();
+        if (st.s > 1.8) {
+          ctx.globalAlpha = .22;
+          ctx.beginPath(); ctx.arc(st.x, st.y, st.s + 3.2, 0, Math.PI * 2); ctx.fill();
+        }
+      }
+    });
+
+    /* 坐标刻度角标 */
+    ctx.strokeStyle = starSoft + '1)';
+    ctx.globalAlpha = .55;
     ctx.lineWidth = 1;
-    var m = 12, l = 9;
-    [[m, m, 1, 1], [box.width - m, m, -1, 1], [m, box.height - m, 1, -1], [box.width - m, box.height - m, -1, -1]].forEach(function (c) {
+    var m = 12, l = 8;
+    [[m, m, 1, 1], [W - m, m, -1, 1], [m, H - m, 1, -1], [W - m, H - m, -1, -1]].forEach(function (c) {
       ctx.beginPath();
       ctx.moveTo(c[0], c[1]); ctx.lineTo(c[0] + l * c[2], c[1]);
       ctx.moveTo(c[0], c[1]); ctx.lineTo(c[0], c[1] + l * c[3]);
@@ -238,16 +319,16 @@
     });
     ctx.globalAlpha = 1;
   }
-  function renderFingerprints() {
-    document.querySelectorAll('.fingerprint-canvas').forEach(drawFingerprint);
+  function renderStarMaps() {
+    document.querySelectorAll('.starmap-canvas').forEach(drawStarMap);
   }
-  renderFingerprints();
-  new MutationObserver(function () { renderFingerprints(); })
+  renderStarMaps();
+  new MutationObserver(function () { renderStarMaps(); })
     .observe(root, { attributes: true, attributeFilter: ['data-theme'] });
   var resizeTimer;
   window.addEventListener('resize', function () {
     clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(function () { renderFingerprints(); renderResumeFields(); }, 180);
+    resizeTimer = setTimeout(function () { renderStarMaps(); renderResumeFields(); }, 180);
   });
 
   /* ---------- 履历页力场（data-resume-field） ---------- */
@@ -449,18 +530,27 @@
   }
 
   /* ---------- GSAP 揭示 ---------- */
+  function startHeroIntro(gsap) {
+    gsap.to('.experience-title .title-line .split-char', {
+      y: 0, yPercent: 0, duration: 1.1, stagger: .022, ease: 'expo.out', delay: .15,
+      startAt: { yPercent: 115 }
+    });
+    gsap.from('.experience-kicker, .experience-intro, .hero-coordinate, .hero-ruler, .hero-readout', {
+      opacity: 0, y: 14, duration: .8, stagger: .07, ease: 'power2.out', delay: .55
+    });
+  }
+
   if (window.gsap && !reduced) {
     var gsap = window.gsap;
     if (window.ScrollTrigger) gsap.registerPlugin(window.ScrollTrigger);
 
-    gsap.to('.experience-title .title-line .split-char', {
-      y: 0, yPercent: 0, duration: 1.1, stagger: .022, ease: 'expo.out', delay: .7,
-      startAt: { yPercent: 115 },
-      onStart: function () {}
-    });
-    gsap.from('.experience-kicker, .experience-intro, .hero-coordinate, .hero-ruler, .hero-readout', {
-      opacity: 0, y: 14, duration: .8, stagger: .07, ease: 'power2.out', delay: 1.15
-    });
+    var introEl = document.getElementById('intro');
+    var introWillPlay = introEl && !introEl.classList.contains('is-gone');
+    if (introWillPlay) {
+      document.addEventListener('cz:intro:done', function () { startHeroIntro(gsap); }, { once: true });
+    } else {
+      startHeroIntro(gsap);
+    }
 
     if (window.ScrollTrigger) {
       gsap.to('.manifesto-track', {
