@@ -51,9 +51,24 @@
         </button>
         <button class="icon-button theme-toggle" type="button" aria-label="切换主题" title="切换主题"><span aria-hidden="true">◐</span></button>
         <button class="icon-button motion-toggle" type="button" aria-label="关闭动态效果" title="动态效果"><span aria-hidden="true">M</span></button>
+        <button class="icon-button menu-toggle" type="button" aria-controls="mobile-menu" aria-expanded="false"><span>MENU</span></button>
       </div>
     </div>
   </nav>
+
+  <aside class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-index">INDEX / 00—06</div>
+    <nav aria-label="移动端导航">
+      <a href="{{ '/' | relative_url }}"><span>00</span>首页</a>
+      <a href="{{ '/theory/' | relative_url }}"><span>01</span>理论</a>
+      <a href="{{ '/sparks/' | relative_url }}"><span>02</span>火花</a>
+      <a href="{{ '/categories/' | relative_url }}"><span>03</span>主题</a>
+      <a href="{{ '/tags/' | relative_url }}"><span>04</span>标签</a>
+      <a href="{{ '/archive/' | relative_url }}"><span>05</span>归档</a>
+      <a href="{{ '/about/' | relative_url }}"><span>06</span>关于</a>
+    </nav>
+    <div class="mobile-menu-foot"><span>CHANGER—CHANGER</span><span>THINKING IN MOTION</span></div>
+  </aside>
 
   <main id="content" class="site-main page-{{ page.layout | default: 'default' }}">
     {{ content }}
