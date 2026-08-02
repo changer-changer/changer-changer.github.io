@@ -1,0 +1,73 @@
+updated: "2026.08"
+name: "崔之行"
+position: "AI systems / embodied intelligence / product thinking"
+thesis: "把复杂技术变成可运行的系统，把模糊问题推进成真实结果。"
+public_note: "公开履历版本 · 不含私人联系方式、住址与生活影像"
+metrics:
+  - value: "01"
+    label: "从硬件到模型"
+  - value: "<10ms"
+    label: "触觉数据传输"
+  - value: "1mm / 30%"
+    label: "精密装配验证"
+  - value: "13h"
+    label: "AI 产品黑客松"
+timeline:
+  - period: "2026.07 — NOW"
+    type: "CURRENT"
+    title: "AI 管培生 / 傅盛战队"
+    organization: "猎豹移动"
+    description: "进入 AI 业务一线，关注产品、业务与智能工具如何共同形成可验证的结果。"
+    tags: ["AI business", "product", "rapid learning"]
+  - period: "2026.07"
+    type: "RESEARCH"
+    title: "IEEE 相关科研稿件记录"
+    organization: "Research writing"
+    description: "将具身智能、触觉感知与机器人系统经验整理为可交流、可验证的科研表达。"
+    tags: ["embodied intelligence", "tactile sensing", "writing"]
+  - period: "2026.03 — 2026.04"
+    type: "BUILD"
+    title: "AI 论文图谱系统"
+    organization: "Independent full-stack project"
+    description: "独立设计并开发论文可视化与智能生成系统，连接 PDF 解析、关系图谱、AI Agent 与多格式输出。"
+    tags: ["React", "D3.js", "PostgreSQL", "AI Agent"]
+  - period: "2025.11 — 2026.03"
+    type: "ROBOTICS"
+    title: "具身智能研究 / 模型算法"
+    organization: "瞬恒智能科技（北京）"
+    description: "完成 VR 遥操作、机器人数据管线、Diffusion Policy / ACT 训练与真机部署，覆盖从数据到推理的完整链路。"
+    tags: ["Diffusion Policy", "ACT", "ROS2", "VR teleoperation"]
+  - period: "2025.11 — 2026.03"
+    type: "SYSTEM"
+    title: "触觉感知系统"
+    organization: "Robot tactile infrastructure"
+    description: "打通 Tac3D 传感器、ROS2 中转节点与 Meta Quest 端的 3D 触觉可视化，构建低延迟数据交互方案。"
+    tags: ["tactile", "UDP", "ROS2", "3D visualization"]
+  - period: "2025.07 — 2025.08"
+    type: "LEAD"
+    title: "智能目标识别与追踪系统"
+    organization: "全国大学生电子设计大赛 · 队长"
+    description: "负责视觉识别、电控系统与团队推进，使用 OpenMV、滤波与 PID 完成目标追踪系统。"
+    tags: ["OpenMV", "PID", "computer vision", "leadership"]
+education:
+  period: "2025 — NOW"
+  title: "计算机科学与技术 · 本科"
+  organization: "北京邮电大学 · 计算机学院"
+  description: "在工程、研究、产品与长期思考之间建立自己的交叉坐标。"
+recognition:
+  - title: "猎豹移动 AI Native 黑客松 · 最佳团队奖"
+    detail: "13 小时内使用 AI Agent 从零构建零售场景 AI 产品原型。"
+  - title: "北京市数学竞赛 · 二等奖"
+    detail: "2026"
+  - title: "发明专利申请 · 已受理"
+    detail: "高密度柔性触觉传感器接触表面虚拟现实可视化方法及系统"
+skills:
+  - title: "MODEL"
+    items: ["Diffusion Policy / ACT", "VLA / imitation learning", "computer vision", "PID / filtering"]
+  - title: "SYSTEM"
+    items: ["ROS2", "VR teleoperation", "real-robot deployment", "embedded development"]
+  - title: "PRODUCT"
+    items: ["problem framing", "user-oriented design", "AI Agent", "full-stack prototyping"]
+links:
+  - label: "GitHub"
+    href: "https://github.com/changer-changer"

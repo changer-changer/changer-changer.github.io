@@ -43,6 +43,7 @@
         <a {% if page.url contains "/tags/" %}aria-current="page"{% endif %} href="{{ '/tags/' | relative_url }}">标签</a>
         <a {% if page.url contains "/archive/" %}aria-current="page"{% endif %} href="{{ '/archive/' | relative_url }}">归档</a>
         <a {% if page.url contains "/about/" %}aria-current="page"{% endif %} href="{{ '/about/' | relative_url }}">关于</a>
+        <a {% if page.url contains "/resume/" %}aria-current="page"{% endif %} href="{{ '/resume/' | relative_url }}">履历</a>
       </div>
       <div class="nav-actions">
         <button class="icon-button search-open search-button" type="button" aria-label="打开快捷搜索" title="搜索">
@@ -57,7 +58,7 @@
   </nav>
 
   <aside class="mobile-menu" id="mobile-menu" aria-hidden="true">
-    <div class="mobile-menu-index">INDEX / 00—06</div>
+    <div class="mobile-menu-index">INDEX / 00—07</div>
     <nav aria-label="移动端导航">
       <a href="{{ '/' | relative_url }}"><span>00</span>首页</a>
       <a href="{{ '/theory/' | relative_url }}"><span>01</span>理论</a>
@@ -66,6 +67,7 @@
       <a href="{{ '/tags/' | relative_url }}"><span>04</span>标签</a>
       <a href="{{ '/archive/' | relative_url }}"><span>05</span>归档</a>
       <a href="{{ '/about/' | relative_url }}"><span>06</span>关于</a>
+      <a href="{{ '/resume/' | relative_url }}"><span>07</span>履历</a>
     </nav>
     <div class="mobile-menu-foot"><span>CHANGER—CHANGER</span><span>THINKING IN MOTION</span></div>
   </aside>

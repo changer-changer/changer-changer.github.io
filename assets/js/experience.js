@@ -218,8 +218,67 @@
   }
   renderFingerprints();
   new MutationObserver(renderFingerprints).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+
+  function renderResumeFields() {
+    document.querySelectorAll('[data-resume-field]').forEach(function (canvas) {
+      var box = canvas.getBoundingClientRect();
+      if (!box.width || !box.height) return;
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(box.width * dpr);
+      canvas.height = Math.round(box.height * dpr);
+      var ctx = canvas.getContext('2d');
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      var random = seededRandom(hashString('resume-field-' + window.location.pathname));
+      var ink = cssColor('--x-ink');
+      var accent = cssColor('--x-accent');
+      var paper = cssColor('--x-paper');
+      ctx.clearRect(0, 0, box.width, box.height);
+      ctx.fillStyle = '#11120f';
+      ctx.fillRect(0, 0, box.width, box.height);
+      ctx.lineWidth = .7;
+      ctx.strokeStyle = 'rgba(239,237,228,.14)';
+      for (var grid = -box.height; grid < box.width + box.height; grid += 28) {
+        ctx.beginPath();
+        ctx.moveTo(grid, 0);
+        ctx.lineTo(grid - box.height, box.height);
+        ctx.stroke();
+      }
+      var cx = box.width * .52;
+      var cy = box.height * .5;
+      for (var ring = 0; ring < 26; ring += 1) {
+        ctx.beginPath();
+        var radius = (ring + 1) * Math.min(box.width, box.height) * .018;
+        for (var step = 0; step <= 120; step += 1) {
+          var angle = step / 120 * Math.PI * 2;
+          var wobble = Math.sin(angle * (3 + ring % 4) + ring * .6) * (2 + ring * .14);
+          var x = cx + Math.cos(angle) * (radius * 1.48 + wobble);
+          var y = cy + Math.sin(angle) * (radius + wobble);
+          if (step === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+        }
+        ctx.strokeStyle = ring % 5 === 0 ? accent : 'rgba(239,237,228,' + (.08 + random() * .18) + ')';
+        ctx.lineWidth = ring % 5 === 0 ? 1.2 : .65;
+        ctx.stroke();
+      }
+      ctx.fillStyle = accent;
+      for (var node = 0; node < 18; node += 1) {
+        var nx = random() * box.width;
+        var ny = random() * box.height;
+        ctx.beginPath();
+        ctx.arc(nx, ny, random() * 2 + .7, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.fillStyle = paper;
+      ctx.globalAlpha = .75;
+      ctx.font = '500 9px DM Mono, monospace';
+      ctx.fillText('FIELD / 01', 16, box.height - 18);
+      ctx.globalAlpha = 1;
+      void ink;
+    });
+  }
+  renderResumeFields();
+  new MutationObserver(renderResumeFields).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
   var resizeTimer;
-  window.addEventListener('resize', function () { clearTimeout(resizeTimer); resizeTimer = setTimeout(renderFingerprints, 160); });
+  window.addEventListener('resize', function () { clearTimeout(resizeTimer); resizeTimer = setTimeout(function () { renderFingerprints(); renderResumeFields(); }, 160); });
 
   var fieldHost = document.getElementById('latent-field');
   if (fieldHost && window.p5) {
