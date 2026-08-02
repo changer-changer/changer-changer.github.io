@@ -193,22 +193,60 @@
     ctx.scale(dpr, dpr);
     var random = seededRandom(hashString('starmap:' + (canvas.dataset.artTitle || 'changer')));
     var accent = '#FF5A1F';
-    var starInk = '#E9EDF9';
-    var starSoft = 'rgba(198, 212, 244, ';
     var W = box.width, H = box.height;
-    /* 深空盘：固定深色，昼夜主题一致 */
-    var bg = ctx.createLinearGradient(0, 0, W * .3, H);
-    bg.addColorStop(0, '#0E1322');
-    bg.addColorStop(1, '#070A14');
+    var cx = W * (.4 + random() * .2), cy = H * (.44 + random() * .12);
+    var spread = Math.min(W, H) * (.26 + random() * .08);
+
+    /* 深空底片：径向渐变 + 暗角 */
+    var bg = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(W, H) * .9);
+    bg.addColorStop(0, '#0D1428');
+    bg.addColorStop(.55, '#080C1A');
+    bg.addColorStop(1, '#04060D');
     ctx.fillStyle = bg;
     ctx.fillRect(0, 0, W, H);
 
-    /* 星位：一到两个星团，黄金角螺旋 + 抖动 */
-    var count = 15 + Math.floor(random() * 6);
-    var cx = W * (.4 + random() * .2), cy = H * (.44 + random() * .12);
-    var spread = Math.min(W, H) * (.24 + random() * .08);
+    /* 天球坐标网格（graticule） */
+    ctx.lineWidth = .6;
+    for (var g = 0; g < 3; g += 1) {
+      ctx.strokeStyle = 'rgba(160, 185, 235, ' + (.045 + g * .015) + ')';
+      ctx.beginPath();
+      ctx.ellipse(cx, cy, spread * (1.1 + g * .55), spread * (.5 + g * .22), -.3, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+    ctx.strokeStyle = 'rgba(160, 185, 235, .05)';
+    ctx.beginPath(); ctx.moveTo(0, cy); ctx.lineTo(W, cy); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx, 0); ctx.lineTo(cx, H); ctx.stroke();
+
+    /* 星云：多层叠加 */
+    var nebulae = [
+      ['rgba(46, 107, 255, ', .14, 2.4],
+      ['rgba(138, 92, 255, ', .1, 1.7],
+      ['rgba(53, 224, 255, ', .07, 2.9]
+    ];
+    nebulae.forEach(function (nb, ni) {
+      var nx = cx + (random() - .5) * spread * 1.6, ny = cy + (random() - .5) * spread * 1.2;
+      var g2 = ctx.createRadialGradient(nx, ny, 0, nx, ny, spread * nb[2]);
+      g2.addColorStop(0, nb[0] + nb[1] + ')');
+      g2.addColorStop(.6, nb[0] + nb[1] * .35 + ')');
+      g2.addColorStop(1, nb[0] + '0)');
+      ctx.fillStyle = g2;
+      ctx.fillRect(0, 0, W, H);
+    });
+
+    /* 背景星尘（带色温） */
+    var tints = ['#FFFFFF', '#CFE0FF', '#FFE9D2', '#DCE8FF'];
+    for (var d = 0; d < 150; d += 1) {
+      ctx.fillStyle = tints[(random() * tints.length) | 0];
+      ctx.globalAlpha = .06 + random() * .4;
+      var ds = random();
+      ctx.fillRect(random() * W, random() * H, ds > .92 ? 1.6 : 1, ds > .92 ? 1.6 : 1);
+    }
+    ctx.globalAlpha = 1;
+
+    /* 星位：一到两个星团 */
+    var count = 13 + Math.floor(random() * 5);
     var twoClusters = random() < .5;
-    var cx2 = cx + (random() - .5) * spread * 3.4, cy2 = cy + (random() - .5) * spread * 1.8;
+    var cx2 = cx + (random() - .5) * spread * 3.2, cy2 = cy + (random() - .5) * spread * 1.7;
     var stars = [];
     for (var i = 0; i < count; i += 1) {
       var inSecond = twoClusters && i > count * .55;
@@ -218,48 +256,26 @@
       stars.push({
         x: baseX + Math.cos(a) * r * 1.5,
         y: baseY + Math.sin(a) * r,
-        s: 1.1 + random() * 2,
-        tw: random() * Math.PI * 2
+        s: .9 + random() * 1.8,
+        tint: tints[(random() * tints.length) | 0]
       });
     }
-    /* 星云微光 */
-    var neb = ctx.createRadialGradient(cx, cy, 0, cx, cy, spread * 2.2);
-    neb.addColorStop(0, 'rgba(46, 107, 255, .12)');
-    neb.addColorStop(.6, 'rgba(138, 92, 255, .05)');
-    neb.addColorStop(1, 'rgba(138, 92, 255, 0)');
-    ctx.fillStyle = neb;
-    ctx.fillRect(0, 0, W, H);
 
-    /* 黄道弧（虚线椭圆） */
-    ctx.save();
-    ctx.translate(cx, cy);
-    ctx.rotate(-.32 + random() * .2);
-    ctx.strokeStyle = starSoft + '.5)';
-    ctx.globalAlpha = .2;
-    ctx.setLineDash([2, 5]);
-    ctx.lineWidth = .7;
-    ctx.beginPath();
-    ctx.ellipse(0, 0, spread * 1.7, spread * .62, 0, 0, Math.PI * 2);
-    ctx.stroke();
-    ctx.setLineDash([]);
-    ctx.restore();
-
-    /* 星座连线：每颗星连最近邻 */
-    ctx.strokeStyle = starSoft + '1)';
-    ctx.lineWidth = .7;
+    /* 星座连线：极细发线，若隐若现 */
+    ctx.lineWidth = .5;
     var linked = {};
     for (var j = 0; j < stars.length; j += 1) {
       var best = -1, bestD = 1e9;
       for (var k = 0; k < stars.length; k += 1) {
         if (k === j) continue;
         var dx = stars[j].x - stars[k].x, dy = stars[j].y - stars[k].y;
-        var d = dx * dx + dy * dy;
+        var dd = dx * dx + dy * dy;
         var key = Math.min(j, k) + '-' + Math.max(j, k);
-        if (d < bestD && !linked[key]) { bestD = d; best = k; }
+        if (dd < bestD && !linked[key]) { bestD = dd; best = k; }
       }
       if (best >= 0) {
         linked[Math.min(j, best) + '-' + Math.max(j, best)] = true;
-        ctx.globalAlpha = .3;
+        ctx.strokeStyle = 'rgba(190, 208, 245, .13)';
         ctx.beginPath();
         ctx.moveTo(stars[j].x, stars[j].y);
         ctx.lineTo(stars[best].x, stars[best].y);
@@ -267,57 +283,56 @@
       }
     }
 
-    /* 背景星尘 */
-    ctx.fillStyle = starInk;
-    for (var d = 0; d < 42; d += 1) {
-      ctx.globalAlpha = .08 + random() * .3;
-      ctx.fillRect(random() * W, random() * H, 1, 1);
-    }
-
-    /* 恒星 */
+    /* 恒星：辉光核心 + 亮星衍射芒 */
     stars.forEach(function (st, idx) {
       var primary = idx === 0;
-      ctx.globalAlpha = 1;
+      var glowR = st.s * (primary ? 9 : 5.5);
+      var glow = ctx.createRadialGradient(st.x, st.y, 0, st.x, st.y, glowR);
       if (primary) {
-        /* 主星：朱红 + 光晕 + 十字丝 */
-        ctx.strokeStyle = accent;
-        ctx.globalAlpha = .55;
-        ctx.lineWidth = .8;
-        ctx.beginPath(); ctx.arc(st.x, st.y, st.s + 5.5, 0, Math.PI * 2); ctx.stroke();
-        ctx.globalAlpha = .9;
-        ctx.beginPath();
-        ctx.moveTo(st.x - st.s - 10, st.y); ctx.lineTo(st.x - st.s - 5.5, st.y);
-        ctx.moveTo(st.x + st.s + 5.5, st.y); ctx.lineTo(st.x + st.s + 10, st.y);
-        ctx.moveTo(st.x, st.y - st.s - 10); ctx.lineTo(st.x, st.y - st.s - 5.5);
-        ctx.moveTo(st.x, st.y + st.s + 5.5); ctx.lineTo(st.x, st.y + st.s + 10);
-        ctx.stroke();
-        ctx.fillStyle = starInk;
-        ctx.beginPath(); ctx.arc(st.x, st.y, st.s + .8, 0, Math.PI * 2); ctx.fill();
-        ctx.fillStyle = accent;
-        ctx.beginPath(); ctx.arc(st.x, st.y, st.s * .55, 0, Math.PI * 2); ctx.fill();
+        glow.addColorStop(0, 'rgba(255, 240, 225, .95)');
+        glow.addColorStop(.25, 'rgba(255, 90, 31, .5)');
+        glow.addColorStop(1, 'rgba(255, 90, 31, 0)');
       } else {
-        ctx.fillStyle = starInk;
-        ctx.globalAlpha = .55 + random() * .45;
-        ctx.beginPath(); ctx.arc(st.x, st.y, st.s, 0, Math.PI * 2); ctx.fill();
-        if (st.s > 1.8) {
-          ctx.globalAlpha = .22;
-          ctx.beginPath(); ctx.arc(st.x, st.y, st.s + 3.2, 0, Math.PI * 2); ctx.fill();
-        }
+        glow.addColorStop(0, 'rgba(255, 255, 255, .85)');
+        glow.addColorStop(.3, 'rgba(200, 218, 250, .25)');
+        glow.addColorStop(1, 'rgba(200, 218, 250, 0)');
+      }
+      ctx.fillStyle = glow;
+      ctx.beginPath(); ctx.arc(st.x, st.y, glowR, 0, Math.PI * 2); ctx.fill();
+
+      /* 衍射芒 */
+      if (primary || st.s > 2) {
+        var sp = st.s * (primary ? 14 : 8);
+        ctx.strokeStyle = primary ? 'rgba(255, 200, 170, .5)' : 'rgba(220, 232, 255, .35)';
+        ctx.lineWidth = .6;
+        ctx.beginPath();
+        ctx.moveTo(st.x - sp, st.y); ctx.lineTo(st.x + sp, st.y);
+        ctx.moveTo(st.x, st.y - sp); ctx.lineTo(st.x, st.y + sp);
+        ctx.stroke();
+      }
+
+      /* 核心 */
+      ctx.fillStyle = primary ? accent : st.tint;
+      ctx.beginPath(); ctx.arc(st.x, st.y, primary ? st.s + .4 : st.s, 0, Math.PI * 2); ctx.fill();
+      if (primary) {
+        ctx.strokeStyle = 'rgba(255, 90, 31, .55)';
+        ctx.lineWidth = .8;
+        ctx.beginPath(); ctx.arc(st.x, st.y, st.s + 5, 0, Math.PI * 2); ctx.stroke();
       }
     });
 
-    /* 坐标刻度角标 */
-    ctx.strokeStyle = starSoft + '1)';
-    ctx.globalAlpha = .55;
-    ctx.lineWidth = 1;
-    var m = 12, l = 8;
-    [[m, m, 1, 1], [W - m, m, -1, 1], [m, H - m, 1, -1], [W - m, H - m, -1, -1]].forEach(function (c) {
-      ctx.beginPath();
-      ctx.moveTo(c[0], c[1]); ctx.lineTo(c[0] + l * c[2], c[1]);
-      ctx.moveTo(c[0], c[1]); ctx.lineTo(c[0], c[1] + l * c[3]);
-      ctx.stroke();
-    });
+    /* 胶片颗粒 + 暗角 */
+    for (var n = 0; n < 500; n += 1) {
+      ctx.fillStyle = random() < .5 ? '#000' : '#FFF';
+      ctx.globalAlpha = .022;
+      ctx.fillRect(random() * W, random() * H, 1, 1);
+    }
     ctx.globalAlpha = 1;
+    var vig = ctx.createRadialGradient(W / 2, H / 2, Math.min(W, H) * .42, W / 2, H / 2, Math.max(W, H) * .75);
+    vig.addColorStop(0, 'rgba(0,0,0,0)');
+    vig.addColorStop(1, 'rgba(2,3,8,.5)');
+    ctx.fillStyle = vig;
+    ctx.fillRect(0, 0, W, H);
   }
   function renderStarMaps() {
     document.querySelectorAll('.starmap-canvas').forEach(drawStarMap);
