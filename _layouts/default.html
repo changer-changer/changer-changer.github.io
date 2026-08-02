@@ -6,7 +6,7 @@
   <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
   <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | truncate: 160 }}">
   <meta name="author" content="{{ site.author | default: site.title }}">
-  <meta name="theme-color" content="#f6f7f4">
+  <meta name="theme-color" content="#11120f">
   <link rel="canonical" href="{{ page.url | absolute_url }}">
   <meta property="og:title" content="{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}">
   <meta property="og:description" content="{{ page.excerpt | default: site.description | strip_html | truncate: 160 }}">
@@ -15,7 +15,8 @@
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%23141713'/%3E%3Ctext x='50' y='60' text-anchor='middle' font-size='36' font-family='Arial, sans-serif' font-weight='700' fill='%23f6f7f4'%3ECZ%3C/text%3E%3C/svg%3E">
 </head>
-<body>
+<body class="site-shell page-kind-{{ page.layout | default: 'default' }}">
+  <div class="ambient-glow" aria-hidden="true"></div>
   <a class="skip-link" href="#content">跳到正文</a>
   <div class="reading-progress" aria-hidden="true"><span id="reading-progress-bar"></span></div>
 
@@ -50,10 +51,11 @@
 
   <footer class="footer">
     <div class="footer-inner">
-      <div>
+      <div class="footer-identity">
         <strong>CHANGER—CHANGER <span>© {{ site.time | date: "%Y" }}</span></strong>
         <p>技术、认知、理论体系与个人成长的长期记录。</p>
       </div>
+      <div class="footer-manifesto">KEEP<br>THINKING<br><em>IN PUBLIC</em></div>
       <div class="footer-links">
         <a href="https://github.com/{{ site.github_username }}" rel="me">GitHub</a>
         <a href="{{ '/archive/' | relative_url }}">Archive</a>
@@ -82,7 +84,7 @@
 
       var themeButton = document.querySelector('.theme-toggle');
       function syncThemeButton() {
-        var current = root.getAttribute('data-theme') || 'light';
+        var current = root.getAttribute('data-theme') || 'dark';
         if (themeButton) {
           themeButton.innerHTML = current === 'dark' ? '<span aria-hidden="true">☼</span>' : '<span aria-hidden="true">◐</span>';
           themeButton.setAttribute('aria-label', current === 'dark' ? '切换到浅色主题' : '切换到深色主题');
@@ -93,7 +95,7 @@
       syncThemeButton();
       if (themeButton) {
         themeButton.addEventListener('click', function() {
-          var next = (root.getAttribute('data-theme') || 'light') === 'dark' ? 'light' : 'dark';
+          var next = (root.getAttribute('data-theme') || 'dark') === 'dark' ? 'light' : 'dark';
           root.setAttribute('data-theme', next);
           localStorage.setItem('cz-theme', next);
           syncThemeButton();
@@ -110,6 +112,29 @@
       }
       window.addEventListener('scroll', updateProgress, { passive: true });
       updateProgress();
+
+      var glow = document.querySelector('.ambient-glow');
+      if (glow && window.matchMedia('(pointer: fine)').matches) {
+        window.addEventListener('pointermove', function(event) {
+          glow.style.setProperty('--pointer-x', event.clientX + 'px');
+          glow.style.setProperty('--pointer-y', event.clientY + 'px');
+        }, { passive: true });
+      }
+
+      var revealItems = document.querySelectorAll('.reveal-on-scroll');
+      if ('IntersectionObserver' in window) {
+        var revealObserver = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        }, { rootMargin: '0px 0px -12% 0px' });
+        revealItems.forEach(function(item) { revealObserver.observe(item); });
+      } else {
+        revealItems.forEach(function(item) { item.classList.add('is-visible'); });
+      }
 
       var posts = [
         {% for post in site.posts %}
