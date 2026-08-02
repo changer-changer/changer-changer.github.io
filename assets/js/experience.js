@@ -68,13 +68,19 @@
       var text = element.textContent;
       element.dataset.splitReady = 'true';
       element.setAttribute('aria-label', text.trim());
-      element.textContent = '';
-      Array.from(text).forEach(function (char) {
-        var span = document.createElement('span');
-        span.className = 'split-char';
-        span.setAttribute('aria-hidden', 'true');
-        span.innerHTML = char === ' ' ? '&nbsp;' : char;
-        element.appendChild(span);
+      var walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+      var textNodes = [];
+      while (walker.nextNode()) textNodes.push(walker.currentNode);
+      textNodes.forEach(function (node) {
+        var fragment = document.createDocumentFragment();
+        Array.from(node.nodeValue).forEach(function (char) {
+          var span = document.createElement('span');
+          span.className = 'split-char';
+          span.setAttribute('aria-hidden', 'true');
+          span.innerHTML = char === ' ' ? '&nbsp;' : char;
+          fragment.appendChild(span);
+        });
+        node.parentNode.replaceChild(fragment, node);
       });
     });
   }
