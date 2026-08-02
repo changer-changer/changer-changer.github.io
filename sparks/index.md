@@ -8,7 +8,7 @@ permalink: /sparks/
   <header class="page-hero" data-index="FRAGMENTS / IN MOTION">
     <p class="eyebrow">Sparks / 未完成的想法</p>
     <h1 data-split>火花</h1>
-    <p>尚未成为系统，却足以改变下一次思考方向的句子。</p>
+    <p>尚未成为结论，却足以改变下一次思考方向的句子。</p>
   </header>
 
   <div class="sparks-list">

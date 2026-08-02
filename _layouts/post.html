@@ -34,6 +34,9 @@ layout: default
         <span>{{ read_minutes }} 分钟读完</span>
         {% if page.tags.size > 0 %}<span>{{ page.tags.size }} 个标签</span>{% endif %}
       </div>
+      {% if page.categories contains "思考图谱" %}
+      <p class="post-context-note">这是一篇持续修订中的工作笔记。文中的判断属于当时的观察与假设，不是已经完成的理论或对他人的建议。</p>
+      {% endif %}
     </header>
 
     <div class="post-content">

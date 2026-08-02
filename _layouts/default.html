@@ -37,7 +37,7 @@
       </a>
       <div class="nav-links">
         <a {% if page.url == "/" %}aria-current="page"{% endif %} href="{{ '/' | relative_url }}">首页</a>
-        <a {% if page.url contains "/theory/" %}aria-current="page"{% endif %} href="{{ '/theory/' | relative_url }}">理论</a>
+        <a {% if page.url contains "/theory/" %}aria-current="page"{% endif %} href="{{ '/theory/' | relative_url }}">思考</a>
         <a {% if page.url contains "/sparks/" %}aria-current="page"{% endif %} href="{{ '/sparks/' | relative_url }}">火花</a>
         <a {% if page.url contains "/categories/" %}aria-current="page"{% endif %} href="{{ '/categories/' | relative_url }}">主题</a>
         <a {% if page.url contains "/tags/" %}aria-current="page"{% endif %} href="{{ '/tags/' | relative_url }}">标签</a>
@@ -61,7 +61,7 @@
     <div class="mobile-menu-index">INDEX / 00—07</div>
     <nav aria-label="移动端导航">
       <a href="{{ '/' | relative_url }}"><span>00</span>首页</a>
-      <a href="{{ '/theory/' | relative_url }}"><span>01</span>理论</a>
+      <a href="{{ '/theory/' | relative_url }}"><span>01</span>思考</a>
       <a href="{{ '/sparks/' | relative_url }}"><span>02</span>火花</a>
       <a href="{{ '/categories/' | relative_url }}"><span>03</span>主题</a>
       <a href="{{ '/tags/' | relative_url }}"><span>04</span>标签</a>
@@ -80,7 +80,7 @@
     <div class="footer-inner">
       <div class="footer-identity">
         <strong>CHANGER—CHANGER <span>© {{ site.time | date: "%Y" }}</span></strong>
-        <p>技术、认知、理论体系与个人成长的长期记录。</p>
+        <p>技术、认知、行动与个人经验的长期记录。</p>
       </div>
       <div class="footer-manifesto">KEEP<br>THINKING<br><em>IN PUBLIC</em></div>
       <div class="footer-links">
@@ -199,7 +199,7 @@
         }
         matches = matches.slice(0, 8);
         if (!matches.length) {
-          results.innerHTML = '<p class="command-empty">没有匹配文章。试试“AI”“认知科学”“理论体系”。</p>';
+          results.innerHTML = '<p class="command-empty">没有匹配文章。试试“AI”“认知科学”“思考图谱”。</p>';
           return;
         }
         results.innerHTML = matches.map(function(post) {
