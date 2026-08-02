@@ -534,7 +534,7 @@ html:not(.anim) [data-reveal] { opacity: 1 !important; }
 .theory-gateway {
   position: relative;
   background: var(--world-ink); color: var(--world-paper);
-  padding: clamp(6rem, 16vh, 11rem) clamp(1rem, 4vw, 2.5rem);
+  padding: clamp(4.5rem, 12vh, 8rem) clamp(1rem, 4vw, 2.5rem);
   overflow: clip;
 }
 .theory-inner {
@@ -542,7 +542,7 @@ html:not(.anim) [data-reveal] { opacity: 1 !important; }
   display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(2rem, 6vw, 5rem); align-items: center;
 }
 @media (max-width: 860px) { .theory-inner { grid-template-columns: 1fr; } }
-.theory-field { position: relative; aspect-ratio: 1; max-width: 30rem; }
+.theory-field { position: relative; aspect-ratio: 1; max-width: 26rem; }
 .theory-field i {
   position: absolute; border: 1px solid rgba(236, 231, 216, .16); border-radius: 50%;
 }
@@ -579,6 +579,7 @@ html:not(.anim) [data-reveal] { opacity: 1 !important; }
   color: var(--accent);
 }
 .spark-scene blockquote p {
+  color: var(--ink);
   font-family: var(--f-serif); font-weight: 900;
   font-size: clamp(1.5rem, 3.4vw, 2.7rem); line-height: 1.5; letter-spacing: 0;
 }
@@ -665,7 +666,7 @@ html:not(.anim) [data-reveal] { opacity: 1 !important; }
 }
 .footer-inner { max-width: var(--container); margin: 0 auto; position: relative; z-index: 1; }
 .footer-manifesto {
-  font-family: var(--f-serif-latin); font-weight: 900;
+  font-family: var(--f-serif-latin); font-weight: 400; font-style: italic;
   font-size: clamp(3rem, 9vw, 8rem); line-height: .98; letter-spacing: -.015em;
   margin-bottom: clamp(2.5rem, 6vh, 4.5rem);
 }
@@ -1121,3 +1122,15 @@ body.menu-open .mobile-menu nav a:nth-child(8) { transition-delay: .43s; }
 
 /* 场景过渡：场景 2 压暗 2D 层 */
 .intro[data-scene="2"] .intro-2d { /* opacity 由 JS 驱动 */ }
+
+/* ---------- Round-1 polish ---------- */
+@media (max-width: 720px) {
+  .experience-title h1 { line-height: 1.1; }
+  .title-line--shift { margin-top: 0; margin-left: clamp(1rem, 8vw, 3rem); }
+}
+
+/* 履历时间线节奏收紧 */
+.resume-entry { min-height: clamp(140px, 13vw, 190px) !important; }
+.resume-section-heading { margin-bottom: clamp(2.5rem, 6vw, 5rem) !important; }
+.resume-entry-marker { justify-content: flex-start !important; gap: .7rem; align-items: center !important; }
+.resume-entry-marker i { width: 7px !important; height: 7px !important; box-shadow: 0 0 0 3px rgba(255,221,77,.18) !important; }
