@@ -507,14 +507,28 @@
     } else if (t < T1 + T2) {
       setScene(1);
       var tIn = t - T1;
-      if (tIn < .1) { ctx2d.clearRect(0, 0, W, H); }
-      canvas2d.style.opacity = String(Math.max(0, 1 - tIn / .6));
-      glWrap.style.opacity = String(Math.min(1, tIn / .6));
-      if (gl) renderGL(tIn);
-      else { /* WebGL 不可用则提前进入场景 3 */
-        drawScene3(Math.min(T3, tIn / (T2 / T3)));
+      if (gl) {
+        if (tIn < .1) { ctx2d.clearRect(0, 0, W, H); }
+        canvas2d.style.opacity = String(Math.max(0, 1 - tIn / .6));
+        glWrap.style.opacity = String(Math.min(1, tIn / .6));
+        renderGL(tIn);
+        if (tIn > T2 - .5) glWrap.style.opacity = String(Math.max(0, (T2 - tIn) / .5));
+      } else {
+        /* three.js 仍在加载：保持 2D 校准画面，绝不留黑屏 */
+        canvas2d.style.opacity = '1';
+        glWrap.style.opacity = '0';
+        ctx2d.fillStyle = '#04050e';
+        ctx2d.fillRect(0, 0, W, H);
+        ctx2d.strokeStyle = 'rgba(53,224,255,.5)';
+        ctx2d.lineWidth = 1;
+        var scanY = (tIn * 180) % H;
+        ctx2d.beginPath(); ctx2d.moveTo(0, scanY); ctx2d.lineTo(W, scanY); ctx2d.stroke();
+        ctx2d.font = '12px "DM Mono", monospace';
+        ctx2d.fillStyle = 'rgba(236,240,255,' + (.35 + .3 * Math.abs(Math.sin(tIn * 3))) + ')';
+        ctx2d.textAlign = 'center';
+        ctx2d.fillText('CALIBRATING ACTUATOR …', W / 2, H / 2);
+        ctx2d.textAlign = 'left';
       }
-      if (tIn > T2 - .5) glWrap.style.opacity = String(Math.max(0, (T2 - tIn) / .5));
     } else if (t < TOTAL) {
       setScene(2);
       canvas2d.style.opacity = '1';
