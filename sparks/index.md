@@ -5,11 +5,11 @@ permalink: /sparks/
 ---
 
 <section class="sparks-page">
-  <div class="section-head">
-    <p class="eyebrow">Sparks</p>
-    <h1>火花</h1>
-    <p class="hero-lede">能激发联想的句子，联系到相关文章。</p>
-  </div>
+  <header class="page-hero" data-index="FRAGMENTS / IN MOTION">
+    <p class="eyebrow">Sparks / 未完成的想法</p>
+    <h1 data-split>火花</h1>
+    <p>尚未成为系统，却足以改变下一次思考方向的句子。</p>
+  </header>
 
   <div class="sparks-list">
     {% for spark in site.data.sparks %}
@@ -20,7 +20,8 @@ permalink: /sparks/
           {% break %}
         {% endif %}
       {% endfor %}
-      <blockquote class="spark-item">
+      <blockquote class="spark-item" data-cursor="FOLLOW">
+        <span class="spark-number">{{ forloop.index | prepend: '0' }}</span>
         <p class="spark-text">{{ spark.text }}</p>
         {% if linked_post %}
           <cite class="spark-link">

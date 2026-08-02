@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Latent Cartography — Generative Study</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.8/p5.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Lora:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root{--anthropic-dark:#141413;--anthropic-light:#faf9f5;--anthropic-mid-gray:#b0aea5;--anthropic-light-gray:#e8e6dc;--anthropic-orange:#d97757;--anthropic-blue:#6a9bcc;--anthropic-green:#788c5d}
+    *{margin:0;padding:0;box-sizing:border-box}body{font-family:Poppins,sans-serif;background:linear-gradient(135deg,var(--anthropic-light),#f5f3ee);min-height:100vh;color:var(--anthropic-dark)}
+    .container{display:flex;min-height:100vh;padding:20px;gap:20px}.sidebar{width:320px;flex-shrink:0;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);padding:24px;border-radius:12px;box-shadow:0 10px 30px rgba(20,20,19,.1);overflow-y:auto}.sidebar h1{font:500 24px Lora,serif;margin-bottom:8px}.subtitle{color:var(--anthropic-mid-gray);font-size:14px;margin-bottom:32px;line-height:1.4}.control-section{margin-bottom:28px}.control-section h3{font-size:16px;margin-bottom:16px;display:flex;gap:8px}.control-section h3::before{content:'•';color:var(--anthropic-orange)}
+    .seed-input{width:100%;background:var(--anthropic-light);padding:12px;border-radius:8px;font:14px monospace;margin-bottom:12px;border:1px solid var(--anthropic-light-gray);text-align:center}.seed-controls,.button-row{display:flex;gap:8px;margin-bottom:8px}.button{flex:1;background:var(--anthropic-orange);color:#fff;border:0;padding:10px 12px;border-radius:6px;font-size:13px;font-weight:500;cursor:pointer}.button.secondary{background:var(--anthropic-blue)}.button.tertiary{width:100%;background:var(--anthropic-green)}.button:hover{filter:brightness(.92);transform:translateY(-1px)}
+    .control-group{margin-bottom:18px}.control-group label{display:block;font-size:13px;font-weight:500;margin-bottom:7px}.slider-container{display:flex;align-items:center;gap:12px}.slider-container input{flex:1;accent-color:var(--anthropic-orange)}.value-display{min-width:42px;text-align:right;color:var(--anthropic-mid-gray);font:12px monospace}.color-group{margin-bottom:12px}.color-group label{display:block;color:var(--anthropic-mid-gray);font-size:12px}.color-picker-container{display:flex;align-items:center;gap:8px}.color-value{font:12px monospace;color:var(--anthropic-mid-gray)}
+    .canvas-area{flex:1;display:flex;align-items:center;justify-content:center;min-width:0}#canvas-container{width:100%;max-width:1000px;border-radius:12px;overflow:hidden;box-shadow:0 20px 40px rgba(20,20,19,.1);background:white}#canvas-container canvas{display:block;width:100%!important;height:auto!important}.loading{display:grid;place-items:center;min-height:400px;color:var(--anthropic-mid-gray)}
+    @media(max-width:680px){.container{flex-direction:column}.sidebar{width:100%}.canvas-area{padding:10px}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <h1>Latent Cartography</h1>
+      <div class="subtitle">A reproducible field study for the Changer—Changer visual system.</div>
+      <section class="control-section">
+        <h3>Seed</h3>
+        <input type="number" id="seed-input" class="seed-input" value="23032026" onchange="updateSeed()">
+        <div class="seed-controls"><button class="button secondary" onclick="previousSeed()">← Prev</button><button class="button secondary" onclick="nextSeed()">Next →</button></div>
+        <button class="button tertiary" onclick="randomSeedAndUpdate()">↻ Random</button>
+      </section>
+      <section class="control-section">
+        <h3>Parameters</h3>
+        <div class="control-group"><label>Field density</label><div class="slider-container"><input type="range" id="particleCount" min="60" max="280" step="10" value="160" oninput="updateParam('particleCount',this.value)"><span id="particleCount-value" class="value-display">160</span></div></div>
+        <div class="control-group"><label>Memory</label><div class="slider-container"><input type="range" id="memory" min="0.82" max="0.98" step="0.01" value="0.93" oninput="updateParam('memory',this.value)"><span id="memory-value" class="value-display">0.93</span></div></div>
+        <div class="control-group"><label>Drift</label><div class="slider-container"><input type="range" id="drift" min="0.04" max="0.24" step="0.01" value="0.11" oninput="updateParam('drift',this.value)"><span id="drift-value" class="value-display">0.11</span></div></div>
+        <div class="control-group"><label>Field scale</label><div class="slider-container"><input type="range" id="noiseScale" min="0.0008" max="0.005" step="0.0002" value="0.0018" oninput="updateParam('noiseScale',this.value)"><span id="noiseScale-value" class="value-display">0.0018</span></div></div>
+      </section>
+      <section class="control-section">
+        <h3>Colors</h3>
+        <div class="color-group"><label>Trace</label><div class="color-picker-container"><input type="color" id="color1" value="#141413" onchange="updateColor(0,this.value)"><span id="color1-value" class="color-value">#141413</span></div></div>
+        <div class="color-group"><label>Signal</label><div class="color-picker-container"><input type="color" id="color2" value="#d97757" onchange="updateColor(1,this.value)"><span id="color2-value" class="color-value">#d97757</span></div></div>
+        <div class="color-group"><label>Field</label><div class="color-picker-container"><input type="color" id="color3" value="#faf9f5" onchange="updateColor(2,this.value)"><span id="color3-value" class="color-value">#faf9f5</span></div></div>
+      </section>
+      <section class="control-section">
+        <h3>Actions</h3>
+        <div class="button-row"><button class="button" onclick="resetParameters()">Reset</button><button class="button secondary" onclick="saveCanvas('latent-cartography-'+params.seed,'png')">Download PNG</button></div>
+      </section>
+    </aside>
+    <main class="canvas-area"><div id="canvas-container"><div class="loading">Initializing generative art…</div></div></main>
+  </div>
+  <script>
+    let params={seed:23032026,particleCount:160,memory:.93,drift:.11,noiseScale:.0018,colorPalette:['#141413','#d97757','#faf9f5']};const defaults=JSON.parse(JSON.stringify(params));let particles=[];
+    function setup(){const c=createCanvas(1200,1200);c.parent('canvas-container');pixelDensity(1);document.querySelector('.loading').style.display='none';initializeSystem()}
+    function initializeSystem(){randomSeed(params.seed);noiseSeed(params.seed);particles=[];for(let i=0;i<params.particleCount;i++)particles.push(new Particle(i));background(params.colorPalette[2])}
+    function draw(){noStroke();fill(params.colorPalette[2]+'0b');rect(0,0,width,height);particles.forEach((particle,index)=>particle.step(index));drawHarmonics()}
+    function drawHarmonics(){push();translate(width/2,height/2);noFill();for(let i=0;i<5;i++){stroke(i===2?params.colorPalette[1]:params.colorPalette[0]);strokeWeight(i===2?1.5:.55);drawingContext.globalAlpha=i===2?.42:.13;beginShape();for(let j=0;j<=180;j++){const a=j/180*TWO_PI;const r=130+i*72+sin(a*(3+i)+frameCount*.005)*12;vertex(cos(a)*r,sin(a)*r*.7)}endShape()}drawingContext.globalAlpha=1;pop()}
+    class Particle{constructor(index){this.index=index;this.spawn()}spawn(){const a=this.index*2.399963;const radius=sqrt((this.index+1)/params.particleCount)*470;this.x=width/2+cos(a)*radius;this.y=height/2+sin(a)*radius*.72;this.vx=0;this.vy=0;this.phase=random(TWO_PI)}step(index){const px=this.x,py=this.y;const n=noise(this.x*params.noiseScale,this.y*params.noiseScale,frameCount*.002);const angle=n*TWO_PI*2.2+sin(this.phase+frameCount*.004)*.35;this.vx=this.vx*params.memory+cos(angle)*params.drift;this.vy=this.vy*params.memory+sin(angle)*params.drift;this.x+=this.vx;this.y+=this.vy;if(this.x<-20||this.x>width+20||this.y<-20||this.y>height+20)this.spawn();stroke(index%13===0?params.colorPalette[1]:params.colorPalette[0]);strokeWeight(index%13===0?1.6:.65);drawingContext.globalAlpha=index%13===0?.72:.25;line(px,py,this.x,this.y);drawingContext.globalAlpha=1}}
+    function updateParam(name,value){params[name]=Number(value);document.getElementById(name+'-value').textContent=value;if(name==='particleCount')initializeSystem()}
+    function updateColor(index,value){params.colorPalette[index]=value;document.getElementById('color'+(index+1)+'-value').textContent=value;initializeSystem()}
+    function updateSeedDisplay(){document.getElementById('seed-input').value=params.seed}function updateSeed(){const n=parseInt(document.getElementById('seed-input').value,10);if(n>0){params.seed=n;initializeSystem()}else updateSeedDisplay()}function previousSeed(){params.seed=Math.max(1,params.seed-1);updateSeedDisplay();initializeSystem()}function nextSeed(){params.seed+=1;updateSeedDisplay();initializeSystem()}function randomSeedAndUpdate(){params.seed=Math.floor(Math.random()*999999)+1;updateSeedDisplay();initializeSystem()}
+    function resetParameters(){params=JSON.parse(JSON.stringify(defaults));['particleCount','memory','drift','noiseScale'].forEach(k=>{document.getElementById(k).value=params[k];document.getElementById(k+'-value').textContent=params[k]});params.colorPalette.forEach((value,index)=>{document.getElementById('color'+(index+1)).value=value;document.getElementById('color'+(index+1)+'-value').textContent=value});updateSeedDisplay();initializeSystem()}
+  </script>
+</body>
+</html>

@@ -3,9 +3,9 @@ layout: default
 ---
 
 <article class="page-shell">
-  <header class="page-hero compact">
+  <header class="page-hero compact" data-index="PAGE / FIELD NOTE">
     <p class="eyebrow">{{ page.eyebrow | default: "Notebook" }}</p>
-    <h1>{{ page.title }}</h1>
+    <h1 data-split>{{ page.title }}</h1>
     {% if page.description %}
       <p>{{ page.description }}</p>
     {% endif %}

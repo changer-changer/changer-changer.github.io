@@ -1,6 +1,8 @@
 ---
 layout: page
 title: 关于
+eyebrow: "About / The person behind the index"
+description: "一个仍在建立中的个人操作系统，以及它为什么需要被公开记录。"
 permalink: /about/
 ---
 

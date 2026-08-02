@@ -5,12 +5,17 @@ layout: default
 {% assign read_minutes = words | divided_by: 320 | plus: 1 %}
 
 <article class="article-shell">
+  <div class="article-fingerprint" aria-hidden="true"><canvas class="fingerprint-canvas" data-art-title="{{ page.title | escape }}"></canvas></div>
   <aside class="article-aside" aria-label="文章工具">
     <div class="toc-card">
       <p class="eyebrow">On this page</p>
       <nav id="article-toc" class="article-toc">
         <a href="#article-start">文章开头</a>
       </nav>
+    </div>
+    <div class="reading-tools" aria-label="阅读字号">
+      <button type="button" data-reading-size="down" aria-label="减小正文字号">A−</button>
+      <button type="button" data-reading-size="up" aria-label="增大正文字号">A+</button>
     </div>
   </aside>
 
@@ -23,7 +28,7 @@ layout: default
         {% endfor %}
       </div>
       {% endif %}
-      <h1 class="post-title">{{ page.title }}</h1>
+      <h1 class="post-title" data-split>{{ page.title }}</h1>
       <div class="post-meta">
         <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y-%m-%d" }}</time>
         <span>{{ read_minutes }} 分钟读完</span>

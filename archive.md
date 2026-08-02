@@ -4,9 +4,9 @@ title: 归档
 permalink: /archive/
 ---
 
-<section class="page-hero">
+<section class="page-hero" data-index="INDEX / BY TIME">
   <p class="eyebrow">Archive</p>
-  <h1>文章归档</h1>
+  <h1 data-split>文章归档</h1>
   <p>按时间回看写作轨迹。适合找某个阶段的集中思考。</p>
 </section>
 
