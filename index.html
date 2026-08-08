@@ -1,143 +1,115 @@
----
-layout: default
----
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>崔之行 · The World I See</title>
+  <meta name="description" content="瞳孔、月亮、陨石、太阳 —— 滚动进入我看见的世界。崔之行的博客。" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='38' fill='%2304060C'/><circle cx='50' cy='50' r='34' fill='%237FB0E8'/><circle cx='50' cy='50' r='14' fill='%2304060C'/></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400;1,500;1,600&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ---- theme tokens (unlayered: beats the engine's @layer sw) ---- */
+    :root, .sw-root {
+      --sw-bg: #04060C;                                   /* 深空 */
+      --sw-ink: #EDEAE2;                                  /* 暖纸白 */
+      --sw-ink-soft: #8E96A8;
+      --sw-accent: #7FB0E8;
+      --sw-font-display: "Playfair Display", "Noto Serif SC", serif;
+      --sw-font-body: "Noto Serif SC", "Songti SC", "PingFang SC", serif;
+    }
+    body { margin: 0; background: #04060C; }
+    #world { min-height: 100vh; }
 
-<section class="experience-hero" data-scene="origin">
-  <div id="latent-field" class="latent-field" aria-hidden="true"></div>
-  <div class="hero-coordinate hero-coordinate--top">PERSONAL RESEARCH INDEX<br>BEIJING · CN</div>
-  <div class="hero-coordinate hero-coordinate--side">EST. MMXXIII · CONTINUOUSLY UPDATED</div>
+    /* ---- editorial chrome over the engine ---- */
+    .sw-brand__name { font-style: italic; letter-spacing: .02em; }
+    .sw-nav { background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.09); }
+    .sw-nav__item { color: var(--sw-ink-soft); }
+    .sw-nav__item:hover { color: var(--sw-ink); }
+    .sw-topcta { background: var(--sw-ink); color: #0A0D14; font-family: var(--sw-font-display); font-style: italic; }
 
-  <div class="experience-title">
-    <p class="experience-kicker"><span></span> 崔之行 / CHANGER—CHANGER</p>
-    <h1 aria-label="在变化中，建立坐标">
-      <span class="title-line" data-split>在变化中</span>
-      <span class="title-line title-line--shift" data-split>建立坐标</span>
-    </h1>
-  </div>
+    .sw-copy__num { color: color-mix(in srgb, var(--sw-accent) 75%, var(--sw-ink-soft)); }
+    .sw-copy__eyebrow { font-family: var(--sw-font-body); font-weight: 400; letter-spacing: .34em; }
+    .sw-copy__title {
+      font-style: italic; font-weight: 500;
+      font-size: clamp(2.6rem, 5.6vw, 4.8rem);
+      letter-spacing: -.015em; line-height: 1.02;
+    }
+    .sw-copy__body { font-weight: 400; }
+    .sw-copy__tags li {
+      color: color-mix(in srgb, var(--sw-accent) 85%, #fff);
+      background: color-mix(in srgb, var(--sw-accent) 10%, transparent);
+      border-color: color-mix(in srgb, var(--sw-accent) 32%, transparent);
+    }
+    .sw-btn--primary { background: var(--sw-accent); color: #0A0D14; font-family: var(--sw-font-display); font-style: italic; }
+    .sw-btn--ghost { color: var(--sw-ink); border-color: rgba(255,255,255,.28); }
+    .sw-route__label { background: rgba(10,13,20,.85); color: var(--sw-ink); border-color: rgba(255,255,255,.1); }
+    .sw-hint { font-family: var(--sw-font-body); }
+  </style>
+</head>
+<body>
+  <div id="world"></div>
 
-  <div class="experience-intro">
-    <p>关于人工智能、认知与个人演化的公开实验。记录还在运动中的判断，把思考变成能够被检索、连接与验证的长期系统。</p>
-    <div class="experience-actions">
-      <button class="disc-button search-open" type="button" data-cursor="SEARCH"><i aria-hidden="true">↗</i><span>探索<br>知识库</span></button>
-      <a class="quiet-link" href="{{ '/theory/' | relative_url }}">进入思考图谱 <span>→</span></a>
-    </div>
-  </div>
-
-  <div class="hero-ruler" aria-hidden="true"><span>SCROLL</span><i></i></div>
-  <div class="hero-readout" aria-hidden="true">
-    POINTER <strong>X <span data-readout-x>0.620</span> / Y <span data-readout-y>0.420</span></strong> · <strong><span data-readout-t>--:--:--</span></strong>
-  </div>
-</section>
-
-<section id="manifesto" class="manifesto-stage" data-scene="manifesto">
-  <div class="manifesto-track" aria-label="观察，连接，行动">
-    <span>OBSERVE</span><i>→</i><span>CONNECT</span><i>→</i><span>ACT</span><i>→</i><span>OBSERVE</span><i>→</i><span>CONNECT</span>
-  </div>
-  <div class="manifesto-notes">
-    <p data-reveal><strong>01</strong> 捕捉不稳定的想法</p>
-    <p data-reveal><strong>02</strong> 建立跨领域的连接</p>
-    <p data-reveal><strong>03</strong> 让判断进入现实</p>
-  </div>
-</section>
-
-<section class="selected-stories scene-section" data-scene="stories">
-  <header class="scene-header">
-    <p class="scene-index">SCENE 01 / SELECTED NOTES</p>
-    <h2 data-reveal>最近留下的<br><em>思想星图</em></h2>
-    <a href="{{ '/archive/' | relative_url }}" class="quiet-link" data-reveal>全部文章 <span>↗</span></a>
-  </header>
-
-  <div class="story-grid">
-    {% for post in site.posts limit:3 %}
-      {% assign rt_chars = post.content | strip_html | size %}
-      {% assign rt_min = rt_chars | divided_by: 400 | plus: 1 %}
-      <article class="story-card story-card--{{ forloop.index }}" data-cursor="OPEN" data-reveal>
-        <a href="{{ post.url | relative_url }}">
-          <div class="story-art"><canvas class="starmap-canvas" data-art-title="{{ post.title | escape }}" aria-hidden="true"></canvas><span>ST—0{{ forloop.index }}</span></div>
-          <div class="story-copy">
-            <div class="story-meta"><time>{{ post.date | date: "%Y.%m.%d" }}</time><span>{{ rt_min }} MIN READ</span></div>
-            <h3>{{ post.title }}</h3>
-            <p>{{ post.excerpt | strip_html | truncate: 110 }}</p>
-            <span class="story-arrow" aria-hidden="true">↗</span>
-          </div>
-        </a>
-      </article>
-    {% endfor %}
-  </div>
-</section>
-
-<section class="theory-gateway" data-scene="theory">
-  <div class="theory-inner">
-    <div class="theory-field" aria-hidden="true"><i></i><i></i><i></i><i></i><span>THEORY<br>IS A LENS</span></div>
-    <div class="theory-copy">
-      <p class="scene-index">SCENE 02 / THE SYSTEM</p>
-      <h2 data-reveal>不是答案。<br>是一套持续更新的<br><em>观察装置。</em></h2>
-      <p data-reveal>从生存倾向、认知抽象到社会结构，一组仍在连接、验证和修正的观察笔记。</p>
-      <a class="disc-button disc-button--light" href="{{ '/theory/' | relative_url }}" data-cursor="ENTER" data-reveal><i aria-hidden="true">→</i><span>进入<br>思考图谱</span></a>
-    </div>
-  </div>
-</section>
-
-{% if site.data.sparks.size > 0 %}
-{% assign spark_index = site.time | date: "%s" | modulo: site.data.sparks.size %}
-{% assign spark = site.data.sparks[spark_index] %}
-{% assign linked_post = nil %}
-{% for post in site.posts %}{% if post.slug == spark.slug or post.url contains spark.slug %}{% assign linked_post = post %}{% break %}{% endif %}{% endfor %}
-<section class="spark-scene scene-section" data-scene="spark">
-  <p class="scene-index">SCENE 03 / UNFINISHED THOUGHT</p>
-  <blockquote data-reveal>
-    <span aria-hidden="true">“</span>
-    <p>{{ spark.text }}</p>
-    {% if linked_post %}<cite><a class="quiet-link" href="{{ linked_post.url | relative_url }}">沿着这束火花继续 →</a></cite>{% endif %}
-  </blockquote>
-</section>
-{% endif %}
-
-<section class="topic-scene scene-section" data-scene="topics">
-  <header class="scene-header">
-    <p class="scene-index">SCENE 04 / CONSTELLATIONS</p>
-    <h2 data-reveal>选择一条<br><em>思想路径</em></h2>
-  </header>
-  <div class="constellation-list">
-    {% assign sorted_cats = site.categories | sort %}
-    {% for cat in sorted_cats limit:8 %}
-      <a href="{{ '/categories/' | relative_url }}#{{ cat[0] }}" data-cursor="{{ cat[1].size }} NOTES" data-reveal>
-        <span class="constellation-no">0{{ forloop.index }}</span>
-        <strong>{{ cat[0] }}</strong>
-        <span class="constellation-count">{{ cat[1].size }} 篇</span>
-        <i aria-hidden="true">↗</i>
-      </a>
-    {% endfor %}
-  </div>
-</section>
-
-<section class="index-scene scene-section" data-scene="index">
-  <header class="scene-header">
-    <p class="scene-index">SCENE 05 / LATEST TRANSMISSIONS</p>
-    <h2 data-reveal>持续写作，<br><em>持续修正</em></h2>
-  </header>
-  <div class="transmission-list">
-    {% for post in paginator.posts %}
-      {% assign rt_chars = post.content | strip_html | size %}
-      {% assign rt_min = rt_chars | divided_by: 400 | plus: 1 %}
-      <article class="transmission-item" data-cursor="READ" data-reveal>
-        <a href="{{ post.url | relative_url }}">
-          <span class="transmission-no">{{ forloop.index | prepend: '0' }}</span>
-          <h3>{{ post.title }}</h3>
-          <span class="transmission-meta">{{ post.date | date: "%Y.%m.%d" }} · {{ rt_min }} MIN</span>
-          <span class="transmission-arrow" aria-hidden="true">→</span>
-        </a>
-      </article>
-    {% endfor %}
-  </div>
-
-  {% if paginator.total_pages > 1 %}
-  <nav class="pagination" aria-label="分页">
-    {% if paginator.previous_page %}<a href="{{ paginator.previous_page_path | relative_url }}">PREV</a>{% endif %}
-    {% for page_num in (1..paginator.total_pages) %}
-      {% if page_num == paginator.page %}<span class="current">{{ page_num }}</span>{% elsif page_num == 1 %}<a href="{{ '/' | relative_url }}">{{ page_num }}</a>{% else %}<a href="{{ site.paginate_path | replace: ':num', page_num | relative_url }}">{{ page_num }}</a>{% endif %}
-    {% endfor %}
-    {% if paginator.next_page %}<a href="{{ paginator.next_page_path | relative_url }}">NEXT</a>{% endif %}
-  </nav>
-  {% endif %}
-</section>
+  <script src="/assets/world/scrub-engine.js"></script>
+  <script>
+    mountScrollWorld(document.getElementById('world'), {
+      brand: { name: '崔之行', href: '/' },
+      cta: { label: '进入博客', href: '/archive' },
+      hint: 'Scroll · 滚动，进入我看见的世界',
+      diveScroll: 1.15,
+      connScroll: 1.15,
+      crossfade: 0.18,
+      nav: true,
+      atmosphere: true,
+      sections: [
+        {
+          id: 'eye', label: '瞳孔',
+          still: '/assets/world/eye.webp',
+          accent: '#7FB0E8',
+          eyebrow: 'CHAPTER 01 · 瞳孔 THE EYE',
+          title: 'The World I See',
+          body: '一切始于一次凝视。瞳孔是光进入身体的地方，也是我记录世界的入口。',
+          tags: ['凝视', '起点'],
+        },
+        {
+          id: 'moon', label: '月亮',
+          still: '/assets/world/moon.webp',
+          accent: '#C7CDD6',
+          eyebrow: 'CHAPTER 02 · 月亮 THE MOON',
+          title: 'Silent Gravity',
+          body: '隔着三十八万公里，依然牵引潮汐。有些陪伴，从不喧哗。',
+          tags: ['寂静', '引力'],
+        },
+        {
+          id: 'meteor', label: '陨石',
+          still: '/assets/world/meteor.webp',
+          accent: '#C9A46B',
+          eyebrow: 'CHAPTER 03 · 陨石 THE METEOR',
+          title: 'Drift & Burn',
+          body: '在抵达之前，每一块石头都在黑暗里飞了很久。漂泊不是迷路，是在路上。',
+          tags: ['漂泊', '燃烧'],
+        },
+        {
+          id: 'sun', label: '太阳',
+          still: '/assets/world/sun.webp',
+          accent: '#FF7A2F',
+          eyebrow: 'CHAPTER 04 · 太阳 THE SUN',
+          title: 'Become the Light',
+          body: '靠近光，追随光，成为光。我把看见的世界写在这里——欢迎到来。',
+          tags: [],
+          cta: {
+            primary: { label: '进入博客', href: '/archive' },
+            secondary: { label: 'GitHub', href: 'https://github.com/changer-changer' },
+          },
+        },
+      ],
+      connectors: [
+        '/assets/world/vid/conn0.mp4',   // 瞳孔 → 月亮
+        '/assets/world/vid/conn1.mp4',   // 月亮 → 陨石
+        '/assets/world/vid/conn2.mp4',   // 陨石 → 太阳
+      ],
+    });
+  </script>
+</body>
+</html>
