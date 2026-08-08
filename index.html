@@ -53,6 +53,17 @@
 
   <script src="/assets/world/scrub-engine.js"></script>
   <script>
+    // GH Pages 源站在国内很慢: 媒体统一走 jsDelivr CDN (GitHub 官方镜像, 国内快数倍)
+    var CDN = 'https://cdn.jsdelivr.net/gh/changer-changer/changer-changer.github.io@master';
+    function m(p) { return CDN + p; }
+
+    // 首段视频预加载: 打开页面就并行下载第一段过渡, 滚动到时秒出
+    (function preloadFirst() {
+      var v = document.createElement('video');
+      v.muted = true; v.playsInline = true; v.preload = 'auto';
+      v.src = CDN + '/assets/world/vid/conn0.mp4';
+    })();
+
     mountScrollWorld(document.getElementById('world'), {
       brand: { name: '崔之行', href: '/' },
       cta: { label: '进入博客', href: '/archive' },
@@ -65,7 +76,7 @@
       sections: [
         {
           id: 'eye', label: '瞳孔',
-          still: '/assets/world/eye.webp',
+          still: m('/assets/world/eye.webp'),
           accent: '#7FB0E8',
           eyebrow: 'CHAPTER 01 · 瞳孔 THE EYE',
           title: 'The World I See',
@@ -74,7 +85,7 @@
         },
         {
           id: 'moon', label: '月亮',
-          still: '/assets/world/moon.webp',
+          still: m('/assets/world/moon.webp'),
           accent: '#C7CDD6',
           eyebrow: 'CHAPTER 02 · 月亮 THE MOON',
           title: 'Silent Gravity',
@@ -83,7 +94,7 @@
         },
         {
           id: 'meteor', label: '陨石',
-          still: '/assets/world/meteor.webp',
+          still: m('/assets/world/meteor.webp'),
           accent: '#C9A46B',
           eyebrow: 'CHAPTER 03 · 陨石 THE METEOR',
           title: 'Drift & Burn',
@@ -92,7 +103,7 @@
         },
         {
           id: 'sun', label: '太阳',
-          still: '/assets/world/sun.webp',
+          still: m('/assets/world/sun.webp'),
           accent: '#FF7A2F',
           eyebrow: 'CHAPTER 04 · 太阳 THE SUN',
           title: 'Become the Light',
@@ -105,9 +116,9 @@
         },
       ],
       connectors: [
-        '/assets/world/vid/conn0.mp4',   // 瞳孔 → 月亮
-        '/assets/world/vid/conn1.mp4',   // 月亮 → 陨石
-        '/assets/world/vid/conn2.mp4',   // 陨石 → 太阳
+        m('/assets/world/vid/conn0.mp4'),   // 瞳孔 → 月亮
+        m('/assets/world/vid/conn1.mp4'),   // 月亮 → 陨石
+        m('/assets/world/vid/conn2.mp4'),   // 陨石 → 太阳
       ],
     });
   </script>

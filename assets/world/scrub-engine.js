@@ -235,9 +235,12 @@ function mountScrollWorld(container, config) {
       const op = smooth(1 - outside / fade);
       s.el.style.opacity = op; s.visible = op > 0.001;
       s.el.style.zIndex = (i === ci) ? '120' : String(100 + Math.round(op * 10));
+      // Sections without a clip (still-only dwells between connector videos): the
+      // still is frame-identical to the neighbouring clips, so it must stay
+      // COMPLETELY static — any fake camera move (zoom/pan) on the frozen frame
+      // reads as "push in, then jump" at the next video seam.
       if (!s.hasClip || !s.ready) {
-        const sc = reduce ? 1 : 1.03 + local * 0.14;
-        s.img.style.transform = `translateX(${stageX - 2}vw) scale(${sc.toFixed(3)})`;
+        s.img.style.transform = `translateX(${stageX}vw) scale(1)`;
       }
     }
 
