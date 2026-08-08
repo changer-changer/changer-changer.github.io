@@ -47,6 +47,10 @@
     .sw-route__label { background: rgba(10,13,20,.85); color: var(--sw-ink); border-color: rgba(255,255,255,.1); }
     .sw-route::before { display: none; }   /* 去掉右侧竖线(浅色在深底上像白条), 保留圆点导航 */
     .sw-hint { font-family: var(--sw-font-body); }
+
+    /* ---- 章节吸附: 滚动停止时自动归位到最近的文字页中心 ---- */
+    html { scroll-snap-type: y proximity; }
+    .sw-snap { position: absolute; left: 0; width: 1px; height: 230vh; scroll-snap-align: center; }
   </style>
 </head>
 <body>
@@ -118,6 +122,33 @@
         '/assets/world/vid/conn2.mp4',   // 陨石 → 太阳
       ],
     });
+
+    // 吸附点: 每个静帧段中心 (diveScroll=1.15 + connScroll=1.15 → 段宽 2.3vh, 中心偏移 0.575+2.3k vh)
+    (function addSnapPoints() {
+      var track = document.querySelector('.sw-track');
+      if (!track) return;
+      var vh = window.innerHeight;
+      var centers = [];
+      for (var k = 0; k < 4; k++) {
+        var m = document.createElement('div');
+        m.className = 'sw-snap';
+        m.style.top = (k * 2.3 * vh) + 'px';
+        track.appendChild(m);
+        centers.push((k * 2.3 + 0.575) * vh);
+      }
+      // JS 兜底: 原生 snap 之外, 滚动停止后若停在两段之间, 平滑归位到最近静帧段中心
+      var timer = null;
+      window.addEventListener('scroll', function () {
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+          var y = window.scrollY, best = centers[0], bd = Infinity;
+          centers.forEach(function (c) { var d = Math.abs(c - y); if (d < bd) { bd = d; best = c; } });
+          if (bd > 0.25 * window.innerHeight) {
+            window.scrollTo({ top: best, behavior: 'smooth' });
+          }
+        }, 150);
+      }, { passive: true });
+    })();
   </script>
 </body>
 </html>
