@@ -53,8 +53,9 @@
 
   <script src="/assets/world/scrub-engine.js"></script>
   <script>
-    // GH Pages 源站在国内很慢: 媒体统一走 jsDelivr CDN (GitHub 官方镜像, 国内快数倍)
-    var CDN = 'https://cdn.jsdelivr.net/gh/changer-changer/changer-changer.github.io@master';
+    // GH Pages 源站在国内很慢: 媒体统一走 jsDelivr CDN。
+    // 固定 commit SHA: jsDelivr 对固定版本不可变缓存, 永不过期; 每次改媒体后更新此 SHA。
+    var CDN = 'https://cdn.jsdelivr.net/gh/changer-changer/changer-changer.github.io@637746a';
     function m(p) { return CDN + p; }
 
     // 首段视频预加载: 打开页面就并行下载第一段过渡, 滚动到时秒出
