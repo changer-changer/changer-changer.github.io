@@ -240,7 +240,7 @@ function mountScrollWorld(container, config) {
       // COMPLETELY static — any fake camera move (zoom/pan) on the frozen frame
       // reads as "push in, then jump" at the next video seam.
       if (!s.hasClip || !s.ready) {
-        s.img.style.transform = `translateX(${stageX}vw) scale(1)`;
+        s.img.style.transform = 'scale(1)';
       }
     }
 
