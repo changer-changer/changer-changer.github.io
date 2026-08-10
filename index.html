@@ -6,9 +6,15 @@
   <title>崔之行 · The World I See</title>
   <meta name="description" content="瞳孔、月亮、陨石、太阳 —— 滚动进入我看见的世界。崔之行的博客。" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='38' fill='%2304060C'/><circle cx='50' cy='50' r='34' fill='%237FB0E8'/><circle cx='50' cy='50' r='14' fill='%2304060C'/></svg>" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400;1,500;1,600&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet" />
+  <!-- 字体走 jsDelivr @fontsource（同款 Google Fonts 文件，国内可达；本地已有 Instrument Serif / DM Mono / Noto SC 900） -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5.1.1/500.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5.1.1/700.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5.1.1/400-italic.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5.1.1/500-italic.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5.1.1/600-italic.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.1.1/400.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.1.1/600.css" rel="stylesheet" />
   <style>
     /* ---- theme tokens (unlayered: beats the engine's @layer sw) ---- */
     :root, .sw-root {
@@ -54,11 +60,15 @@
 
   <script src="/assets/world/scrub-engine.js"></script>
   <script>
+    // 媒体主源: jsDelivr CDN (国内可达, ~900KB/s); 引擎内置失败回退到同源 github.io
+    var CDN = 'https://cdn.jsdelivr.net/gh/changer-changer/changer-changer.github.io@master/assets/world';
+    var W = function (p) { return CDN + p; };
+
     // 首段视频预加载: 打开页面就并行下载第一段过渡, 滚动到时秒出
     (function preloadFirst() {
       var v = document.createElement('video');
       v.muted = true; v.playsInline = true; v.preload = 'auto';
-      v.src = '/assets/world/vid/conn0.mp4';
+      v.src = W('/vid/conn0.mp4');
     })();
 
     mountScrollWorld(document.getElementById('world'), {
@@ -73,7 +83,7 @@
       sections: [
         {
           id: 'eye', label: '瞳孔',
-          still: '/assets/world/eye.webp',
+          still: W('/eye.webp'),
           accent: '#7FB0E8',
           eyebrow: 'CHAPTER 01 · 瞳孔 THE EYE',
           title: 'The World I See',
@@ -82,7 +92,7 @@
         },
         {
           id: 'moon', label: '月亮',
-          still: '/assets/world/moon.webp',
+          still: W('/moon.webp'),
           accent: '#C7CDD6',
           eyebrow: 'CHAPTER 02 · 月亮 THE MOON',
           title: 'Silent Gravity',
@@ -91,7 +101,7 @@
         },
         {
           id: 'meteor', label: '陨石',
-          still: '/assets/world/meteor.webp',
+          still: W('/meteor.webp'),
           accent: '#C9A46B',
           eyebrow: 'CHAPTER 03 · 陨石 THE METEOR',
           title: 'Drift & Burn',
@@ -100,7 +110,7 @@
         },
         {
           id: 'sun', label: '太阳',
-          still: '/assets/world/sun.webp',
+          still: W('/sun.webp'),
           accent: '#FF7A2F',
           eyebrow: 'CHAPTER 04 · 太阳 THE SUN',
           title: 'Become the Light',
@@ -113,9 +123,9 @@
         },
       ],
       connectors: [
-        '/assets/world/vid/conn0.mp4',   // 瞳孔 → 月亮
-        '/assets/world/vid/conn1.mp4',   // 月亮 → 陨石
-        '/assets/world/vid/conn2.mp4',   // 陨石 → 太阳
+        W('/vid/conn0.mp4'),   // 瞳孔 → 月亮
+        W('/vid/conn1.mp4'),   // 月亮 → 陨石
+        W('/vid/conn2.mp4'),   // 陨石 → 太阳
       ],
     });
   </script>

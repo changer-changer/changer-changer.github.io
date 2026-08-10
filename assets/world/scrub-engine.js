@@ -80,6 +80,13 @@ function mountScrollWorld(container, config) {
   const N = SECTIONS.length;
   if (!N) return;
 
+  // jsDelivr 代理 URL → 同源回退路径（如 cdn.jsdelivr.net/gh/org/repo@ref/assets/x → /assets/x）。
+  // 媒体主源挂了（DNS 污染/节点故障）时 loadClip/图片自动回退到 github.io 原地址。
+  function cdnFallback(url) {
+    const m = /^https:\/\/cdn\.jsdelivr\.net\/gh\/[^/]+\/[^@/]+@[^/]+(\/.*)$/.exec(url);
+    return m ? m[1] : null;
+  }
+
   injectCSS();
   container.classList.add('sw-root');
 
@@ -140,7 +147,10 @@ function mountScrollWorld(container, config) {
     const scene = el('div', 'sw-scene'); scene.style.setProperty('--sw-accent', s.accent || '');
     const img = el('img', 'sw-scene__still'); img.alt = ''; img.decoding = 'async'; img.loading = 'lazy';
     const poster = (isMobile() && s.stillM) ? s.stillM : s.still;
-    if (poster) img.src = poster;
+    if (poster) {
+      img.src = poster;
+      img.onerror = () => { const fb = cdnFallback(img.src); if (fb) img.src = fb; };
+    }
     scene.appendChild(img); stage.appendChild(scene);
     s.el = scene; s.img = img; s.video = null; s.hasClip = false;
     s.loading = false; s.ready = false; s.cur = 0; s.target = 0; s.visible = false;
@@ -195,15 +205,24 @@ function mountScrollWorld(container, config) {
     window.scrollTo({ top: seg.start + (seg.end - seg.start) * 0.5, behavior: reduce ? 'auto' : 'smooth' });
   }
 
+  const MAX_CONCURRENT = 2;   // 同时最多下载 2 段视频, 避免三路抢带宽
+  let loadingCount = 0;
+
+  function fetchBlobWithFallback(url) {
+    const fb = cdnFallback(url);
+    const grab = u => fetch(u).then(r => r.ok ? r.blob() : Promise.reject(new Error('HTTP ' + r.status)));
+    return grab(url).catch(err => fb ? grab(fb) : Promise.reject(err));
+  }
+
   function loadClip(s) {
     // Under prefers-reduced-motion we never load the clips at all — the stills stay up
     // and simply cross-dissolve as you scroll. No scrubbed video motion, no decode cost.
     if (reduce || s.loading || !s.clip) return;
-    s.loading = true;
+    if (loadingCount >= MAX_CONCURRENT) return;   // 等下次 read() 让出名额
+    s.loading = true; loadingCount++;
     // Serve the lighter mobile encode on phones when one was provided.
     const url = (isMobile() && s.clipM) ? s.clipM : s.clip;
-    fetch(url).then(r => r.ok ? r.blob() : Promise.reject(new Error('404')))
-      .then(blob => {
+    fetchBlobWithFallback(url).then(blob => {
         const v = document.createElement('video');
         v.className = 'sw-scene__video';
         v.muted = true; v.playsInline = true; v.preload = 'auto';
@@ -216,7 +235,17 @@ function mountScrollWorld(container, config) {
         v.addEventListener('seeked', () => { s.el.classList.add('has-clip'); }, { once: true });
         v.addEventListener('loadeddata', () => { try { v.pause(); } catch (e) {} if (userReady) primeVideo(v); });
         s.el.appendChild(v); s.video = v; s.hasClip = true;
-      }).catch(() => { s.loading = false; });
+      }).catch(() => { s.loading = false; })
+      .finally(() => { loadingCount--; });
+  }
+
+  // 滚动远离当前段后卸载视频: 释放 blob URL 与解码内存; 回滚再进入时重载, 命中 HTTP 缓存会很快
+  function unloadClip(s) {
+    if (!s.hasClip || !s.video) return;
+    try { URL.revokeObjectURL(s.video.src); } catch (e) {}
+    try { s.video.remove(); } catch (e) {}
+    s.el.classList.remove('has-clip');
+    s.video = null; s.hasClip = false; s.ready = false; s.loading = false; s.cur = 0; s.target = 0;
   }
 
   function read() {
@@ -228,6 +257,7 @@ function mountScrollWorld(container, config) {
     for (let i = 0; i < NSEG; i++) {
       const s = SEGMENTS[i];
       if (y > s.start - 1.6 * vh && y < s.end + 1.6 * vh) loadClip(s);
+      else if (s.hasClip && (y < s.start - 3 * vh || y > s.end + 3 * vh)) unloadClip(s);
       const local = clamp((y - s.start) / (s.end - s.start), 0, 1);
       s.target = s.linger ? lingerEase(local, s.linger) : local;
       let outside = 0;
