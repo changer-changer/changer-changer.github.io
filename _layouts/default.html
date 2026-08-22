@@ -3,15 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% assign meta_description = page.description | default: page.excerpt | default: site.description | strip_html | truncate: 160 %}
+  {% assign meta_title = page.title | default: site.title %}
   <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
-  <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | truncate: 160 }}">
+  <meta name="description" content="{{ meta_description }}">
   <meta name="author" content="{{ site.author | default: site.title }}">
   <meta name="theme-color" content="#EDE9DC">
   <link rel="canonical" href="{{ page.url | absolute_url }}">
-  <meta property="og:title" content="{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}">
-  <meta property="og:description" content="{{ page.excerpt | default: site.description | strip_html | truncate: 160 }}">
+  <meta property="og:site_name" content="{{ site.title }}">
+  <meta property="og:title" content="{{ meta_title }}{% if page.title %} - {{ site.title }}{% endif %}">
+  <meta property="og:description" content="{{ meta_description }}">
   <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
   <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="{{ meta_title }}">
+  <meta name="twitter:description" content="{{ meta_description }}">
   <script>
     /* 首屏前执行：主题 + 动效标记，避免闪烁 */
     (function () {
@@ -184,6 +190,7 @@
   <script defer src="{{ '/assets/vendor/gsap.min.js' | relative_url }}"></script>
   <script defer src="{{ '/assets/vendor/ScrollTrigger.min.js' | relative_url }}"></script>
   <script defer src="{{ '/assets/vendor/lenis.min.js' | relative_url }}"></script>
+  {% if page.layout == 'resume' %}<script defer src="{{ '/assets/js/resume.js' | relative_url }}"></script>{% endif %}
   <script defer src="{{ '/assets/js/main.js' | relative_url }}"></script>
 </body>
 </html>
