@@ -1,0 +1,30 @@
+---
+layout: default
+---
+
+{% assign cv = site.data.resume %}
+<article class="cv-cases-page">
+  <header class="cv-cases-header">
+    <a class="cv-back-link" href="{{ '/resume/' | relative_url }}">← 返回速览</a>
+    <p class="cv-eyebrow">PROJECT NOTES / {{ cv.updated }}</p>
+    <h1>项目材料</h1>
+    <p>把简历里的一行项目，展开成可核验的工作拆解。这里保留问题、动作、结果与证据边界；需要快速判断时，请回到履历速览。</p>
+  </header>
+  <nav class="cv-case-index" aria-label="项目材料索引">
+    {% for item in cv.case_studies %}<a href="#{{ item.id }}"><span>{{ item.number }}</span>{{ item.title }}</a>{% endfor %}
+  </nav>
+  <div class="cv-case-list">
+    {% for item in cv.case_studies %}
+      <article class="cv-case-detail" id="{{ item.id }}">
+        <header><div class="cv-project-meta"><span>{{ item.category_label }}</span><span>{{ item.period }}</span><em class="cv-status cv-status--{{ item.status_class }}">{{ item.status_label }}</em></div><h2>{{ item.title }}</h2><p>{{ item.one_liner }}</p></header>
+        <div class="cv-case-grid">
+          <div><span>THE PROBLEM</span><p>{{ item.problem }}</p></div>
+          <div><span>MY CONTRIBUTION</span><p>{{ item.contribution }}</p></div>
+          <div><span>WHAT CHANGED</span><p>{{ item.outcome }}</p></div>
+        </div>
+        <div class="cv-case-proof"><span>证据边界</span><p>{{ item.evidence }}</p></div>
+        <div class="cv-tags">{% for tag in item.tags %}<span>{{ tag }}</span>{% endfor %}</div>
+      </article>
+    {% endfor %}
+  </div>
+</article>

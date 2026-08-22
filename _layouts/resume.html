@@ -2,224 +2,89 @@
 layout: default
 ---
 
-{% assign resume = site.data.resume %}
-<article class="profile-page">
-  <header class="profile-hero" data-resume-section="top">
-    <div class="profile-hero-inner">
-      <div class="profile-hero-copy">
-        <div class="profile-meta-row">
-          <span class="profile-eyebrow">PUBLIC PROFILE / {{ resume.updated }}</span>
-          <span class="profile-status"><i></i>{{ resume.availability }}</span>
-        </div>
-        <p class="profile-role">{{ resume.role }}</p>
-        <h1>{{ resume.name }}<span class="profile-name-mark">/</span></h1>
-        <p class="profile-thesis">{{ resume.thesis }}</p>
-        <p class="profile-intro">{{ resume.intro }}</p>
-        <div class="profile-hero-actions">
-          <a class="profile-button profile-button--solid" href="#work">先看我做过的系统 <span>↓</span></a>
-          <a class="profile-text-link" href="#approach">我如何判断问题 <span>↘</span></a>
-        </div>
+{% assign cv = site.data.resume %}
+<article class="cv-page">
+  <div class="cv-paper">
+    <header class="cv-header">
+      <div class="cv-header-main">
+        <p class="cv-eyebrow">CURRICULUM VITAE / {{ cv.updated }}</p>
+        <h1>{{ cv.name }}</h1>
+        <p class="cv-role">{{ cv.role }}</p>
+        <p class="cv-summary">{{ cv.summary }}</p>
       </div>
-
-      <div class="profile-hero-map" aria-label="从传感器到业务结果的工作路径" role="img">
-        <div class="profile-map-grid"></div>
-        <div class="profile-map-topline"><span>WORKING MODEL</span><span>01—04</span></div>
-        <svg class="profile-map-lines" viewBox="0 0 520 570" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M92 150 C172 148 170 235 260 235 S344 320 430 320" />
-          <path d="M92 150 C170 150 168 406 260 406 S350 320 430 320" />
-          <path d="M260 235 C330 235 342 156 430 156" />
-          <path d="M260 406 C330 406 340 486 430 486" />
-        </svg>
-        <div class="profile-map-node profile-map-node--signal"><small>01 / SIGNAL</small><strong>传感器</strong><span>触觉 · 视觉</span></div>
-        <div class="profile-map-node profile-map-node--system"><small>02 / SYSTEM</small><strong>数据链路</strong><span>ROS2 · VR · 控制</span></div>
-        <div class="profile-map-node profile-map-node--model"><small>03 / MODEL</small><strong>可训练的模型</strong><span>Diffusion Policy</span></div>
-        <div class="profile-map-node profile-map-node--product"><small>04 / OUTCOME</small><strong>可被使用的结果</strong><span>Demo · 交付 · 复盘</span></div>
-        <div class="profile-map-note">我习惯把“想法”拆成一条<br>可以被观察、测试、交付的链路。</div>
-      </div>
-    </div>
-    <div class="profile-hero-foot">
-      <span>{{ resume.public_note }}</span>
-      <a href="#signals">继续阅读 <span>↓</span></a>
-    </div>
-  </header>
-
-  <nav class="profile-index" aria-label="履历页面导航">
-    <div class="profile-index-inner">
-      <span class="profile-index-label">ON THIS PAGE</span>
-      <div class="profile-index-links">
-        <a href="#signals" data-resume-nav="signals"><span>01</span>先看信号</a>
-        <a href="#work" data-resume-nav="work"><span>02</span>具体做过什么</a>
-        <a href="#approach" data-resume-nav="approach"><span>03</span>如何思考</a>
-        <a href="#capabilities" data-resume-nav="capabilities"><span>04</span>能力与证据</a>
-      </div>
-      <button class="profile-index-toggle" type="button" data-resume-toggle aria-pressed="false">阅读提示 <span>+</span></button>
-    </div>
-    <div class="profile-reading-note" data-resume-note hidden>
-      <span>给招聘者</span>
-      <p>如果你只有 30 秒：先看下面的“系统交付”，它比职位名称更能说明我的工作方式。展开项目卡片，可以看到问题、我的边界、具体动作和当前证据状态。</p>
-    </div>
-  </nav>
-
-  <section class="profile-section profile-signals" id="signals" data-resume-section="signals">
-    <div class="profile-section-head">
-      <p class="profile-section-label">01 / SIGNALS</p>
-      <div>
-        <h2>先说清楚，<em>我是谁。</em></h2>
-        <p class="profile-section-deck">我在机器人、模型和真实业务之间工作。擅长把模糊问题拆成系统，把系统推进到可以被人使用的结果。</p>
-      </div>
-    </div>
-    <div class="profile-signal-grid">
-      {% for item in resume.signals %}
-        <article class="profile-signal-card">
-          <span class="profile-card-index">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
-          <strong>{{ item.title }}</strong>
-          <p>{{ item.detail }}</p>
-        </article>
-      {% endfor %}
-    </div>
-  </section>
-
-  <section class="profile-section profile-work" id="work" data-resume-section="work">
-    <div class="profile-section-head profile-section-head--work">
-      <p class="profile-section-label">02 / SELECTED WORK</p>
-      <div>
-        <h2>看交付，<em>不要只看标签。</em></h2>
-        <p class="profile-section-deck">下面的项目按“问题 → 动作 → 结果”组织。结果尚未有公开材料的地方，我会直接标出来。</p>
-      </div>
-    </div>
-
-    <div class="profile-work-toolbar" aria-label="项目筛选">
-      <span class="profile-toolbar-label">FILTER / <b data-resume-count>{{ resume.case_studies.size }}</b></span>
-      <div class="profile-filter-group" role="group" aria-label="按工作类型筛选">
-        <button type="button" class="is-active" data-resume-filter="all" aria-pressed="true">全部</button>
-        <button type="button" data-resume-filter="systems" aria-pressed="false">系统</button>
-        <button type="button" data-resume-filter="product" aria-pressed="false">产品</button>
-        <button type="button" data-resume-filter="research" aria-pressed="false">研究</button>
-      </div>
-    </div>
-
-    <div class="profile-case-list">
-      {% for item in resume.case_studies %}
-        <article class="profile-case" data-resume-case data-category="{{ item.category }}">
-          <div class="profile-case-head">
-            <div class="profile-case-number">{{ item.number }}</div>
-            <div class="profile-case-title">
-              <div class="profile-case-meta"><span>{{ item.category_label }}</span><span>{{ item.period }}</span></div>
-              <h3>{{ item.title }}</h3>
-              <p>{{ item.one_liner }}</p>
-            </div>
-            <div class="profile-case-state profile-state--{{ item.status_class }}"><i></i>{{ item.status_label }}</div>
-          </div>
-          <details class="profile-case-details" {% if forloop.first %}open{% endif %}>
-            <summary><span>展开工作拆解</span><i>＋</i></summary>
-            <div class="profile-case-body">
-              <div class="profile-case-block">
-                <span>THE PROBLEM</span>
-                <p>{{ item.problem }}</p>
-              </div>
-              <div class="profile-case-block">
-                <span>MY CONTRIBUTION</span>
-                <p>{{ item.contribution }}</p>
-              </div>
-              <div class="profile-case-block">
-                <span>WHAT CHANGED</span>
-                <p>{{ item.outcome }}</p>
-              </div>
-              <div class="profile-case-proof">
-                <span>证据边界</span>
-                <p>{{ item.evidence }}</p>
-              </div>
-              <div class="profile-case-tags">{% for tag in item.tags %}<span>{{ tag }}</span>{% endfor %}</div>
-            </div>
-          </details>
-        </article>
-      {% endfor %}
-    </div>
-  </section>
-
-  <section class="profile-section profile-approach" id="approach" data-resume-section="approach">
-    <div class="profile-section-head profile-section-head--dark">
-      <p class="profile-section-label">03 / HOW I WORK</p>
-      <div>
-        <h2>我的方法，<em>先于我的工具。</em></h2>
-        <p class="profile-section-deck">技术只是手段。真正决定项目能不能落地的，是有没有把反馈放回系统里。</p>
-      </div>
-    </div>
-    <div class="profile-principle-grid">
-      {% for item in resume.principles %}
-        <article class="profile-principle">
-          <div class="profile-principle-index">{{ item.number }}</div>
-          <h3>{{ item.title }}</h3>
-          <p>{{ item.detail }}</p>
-          <span class="profile-principle-arrow">↗</span>
-        </article>
-      {% endfor %}
-    </div>
-    <div class="profile-loop">
-      <span>REALITY LOOP</span>
-      <div><b>观察问题</b><i>→</i><b>定义任务链</b><i>→</i><b>做最小 Demo</b><i>→</i><b>验证价值</b><i>→</i><b>沉淀系统</b></div>
-    </div>
-  </section>
-
-  <section class="profile-section profile-capabilities" id="capabilities" data-resume-section="capabilities">
-    <div class="profile-section-head">
-      <p class="profile-section-label">04 / CAPABILITIES & PROOF</p>
-      <div>
-        <h2>能力不是清单，<em>是可复用的路径。</em></h2>
-        <p class="profile-section-deck">我更愿意展示能力如何彼此连接：从底层信号到模型，再到产品和交付。</p>
-      </div>
-    </div>
-    <div class="profile-capability-layout">
-      <div class="profile-capability-list">
-        {% for group in resume.capabilities %}
-          <article class="profile-capability-row">
-            <span>{{ group.label }}</span>
-            <div><h3>{{ group.title }}</h3><p>{{ group.detail }}</p><ul>{% for item in group.items %}<li>{{ item }}</li>{% endfor %}</ul></div>
-          </article>
-        {% endfor %}
-      </div>
-      <aside class="profile-proof-panel">
-        <span class="profile-panel-kicker">PUBLIC RECORD</span>
-        <h3>有材料的，写进结果；没材料的，留在边界里。</h3>
-        <div class="profile-proof-list">
-          {% for item in resume.proof %}
-            <div class="profile-proof-item"><i class="profile-proof-dot profile-proof-dot--{{ item.class }}"></i><div><strong>{{ item.title }}</strong><p>{{ item.detail }}</p></div></div>
+      <div class="cv-header-side">
+        <p class="cv-location">{{ cv.location }}<br>{{ cv.availability }}</p>
+        <div class="cv-links">
+          {% for link in cv.links %}
+            {% if link.external %}<a href="{{ link.href }}" target="_blank" rel="noreferrer">{{ link.label }} <span>↗</span></a>{% else %}<a href="{{ link.href | relative_url }}">{{ link.label }} <span>↗</span></a>{% endif %}
           {% endfor %}
+          <button type="button" data-print-resume>打印 / PDF <span>⌘P</span></button>
         </div>
+      </div>
+    </header>
+
+    <div class="cv-focus-row">
+      <span>FOCUS</span>
+      {% for item in cv.focus %}<b>{{ item }}</b>{% unless forloop.last %}<i>·</i>{% endunless %}{% endfor %}
+    </div>
+
+    <div class="cv-layout">
+      <main class="cv-main">
+        <section class="cv-section" aria-labelledby="experience-title">
+          <div class="cv-section-head"><span>01</span><h2 id="experience-title">Experience</h2></div>
+          {% for item in cv.experience %}
+            <article class="cv-entry">
+              <div class="cv-entry-time">{{ item.period }}<small>{{ item.status }}</small></div>
+              <div class="cv-entry-content">
+                <div class="cv-entry-heading"><h3>{{ item.organization }}</h3><span>{{ item.label }}</span></div>
+                <p class="cv-entry-role">{{ item.role }}</p>
+                <ul>{% for bullet in item.bullets %}<li>{{ bullet }}</li>{% endfor %}</ul>
+              </div>
+            </article>
+          {% endfor %}
+        </section>
+
+        <section class="cv-section cv-projects" aria-labelledby="projects-title">
+          <div class="cv-section-head"><span>02</span><h2 id="projects-title">Selected work</h2><a href="{{ '/resume/cases/' | relative_url }}">项目材料 ↗</a></div>
+          {% for item in cv.case_studies %}
+            <article class="cv-project">
+              <div class="cv-project-number">{{ item.number }}</div>
+              <div class="cv-project-content">
+                <div class="cv-project-meta"><span>{{ item.category_label }}</span><span>{{ item.period }}</span><em class="cv-status cv-status--{{ item.status_class }}">{{ item.status_label }}</em></div>
+                <h3>{{ item.title }}</h3>
+                <p>{{ item.one_liner }}</p>
+                <ul>{% for bullet in item.short_bullets %}<li>{{ bullet }}</li>{% endfor %}</ul>
+                <div class="cv-tags">{% for tag in item.tags limit: 4 %}<span>{{ tag }}</span>{% endfor %}</div>
+              </div>
+            </article>
+          {% endfor %}
+        </section>
+      </main>
+
+      <aside class="cv-side">
+        <section class="cv-side-section" aria-labelledby="skills-title">
+          <div class="cv-side-head"><span>03</span><h2 id="skills-title">Skills</h2></div>
+          {% for group in cv.skills %}<div class="cv-skill-group"><h3>{{ group.label }}</h3><p>{% for item in group.items %}{{ item }}{% unless forloop.last %} · {% endunless %}{% endfor %}</p></div>{% endfor %}
+        </section>
+
+        <section class="cv-side-section" aria-labelledby="education-title">
+          <div class="cv-side-head"><span>04</span><h2 id="education-title">Education</h2></div>
+          <div class="cv-education"><span>{{ cv.education.period }}</span><strong>{{ cv.education.title }}</strong><p>{{ cv.education.organization }}</p><small>{{ cv.education.detail }}</small></div>
+        </section>
+
+        <section class="cv-side-section" aria-labelledby="awards-title">
+          <div class="cv-side-head"><span>05</span><h2 id="awards-title">Proof</h2></div>
+          <div class="cv-proof-list">
+            {% for item in cv.proof %}<div class="cv-proof"><i class="cv-dot cv-dot--{{ item.status | slugify }}"></i><div><strong>{{ item.title }}</strong><p>{{ item.detail }}</p></div></div>{% endfor %}
+          </div>
+          <div class="cv-awards">
+            {% for item in cv.awards %}<div><span>{{ item.period }}</span><strong>{{ item.title }}</strong><small>{{ item.detail }}</small></div>{% endfor %}
+          </div>
+          <p class="cv-awards-inline">获奖：{% for item in cv.awards %}{{ item.title }}{% unless forloop.last %} · {% endunless %}{% endfor %}</p>
+        </section>
       </aside>
     </div>
-  </section>
 
-  <section class="profile-section profile-background" data-resume-section="background">
-    <div class="profile-background-top">
-      <p class="profile-section-label">05 / BACKGROUND</p>
-      <span>THE LONGER VIEW</span>
-    </div>
-    <div class="profile-background-grid">
-      <div>
-        <span class="profile-background-period">{{ resume.education.period }}</span>
-        <h2>{{ resume.education.title }}</h2>
-        <p>{{ resume.education.organization }}</p>
-      </div>
-      <div class="profile-background-side">
-        <p>{{ resume.education.detail }}</p>
-        <div class="profile-awards">
-          {% for item in resume.awards %}<div><span>{{ item.period }}</span><strong>{{ item.title }}</strong><small>{{ item.detail }}</small></div>{% endfor %}
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer class="profile-cta">
-    <div>
-      <p class="profile-section-label">END / OPEN CHANNEL</p>
-      <h2>如果你正在做<br><em>难而具体的事。</em></h2>
-    </div>
-    <div class="profile-cta-side">
-      <p>{{ resume.contact_note }}</p>
-      <div class="profile-cta-links">
-        {% for link in resume.links %}<a class="profile-button profile-button--light" href="{{ link.href }}" {% if link.external %}target="_blank" rel="noreferrer"{% endif %}>{{ link.label }} <span>↗</span></a>{% endfor %}
-      </div>
-    </div>
-  </footer>
+    <footer class="cv-footer"><span>{{ cv.profile_note }}</span><span>{{ cv.contact_note }}</span></footer>
+  </div>
 </article>
