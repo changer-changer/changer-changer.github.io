@@ -15,6 +15,7 @@ layout: default
   </nav>
   <div class="cv-case-list">
     {% for item in cv.case_studies %}
+      {% assign case_media = cv.media | where: "id", item.media_id | first %}
       <article class="cv-case-detail" id="{{ item.id }}">
         <header><div class="cv-project-meta"><span>{{ item.category_label }}</span><span>{{ item.period }}</span><em class="cv-status cv-status--{{ item.status_class }}">{{ item.status_label }}</em></div><h2>{{ item.title }}</h2><p>{{ item.one_liner }}</p></header>
         <div class="cv-case-grid">
@@ -22,6 +23,12 @@ layout: default
           <div><span>MY CONTRIBUTION</span><p>{{ item.contribution }}</p></div>
           <div><span>WHAT CHANGED</span><p>{{ item.outcome }}</p></div>
         </div>
+        {% if case_media %}
+          <figure class="cv-case-media">
+            <div class="cv-case-media-image"><img src="{{ case_media.image | relative_url }}" alt="{{ case_media.alt }}" loading="lazy"></div>
+            <figcaption><span>{{ case_media.label }}</span><strong>{{ case_media.caption }}</strong><p>{{ case_media.note }}</p></figcaption>
+          </figure>
+        {% endif %}
         <div class="cv-case-proof"><span>证据边界</span><p>{{ item.evidence }}</p></div>
         <div class="cv-tags">{% for tag in item.tags %}<span>{{ tag }}</span>{% endfor %}</div>
       </article>

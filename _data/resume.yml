@@ -15,6 +15,13 @@ links:
     href: "/"
     external: false
 focus: ["Embodied intelligence", "AI systems", "Product practice"]
+media:
+  - id: "fusheng-field"
+    image: "/assets/images/resume/field-fusheng.jpg"
+    alt: "在傅盛 AI 战队现场与傅盛合照"
+    label: "FIELD NOTE / 2026.07"
+    caption: "与傅盛合照 · 傅盛 AI 战队培养现场"
+    note: "把当前经历放回真实的业务现场，而不是只留下一个职位名称。"
 experience:
   - period: "2026.07 — 至今"
     organization: "北京金山猎豹科技有限公司"
@@ -115,6 +122,7 @@ case_studies:
     evidence: "正式参加猎豹移动“傅盛 AI 战队”管培生培养计划已由确认书核实；客户数量、转化率和上线范围不在公开页虚构。"
     status_class: "current"
     status_label: "进行中"
+    media_id: "fusheng-field"
     tags: ["customer discovery", "task chain", "Demo", "ROI", "requirements"]
   - id: "residual-attention"
     number: "04"

@@ -3,6 +3,7 @@ layout: default
 ---
 
 {% assign cv = site.data.resume %}
+{% assign field_media = cv.media | where: "id", "fusheng-field" | first %}
 <article class="cv-page">
   <div class="cv-paper">
     <header class="cv-header">
@@ -20,6 +21,12 @@ layout: default
           {% endfor %}
           <button type="button" data-print-resume>打印 / PDF <span>⌘P</span></button>
         </div>
+        {% if field_media %}
+          <figure class="cv-header-media">
+            <img src="{{ field_media.image | relative_url }}" alt="{{ field_media.alt }}" loading="eager">
+            <figcaption><span>{{ field_media.label }}</span>{{ field_media.caption }}</figcaption>
+          </figure>
+        {% endif %}
       </div>
     </header>
 

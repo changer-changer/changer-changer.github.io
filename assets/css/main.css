@@ -1126,7 +1126,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 .cv-header { display: grid; grid-template-columns: 1fr auto; gap: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--cv-ink); }
 .cv-eyebrow, .cv-role, .cv-location, .cv-links, .cv-focus-row, .cv-entry-time, .cv-entry-heading > span, .cv-project-meta, .cv-status, .cv-tags, .cv-side-head, .cv-skill-group h3, .cv-education > span, .cv-awards span, .cv-footer, .cv-cases-header p, .cv-case-index, .cv-case-grid > div > span, .cv-case-proof > span, .cv-back-link { font: 500 .62rem/1.5 var(--f-mono); letter-spacing: .1em; }
 .cv-eyebrow { color: var(--cv-accent); }
-.cv-header h1 { margin-top: 1.25rem; font: 900 clamp(3.4rem, 7vw, 7rem)/.92 var(--f-serif); letter-spacing: -.04em; }
+.cv-header h1 { margin-top: 1.25rem; font: 900 clamp(3.4rem, 7vw, 7rem)/.92 var(--f-serif); letter-spacing: -.04em; white-space: nowrap; }
 .cv-role { margin-top: .8rem; color: var(--cv-muted); text-transform: uppercase; }
 .cv-summary { max-width: 52ch; margin-top: 1.35rem; color: #403b31; font-size: .92rem; line-height: 1.8; }
 .cv-header-side { display: flex; flex-direction: column; align-items: flex-end; gap: 2rem; text-align: right; }
@@ -1135,6 +1135,10 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 .cv-links a, .cv-links button { color: var(--cv-ink); font: inherit; letter-spacing: inherit; transition: color .25s, transform .25s; }
 .cv-links a:hover, .cv-links button:hover { color: var(--cv-accent); transform: translateX(-3px); }
 .cv-links span { color: var(--cv-accent); }
+.cv-header-media { width: min(8.5rem, 100%); margin: .35rem 0 0 auto; }
+.cv-header-media img { display: block; width: 100%; aspect-ratio: .72; object-fit: cover; object-position: 50% 38%; border: 1px solid var(--cv-line); filter: saturate(.82) contrast(.96); }
+.cv-header-media figcaption { display: grid; gap: .22rem; margin-top: .55rem; color: var(--cv-muted); font: 500 .57rem/1.5 var(--f-mono); letter-spacing: .04em; }
+.cv-header-media figcaption span { color: var(--cv-accent); font-size: .54rem; letter-spacing: .1em; }
 .cv-focus-row { min-height: 3.5rem; display: flex; align-items: center; flex-wrap: wrap; gap: .7rem; border-bottom: 1px solid var(--cv-line); color: var(--cv-muted); }
 .cv-focus-row > span { color: var(--cv-accent); margin-right: .6rem; }
 .cv-focus-row b { color: var(--cv-ink); font-weight: 500; letter-spacing: .04em; }
@@ -1212,6 +1216,14 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 .cv-case-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
 .cv-case-grid > div > span, .cv-case-proof > span { color: var(--cv-accent); }
 .cv-case-grid p { margin-top: .65rem; color: #4d473b; font-size: .82rem; line-height: 1.8; }
+.cv-case-media { display: grid; grid-template-columns: minmax(12rem, 18rem) minmax(0, 1fr); gap: clamp(1.2rem, 4vw, 3rem); align-items: end; margin-top: 2.1rem; padding: 1rem 0 1.4rem; border-top: 1px solid var(--cv-line); border-bottom: 1px solid var(--cv-line); }
+.cv-case-media-image { overflow: hidden; background: var(--cv-ground); }
+.cv-case-media-image img { display: block; width: 100%; aspect-ratio: .82; object-fit: cover; object-position: 50% 38%; filter: saturate(.82) contrast(.96); transition: transform .5s var(--ease-out), filter .3s; }
+.cv-case-media:hover img { transform: scale(1.025); filter: saturate(1) contrast(1); }
+.cv-case-media figcaption { max-width: 33rem; padding-bottom: .25rem; }
+.cv-case-media figcaption > span { display: block; color: var(--cv-accent); font: 500 .62rem/1.5 var(--f-mono); letter-spacing: .1em; }
+.cv-case-media figcaption strong { display: block; margin-top: .75rem; font: 900 clamp(1.45rem, 3vw, 2.4rem)/1.08 var(--f-serif); letter-spacing: -.02em; }
+.cv-case-media figcaption p { margin-top: .7rem; max-width: 36ch; color: var(--cv-muted); font-size: .82rem; line-height: 1.8; }
 .cv-case-proof { display: grid; grid-template-columns: 7rem 1fr; gap: 1rem; margin-top: 2rem; padding: .85rem 0; border-top: 1px dashed var(--cv-line); border-bottom: 1px dashed var(--cv-line); }
 .cv-case-proof p { color: var(--cv-muted); font-size: .78rem; line-height: 1.7; }
 .cv-case-detail .cv-tags { margin-top: 1.1rem; }
@@ -1230,6 +1242,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   .cv-header h1 { font-size: 4rem; }
   .cv-header-side { align-items: flex-start; margin-top: 1.5rem; text-align: left; gap: 1rem; }
   .cv-links { align-items: flex-start; flex-direction: row; flex-wrap: wrap; gap: .7rem 1rem; }
+  .cv-header-media { width: min(9.5rem, 42vw); margin: .5rem 0 0; }
   .cv-layout { display: block; }
   .cv-entry { grid-template-columns: 1fr; gap: .55rem; }
   .cv-entry-time { display: flex; justify-content: space-between; }
@@ -1243,6 +1256,8 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   .cv-footer span + span { display: block; margin-top: .5rem; }
   .cv-case-index { overflow-x: auto; flex-wrap: nowrap; white-space: nowrap; padding: .9rem 1.25rem; }
   .cv-case-detail header h2 { font-size: 2.6rem; }
+  .cv-case-media { grid-template-columns: 1fr; gap: 1rem; }
+  .cv-case-media-image { width: min(13rem, 100%); }
   .cv-case-proof { display: block; }
   .cv-case-proof p { margin-top: .5rem; }
 }
@@ -1256,6 +1271,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   .cv-header h1 { margin-top: 2mm; font-size: 34pt; }
   .cv-summary { max-width: 55ch; margin-top: 3mm; font-size: 8pt; line-height: 1.45; }
   .cv-header-side { gap: 4mm; }
+  .cv-header-media { display: none; }
   .cv-location, .cv-links, .cv-focus-row, .cv-entry-time, .cv-entry-heading > span, .cv-project-meta, .cv-status, .cv-tags, .cv-side-head, .cv-skill-group h3, .cv-education > span, .cv-awards span, .cv-footer { font-size: 6.5pt; }
   .cv-focus-row { min-height: 8mm; gap: 2mm; }
   .cv-layout { gap: 11mm; }
@@ -1286,4 +1302,5 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   .cv-cases-header { padding: 14mm; }
   .cv-case-index { display: none; }
   .cv-case-list { padding: 0 14mm; }
+  .cv-case-media { display: none; }
 }
