@@ -1216,9 +1216,13 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 .cv-case-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
 .cv-case-grid > div > span, .cv-case-proof > span { color: var(--cv-accent); }
 .cv-case-grid p { margin-top: .65rem; color: #4d473b; font-size: .82rem; line-height: 1.8; }
-.cv-case-media { display: grid; grid-template-columns: minmax(12rem, 18rem) minmax(0, 1fr); gap: clamp(1.2rem, 4vw, 3rem); align-items: end; margin-top: 2.1rem; padding: 1rem 0 1.4rem; border-top: 1px solid var(--cv-line); border-bottom: 1px solid var(--cv-line); }
+.cv-case-media-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); gap: 1rem; margin-top: 2.1rem; }
+.cv-case-media { display: flex; flex-direction: column; gap: 1rem; min-width: 0; margin: 0; padding: 1rem 0 1.2rem; border-top: 1px solid var(--cv-line); border-bottom: 1px solid var(--cv-line); }
 .cv-case-media-image { overflow: hidden; background: var(--cv-ground); }
-.cv-case-media-image img { display: block; width: 100%; aspect-ratio: .82; object-fit: cover; object-position: 50% 38%; filter: saturate(.82) contrast(.96); transition: transform .5s var(--ease-out), filter .3s; }
+.cv-case-media-image img { display: block; width: 100%; aspect-ratio: 1.25; object-fit: cover; object-position: 50% 38%; filter: saturate(.82) contrast(.96); transition: transform .5s var(--ease-out), filter .3s; }
+.cv-case-media--portrait .cv-case-media-image img { aspect-ratio: .78; }
+.cv-case-media--square .cv-case-media-image img { aspect-ratio: 1; object-fit: contain; }
+.cv-case-media--wide .cv-case-media-image img { aspect-ratio: 1.55; object-fit: contain; }
 .cv-case-media:hover img { transform: scale(1.025); filter: saturate(1) contrast(1); }
 .cv-case-media figcaption { max-width: 33rem; padding-bottom: .25rem; }
 .cv-case-media figcaption > span { display: block; color: var(--cv-accent); font: 500 .62rem/1.5 var(--f-mono); letter-spacing: .1em; }
@@ -1256,8 +1260,8 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   .cv-footer span + span { display: block; margin-top: .5rem; }
   .cv-case-index { overflow-x: auto; flex-wrap: nowrap; white-space: nowrap; padding: .9rem 1.25rem; }
   .cv-case-detail header h2 { font-size: 2.6rem; }
-  .cv-case-media { grid-template-columns: 1fr; gap: 1rem; }
-  .cv-case-media-image { width: min(13rem, 100%); }
+  .cv-case-media-gallery { grid-template-columns: 1fr; }
+  .cv-case-media-image { width: min(100%, 24rem); }
   .cv-case-proof { display: block; }
   .cv-case-proof p { margin-top: .5rem; }
 }
@@ -1302,5 +1306,5 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   .cv-cases-header { padding: 14mm; }
   .cv-case-index { display: none; }
   .cv-case-list { padding: 0 14mm; }
-  .cv-case-media { display: none; }
+  .cv-case-media-gallery, .cv-case-media { display: none; }
 }
