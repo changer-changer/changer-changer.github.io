@@ -15,7 +15,8 @@ layout: default
   </nav>
   <div class="cv-case-list">
     {% for item in cv.case_studies %}
-      {% assign case_media = cv.media | where: "id", item.media_id | first %}
+      {% assign case_media = nil %}
+      {% if item.media_id %}{% assign case_media = cv.media | where: "id", item.media_id | first %}{% endif %}
       <article class="cv-case-detail" id="{{ item.id }}">
         <header><div class="cv-project-meta"><span>{{ item.category_label }}</span><span>{{ item.period }}</span><em class="cv-status cv-status--{{ item.status_class }}">{{ item.status_label }}</em></div><h2>{{ item.title }}</h2><p>{{ item.one_liner }}</p></header>
         <div class="cv-case-grid">
