@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% assign cv = site.data.resume_portfolio %}
+  {% assign profile = cv.profiles[page.profile] %}
+  <title>{{ profile.nav_label }} · {{ cv.identity.name }} · {{ site.title }}</title>
+  <meta name="description" content="{{ profile.summary }}">
+  <meta name="theme-color" content="#f4f0e6">
+  <link rel="preload" href="{{ '/assets/fonts/noto-serif-sc-900.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ '/assets/fonts/instrument-serif-regular.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ '/assets/fonts/dm-mono-400.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ '/assets/css/resume-portfolio.css' | relative_url }}">
+</head>
+<body class="resume-portfolio-page resume-portfolio-page--{{ page.profile }}">
+  <a class="resume-skip" href="#resume-content">跳到正文</a>
+  <div class="resume-chrome">
+    <a class="resume-brand" href="{{ '/' | relative_url }}" aria-label="返回博客首页">
+      <span class="resume-brand-mark">C/C</span>
+      <span><b>CHANGER—CHANGER</b><small>PUBLIC RESUME SYSTEM</small></span>
+    </a>
+    <div class="resume-chrome-meta"><span>UPDATED {{ cv.updated }}</span><span>OPEN TO CONVERSATION</span></div>
+    <div class="resume-actions">
+      <a href="{{ '/' | relative_url }}">博客 ↗</a>
+      <button type="button" data-print-resume>打印 / PDF <kbd>⌘P</kbd></button>
+    </div>
+  </div>
+
+  <nav class="resume-profile-nav" aria-label="简历版本">
+    <span class="resume-profile-nav-label">SELECT A LENS</span>
+    <div>
+      <a class="{% if page.profile == 'overview' %}is-active{% endif %}" href="{{ '/resume/' | relative_url }}"><i>01</i>全能版</a>
+      <a class="{% if page.profile == 'research' %}is-active{% endif %}" href="{{ '/resume/research/' | relative_url }}"><i>02</i>科研 / 算法</a>
+      <a class="{% if page.profile == 'product' %}is-active{% endif %}" href="{{ '/resume/product/' | relative_url }}"><i>03</i>产品 / FDE</a>
+    </div>
+    <span class="resume-profile-nav-note">同一套事实母库，不同的阅读入口</span>
+  </nav>
+
+  <main id="resume-content" class="resume-shell">
+    <header class="resume-hero">
+      <div class="resume-hero-copy">
+        <p class="resume-eyebrow">{{ profile.eyebrow }} <span>/ {{ cv.updated }}</span></p>
+        <div class="resume-name-line"><h1>{{ cv.identity.name }}</h1><span class="resume-version">{{ profile.nav_label }}</span></div>
+        <p class="resume-role">{{ cv.identity.role }}</p>
+        <h2>{{ profile.title }}</h2>
+        <p class="resume-lead">{{ profile.summary }}</p>
+        <div class="resume-hero-links">
+          <a href="{{ cv.identity.github }}" target="_blank" rel="noreferrer">GitHub <span>↗</span></a>
+          <span>{{ cv.identity.location }}</span>
+          <span>{{ cv.identity.availability }}</span>
+        </div>
+      </div>
+      <div class="resume-hero-proof">
+        {% assign hero_media_id = profile.proof_media | first %}
+        {% assign hero_media = cv.media | where: "id", hero_media_id | first %}
+        {% if hero_media %}
+          <button class="resume-hero-image" type="button" data-lightbox data-image="{{ hero_media.image | relative_url }}" data-caption="{{ hero_media.caption }}">
+            <img src="{{ hero_media.image | relative_url }}" alt="{{ hero_media.alt }}" loading="eager">
+            <span class="resume-image-expand">VIEW PROOF ↗</span>
+          </button>
+          <div class="resume-proof-caption"><span>{{ hero_media.label }}</span><strong>{{ hero_media.caption }}</strong><small>{{ hero_media.note }}</small></div>
+        {% endif %}
+      </div>
+    </header>
+
+    <section class="resume-quick-read" aria-label="招聘者快速判断">
+      <div class="resume-section-kicker"><span>00</span><b>READ THIS FIRST</b><i></i></div>
+      <p>{{ profile.audience }}</p>
+      <div class="resume-signal-grid">
+        {% for signal in profile.signals %}
+          <article><strong>{{ signal.value }}</strong><span>{{ signal.label }}</span></article>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="resume-section resume-experience" id="experience">
+      <div class="resume-section-heading"><div><span>01</span><h2>Experience</h2></div><p>先看我在哪些真实场景里承担过责任。</p></div>
+      <div class="resume-experience-list">
+        {% for experience_id in profile.experience_order %}
+          {% assign experience = cv.experience | where: "id", experience_id | first %}
+          <article class="resume-experience-card">
+            <div class="resume-experience-rail"><span>{{ experience.period }}</span><b>{{ experience.status }}</b></div>
+            <div class="resume-experience-main">
+              <div class="resume-card-topline"><span>{{ experience.label }}</span><em>{{ experience.organization }}</em></div>
+              <h3>{{ experience.role }}</h3>
+              <ul>{% for bullet in experience.bullets %}<li>{{ bullet }}</li>{% endfor %}</ul>
+              <div class="resume-metric-row">{% for metric in experience.metrics %}<span>{{ metric }}</span>{% endfor %}</div>
+              <p class="resume-evidence-boundary"><b>证据边界</b>{{ experience.proof }}</p>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="resume-section resume-featured" id="selected-work">
+      <div class="resume-section-heading"><div><span>02</span><h2>Selected work</h2></div><p>每个项目都回答：问题是什么，我做了什么，结果到哪一步。</p></div>
+      <div class="resume-project-list">
+        {% for project_id in profile.featured %}
+          {% assign project = cv.projects | where: "id", project_id | first %}
+          {% if project %}
+            <article class="resume-project-card resume-project-card--featured" id="{{ project.id }}">
+              <div class="resume-project-index">{{ forloop.index | prepend: '0' }}</div>
+              <div class="resume-project-main">
+                <div class="resume-project-meta"><span>{{ project.label }}</span><span>{{ project.period }}</span><em>{{ project.status }}</em></div>
+                <h3>{{ project.title }}</h3>
+                <p class="resume-project-hook">{{ project.hook }}</p>
+                <p class="resume-project-summary">{{ project.summary }}</p>
+                <div class="resume-project-columns"><div><b>MY CONTRIBUTION</b><p>{{ project.contribution }}</p></div><div><b>WHAT CHANGED</b><p>{{ project.outcome }}</p></div></div>
+                <div class="resume-metric-row">{% for metric in project.metrics %}<span>{{ metric }}</span>{% endfor %}</div>
+                <div class="resume-tags">{% for tag in project.tags %}<span>#{{ tag }}</span>{% endfor %}</div>
+                {% if project.media_ids %}
+                  <div class="resume-project-proof-strip">
+                    {% for media_id in project.media_ids limit: 3 %}
+                      {% assign project_media = cv.media | where: "id", media_id | first %}
+                      {% if project_media %}<button type="button" data-lightbox data-image="{{ project_media.image | relative_url }}" data-caption="{{ project_media.caption }}"><img src="{{ project_media.image | relative_url }}" alt="{{ project_media.alt }}" loading="lazy"><span>{{ project_media.label }}</span></button>{% endif %}
+                    {% endfor %}
+                  </div>
+                {% endif %}
+                <details><summary>展开工作拆解与证据边界 <span>＋</span></summary><div class="resume-detail-copy"><p><b>项目判断</b>{{ project.hook }}</p><p><b>公开口径</b>{{ project.outcome }}</p></div></details>
+              </div>
+            </article>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="resume-section resume-supporting" id="supporting-work">
+      <div class="resume-section-heading"><div><span>03</span><h2>More signal</h2></div><p>不抢主叙事，但能让人看见能力的宽度。</p></div>
+      <div class="resume-supporting-grid">
+        {% for project_id in profile.supporting %}
+          {% assign project = cv.projects | where: "id", project_id | first %}
+          {% if project %}
+            <article class="resume-project-card resume-project-card--compact">
+              <div class="resume-project-meta"><span>{{ project.label }}</span><span>{{ project.period }}</span></div>
+              <h3>{{ project.title }}</h3>
+              <p class="resume-project-hook">{{ project.hook }}</p>
+              <p class="resume-project-summary">{{ project.summary }}</p>
+              <div class="resume-metric-row">{% for metric in project.metrics limit: 3 %}<span>{{ metric }}</span>{% endfor %}</div>
+              <details><summary>看贡献与边界 <span>＋</span></summary><div class="resume-detail-copy"><p><b>贡献</b>{{ project.contribution }}</p><p><b>结果</b>{{ project.outcome }}</p></div></details>
+            </article>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="resume-bottom-grid">
+      <section class="resume-section resume-toolkit" id="toolkit">
+        <div class="resume-section-heading"><div><span>04</span><h2>Toolbox</h2></div><p>工具是手段，系统理解是主线。</p></div>
+        <div class="resume-toolkit-grid">
+          <div><b>SYSTEMS</b><p>ROS2 · LeRobot · Tac3D · Meta Quest 3S · UART / GPIO / STM32</p></div>
+          <div><b>MODELS</b><p>Diffusion Policy · ACT · imitation learning · residual attention · data pipeline</p></div>
+          <div><b>PRODUCT</b><p>customer discovery · task-chain design · PRD · prototype · FDE delivery · ROI thinking</p></div>
+          <div><b>RESEARCH</b><p>ablation · representation analysis · experiment design · multi-agent workflow · scientific writing</p></div>
+        </div>
+      </section>
+      <section class="resume-section resume-education" id="education">
+        <div class="resume-section-heading"><div><span>05</span><h2>Education</h2></div></div>
+        <p class="resume-education-period">{{ cv.education.period }}</p><h3>{{ cv.education.title }}</h3><p>{{ cv.education.organization }}</p><small>{{ cv.education.note }}</small>
+      </section>
+    </section>
+
+    <section class="resume-section resume-proof" id="proof">
+      <div class="resume-section-heading"><div><span>06</span><h2>Proof wall</h2></div><p>看图就能知道我做过什么；点击可放大。</p></div>
+      <div class="resume-proof-grid">
+        {% for media_id in profile.proof_media %}
+          {% assign proof_media = cv.media | where: "id", media_id | first %}
+          {% if proof_media %}
+            <figure class="resume-proof-card">
+              <button type="button" data-lightbox data-image="{{ proof_media.image | relative_url }}" data-caption="{{ proof_media.caption }}"><img src="{{ proof_media.image | relative_url }}" alt="{{ proof_media.alt }}" loading="lazy"><span>OPEN ↗</span></button>
+              <figcaption><small>{{ proof_media.label }}</small><strong>{{ proof_media.caption }}</strong><p>{{ proof_media.note }}</p></figcaption>
+            </figure>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </section>
+
+    <footer class="resume-footer"><div><strong>{{ cv.identity.name }}</strong><span>{{ cv.identity.short_line }}</span></div><div><span>{{ cv.identity.contact_note }}</span><a href="{{ cv.identity.github }}" target="_blank" rel="noreferrer">GitHub ↗</a></div></footer>
+  </main>
+
+  <dialog class="resume-lightbox" id="resume-lightbox" aria-label="证据图片预览">
+    <button type="button" class="resume-lightbox-close" data-lightbox-close aria-label="关闭图片预览">×</button>
+    <img src="" alt="">
+    <p></p>
+  </dialog>
+  <script src="{{ '/assets/js/resume-portfolio.js' | relative_url }}"></script>
+</body>
+</html>
