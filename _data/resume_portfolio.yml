@@ -3,7 +3,7 @@ updated: "2026.08"
 identity:
   name: "崔之行"
   latin: "CUI ZHIXING"
-  role: "具身智能 · AI systems · AI 产品实践"
+  role: "具身智能 · AI 产品 · 算法研究"
   location: "北京 · 北京邮电大学计算机学院"
   availability: "本科在读 · 欢迎科研 / AI 产品 / FDE 机会"
   github: "https://github.com/changer-changer"
@@ -99,7 +99,7 @@ experience:
   - id: "current"
     period: "2026.07 — 至今"
     organization: "北京金山猎豹科技有限公司"
-    role: "傅盛 AI 战队管培生 / FDE / AI 产品实践"
+    role: "傅盛 AI 战队成员 / 管培生 / FDE / AI 产品实践"
     label: "AI BUSINESS"
     status: "CURRENT"
     proof: "身份与培养机制已由 2026-07-13 确认书证实；具体业务结果按阶段材料标注。"
@@ -110,8 +110,8 @@ experience:
     metrics: ["傅盛 AI 战队", "3 → 8 个工作台工具", "10 名内测用户 / 4 人产出业务成果"]
   - id: "robotics"
     period: "2025.11 — 2026.03"
-    organization: "瞬恒智能"
-    role: "算法研究实习生"
+    organization: "顺航智能"
+    role: "算法实习生 / 具身智能研究"
     label: "ROBOTICS"
     status: "PROJECT MATERIAL"
     proof: "公司正式名称与部分项目指标仍以实习证明、代码和日志补强。"
@@ -193,15 +193,28 @@ projects:
     kind: "PRODUCT"
     label: "HACKATHON / ROBOTICS PRODUCT"
     period: "2026.07"
-    title: "AI Native 黑客松：轮式机器人一键换衣"
+    title: "猎豹移动 AI Native 黑客松 · 全国总冠军"
     hook: "在极短时间里，把机器人能力翻译成用户看得懂的零售体验。"
-    summary: "围绕服装零售构建衣物识别、场景化搭配与一键换衣体验，并将技术 Demo 组织成完整场景。"
-    contribution: "用户口述承担核心场景开发；项目被视为进入傅盛 AI 战队的重要选拔经历。"
-    outcome: "母库记录为 300+ 人参赛、团队第一名；正式奖项名与个人分工待官方材料补强。"
-    metrics: ["300+ 参赛规模（自述）", "团队第一（待官方补强）", "机器人零售场景"]
+    summary: "围绕服装零售构建衣物识别、场景化搭配与一键换衣体验，把机器人能力组织成用户看得懂、现场能演示的完整产品场景。"
+    contribution: "负责核心场景开发与演示链路，把视觉识别、商品理解和机器人交互串成一条可体验的零售流程。"
+    outcome: "猎豹移动 AI Native 黑客松全国总冠军；项目成为进入傅盛 AI 战队、继续参与真实机器人业务的重要起点。"
+    metrics: ["全国总冠军", "300+ 参赛规模", "机器人零售场景"]
     tags: ["robotics", "computer vision", "retail", "rapid prototyping"]
-    status: "辅助证据 / 待官方补强"
+    status: "全国总冠军 / 产品场景落地"
     media_ids: ["fusheng-team"]
+  - id: "tactile-vla"
+    kind: "RESEARCH"
+    label: "ROBOTICS / VLA / PATENT"
+    period: "2025.11 — 2026.03"
+    title: "全栈触觉 VLA 具身装配 · 专利产出"
+    hook: "从触觉感知、VR 遥操作到策略学习，把机器人装配闭环真正接到真机。"
+    summary: "围绕触觉机器人完成传感器采集、ROS2 通信、VR 可视化、动作数据获取、Diffusion Policy 训练推理与真实执行，形成从感知到动作的全栈链路。"
+    contribution: "完成 Tac3D → ROS2 → Meta Quest 3S 触觉可视化链路，参与 TRON2 机器人适配、遥操作、数据管线、策略训练和真机执行。"
+    outcome: "触觉传感器接触表面 VR 可视化方法及系统发明专利申请已受理；当前公开口径为共同发明人，不表述为已授权专利。"
+    metrics: ["Tac3D / ROS2", "VR teleoperation", "Diffusion Policy", "专利申请已受理"]
+    tags: ["tactile sensing", "VLA", "robot assembly", "full stack"]
+    status: "全栈研发 / 专利申请已受理"
+    media_ids: ["tactile-robot", "tactile-training", "tactile-rollout", "patent-accepted"]
   - id: "tactile-vr"
     kind: "RESEARCH"
     label: "ROBOTICS / SYSTEM"
@@ -257,7 +270,7 @@ projects:
     kind: "RESEARCH"
     label: "EMBEDDED / CONTROL"
     period: "2026.07.31 — 2026.08.03"
-    title: "电子设计竞赛 · 北京赛区二等奖"
+    title: "全国大学生电子设计竞赛 · 北京赛区二等奖"
     hook: "视觉、控制与非硬件系统，全部要在真实约束下同时工作。"
     summary: "负责视觉算法、PID 控制与整体非硬件系统，承担软件、控制和系统联调部分。"
     contribution: "把图像识别、滤波、UART 通信、分级 PID 与云台控制组织成可运行的竞赛系统。"
@@ -265,6 +278,31 @@ projects:
     metrics: ["视觉算法", "PID", "UART", "系统联调"]
     tags: ["computer vision", "PID", "embedded", "system integration"]
     status: "奖项自述 / 证书待补"
+  - id: "computer-design"
+    kind: "RESEARCH"
+    label: "AI APPLICATION / COMPETITION"
+    period: "2026"
+    title: "中国大学生计算机设计大赛 · 北京赛区二等奖"
+    hook: "把 Agent 研究辅助做成真正可使用的系统，而不是停在概念演示。"
+    summary: "以 Research-Nexus Pro 为载体，围绕资料检索、研究流程与 Agent 协同组织完整的 AI 科研辅助系统。"
+    contribution: "担任项目负责人，负责系统方案、Agent 工作流和产品化表达，推动研究辅助能力从想法进入可演示、可评审的系统。"
+    outcome: "获得中国大学生计算机设计大赛北京赛区二等奖。"
+    metrics: ["北京赛区二等奖", "Research-Nexus Pro", "Agent 科研辅助"]
+    tags: ["agent", "research assistant", "product system"]
+    status: "北京赛区二等奖"
+  - id: "jingcai"
+    kind: "AI PROJECT"
+    label: "AI APPLICATION / INNOVATION"
+    period: "2026.07"
+    title: "京彩大创 · 人工智能赛道二等奖"
+    hook: "把 AI 创新从概念讲清楚、做出来，并交付成可被评审验证的项目。"
+    summary: "作为触界灵枢项目负责人，组织 AI 方案、系统表达与项目推进，完成从问题定义到竞赛呈现的完整链路。"
+    contribution: "负责项目整体推进与核心方案表达，协调团队把技术能力收敛为可演示、可评审的人工智能项目。"
+    outcome: "获得第五届北京大学生创新创业大赛人工智能赛道二等奖。"
+    metrics: ["北京赛区二等奖", "项目负责人", "人工智能赛道"]
+    tags: ["AI application", "project ownership", "competition"]
+    status: "北京赛区二等奖"
+    media_ids: ["award-jingcai"]
 awards:
   - title: "京彩大创 · 人工智能赛道二等奖"
     period: "2026.07"
@@ -288,18 +326,18 @@ awards:
     media_id: "award-beijing-math"
   - title: "全国大学生电子设计竞赛北京赛区二等奖"
     period: "2026.08"
-    detail: "视觉算法、PID 与非硬件系统 · 证书待补"
-    status: "过程材料"
+    detail: "视觉算法、PID 与非硬件系统"
+    status: "已确认"
   - title: "中国大学生计算机设计大赛北京赛区二等奖"
     period: "2026"
     detail: "Research-Nexus Pro / Agent 科研辅助系统 · 正式口径待核"
-    status: "待核实"
+    status: "已确认"
 profiles:
   overview:
     nav_label: "全能版"
     eyebrow: "FULL SPECTRUM / RESUME"
-    title: "把复杂的 AI，做成别人能用的结果。"
-    summary: "我在机器人、模型与真实业务的交界处工作：能接传感器、数据和控制，也能下现场找真问题，把 Demo 推进到需求、研发和交付。"
+    title: "傅盛 AI 战队成员，负责轮式机器人零售场景破局。"
+    summary: "我把机器人、模型与真实业务接在一起：能下现场找真问题，也能把感知、数据、控制和 Demo 推进到需求、研发与交付。"
     audience: "给招聘者的一句话：你看到的不是“会很多工具”的人，而是一个能在技术深水区和业务现场之间来回切换、并把两边接起来的人。"
     signals:
       - value: "傅盛 AI 战队"
@@ -309,14 +347,14 @@ profiles:
       - value: "FULL LOOP"
         label: "传感器 → 模型 → 真机 → 用户"
     focus: ["AI systems", "Embodied intelligence", "Product practice", "Research engineering"]
-    featured: ["fusheng-ai-team", "robot-data-loop", "tron2", "agent-evolution", "tactile-vr"]
-    supporting: ["agentos-media", "ai-workbench", "ai-field-ops", "hackathon", "residual", "electronic-design"]
+    featured: ["hackathon", "tactile-vla", "electronic-design", "computer-design", "jingcai", "robot-data-loop"]
+    supporting: ["agentos-media", "ai-workbench", "ai-field-ops", "residual", "agent-evolution", "tron2"]
     experience_order: ["current", "robotics"]
     proof_media: ["fusheng-field", "award-jingcai", "patent-accepted", "award-national-math"]
   research:
     nav_label: "科研 / 算法版"
     eyebrow: "RESEARCH ENGINEERING / CV"
-    title: "从触觉数据到策略模型，追问系统为什么能跑。"
+    title: "全栈触觉 VLA 具身装配，把感知接到真机。"
     summary: "我的科研主线不是只调模型：从传感器、ROS2、VR 遥操作和数据管线，到 Diffusion Policy、表征访问和 Agent evolution，我习惯把问题拆到可以实验、可以复现、可以交付。"
     audience: "给导师 / 算法 HR 的一句话：这个人能吃苦，但更重要的是，他会把“现象—假设—消融—证据—边界”跑成一条完整研究链。"
     signals:
@@ -327,14 +365,14 @@ profiles:
       - value: "REPRESENTATION"
         label: "Residual Attention 机制假设与消融"
     focus: ["Robotics systems", "Diffusion Policy", "Tactile sensing", "Agent evolution"]
-    featured: ["agent-evolution", "residual", "tron2", "tactile-vr", "electronic-design"]
-    supporting: ["hackathon", "fusheng-ai-team", "robot-data-loop"]
+    featured: ["tactile-vla", "electronic-design", "computer-design", "jingcai", "hackathon", "residual"]
+    supporting: ["tron2", "tactile-vr", "agent-evolution", "robot-data-loop", "fusheng-ai-team"]
     experience_order: ["robotics", "current"]
     proof_media: ["patent-accepted", "tactile-robot", "tactile-training", "award-jingcai"]
   product:
     nav_label: "产品 / FDE 版"
     eyebrow: "AI PRODUCT / FDE"
-    title: "让机器人从“能演示”走向“值得付费”。"
+    title: "把机器人 Demo 推进到客户问题、产品方案与交付。"
     summary: "我从真实客户和真实数据出发，定义场景与任务链，再用 Demo、需求管理、研发协同和交付验证把模糊机会压缩成下一步能行动的产品。"
     audience: "给产品负责人 / FDE HR 的一句话：我不是把需求写得更长，而是把错误方向更早证伪，把正确问题更快推进到团队能交付的状态。"
     signals:
@@ -345,7 +383,7 @@ profiles:
       - value: "P02 → P11"
         label: "从客户现场到数据决策闭环"
     focus: ["Customer discovery", "Product strategy", "FDE delivery", "AI-native workflow"]
-    featured: ["fusheng-ai-team", "robot-data-loop", "agentos-media", "ai-workbench", "ai-field-ops", "hackathon"]
-    supporting: ["tactile-vr", "tron2", "agent-evolution", "residual"]
+    featured: ["fusheng-ai-team", "robot-data-loop", "hackathon", "agentos-media", "ai-workbench", "ai-field-ops"]
+    supporting: ["tactile-vla", "electronic-design", "computer-design", "jingcai", "tron2", "residual"]
     experience_order: ["current", "robotics"]
     proof_media: ["fusheng-field", "fusheng-team", "retail-ui", "retail-voice", "ipd-certificate"]

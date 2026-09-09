@@ -1,5 +1,5 @@
 ---
-layout: resume-portfolio
+layout: resume-professional
 profile: research
 title: 科研算法版简历
 permalink: /resume/research/

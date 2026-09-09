@@ -1,5 +1,5 @@
 ---
-layout: resume-portfolio
+layout: resume-professional
 profile: product
 title: 产品 FDE 版简历
 permalink: /resume/product/

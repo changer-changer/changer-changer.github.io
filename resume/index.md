@@ -1,5 +1,5 @@
 ---
-layout: resume-portfolio
+layout: resume-professional
 profile: overview
 title: 全能版简历
 permalink: /resume/
