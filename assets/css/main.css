@@ -772,7 +772,7 @@ html:not(.anim) [data-reveal] { opacity: 1 !important; }
   font-family: var(--f-mono); font-size: .68rem; line-height: 1.6; letter-spacing: .02em;
   color: var(--muted); padding: .3rem 0 .3rem .8rem; position: relative;
   transition: color .3s;
-  display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden;
+  display: block; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;
 }
 .article-toc a::before {
   content: ""; position: absolute; left: -1.3rem; top: .55rem; bottom: .55rem; width: 2px;
