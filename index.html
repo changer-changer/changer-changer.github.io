@@ -6,15 +6,13 @@
   <title>崔之行 · The World I See</title>
   <meta name="description" content="瞳孔、月亮、陨石、太阳 —— 滚动进入我看见的世界。崔之行的博客。" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='38' fill='%2304060C'/><circle cx='50' cy='50' r='34' fill='%237FB0E8'/><circle cx='50' cy='50' r='14' fill='%2304060C'/></svg>" />
-  <!-- 字体走 jsDelivr @fontsource（同款 Google Fonts 文件，国内可达；本地已有 Instrument Serif / DM Mono / Noto SC 900） -->
+  <!-- 字体走 jsDelivr @fontsource（同款 Google Fonts 文件）；异步加载不阻塞首屏，系统字体栈兜底 -->
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
-  <link href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5.1.1/500.css" rel="stylesheet" />
-  <link href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5.1.1/700.css" rel="stylesheet" />
-  <link href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5.1.1/400-italic.css" rel="stylesheet" />
-  <link href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5.1.1/500-italic.css" rel="stylesheet" />
-  <link href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5.1.1/600-italic.css" rel="stylesheet" />
-  <link href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.1.1/400.css" rel="stylesheet" />
-  <link href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.1.1/600.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5.1.1/500.css" rel="stylesheet" media="print" onload="this.media='all'" />
+  <link href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5.1.1/700.css" rel="stylesheet" media="print" onload="this.media='all'" />
+  <link href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5.1.1/500-italic.css" rel="stylesheet" media="print" onload="this.media='all'" />
+  <link href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.1.1/400.css" rel="stylesheet" media="print" onload="this.media='all'" />
+  <link href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.1.1/600.css" rel="stylesheet" media="print" onload="this.media='all'" />
   <style>
     /* ---- theme tokens (unlayered: beats the engine's @layer sw) ---- */
     :root, .sw-root {
@@ -60,12 +58,13 @@
 
   <script src="/assets/world/scrub-engine.js"></script>
   <script>
-    // 媒体主源: jsDelivr CDN (国内可达, ~900KB/s); 引擎内置失败回退到同源 github.io
-    var CDN = 'https://cdn.jsdelivr.net/gh/changer-changer/changer-changer.github.io@master/assets/world';
-    var W = function (p) { return CDN + p; };
+    // 媒体同源加载: 总量已压到 ~4MB, 同源省去 CDN 缓存不一致与国内 jsDelivr 不稳定问题
+    var W = function (p) { return '/assets/world' + p; };
 
-    // 首段视频预加载: 打开页面就并行下载第一段过渡, 滚动到时秒出
+    // 首段视频预加载: 桌面/非省流模式才预载, 蜂窝省流用户滚动触发时再拉
     (function preloadFirst() {
+      var c = navigator.connection;
+      if (c && (c.saveData || /2g/.test(c.effectiveType || ''))) return;
       var v = document.createElement('video');
       v.muted = true; v.playsInline = true; v.preload = 'auto';
       v.src = W('/vid/conn0.mp4');
