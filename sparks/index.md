@@ -21,7 +21,7 @@ permalink: /sparks/
         {% endif %}
       {% endfor %}
       <blockquote class="spark-item" data-cursor="FOLLOW">
-        <span class="spark-number">{{ forloop.index | prepend: '0' }}</span>
+        <span class="spark-number">{% if forloop.index < 10 %}00{{ forloop.index }}{% elsif forloop.index < 100 %}0{{ forloop.index }}{% else %}{{ forloop.index }}{% endif %}</span>
         <p class="spark-text">{{ spark.text }}</p>
         {% if linked_post %}
           <cite class="spark-link">
