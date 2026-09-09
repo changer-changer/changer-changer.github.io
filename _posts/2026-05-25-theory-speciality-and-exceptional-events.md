@@ -2,8 +2,8 @@
 layout: post
 title: "特殊性与突破：关于改变的一个观察"
 date: 2026-05-25
-categories: ["思考图谱"]
-tags: ["特殊性", "创新", "突破", "趋向性", "方法论"]
+categories: [思考图谱]
+tags: [特殊性, 创新, 突破, 趋向性, 方法论]
 series: "世界观察笔记"
 part: 16
 ---

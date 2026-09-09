@@ -2,8 +2,8 @@
 layout: post
 title: "认知即抽象：我们如何接近而非抵达真实"
 date: 2026-05-25
-categories: ["思考图谱"]
-tags: ["认知科学", "抽象", "受体", "模态", "认识论"]
+categories: [思考图谱]
+tags: [认知科学, 抽象, 受体, 模态, 认识论]
 series: "世界观察笔记"
 part: 8
 ---

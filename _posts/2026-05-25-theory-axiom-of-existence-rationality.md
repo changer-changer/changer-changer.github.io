@@ -2,8 +2,8 @@
 layout: post
 title: "存在与合理性：一个未完成的猜想"
 date: 2026-05-25
-categories: ["思考图谱"]
-tags: ["存在论", "合理性", "逻辑", "哲学", "公理"]
+categories: [思考图谱]
+tags: [存在论, 合理性, 逻辑, 哲学, 公理]
 series: "世界观察笔记"
 part: 2
 ---

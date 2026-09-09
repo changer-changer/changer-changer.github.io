@@ -3,7 +3,7 @@ layout: post
 title: "PreLN vs PostLN：并联广播 vs 串联流水线"
 date: 2026-05-24
 categories: [技术]
-tags: [Transformer, LayerNorm, 梯度传播, 深度学习, 架构设计, PreLN, PostLN, 残差注意力, Representation Dilution]
+tags: [Transformer, 深度学习, 梯度传播, 架构设计, Representation Dilution]
 ---
 
 

@@ -2,8 +2,8 @@
 layout: post
 title: "优化的三个层次：效率、结构与方向"
 date: 2026-05-25
-categories: ["思考图谱"]
-tags: ["优化", "效率", "结构", "方法论", "执行"]
+categories: [思考图谱]
+tags: [优化, 效率, 结构, 方法论, 执行力]
 series: "世界观察笔记"
 part: 19
 ---

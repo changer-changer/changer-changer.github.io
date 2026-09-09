@@ -2,8 +2,8 @@
 layout: post
 title: "现代环境如何改变人的注意力与判断"
 date: 2026-05-25
-categories: ["思考图谱"]
-tags: ["社会批判", "偏离", "现代性", "教育", "文化"]
+categories: [思考图谱]
+tags: [社会观察, 偏离, 现代性, 教育, 文化]
 series: "世界观察笔记"
 part: 23
 ---

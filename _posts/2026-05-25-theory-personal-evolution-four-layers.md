@@ -2,8 +2,8 @@
 layout: post
 title: "个人变化的四个层次：从本能到自我观察"
 date: 2026-05-25
-categories: ["思考图谱"]
-tags: ["个人演化", "层次", "觉醒", "成长", "社会"]
+categories: [思考图谱]
+tags: [个人演化, 层次, 觉醒, 成长, 社会]
 series: "世界观察笔记"
 part: 15
 ---

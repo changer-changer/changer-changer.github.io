@@ -2,8 +2,8 @@
 layout: post
 title: "负熵与复杂性：生命的一种解释"
 date: 2026-05-25
-categories: ["思考图谱"]
-tags: ["负熵", "复杂性", "热力学", "生命", "物理学"]
+categories: [思考图谱]
+tags: [负熵, 复杂性, 热力学, 生命, 物理学]
 series: "世界观察笔记"
 part: 6
 ---

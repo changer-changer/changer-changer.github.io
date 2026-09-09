@@ -2,8 +2,8 @@
 layout: post
 title: "cross attantion 热力图"
 date: 2026-03-30
-categories: ["技术"]
-tags: ["技术", "深度学习", "数学", "Transformer", "梯度传播"]
+categories: [技术]
+tags: [技术, 深度学习, 数学, Transformer, 梯度传播]
 ---
 
 Cross Attention注意力热力图核心知识笔记

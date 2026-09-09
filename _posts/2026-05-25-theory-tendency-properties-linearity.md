@@ -2,8 +2,8 @@
 layout: post
 title: "趋向性：线性、守恒与认知边界"
 date: 2026-05-25
-categories: ["思考图谱"]
-tags: ["趋向性", "线性", "守恒", "认知局限", "哲学"]
+categories: [思考图谱]
+tags: [趋向性, 线性, 守恒, 认知局限, 哲学]
 series: "世界观察笔记"
 part: 5
 ---

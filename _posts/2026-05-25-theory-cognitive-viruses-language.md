@@ -2,8 +2,8 @@
 layout: post
 title: "认知病毒：语言如何影响我们的判断"
 date: 2026-05-25
-categories: ["思考图谱"]
-tags: ["认知科学", "语言", "文化病毒", "内语", "思维"]
+categories: [思考图谱]
+tags: [认知科学, 语言, 文化病毒, 内语, 思维]
 series: "世界观察笔记"
 part: 11
 ---

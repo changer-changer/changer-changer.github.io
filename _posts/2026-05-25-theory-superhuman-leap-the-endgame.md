@@ -2,8 +2,8 @@
 layout: post
 title: "关于人类能力边界的一种想象"
 date: 2026-05-25
-categories: ["思考图谱"]
-tags: ["超人", "进化", "未来", "宇宙", "终极目标"]
+categories: [思考图谱]
+tags: [超人, 进化, 未来, 宇宙, 终极目标]
 series: "世界观察笔记"
 part: 25
 ---

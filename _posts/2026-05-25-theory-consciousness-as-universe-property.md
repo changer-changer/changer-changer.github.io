@@ -2,8 +2,8 @@
 layout: post
 title: "意识：关于主观体验的一种观察"
 date: 2026-05-25
-categories: ["思考图谱"]
-tags: ["意识", "宇宙", "复杂性", "哲学", "神经科学"]
+categories: [思考图谱]
+tags: [意识, 宇宙, 复杂性, 哲学, 神经科学]
 series: "世界观察笔记"
 part: 12
 ---

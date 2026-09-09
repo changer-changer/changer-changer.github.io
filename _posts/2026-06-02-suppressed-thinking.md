@@ -2,7 +2,7 @@
 layout: post
 title: "被抑制的思维：人类目标导向思维的消亡与AI时代的回归"
 date: 2026-06-02
-categories: [随笔, 思考]
+categories: [思考]
 tags: [思维, 教育, AI时代, 社会分工]
 ---
 

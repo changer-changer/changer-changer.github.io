@@ -2,8 +2,8 @@
 layout: post
 title: "社会矩阵与杠杆：关于力量如何形成的笔记"
 date: 2026-05-25
-categories: ["思考图谱"]
-tags: ["社会", "杠杆", "力量", "资本", "策略"]
+categories: [思考图谱]
+tags: [社会, 杠杆, 力量, 资本, 策略]
 series: "世界观察笔记"
 part: 18
 ---

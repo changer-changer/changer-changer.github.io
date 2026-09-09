@@ -2,8 +2,8 @@
 layout: post
 title: "具身组块：能力如何在实践中形成"
 date: 2026-05-25
-categories: ["思考图谱"]
-tags: ["认知科学", "具身认知", "组块", "能力", "学习"]
+categories: [思考图谱]
+tags: [认知科学, 具身认知, 组块, 能力, 学习方法]
 series: "世界观察笔记"
 part: 10
 ---

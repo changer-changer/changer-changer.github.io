@@ -3,7 +3,7 @@ layout: post
 title: "外部反馈"
 date: 2026-05-12
 categories: [思考]
-tags: [学习, 认知, AI]
+tags: [学习方法, 认知, AI]
 ---
 
 人有两种获得反馈的方式，大多数人只用一种，而且用错了。

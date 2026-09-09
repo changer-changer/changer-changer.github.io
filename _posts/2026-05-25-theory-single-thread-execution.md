@@ -2,8 +2,8 @@
 layout: post
 title: "单线程执行：注意力如何被分配"
 date: 2026-05-25
-categories: ["思考图谱"]
-tags: ["执行", "专注", "单线程", "效率", "方法论"]
+categories: [思考图谱]
+tags: [执行力, 专注, 单线程, 效率, 方法论]
 series: "世界观察笔记"
 part: 20
 ---

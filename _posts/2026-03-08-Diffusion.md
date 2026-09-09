@@ -2,8 +2,8 @@
 layout: post
 title: "终极回顾：Diffusion"
 date: 2026-03-08
-categories: ["技术"]
-tags: ["技术", "深度学习", "数学", "Transformer", "神经网络", "梯度传播"]
+categories: [技术]
+tags: [技术, 深度学习, 数学, Transformer, 神经网络, 梯度传播]
 ---
 
 Policy 的数学本质与物理直觉

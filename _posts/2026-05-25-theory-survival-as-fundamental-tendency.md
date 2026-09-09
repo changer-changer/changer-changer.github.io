@@ -2,8 +2,8 @@
 layout: post
 title: "欲望与生存：一个关于人类动机的猜想"
 date: 2026-05-25
-categories: ["思考图谱"]
-tags: ["生存", "欲望", "趋向性", "演化", "人类本性"]
+categories: [思考图谱]
+tags: [生存, 欲望, 趋向性, 演化, 人类本性]
 series: "世界观察笔记"
 part: 14
 ---

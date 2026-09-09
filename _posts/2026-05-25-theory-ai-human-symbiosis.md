@@ -2,8 +2,8 @@
 layout: post
 title: "人机共生：人和 AI 如何形成互补"
 date: 2026-05-25
-categories: ["思考图谱"]
-tags: ["AI", "人机共生", "未来", "智能", "进化"]
+categories: [思考图谱]
+tags: [AI, 人机共生, 未来, 智能, 进化]
 series: "世界观察笔记"
 part: 24
 ---

@@ -2,8 +2,8 @@
 layout: post
 title: "生命、秩序与逆熵：一条观察线索"
 date: 2026-05-25
-categories: ["思考图谱"]
-tags: ["生物学", "逆熵", "演化", "生存", "热力学"]
+categories: [思考图谱]
+tags: [生物学, 逆熵, 演化, 生存, 热力学]
 series: "世界观察笔记"
 part: 13
 ---

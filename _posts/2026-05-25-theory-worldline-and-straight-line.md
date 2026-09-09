@@ -2,8 +2,8 @@
 layout: post
 title: "世界线与直线：关于路径选择的一个比喻"
 date: 2026-05-25
-categories: ["思考图谱"]
-tags: ["世界线", "路径", "优化", "人生", "决策"]
+categories: [思考图谱]
+tags: [世界线, 路径, 优化, 人生, 决策]
 series: "世界观察笔记"
 part: 21
 ---

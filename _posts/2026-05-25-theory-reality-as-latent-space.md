@@ -2,8 +2,8 @@
 layout: post
 title: "现实像潜空间：关于性质与认知的笔记"
 date: 2026-05-25
-categories: ["思考图谱"]
-tags: ["认识论", "潜空间", "性质", "抽象", "哲学"]
+categories: [思考图谱]
+tags: [认识论, 潜空间, 性质, 抽象, 哲学]
 series: "世界观察笔记"
 part: 3
 ---

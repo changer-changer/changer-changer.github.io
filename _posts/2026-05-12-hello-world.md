@@ -2,7 +2,7 @@
 layout: post
 title: "Hello World — 博客上线"
 date: 2026-05-12
-categories: [随笔]
+categories: [思考]
 tags: [博客, 开始]
 ---
 

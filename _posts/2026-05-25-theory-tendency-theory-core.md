@@ -2,8 +2,8 @@
 layout: post
 title: "趋向性：我用来观察变化的一个概念"
 date: 2026-05-25
-categories: ["思考图谱"]
-tags: ["趋向性", "观察工具", "方向", "演化", "思考"]
+categories: [思考图谱]
+tags: [趋向性, 观察工具, 方向, 演化, 思维]
 series: "世界观察笔记"
 part: 4
 ---

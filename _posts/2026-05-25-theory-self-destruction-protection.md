@@ -2,8 +2,8 @@
 layout: post
 title: "满足感与自我消耗：一条待验证的线索"
 date: 2026-05-25
-categories: ["思考图谱"]
-tags: ["自毁", "满足感", "演化", "心理", "生存"]
+categories: [思考图谱]
+tags: [自毁, 满足感, 演化, 心理, 生存]
 series: "世界观察笔记"
 part: 22
 ---

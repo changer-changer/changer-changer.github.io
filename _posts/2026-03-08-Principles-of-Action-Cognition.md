@@ -2,8 +2,8 @@
 layout: post
 title: "我的行动与认知原则 (Principles of Action & Cognition)"
 date: 2026-03-08
-categories: ["思考"]
-tags: ["行动力", "决策", "执行力", "深度学习", "神经科学", "认知科学"]
+categories: [思考]
+tags: [执行力, 决策, 深度学习, 神经科学, 认知科学]
 ---
 
 ## 第一部分：行动的底层铁律与战略规划

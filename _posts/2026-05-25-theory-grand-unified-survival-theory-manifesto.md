@@ -2,8 +2,8 @@
 layout: post
 title: "一组关于生存、认知与行动的笔记"
 date: 2026-05-25
-categories: ["思考图谱"]
-tags: ["思考图谱", "哲学", "观察", "第一性原理", "生存"]
+categories: [思考图谱]
+tags: [思考图谱, 哲学, 观察, 第一性原理, 生存]
 series: "世界观察笔记"
 part: 1
 ---
