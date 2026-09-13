@@ -1,5 +1,5 @@
 schema: 1
-updated: "2026.08"
+updated: "2026.09"
 identity:
   name: "崔之行"
   latin: "CUI ZHIXING"
@@ -24,6 +24,27 @@ media:
     label: "TEAM / AI NATIVE"
     caption: "与傅盛及队友的活动现场"
     note: "母库辅助证据：证明现场接触与团队活动，不单独证明具体名额或投资承诺。"
+    kind: "photo"
+  - id: "mibi-award-portrait"
+    image: "/assets/images/resume/portfolio/mibi-hiyouth-award.jpg"
+    alt: "Hi Youth 海淀青年创想训练营面壁智能专场一等奖获奖合影"
+    label: "AWARD / 2026.09.12"
+    caption: "面壁智能专场一等奖 · 获奖合影"
+    note: "第72队现场获奖照片；证书可见 Hi Youth 海淀青年创想训练营与一等奖口径。"
+    kind: "proof"
+  - id: "mibi-award-stage"
+    image: "/assets/images/resume/portfolio/mibi-hiyouth-stage.jpg"
+    alt: "第72队在 Hi Youth 面壁智能专场颁奖现场"
+    label: "STAGE / 1ST PLACE"
+    caption: "颁奖现场 · 第72队"
+    note: "现场照片：奖状与舞台背屏共同呈现一等奖结果。"
+    kind: "photo"
+  - id: "mibi-award-talk"
+    image: "/assets/images/resume/portfolio/mibi-hiyouth-talk.jpg"
+    alt: "在 Hi Youth 面壁智能专场进行项目答辩"
+    label: "PITCH / HI YOUTH"
+    caption: "现场答辩 · 把方案讲到评委能判断"
+    note: "答辩现场照片；用于证明参与呈现，不单独替代项目材料。"
     kind: "photo"
   - id: "tactile-rollout"
     image: "/assets/images/resume/evidence/tactile-realman-rollout.png"
@@ -202,6 +223,19 @@ projects:
     tags: ["robotics", "computer vision", "retail", "rapid prototyping"]
     status: "全国总冠军 / 产品场景落地"
     media_ids: ["fusheng-team"]
+  - id: "mibi-hackathon"
+    kind: "PRODUCT"
+    label: "HACKATHON / HI YOUTH × 面壁智能"
+    period: "2026.09.11 — 2026.09.12"
+    title: "面壁智能黑客松 · 专场一等奖（第1名）"
+    hook: "把一个真实 AI 工作流压缩成评委看得懂、现场讲得清的可演示方案。"
+    summary: "参加 Hi Youth 海淀青年创想训练营黑客松·面壁智能专场，以第72队成员身份围绕 PilotDeck 完成方案表达与现场答辩。"
+    contribution: "围绕“检查 AI 生成文件，只让出错的任务返工”这一核心问题，把整份重做拆成任务级验证与局部返工；参与问题拆解、产品方案呈现与现场答辩，在两天赛程内完成可评审的完整表达。"
+    outcome: "获得 Hi Youth 海淀青年创想训练营黑客松·面壁智能专场一等奖（第1名）；证书日期为 2026-09-12，公开证据口径为专场一等奖。"
+    metrics: ["一等奖 / 第1名", "第72队", "PilotDeck", "2026.09.12"]
+    tags: ["AI workflow", "Agent product", "hackathon", "pitch"]
+    status: "一等奖 / 第1名"
+    media_ids: ["mibi-award-portrait", "mibi-award-stage", "mibi-award-talk"]
   - id: "tactile-vla"
     kind: "RESEARCH"
     label: "ROBOTICS / VLA / PATENT"
@@ -304,6 +338,11 @@ projects:
     status: "北京赛区二等奖"
     media_ids: ["award-jingcai"]
 awards:
+  - title: "Hi Youth × 面壁智能黑客松 · 一等奖（第1名）"
+    period: "2026.09.12"
+    detail: "第72队 / PilotDeck 项目"
+    status: "证书与现场照片已证实"
+    media_id: "mibi-award-portrait"
   - title: "京彩大创 · 人工智能赛道二等奖"
     period: "2026.07"
     detail: "项目负责人 / 触界灵枢"
@@ -340,6 +379,8 @@ profiles:
     summary: "我把机器人、模型与真实业务接在一起：能下现场找真问题，也能把感知、数据、控制和 Demo 推进到需求、研发与交付。"
     audience: "给招聘者的一句话：你看到的不是“会很多工具”的人，而是一个能在技术深水区和业务现场之间来回切换、并把两边接起来的人。"
     signals:
+      - value: "专场第1名"
+        label: "Hi Youth × 面壁智能黑客松 / 第72队"
       - value: "傅盛 AI 战队"
         label: "由傅盛发起并指导的管培生计划"
       - value: "3.39M"
@@ -347,10 +388,10 @@ profiles:
       - value: "FULL LOOP"
         label: "传感器 → 模型 → 真机 → 用户"
     focus: ["AI systems", "Embodied intelligence", "Product practice", "Research engineering"]
-    featured: ["hackathon", "tactile-vla", "electronic-design", "computer-design", "jingcai", "robot-data-loop"]
+    featured: ["hackathon", "mibi-hackathon", "tactile-vla", "electronic-design", "computer-design", "jingcai"]
     supporting: ["agentos-media", "ai-workbench", "ai-field-ops", "residual", "agent-evolution", "tron2"]
     experience_order: ["current", "robotics"]
-    proof_media: ["fusheng-field", "award-jingcai", "patent-accepted", "award-national-math"]
+    proof_media: ["mibi-award-portrait", "mibi-award-stage", "fusheng-field", "award-jingcai", "patent-accepted"]
   research:
     nav_label: "科研 / 算法版"
     eyebrow: "RESEARCH ENGINEERING / CV"
@@ -362,13 +403,13 @@ profiles:
         label: "触觉 VR 可视化发明专利申请已受理"
       - value: "TRON2"
         label: "机器人适配、数据、训练、控制与真机"
-      - value: "REPRESENTATION"
-        label: "Residual Attention 机制假设与消融"
+      - value: "第1名"
+        label: "面壁智能专场黑客松 / 第72队"
     focus: ["Robotics systems", "Diffusion Policy", "Tactile sensing", "Agent evolution"]
-    featured: ["tactile-vla", "electronic-design", "computer-design", "jingcai", "hackathon", "residual"]
+    featured: ["tactile-vla", "mibi-hackathon", "electronic-design", "computer-design", "jingcai", "hackathon"]
     supporting: ["tron2", "tactile-vr", "agent-evolution", "robot-data-loop", "fusheng-ai-team"]
     experience_order: ["robotics", "current"]
-    proof_media: ["patent-accepted", "tactile-robot", "tactile-training", "award-jingcai"]
+    proof_media: ["mibi-award-portrait", "mibi-award-talk", "patent-accepted", "tactile-robot", "tactile-training"]
   product:
     nav_label: "产品 / FDE 版"
     eyebrow: "AI PRODUCT / FDE"
@@ -376,14 +417,14 @@ profiles:
     summary: "我从真实客户和真实数据出发，定义场景与任务链，再用 Demo、需求管理、研发协同和交付验证把模糊机会压缩成下一步能行动的产品。"
     audience: "给产品负责人 / FDE HR 的一句话：我不是把需求写得更长，而是把错误方向更早证伪，把正确问题更快推进到团队能交付的状态。"
     signals:
-      - value: "31 / 55"
-        label: "AI 实战派北京场阶段落地数据"
+      - value: "第1名"
+        label: "面壁智能专场黑客松 / 第72队"
       - value: "3 → 8+"
         label: "市场部 AI 工作台两周扩展"
       - value: "P02 → P11"
         label: "从客户现场到数据决策闭环"
     focus: ["Customer discovery", "Product strategy", "FDE delivery", "AI-native workflow"]
-    featured: ["fusheng-ai-team", "robot-data-loop", "hackathon", "agentos-media", "ai-workbench", "ai-field-ops"]
+    featured: ["fusheng-ai-team", "mibi-hackathon", "robot-data-loop", "hackathon", "agentos-media", "ai-workbench"]
     supporting: ["tactile-vla", "electronic-design", "computer-design", "jingcai", "tron2", "residual"]
     experience_order: ["current", "robotics"]
-    proof_media: ["fusheng-field", "fusheng-team", "retail-ui", "retail-voice", "ipd-certificate"]
+    proof_media: ["mibi-award-portrait", "mibi-award-stage", "fusheng-field", "fusheng-team", "retail-ui"]
