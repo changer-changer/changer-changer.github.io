@@ -84,6 +84,9 @@ permalink: /theory/
 | [组织里，事情是怎么真正做成的](/2026/09/09/how-things-get-done-in-organizations/) | 17、18：社会矩阵的组织内版本 |
 | [主体性、行为模式与思维浪费](/2026/09/09/subjectivity-and-behavior-patterns/) | 20：单线程执行的完整机制 |
 | [大学从来不是为了有用而诞生](/2026/09/09/education-is-not-value-exchange/) | 14：欲望、生存与价值交换的边界 |
+| [智力上的勇毅：敢把事情想清楚](/2026/09/13/intellectual-courage/) | 08：认知即抽象的勇气面；20：何时该停 |
+| [每个职业的本质都非常简单：know how 与两层人生](/2026/09/13/knowhow-of-careers/) | 17、19：社会结构里的人与优化的落点 |
+| [比赛给你的是信息，不是状态](/2026/09/13/competition-gives-information/) | 08、22：信息与状态；体系被新信息重写 |
 
 ## 这张图现在长到哪里了
 
