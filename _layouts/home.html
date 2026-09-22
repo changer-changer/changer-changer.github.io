@@ -122,16 +122,20 @@
         menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
         menu && menu.setAttribute('aria-hidden', open ? 'false' : 'true');
       });
-      var io = ('IntersectionObserver' in window)
-        ? new IntersectionObserver(function (es) {
-            es.forEach(function (e) {
-              if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-            });
-          }, { threshold: .12 })
-        : null;
-      document.querySelectorAll('[data-reveal]').forEach(function (el, i) {
-        el.style.transitionDelay = (i % 4) * 60 + 'ms';
-        io ? io.observe(el) : el.classList.add('in');
+
+      /* 看门狗：入场动画若迟迟未推进（动画时钟被节流/冻结的异常环境），
+         最多等 6 秒就整体关闭动画，保证内容必然显示；
+         用户切回标签页的瞬间也立即检查一次。 */
+      var checks = 0;
+      function ensureVisible() {
+        var hero = document.querySelector('.home-hero-title');
+        if (!hero || parseFloat(getComputedStyle(hero).opacity) >= 0.5) return;
+        if (++checks > 30) { document.documentElement.classList.add('home-anim-off'); return; }
+        setTimeout(ensureVisible, 200);
+      }
+      setTimeout(ensureVisible, 200);
+      document.addEventListener('visibilitychange', function () {
+        if (!document.hidden) ensureVisible();
       });
     })();
   </script>

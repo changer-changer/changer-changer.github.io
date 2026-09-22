@@ -8,13 +8,13 @@ description: "瞳孔、月亮、陨石、太阳 —— 滚动进入我看见的�
 
 <section class="home-hero">
   <div class="container home-hero-inner">
-    <p class="eyebrow" data-reveal>CHANGER—CHANGER · FIELD NOTES</p>
-    <h1 class="home-hero-title" data-reveal>把看见的世界，<br>认真地写下来<em>。</em></h1>
-    <p class="home-hero-sub" data-reveal>
+    <p class="eyebrow">CHANGER—CHANGER · FIELD NOTES</p>
+    <h1 class="home-hero-title">把看见的世界，<br>认真地写下来<em>。</em></h1>
+    <p class="home-hero-sub">
       你好，我是崔之行。这里记录我在技术、认知与行动路上的长期思考——
       靠近光，追随光，成为光。
     </p>
-    <div class="home-hero-cta" data-reveal>
+    <div class="home-hero-cta">
       <a class="button primary" href="{{ '/archive/' | relative_url }}">开始阅读</a>
       <a class="button secondary" href="{{ '/about/' | relative_url }}">关于我</a>
     </div>
@@ -23,14 +23,14 @@ description: "瞳孔、月亮、陨石、太阳 —— 滚动进入我看见的�
 
 <section class="home-section">
   <div class="container">
-    <div class="home-section-head" data-reveal>
+    <div class="home-section-head">
       <h2 class="home-section-title"><span class="idx">01</span>最新写作</h2>
       <a class="quiet-link home-section-more" href="{{ '/archive/' | relative_url }}">全部文章 →</a>
     </div>
 
     {% assign feature = latest | first %}
     {% assign rest = latest | slice: 1, 4 %}
-    <div class="home-feature" data-reveal>
+    <div class="home-feature">
       <a class="home-card is-feature" href="{{ feature.url | relative_url }}">
         <div class="card-meta">
           <span class="card-cat">{{ feature.categories | join: ' / ' }}</span>
@@ -57,30 +57,30 @@ description: "瞳孔、月亮、陨石、太阳 —— 滚动进入我看见的�
 
 <section class="home-section">
   <div class="container">
-    <div class="home-section-head" data-reveal>
+    <div class="home-section-head">
       <h2 class="home-section-title"><span class="idx">02</span>探索这个博客</h2>
       <a class="quiet-link home-section-more" href="{{ '/search/' | relative_url }}">搜索 →</a>
     </div>
     <div class="home-explore-grid">
-      <a class="home-explore-card" href="{{ '/theory/' | relative_url }}" data-reveal>
+      <a class="home-explore-card" href="{{ '/theory/' | relative_url }}">
         <span class="num">01</span>
         <h3>思考</h3>
         <p>长文与理论笔记，把问题想清楚的完整过程。</p>
         <span class="go">THEORY →</span>
       </a>
-      <a class="home-explore-card" href="{{ '/sparks/' | relative_url }}" data-reveal>
+      <a class="home-explore-card" href="{{ '/sparks/' | relative_url }}">
         <span class="num">02</span>
         <h3>火花</h3>
         <p>一闪而过的念头与摘录，思维的运动轨迹。</p>
         <span class="go">SPARKS →</span>
       </a>
-      <a class="home-explore-card" href="{{ '/categories/' | relative_url }}" data-reveal>
+      <a class="home-explore-card" href="{{ '/categories/' | relative_url }}">
         <span class="num">03</span>
         <h3>主题</h3>
         <p>按主题浏览全部写作，找到你关心的那条线。</p>
         <span class="go">TOPICS →</span>
       </a>
-      <a class="home-explore-card" href="{{ '/resume/' | relative_url }}" data-reveal>
+      <a class="home-explore-card" href="{{ '/resume/' | relative_url }}">
         <span class="num">04</span>
         <h3>履历</h3>
         <p>我做过的事、写过的代码与走过的路。</p>
@@ -90,7 +90,7 @@ description: "瞳孔、月亮、陨石、太阳 —— 滚动进入我看见的�
 
     {% assign first_post = site.posts | last %}
     {% assign tag_count = site.tags | size %}
-    <div class="home-stats" data-reveal>
+    <div class="home-stats">
       <div class="home-stat"><b>{{ site.posts | size }}<i>+</i></b><span>POSTS · 文章</span></div>
       <div class="home-stat"><b>{{ site.categories | size }}</b><span>TOPICS · 主题</span></div>
       <div class="home-stat"><b>{{ tag_count }}<i>+</i></b><span>TAGS · 标签</span></div>
@@ -100,7 +100,7 @@ description: "瞳孔、月亮、陨石、太阳 —— 滚动进入我看见的�
 </section>
 
 <section class="home-outro">
-  <div class="container" data-reveal>
+  <div class="container">
     <h2>Keep thinking,<br><em>in public.</em></h2>
     <a class="button primary" href="{{ '/archive/' | relative_url }}">进入归档</a>
   </div>

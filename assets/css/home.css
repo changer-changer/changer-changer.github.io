@@ -195,11 +195,59 @@
 }
 .home-outro .button { margin-top: 2.2rem; }
 
-/* ---------- 入场动效（轻量） ---------- */
-[data-reveal] { opacity: 0; transform: translateY(22px); transition: opacity .8s var(--ease-out), transform .8s var(--ease-out); }
-[data-reveal].in { opacity: 1; transform: none; }
-html:not(.anim) [data-reveal] { opacity: 1; transform: none; }
-@media (prefers-reduced-motion: reduce) { [data-reveal] { opacity: 1; transform: none; } }
+/* ---------- 入场动效（纯 CSS，内容默认可见，动画只做增强） ----------
+   原则是：任何环境下（JS 关闭、动画失效、观察器不触发）正文都不可为空。
+   因此不用「默认隐藏 + JS 点亮」的模式，改用 keyframes 向前填充：
+   元素自然状态就是可见的，动画仅在其上播放一次。 */
+@keyframes home-fade-up {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: none; }
+}
+/* 看门狗兜底：动画时钟被冻结的环境里（见 _layouts/home.html 的检测脚本），
+   关掉全部入场动画，内容立即以自然状态显示。 */
+.home-anim-off .home-hero .eyebrow,
+.home-anim-off .home-hero-title,
+.home-anim-off .home-hero-sub,
+.home-anim-off .home-hero-cta,
+.home-anim-off .home-section-head,
+.home-anim-off .home-feature,
+.home-anim-off .home-explore-card,
+.home-anim-off .home-stats,
+.home-anim-off .home-outro .container { animation: none !important; }
+.home-hero .eyebrow,
+.home-hero-title,
+.home-hero-sub,
+.home-hero-cta,
+.home-section-head,
+.home-feature,
+.home-explore-card,
+.home-stats,
+.home-outro .container {
+  animation: home-fade-up .8s var(--ease-out) backwards;
+}
+.home-hero-title { animation-delay: .08s; }
+.home-hero-sub { animation-delay: .16s; }
+.home-hero-cta { animation-delay: .24s; }
+.home-feature { animation-delay: .1s; }
+@media (prefers-reduced-motion: reduce) {
+  .home-hero .eyebrow, .home-hero-title, .home-hero-sub, .home-hero-cta,
+  .home-section-head, .home-feature, .home-explore-card, .home-stats,
+  .home-outro .container { animation: none; }
+}
+/* 支持 scroll-driven 动画的浏览器，下方区块改为滚动进入时显现；
+   不支持的浏览器忽略整段，保持上面的「加载即显现」。 */
+@supports (animation-timeline: view()) {
+  .home-explore-card,
+  .home-stats,
+  .home-outro .container {
+    animation: home-fade-up .8s var(--ease-out) both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 55%;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .home-explore-card, .home-stats, .home-outro .container { animation: none; }
+  }
+}
 
 /* ---------- 响应式 ---------- */
 @media (max-width: 1024px) {
