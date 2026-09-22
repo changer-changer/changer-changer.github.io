@@ -1,132 +1,107 @@
-<!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>崔之行 · The World I See</title>
-  <meta name="description" content="瞳孔、月亮、陨石、太阳 —— 滚动进入我看见的世界。崔之行的博客。" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='38' fill='%2304060C'/><circle cx='50' cy='50' r='34' fill='%237FB0E8'/><circle cx='50' cy='50' r='14' fill='%2304060C'/></svg>" />
-  <!-- 字体走 jsDelivr @fontsource（同款 Google Fonts 文件）；异步加载不阻塞首屏，系统字体栈兜底 -->
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
-  <link href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5.1.1/500.css" rel="stylesheet" media="print" onload="this.media='all'" />
-  <link href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5.1.1/700.css" rel="stylesheet" media="print" onload="this.media='all'" />
-  <link href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5.1.1/500-italic.css" rel="stylesheet" media="print" onload="this.media='all'" />
-  <link href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.1.1/400.css" rel="stylesheet" media="print" onload="this.media='all'" />
-  <link href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.1.1/600.css" rel="stylesheet" media="print" onload="this.media='all'" />
-  <style>
-    /* ---- theme tokens (unlayered: beats the engine's @layer sw) ---- */
-    :root, .sw-root {
-      --sw-bg: #04060C;                                   /* 深空 */
-      --sw-ink: #EDEAE2;                                  /* 暖纸白 */
-      --sw-ink-soft: #8E96A8;
-      --sw-accent: #7FB0E8;
-      --sw-font-display: "Playfair Display", "Noto Serif SC", serif;
-      --sw-font-body: "Noto Serif SC", "Songti SC", "PingFang SC", serif;
-    }
-    body { margin: 0; background: #04060C; }
-    #world { min-height: 100vh; }
+---
+layout: home
+title: "崔之行 · The World I See"
+description: "瞳孔、月亮、陨石、太阳 —— 滚动进入我看见的世界。崔之行的博客。"
+---
 
-    /* ---- editorial chrome over the engine ---- */
-    .sw-brand__name { font-style: italic; letter-spacing: .02em; }
-    .sw-nav { background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.09); }
-    .sw-nav__item { color: var(--sw-ink-soft); }
-    .sw-nav__item:hover { color: var(--sw-ink); }
-    .sw-topcta { background: var(--sw-ink); color: #0A0D14; font-family: var(--sw-font-display); font-style: italic; }
+{% assign latest = site.posts | limit: 5 %}
 
-    .sw-copy__num { color: color-mix(in srgb, var(--sw-accent) 75%, var(--sw-ink-soft)); }
-    .sw-copy__eyebrow { font-family: var(--sw-font-body); font-weight: 400; letter-spacing: .34em; }
-    .sw-copy__title {
-      font-style: italic; font-weight: 500;
-      font-size: clamp(2.6rem, 5.6vw, 4.8rem);
-      letter-spacing: -.015em; line-height: 1.02;
-    }
-    .sw-copy__body { font-weight: 400; }
-    .sw-copy__tags li {
-      color: color-mix(in srgb, var(--sw-accent) 85%, #fff);
-      background: color-mix(in srgb, var(--sw-accent) 10%, transparent);
-      border-color: color-mix(in srgb, var(--sw-accent) 32%, transparent);
-    }
-    .sw-btn--primary { background: var(--sw-accent); color: #0A0D14; font-family: var(--sw-font-display); font-style: italic; }
-    .sw-btn--ghost { color: var(--sw-ink); border-color: rgba(255,255,255,.28); }
-    .sw-route__label { background: rgba(10,13,20,.85); color: var(--sw-ink); border-color: rgba(255,255,255,.1); }
-    .sw-route::before { display: none; }   /* 去掉右侧竖线(浅色在深底上像白条), 保留圆点导航 */
-    .sw-hint { font-family: var(--sw-font-body); }
-  </style>
-</head>
-<body>
-  <div id="world"></div>
+<section class="home-hero">
+  <div class="container home-hero-inner">
+    <p class="eyebrow" data-reveal>CHANGER—CHANGER · FIELD NOTES</p>
+    <h1 class="home-hero-title" data-reveal>把看见的世界，<br>认真地写下来<em>。</em></h1>
+    <p class="home-hero-sub" data-reveal>
+      你好，我是崔之行。这里记录我在技术、认知与行动路上的长期思考——
+      靠近光，追随光，成为光。
+    </p>
+    <div class="home-hero-cta" data-reveal>
+      <a class="button primary" href="{{ '/archive/' | relative_url }}">开始阅读</a>
+      <a class="button secondary" href="{{ '/about/' | relative_url }}">关于我</a>
+    </div>
+  </div>
+</section>
 
-  <script src="/assets/world/scrub-engine.js"></script>
-  <script>
-    // 媒体同源加载: 总量已压到 ~4MB, 同源省去 CDN 缓存不一致与国内 jsDelivr 不稳定问题
-    var W = function (p) { return '/assets/world' + p; };
+<section class="home-section">
+  <div class="container">
+    <div class="home-section-head" data-reveal>
+      <h2 class="home-section-title"><span class="idx">01</span>最新写作</h2>
+      <a class="quiet-link home-section-more" href="{{ '/archive/' | relative_url }}">全部文章 →</a>
+    </div>
 
-    // 首段视频预加载: 桌面/非省流模式才预载, 蜂窝省流用户滚动触发时再拉
-    (function preloadFirst() {
-      var c = navigator.connection;
-      if (c && (c.saveData || /2g/.test(c.effectiveType || ''))) return;
-      var v = document.createElement('video');
-      v.muted = true; v.playsInline = true; v.preload = 'auto';
-      v.src = W('/vid/conn0.mp4');
-    })();
+    {% assign feature = latest | first %}
+    {% assign rest = latest | slice: 1, 4 %}
+    <div class="home-feature" data-reveal>
+      <a class="home-card is-feature" href="{{ feature.url | relative_url }}">
+        <div class="card-meta">
+          <span class="card-cat">{{ feature.categories | join: ' / ' }}</span>
+          <span>{{ feature.date | date: "%Y.%m.%d" }}</span>
+        </div>
+        <h3>{{ feature.title }}</h3>
+        <p>{{ feature.description | default: feature.excerpt }}</p>
+        <span class="card-arrow">READ →</span>
+      </a>
+      <div class="home-list">
+        {% for post in rest %}
+        <a class="home-card" href="{{ post.url | relative_url }}">
+          <div class="card-meta">
+            <span class="card-cat">{{ post.categories | join: ' / ' }}</span>
+            <span>{{ post.date | date: "%Y.%m.%d" }}</span>
+          </div>
+          <h3>{{ post.title }}</h3>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
 
-    mountScrollWorld(document.getElementById('world'), {
-      brand: { name: '崔之行', href: '/' },
-      cta: { label: '进入博客', href: '/archive' },
-      hint: 'Scroll · 滚动，进入我看见的世界',
-      diveScroll: 1.15,
-      connScroll: 1.15,
-      crossfade: 0.18,
-      nav: true,
-      atmosphere: true,
-      sections: [
-        {
-          id: 'eye', label: '瞳孔',
-          still: W('/eye.webp'),
-          accent: '#7FB0E8',
-          eyebrow: 'CHAPTER 01 · 瞳孔 THE EYE',
-          title: 'The World I See',
-          body: '一切始于一次凝视。瞳孔是光进入身体的地方，也是我记录世界的入口。',
-          tags: ['凝视', '起点'],
-        },
-        {
-          id: 'moon', label: '月亮',
-          still: W('/moon.webp'),
-          accent: '#C7CDD6',
-          eyebrow: 'CHAPTER 02 · 月亮 THE MOON',
-          title: 'Silent Gravity',
-          body: '隔着三十八万公里，依然牵引潮汐。有些陪伴，从不喧哗。',
-          tags: ['寂静', '引力'],
-        },
-        {
-          id: 'meteor', label: '陨石',
-          still: W('/meteor.webp'),
-          accent: '#C9A46B',
-          eyebrow: 'CHAPTER 03 · 陨石 THE METEOR',
-          title: 'Drift & Burn',
-          body: '在抵达之前，每一块石头都在黑暗里飞了很久。漂泊不是迷路，是在路上。',
-          tags: ['漂泊', '燃烧'],
-        },
-        {
-          id: 'sun', label: '太阳',
-          still: W('/sun.webp'),
-          accent: '#FF7A2F',
-          eyebrow: 'CHAPTER 04 · 太阳 THE SUN',
-          title: 'Become the Light',
-          body: '靠近光，追随光，成为光。我把看见的世界写在这里——欢迎到来。',
-          tags: [],
-          cta: {
-            primary: { label: '进入博客', href: '/archive' },
-            secondary: { label: 'GitHub', href: 'https://github.com/changer-changer' },
-          },
-        },
-      ],
-      connectors: [
-        W('/vid/conn0.mp4'),   // 瞳孔 → 月亮
-        W('/vid/conn1.mp4'),   // 月亮 → 陨石
-        W('/vid/conn2.mp4'),   // 陨石 → 太阳
-      ],
-    });
-  </script>
-</body>
-</html>
+<section class="home-section">
+  <div class="container">
+    <div class="home-section-head" data-reveal>
+      <h2 class="home-section-title"><span class="idx">02</span>探索这个博客</h2>
+      <a class="quiet-link home-section-more" href="{{ '/search/' | relative_url }}">搜索 →</a>
+    </div>
+    <div class="home-explore-grid">
+      <a class="home-explore-card" href="{{ '/theory/' | relative_url }}" data-reveal>
+        <span class="num">01</span>
+        <h3>思考</h3>
+        <p>长文与理论笔记，把问题想清楚的完整过程。</p>
+        <span class="go">THEORY →</span>
+      </a>
+      <a class="home-explore-card" href="{{ '/sparks/' | relative_url }}" data-reveal>
+        <span class="num">02</span>
+        <h3>火花</h3>
+        <p>一闪而过的念头与摘录，思维的运动轨迹。</p>
+        <span class="go">SPARKS →</span>
+      </a>
+      <a class="home-explore-card" href="{{ '/categories/' | relative_url }}" data-reveal>
+        <span class="num">03</span>
+        <h3>主题</h3>
+        <p>按主题浏览全部写作，找到你关心的那条线。</p>
+        <span class="go">TOPICS →</span>
+      </a>
+      <a class="home-explore-card" href="{{ '/resume/' | relative_url }}" data-reveal>
+        <span class="num">04</span>
+        <h3>履历</h3>
+        <p>我做过的事、写过的代码与走过的路。</p>
+        <span class="go">RESUME →</span>
+      </a>
+    </div>
+
+    {% assign first_post = site.posts | last %}
+    {% assign tag_count = site.tags | size %}
+    <div class="home-stats" data-reveal>
+      <div class="home-stat"><b>{{ site.posts | size }}<i>+</i></b><span>POSTS · 文章</span></div>
+      <div class="home-stat"><b>{{ site.categories | size }}</b><span>TOPICS · 主题</span></div>
+      <div class="home-stat"><b>{{ tag_count }}<i>+</i></b><span>TAGS · 标签</span></div>
+      <div class="home-stat"><b>{{ first_post.date | date: "%Y" }}<i>—</i></b><span>WRITING SINCE</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="home-outro">
+  <div class="container" data-reveal>
+    <h2>Keep thinking,<br><em>in public.</em></h2>
+    <a class="button primary" href="{{ '/archive/' | relative_url }}">进入归档</a>
+  </div>
+</section>

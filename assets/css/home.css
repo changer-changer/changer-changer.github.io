@@ -1,0 +1,216 @@
+/* ============================================================
+   首页 · MiMo 式版式 × 纸墨朱红设计语言
+   大标题、大卡片、大留白；去掉一切重特效。
+   ============================================================ */
+
+.page-home { width: 100%; }
+
+.page-home .container {
+  max-width: var(--container); width: 100%;
+  margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2.5rem);
+}
+.nav-plain-link {
+  font-family: var(--f-mono); font-size: .7rem; letter-spacing: .1em;
+  color: var(--muted); padding: .4rem .65rem;
+  border: 1px solid var(--line); border-radius: 999px;
+  transition: color .3s, border-color .3s;
+}
+.nav-plain-link:hover { color: var(--accent); border-color: var(--accent); }
+
+/* ---------- Hero ---------- */
+.home-hero {
+  position: relative;
+  padding: clamp(6rem, 14vh, 10rem) 0 clamp(4rem, 9vh, 7rem);
+  overflow: clip;
+}
+/* 一束朱红的光，代替旧的整屏视频 */
+.home-hero::before {
+  content: "";
+  position: absolute; right: -12%; top: -30%;
+  width: min(56vw, 720px); aspect-ratio: 1;
+  background: radial-gradient(circle at center,
+    color-mix(in srgb, var(--accent) 22%, transparent) 0%,
+    color-mix(in srgb, var(--accent) 7%, transparent) 38%,
+    transparent 68%);
+  filter: blur(10px);
+  pointer-events: none;
+}
+.home-hero-inner { position: relative; }
+.home-hero .eyebrow { margin-bottom: 2rem; }
+.home-hero-title {
+  font-family: var(--f-serif);
+  font-weight: 900;
+  font-size: clamp(3rem, 8.2vw, 6.6rem);
+  line-height: 1.06;
+  letter-spacing: .01em;
+  max-width: 14em;
+}
+.home-hero-title em {
+  font-family: var(--f-serif-latin); font-style: italic; font-weight: 400;
+  color: var(--accent);
+}
+.home-hero-sub {
+  margin-top: 2.2rem; max-width: 34em;
+  font-size: 1.06rem; color: var(--muted);
+}
+.home-hero-cta { margin-top: 3rem; display: flex; flex-wrap: wrap; gap: 1rem; }
+
+/* ---------- 分节标题 ---------- */
+.home-section { padding: clamp(3.5rem, 8vh, 6rem) 0 0; }
+.home-section-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 1.5rem; margin-bottom: 2.4rem;
+}
+.home-section-title {
+  font-family: var(--f-serif); font-weight: 900;
+  font-size: clamp(1.7rem, 3.4vw, 2.5rem); line-height: 1.15;
+}
+.home-section-title .idx {
+  font-family: var(--f-mono); font-weight: 400;
+  font-size: .8rem; color: var(--accent);
+  vertical-align: super; margin-right: .6rem; letter-spacing: .12em;
+}
+.home-section-more { white-space: nowrap; }
+
+/* ---------- 最新写作：主卡 + 列表 ---------- */
+.home-feature {
+  display: grid; grid-template-columns: 1.15fr .85fr;
+  gap: 1.25rem; margin-bottom: 1.25rem;
+}
+.home-card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: clamp(1.6rem, 3vw, 2.6rem);
+  display: flex; flex-direction: column; gap: .9rem;
+  transition: transform .45s var(--ease-out), box-shadow .45s, border-color .45s;
+  overflow: hidden;
+}
+.home-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+  border-color: color-mix(in srgb, var(--accent) 42%, var(--line));
+}
+.home-card .card-meta {
+  font-family: var(--f-mono); font-size: .7rem; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--faint);
+  display: flex; gap: 1rem; flex-wrap: wrap;
+}
+.home-card .card-cat { color: var(--accent); }
+.home-card h3 {
+  font-family: var(--f-serif); font-weight: 900;
+  line-height: 1.28; letter-spacing: .01em;
+}
+.home-card.is-feature h3 { font-size: clamp(1.6rem, 3vw, 2.3rem); }
+.home-card:not(.is-feature) h3 { font-size: 1.18rem; }
+.home-card p { color: var(--muted); font-size: .92rem; line-height: 1.8; flex: 1; }
+.home-card.is-feature p {
+  font-size: 1rem; max-width: 40em;
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+.home-card .card-arrow {
+  font-family: var(--f-mono); font-size: .74rem; letter-spacing: .12em;
+  color: var(--ink); display: inline-flex; align-items: center; gap: .45rem;
+  transition: color .3s, gap .3s var(--ease-out);
+}
+.home-card:hover .card-arrow { color: var(--accent); gap: .8rem; }
+.home-card.is-feature::after {
+  content: "NEW"; position: absolute; top: 1.4rem; right: 1.6rem;
+  font-family: var(--f-mono); font-size: .64rem; letter-spacing: .2em;
+  color: var(--accent-ink); background: var(--accent);
+  padding: .28rem .7rem; border-radius: 999px;
+}
+.home-list { display: grid; gap: 1.25rem; }
+
+/* ---------- 探索：大数字卡片 ---------- */
+.home-explore-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem;
+}
+.home-explore-card {
+  position: relative;
+  min-height: 260px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 1.8rem;
+  display: flex; flex-direction: column; justify-content: flex-end; gap: .6rem;
+  transition: transform .45s var(--ease-out), box-shadow .45s, border-color .45s;
+  overflow: hidden;
+}
+.home-explore-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+  border-color: color-mix(in srgb, var(--accent) 42%, var(--line));
+}
+.home-explore-card .num {
+  position: absolute; top: 1.1rem; left: 1.6rem;
+  font-family: var(--f-serif-latin); font-style: italic;
+  font-size: 3.2rem; line-height: 1; color: var(--line);
+  transition: color .45s;
+}
+.home-explore-card:hover .num { color: var(--accent); }
+.home-explore-card h3 {
+  font-family: var(--f-serif); font-weight: 900; font-size: 1.3rem;
+}
+.home-explore-card p { color: var(--muted); font-size: .86rem; line-height: 1.7; }
+.home-explore-card .go {
+  font-family: var(--f-mono); font-size: .7rem; letter-spacing: .14em;
+  color: var(--faint); margin-top: .4rem;
+  transition: color .3s;
+}
+.home-explore-card:hover .go { color: var(--accent); }
+
+/* ---------- 统计带 ---------- */
+.home-stats {
+  margin-top: clamp(3.5rem, 8vh, 6rem);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 2.6rem 0;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+}
+.home-stat b {
+  display: block;
+  font-family: var(--f-serif-latin); font-style: italic; font-weight: 400;
+  font-size: clamp(2rem, 4vw, 3rem); line-height: 1; color: var(--ink);
+}
+.home-stat span {
+  font-family: var(--f-mono); font-size: .68rem; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--faint);
+}
+.home-stat b i { font-style: normal; color: var(--accent); }
+
+/* ---------- 尾声 ---------- */
+.home-outro {
+  padding: clamp(4rem, 10vh, 7rem) 0 clamp(4rem, 10vh, 7rem);
+  text-align: center;
+}
+.home-outro h2 {
+  font-family: var(--f-serif); font-weight: 900;
+  font-size: clamp(1.9rem, 4.4vw, 3.2rem); line-height: 1.2;
+}
+.home-outro h2 em {
+  font-family: var(--f-serif-latin); font-style: italic; font-weight: 400;
+  color: var(--accent);
+}
+.home-outro .button { margin-top: 2.2rem; }
+
+/* ---------- 入场动效（轻量） ---------- */
+[data-reveal] { opacity: 0; transform: translateY(22px); transition: opacity .8s var(--ease-out), transform .8s var(--ease-out); }
+[data-reveal].in { opacity: 1; transform: none; }
+html:not(.anim) [data-reveal] { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { [data-reveal] { opacity: 1; transform: none; } }
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 1024px) {
+  .home-explore-grid { grid-template-columns: repeat(2, 1fr); }
+  .home-stats { grid-template-columns: repeat(2, 1fr); row-gap: 2rem; }
+}
+@media (max-width: 768px) {
+  .home-feature { grid-template-columns: 1fr; }
+  .home-section-head { flex-direction: column; align-items: flex-start; gap: .8rem; }
+}
+@media (max-width: 520px) {
+  .home-explore-grid { grid-template-columns: 1fr; }
+  .home-explore-card { min-height: 200px; }
+}

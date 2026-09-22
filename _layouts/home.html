@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% assign meta_description = page.description | default: site.description | strip_html | truncate: 160 %}
+  <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+  <meta name="description" content="{{ meta_description }}">
+  <meta name="author" content="{{ site.author | default: site.title }}">
+  <meta name="theme-color" content="#EDE9DC">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  <meta property="og:site_name" content="{{ site.title }}">
+  <meta property="og:title" content="{{ site.title }}">
+  <meta property="og:description" content="{{ meta_description }}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <script>
+    (function () {
+      var root = document.documentElement;
+      try {
+        var theme = localStorage.getItem('cz-theme');
+        if (theme) root.setAttribute('data-theme', theme);
+      } catch (e) {}
+      root.classList.add('anim');
+    })();
+  </script>
+  <link rel="preload" href="{{ '/assets/fonts/noto-serif-sc-900.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ '/assets/fonts/instrument-serif-italic.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/home.css' | relative_url }}">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='50' fill='%23E0490F'/%3E%3Ctext x='50' y='62' text-anchor='middle' font-size='34' font-family='monospace' fill='%23FFF4E8'%3EC/C%3C/text%3E%3C/svg%3E">
+</head>
+<body class="site-shell page-kind-home">
+  <a class="skip-link" href="#content">跳到正文</a>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="{{ '/' | relative_url }}" class="site-title" aria-label="{{ site.title }} 首页">
+        <span class="site-mark">C/C</span>
+        <span class="site-name">CHANGER—CHANGER<span class="site-name-sub">/ FIELD NOTES</span></span>
+      </a>
+      <div class="nav-links">
+        <a aria-current="page" href="{{ '/' | relative_url }}">首页</a>
+        <a href="{{ '/theory/' | relative_url }}">思考</a>
+        <a href="{{ '/sparks/' | relative_url }}">火花</a>
+        <a href="{{ '/categories/' | relative_url }}">主题</a>
+        <a href="{{ '/archive/' | relative_url }}">归档</a>
+        <a href="{{ '/about/' | relative_url }}">关于</a>
+        <a href="{{ '/resume/' | relative_url }}">履历</a>
+      </div>
+      <div class="nav-actions">
+        <a class="nav-plain-link" href="{{ '/search/' | relative_url }}">SEARCH</a>
+        <button class="icon-button theme-toggle" type="button" aria-label="切换主题" title="切换主题"><span aria-hidden="true">◐</span></button>
+      </div>
+    </div>
+  </nav>
+
+  <main id="content" class="site-main page-home">
+    {{ content }}
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-manifesto">KEEP THINKING<br><em>IN PUBLIC</em></div>
+      <div class="footer-grid">
+        <div class="footer-identity">
+          <strong>CHANGER—CHANGER <span>© {{ site.time | date: "%Y" }}</span></strong>
+          <p>技术、认知、行动与个人经验的长期记录。</p>
+        </div>
+        <div class="footer-col">
+          <p>SITEMAP</p>
+          <a href="{{ '/theory/' | relative_url }}">思考图谱</a>
+          <a href="{{ '/archive/' | relative_url }}">文章归档</a>
+          <a href="{{ '/sparks/' | relative_url }}">火花</a>
+          <a href="/world.html">旧首页 · The World</a>
+        </div>
+        <div class="footer-col">
+          <p>ELSEWHERE</p>
+          <a href="https://github.com/{{ site.github_username }}" rel="me">GitHub ↗</a>
+          <a href="{{ '/search/' | relative_url }}">搜索</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var nav = document.querySelector('.navbar');
+      var onScroll = function () { nav && nav.classList.toggle('is-scrolled', window.scrollY > 8); };
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      var btn = document.querySelector('.theme-toggle');
+      btn && btn.addEventListener('click', function () {
+        var root = document.documentElement;
+        var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem('cz-theme', next); } catch (e) {}
+      });
+      var io = ('IntersectionObserver' in window)
+        ? new IntersectionObserver(function (es) {
+            es.forEach(function (e) {
+              if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+            });
+          }, { threshold: .12 })
+        : null;
+      document.querySelectorAll('[data-reveal]').forEach(function (el, i) {
+        el.style.transitionDelay = (i % 4) * 60 + 'ms';
+        io ? io.observe(el) : el.classList.add('in');
+      });
+    })();
+  </script>
+</body>
+</html>
