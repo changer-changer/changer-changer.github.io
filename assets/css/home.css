@@ -5,6 +5,21 @@
 
 .page-home { width: 100%; }
 
+/* ---------- 鼠标跟随柔光 ----------
+   纯增强层：fixed + pointer-events none，JS 不跑/不兼容时保持透明，零风险。 */
+:root { --glow-alpha: 9%; }
+:root[data-theme="dark"] { --glow-alpha: 15%; }
+.home-glow {
+  position: fixed; inset: 0; z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(560px circle at var(--mx, 60%) var(--my, 24%),
+    color-mix(in srgb, var(--accent) var(--glow-alpha), transparent),
+    color-mix(in srgb, var(--accent) calc(var(--glow-alpha) / 3), transparent) 38%,
+    transparent 66%);
+}
+.home-glow.on { opacity: 1; }
+
 .page-home .container {
   max-width: var(--container); width: 100%;
   margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2.5rem);

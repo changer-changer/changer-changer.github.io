@@ -31,6 +31,7 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='50' fill='%23E0490F'/%3E%3Ctext x='50' y='62' text-anchor='middle' font-size='34' font-family='monospace' fill='%23FFF4E8'%3EC/C%3C/text%3E%3C/svg%3E">
 </head>
 <body class="site-shell page-kind-home">
+  <div class="home-glow" aria-hidden="true"></div>
   <a class="skip-link" href="#content">跳到正文</a>
 
   <nav class="navbar">
@@ -137,6 +138,29 @@
       document.addEventListener('visibilitychange', function () {
         if (!document.hidden) ensureVisible();
       });
+
+      /* 鼠标跟随柔光：指针位置经 rAF 插值后写入 CSS 变量，形成缓动光晕。
+         仅精确指针 + 未开启减动效时启用；层本身 pointer-events:none 且默认透明。 */
+      var glow = document.querySelector('.home-glow');
+      if (glow && matchMedia('(pointer: fine)').matches
+          && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        var tx = innerWidth * .6, ty = innerHeight * .24, cx = tx, cy = ty, glowRaf = null;
+        var glowStep = function () {
+          cx += (tx - cx) * .1; cy += (ty - cy) * .1;
+          glow.style.setProperty('--mx', cx.toFixed(1) + 'px');
+          glow.style.setProperty('--my', cy.toFixed(1) + 'px');
+          glowRaf = (Math.abs(tx - cx) + Math.abs(ty - cy) > .5)
+            ? requestAnimationFrame(glowStep) : null;
+        };
+        addEventListener('pointermove', function (e) {
+          tx = e.clientX; ty = e.clientY;
+          /* 位置同步写入，不依赖 rAF：即使动画帧被冻结光晕也能跟随指针 */
+          glow.style.setProperty('--mx', tx + 'px');
+          glow.style.setProperty('--my', ty + 'px');
+          if (!glow.classList.contains('on')) glow.classList.add('on');
+          if (!glowRaf) glowRaf = requestAnimationFrame(glowStep);
+        }, { passive: true });
+      }
     })();
   </script>
 </body>
