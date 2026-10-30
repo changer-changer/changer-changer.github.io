@@ -34,7 +34,8 @@
         let damp=Math.exp(-(1.4+own*4.2)*dt); p.vx=(p.vx+(flowX*(1-own*.94)+(tx-x)*own*10+edgeX+dx*repel)*dt)*damp;p.vy=(p.vy+(flowY*(1-own*.94)+(ty-y)*own*10+edgeY+dy*repel)*dt)*damp;p.x+=p.vx*dt;p.y+=p.vy*dt;
         if(p.x<.002){p.x=.002;p.vx=Math.abs(p.vx)*.65}else if(p.x>.998){p.x=.998;p.vx=-Math.abs(p.vx)*.65}if(p.y<.002){p.y=.002;p.vy=Math.abs(p.vy)*.65}else if(p.y>.998){p.y=.998;p.vy=-Math.abs(p.vy)*.65}
       }
-      ctx.fillStyle=document.documentElement.getAttribute('data-theme')==='light' ? `rgba(20,25,20,${p.alpha})` : `rgba(229,234,223,${p.alpha})`;ctx.beginPath();ctx.arc(p.x*w,p.y*h,p.radius,0,Math.PI*2);ctx.fill();
+      const homeAmount=strength*mix[0], homeLight=p.targets[0].v, alpha=p.alpha*(1-homeAmount)+(.075+Math.pow(homeLight,2)*.8)*homeAmount, radius=p.radius*(1-homeAmount)+(.32+homeLight*.85)*homeAmount;
+      ctx.fillStyle=document.documentElement.getAttribute('data-theme')==='light' ? `rgba(20,25,20,${alpha})` : `rgba(229,234,223,${alpha})`;ctx.beginPath();ctx.arc(p.x*w,p.y*h,radius,0,Math.PI*2);ctx.fill();
     }
     frame=requestAnimationFrame(draw);
   }
