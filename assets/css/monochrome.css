@@ -12,3 +12,5 @@
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important} #particle-field{display:none}}
 
 .article-starmap canvas { filter: grayscale(1); }
+html.anim [data-reveal]{opacity:1!important}
+.post-content table{display:block;overflow-x:auto}
