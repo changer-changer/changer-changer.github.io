@@ -8,7 +8,7 @@
   <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
   <meta name="description" content="{{ meta_description }}">
   <meta name="author" content="{{ site.author | default: site.title }}">
-  <meta name="theme-color" content="#EDE9DC">
+  <meta name="theme-color" content="#111311">
   <link rel="canonical" href="{{ page.url | absolute_url }}">
   <meta property="og:site_name" content="{{ site.title }}">
   <meta property="og:title" content="{{ meta_title }}{% if page.title %} - {{ site.title }}{% endif %}">
@@ -23,8 +23,8 @@
     (function () {
       var root = document.documentElement;
       try {
-        var theme = localStorage.getItem('cz-theme');
-        if (theme) root.setAttribute('data-theme', theme);
+        var theme = localStorage.getItem('cz-theme') || 'dark';
+        root.setAttribute('data-theme', theme);
         var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
           || localStorage.getItem('cz-motion') === 'reduced';
         if (!reduced) root.classList.add('anim');
@@ -34,8 +34,9 @@
   <link rel="preload" href="{{ '/assets/fonts/noto-serif-sc-900.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="{{ '/assets/fonts/instrument-serif-italic.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/monochrome.css' | relative_url }}">
   <noscript><style>.site-loader,.page-transition,.cursor-orbit{display:none!important}html.anim [data-reveal]{opacity:1!important}</style></noscript>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='50' fill='%23E0490F'/%3E%3Ctext x='50' y='62' text-anchor='middle' font-size='34' font-family='monospace' fill='%23FFF4E8'%3EC/C%3C/text%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='50' fill='%231b1d1b'/%3E%3Ctext x='50' y='62' text-anchor='middle' font-size='34' font-family='monospace' fill='%23f0f0e9'%3EC/C%3C/text%3E%3C/svg%3E">
 </head>
 <body class="site-shell page-kind-{{ page.layout | default: 'default' }}">
   {% if page.url == "/" %}
@@ -60,14 +61,6 @@
   </script>
   <script type="module" src="{{ '/assets/js/intro.js' | relative_url }}"></script>
   {% endif %}
-  <div class="site-loader" aria-hidden="true">
-    <div class="loader-mark">CHANGER<br><em>CHANGER</em></div>
-    <div class="loader-counter"><span>00</span><em>/100</em></div>
-    <div class="loader-line"><span></span></div>
-    <div class="loader-coords">LAT 39.99 · LON 116.33 · BEIJING</div>
-  </div>
-  <div class="page-transition" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-  <div class="cursor-orbit" aria-hidden="true"><i class="cursor-dot"></i><i class="cursor-ring"></i><span></span></div>
   <a class="skip-link" href="#content">跳到正文</a>
   <div class="reading-progress" aria-hidden="true"><span id="reading-progress-bar"></span></div>
 
@@ -176,7 +169,7 @@
         var current = root.getAttribute('data-theme') || 'light';
         if (btn) btn.setAttribute('aria-label', current === 'dark' ? '切换到浅色主题' : '切换到深色主题');
         var meta = document.querySelector('meta[name="theme-color"]');
-        if (meta) meta.setAttribute('content', current === 'dark' ? '#131109' : '#EDE9DC');
+        if (meta) meta.setAttribute('content', current === 'dark' ? '#0b0d0b' : '#f0f0eb');
       }
       sync();
       if (btn) btn.addEventListener('click', function () {

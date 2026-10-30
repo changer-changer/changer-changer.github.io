@@ -7,7 +7,7 @@
   <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
   <meta name="description" content="{{ meta_description }}">
   <meta name="author" content="{{ site.author | default: site.title }}">
-  <meta name="theme-color" content="#EDE9DC">
+  <meta name="theme-color" content="#111311">
   <link rel="canonical" href="{{ page.url | absolute_url }}">
   <meta property="og:site_name" content="{{ site.title }}">
   <meta property="og:title" content="{{ site.title }}">
@@ -18,8 +18,8 @@
     (function () {
       var root = document.documentElement;
       try {
-        var theme = localStorage.getItem('cz-theme');
-        if (theme) root.setAttribute('data-theme', theme);
+        var theme = localStorage.getItem('cz-theme') || 'dark';
+        root.setAttribute('data-theme', theme);
       } catch (e) {}
       root.classList.add('anim');
     })();
@@ -28,10 +28,11 @@
   <link rel="preload" href="{{ '/assets/fonts/instrument-serif-italic.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
   <link rel="stylesheet" href="{{ '/assets/css/home.css' | relative_url }}">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='50' fill='%23E0490F'/%3E%3Ctext x='50' y='62' text-anchor='middle' font-size='34' font-family='monospace' fill='%23FFF4E8'%3EC/C%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="{{ '/assets/css/monochrome.css' | relative_url }}">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='50' fill='%231b1d1b'/%3E%3Ctext x='50' y='62' text-anchor='middle' font-size='34' font-family='monospace' fill='%23f0f0e9'%3EC/C%3C/text%3E%3C/svg%3E">
 </head>
 <body class="site-shell page-kind-home">
-  <div class="home-glow" aria-hidden="true"></div>
+  <canvas id="particle-field" aria-hidden="true"></canvas>
   <a class="skip-link" href="#content">跳到正文</a>
 
   <nav class="navbar">
@@ -101,6 +102,7 @@
     </div>
   </footer>
 
+  <script src="{{ '/assets/js/particles.js' | relative_url }}" defer></script>
   <script>
     (function () {
       var nav = document.querySelector('.navbar');

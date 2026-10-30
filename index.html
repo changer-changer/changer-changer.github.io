@@ -1,107 +1,26 @@
 ---
 layout: home
-title: "崔之行 · The World I See"
-description: "瞳孔、月亮、陨石、太阳 —— 滚动进入我看见的世界。崔之行的博客。"
+title: "崔之行 · 思考与创造"
+description: "你好，我是崔之行。欢迎来到我的博客，记录技术、思考与成长。"
 ---
-
-{% assign latest = site.posts | limit: 5 %}
-
-<section class="home-hero">
-  <div class="container home-hero-inner">
-    <p class="eyebrow">CHANGER—CHANGER · FIELD NOTES</p>
-    <h1 class="home-hero-title">把看见的世界，<br>认真地写下来<em>。</em></h1>
-    <p class="home-hero-sub">
-      你好，我是崔之行。这里记录我在技术、认知与行动路上的长期思考——
-      靠近光，追随光，成为光。
-    </p>
-    <div class="home-hero-cta">
-      <a class="button primary" href="{{ '/archive/' | relative_url }}">开始阅读</a>
-      <a class="button secondary" href="{{ '/about/' | relative_url }}">关于我</a>
-    </div>
-  </div>
-</section>
-
-<section class="home-section">
-  <div class="container">
-    <div class="home-section-head">
-      <h2 class="home-section-title"><span class="idx">01</span>最新写作</h2>
-      <a class="quiet-link home-section-more" href="{{ '/archive/' | relative_url }}">全部文章 →</a>
-    </div>
-
-    {% assign feature = latest | first %}
-    {% assign rest = latest | slice: 1, 4 %}
-    <div class="home-feature">
-      <a class="home-card is-feature" href="{{ feature.url | relative_url }}">
-        <div class="card-meta">
-          <span class="card-cat">{{ feature.categories | join: ' / ' }}</span>
-          <span>{{ feature.date | date: "%Y.%m.%d" }}</span>
-        </div>
-        <h3>{{ feature.title }}</h3>
-        <p>{{ feature.description | default: feature.excerpt }}</p>
-        <span class="card-arrow">READ →</span>
-      </a>
-      <div class="home-list">
-        {% for post in rest %}
-        <a class="home-card" href="{{ post.url | relative_url }}">
-          <div class="card-meta">
-            <span class="card-cat">{{ post.categories | join: ' / ' }}</span>
-            <span>{{ post.date | date: "%Y.%m.%d" }}</span>
-          </div>
-          <h3>{{ post.title }}</h3>
-        </a>
-        {% endfor %}
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="home-section">
-  <div class="container">
-    <div class="home-section-head">
-      <h2 class="home-section-title"><span class="idx">02</span>探索这个博客</h2>
-      <a class="quiet-link home-section-more" href="{{ '/search/' | relative_url }}">搜索 →</a>
-    </div>
-    <div class="home-explore-grid">
-      <a class="home-explore-card" href="{{ '/theory/' | relative_url }}">
-        <span class="num">01</span>
-        <h3>思考</h3>
-        <p>长文与理论笔记，把问题想清楚的完整过程。</p>
-        <span class="go">THEORY →</span>
-      </a>
-      <a class="home-explore-card" href="{{ '/sparks/' | relative_url }}">
-        <span class="num">02</span>
-        <h3>火花</h3>
-        <p>一闪而过的念头与摘录，思维的运动轨迹。</p>
-        <span class="go">SPARKS →</span>
-      </a>
-      <a class="home-explore-card" href="{{ '/categories/' | relative_url }}">
-        <span class="num">03</span>
-        <h3>主题</h3>
-        <p>按主题浏览全部写作，找到你关心的那条线。</p>
-        <span class="go">TOPICS →</span>
-      </a>
-      <a class="home-explore-card" href="{{ '/resume/' | relative_url }}">
-        <span class="num">04</span>
-        <h3>履历</h3>
-        <p>我做过的事、写过的代码与走过的路。</p>
-        <span class="go">RESUME →</span>
-      </a>
-    </div>
-
-    {% assign first_post = site.posts | last %}
-    {% assign tag_count = site.tags | size %}
-    <div class="home-stats">
-      <div class="home-stat"><b>{{ site.posts | size }}<i>+</i></b><span>POSTS · 文章</span></div>
-      <div class="home-stat"><b>{{ site.categories | size }}</b><span>TOPICS · 主题</span></div>
-      <div class="home-stat"><b>{{ tag_count }}<i>+</i></b><span>TAGS · 标签</span></div>
-      <div class="home-stat"><b>{{ first_post.date | date: "%Y" }}<i>—</i></b><span>WRITING SINCE</span></div>
-    </div>
-  </div>
-</section>
-
-<section class="home-outro">
-  <div class="container">
-    <h2>Keep thinking,<br><em>in public.</em></h2>
-    <a class="button primary" href="{{ '/archive/' | relative_url }}">进入归档</a>
-  </div>
+<div class="particle-story" data-particle-source="{{ '/assets/particles/forms.json' | relative_url }}">
+  <section class="story-scene" id="hello">
+    <div class="story-copy"><p class="story-index">01 / HELLO, WORLD</p><h1>你好，<br>我是<span>崔之行。</span></h1><p class="story-lead">欢迎来到我的博客。<br>在这里，记录思考，也探索未来。</p><div class="story-links"><a href="{{ '/archive/' | relative_url }}">开始阅读 <span>↗</span></a><a href="{{ '/about/' | relative_url }}">关于我 <span>↗</span></a></div></div>
+    <div class="figure-space" data-figure="0"><img src="{{ '/assets/particles/form-0.webp' | relative_url }}" alt="" aria-hidden="true"><span>01 / MAGNETAR</span></div>
+    <div class="story-bottom"><span>THOUGHTS IN MOTION</span><a href="#thinking">向下探索 ↓</a><button type="button" id="particle-toggle" aria-pressed="true">暂停粒子 Ⅱ</button></div>
+  </section>
+  <section class="story-scene" id="thinking">
+    <div class="figure-space" data-figure="1"><img src="{{ '/assets/particles/form-1.webp' | relative_url }}" alt="" aria-hidden="true"><span>02 / THINKING</span></div>
+    <div class="story-copy"><p class="story-index">02 / NOTES ON THINKING</p><h2>在思考中，<br><span>塑造自己。</span></h2><p class="story-lead">我在这里记录每一点思考。<br>让零散的想法相遇，慢慢形成自己的理解。</p><div class="story-links"><a href="{{ '/theory/' | relative_url }}">进入思考图谱 <span>↗</span></a><a href="{{ '/sparks/' | relative_url }}">捕捉灵感 <span>↗</span></a></div></div>
+    <div class="story-bottom"><span>FORM / REFLECTION</span><a href="#future">继续向下 ↓</a></div>
+  </section>
+  <section class="story-scene" id="future">
+    <div class="story-copy"><p class="story-index">03 / EXPLORING INTELLIGENCE</p><h2>走近未知，<br><span>探索可能。</span></h2><p class="story-lead">关注人工智能，也关心技术如何改变我们。<br>在探索中保持好奇，在实践中寻找答案。</p><div class="story-links"><a href="{{ '/categories/' | relative_url }}">浏览所有主题 <span>↗</span></a><a href="{{ '/search/' | relative_url }}">搜索文章 <span>↗</span></a></div></div>
+    <div class="figure-space" data-figure="2"><img src="{{ '/assets/particles/form-2.webp' | relative_url }}" alt="" aria-hidden="true"><span>03 / INTELLIGENCE</span></div>
+    <div class="story-bottom"><span>IDEAS / POSSIBILITY</span><a href="#writing">查看文章 ↓</a></div>
+  </section>
+</div>
+<section class="journal" id="writing"><div class="journal-head"><div><p class="story-index">THE JOURNAL / RECENT WRITING</p><h2>最近的记录<span>。</span></h2></div><a href="{{ '/archive/' | relative_url }}">全部文章 ↗</a></div>
+  <div class="journal-list">{% for post in site.posts limit:6 %}<a class="journal-row" href="{{ post.url | relative_url }}"><span class="journal-date">{{ post.date | date: '%Y.%m.%d' }}</span><span class="journal-title">{{ post.title | escape }}</span><span class="journal-cat">{{ post.categories | first }}</span><span class="journal-arrow">↗</span></a>{% endfor %}</div>
+  <div class="journal-explore"><a href="{{ '/theory/' | relative_url }}"><small>01 / THINKING</small><strong>思考图谱</strong><span>从问题出发，建立联系 ↗</span></a><a href="{{ '/sparks/' | relative_url }}"><small>02 / SPARKS</small><strong>灵感火花</strong><span>收集那些转瞬即逝的念头 ↗</span></a><a href="{{ '/resume/' | relative_url }}"><small>03 / ABOUT</small><strong>了解我</strong><span>经历、项目与正在做的事 ↗</span></a></div>
 </section>
