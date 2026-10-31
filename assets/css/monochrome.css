@@ -14,3 +14,4 @@
 .article-starmap canvas { filter: grayscale(1); }
 html.anim [data-reveal]{opacity:1!important}
 .post-content table{display:block;overflow-x:auto}
+@media(max-width:760px){#future.story-scene{grid-template-rows:auto minmax(0,1fr);padding-top:calc(var(--nav-h) + 1rem)}#future .story-copy{align-self:start}#future .figure-space{height:min(34svh,300px);align-self:center}}
