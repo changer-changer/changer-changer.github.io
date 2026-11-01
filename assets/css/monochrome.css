@@ -88,3 +88,12 @@ html.anim [data-reveal]{opacity:1!important}
 @media(max-width:760px){#future .figure-space{width:100%;height:100%}#future .figure-space span{right:1.4rem;bottom:4rem}#future .story-copy::before{inset:-2rem -1.5rem;background:radial-gradient(ellipse at 28% 42%,rgba(11,13,11,.98),rgba(11,13,11,.9) 55%,transparent 90%)}}
 
 #future .figure-space{grid-area:1 / 1 / -1 / -1;align-self:stretch;justify-self:stretch}
+
+/* Pure white lines bend through the title; line density creates the tonal contrast. */
+#future .lens-title{width:min(100%,510px);margin:0;line-height:0}
+#future .lens-title svg{display:block;width:100%;height:auto;overflow:visible}
+#future .lens-glyph{font-family:var(--f-serif);font-size:88px;font-weight:900;letter-spacing:-2px}
+#future .lens-solid{fill:#fff}
+#future .lens-engraving{animation:lens-drift 18s ease-in-out infinite}
+@keyframes lens-drift{0%,100%{transform:translateX(-1.5px)}50%{transform:translateX(1.5px)}}
+@media(prefers-reduced-motion:reduce){#future .lens-engraving{animation:none}}
