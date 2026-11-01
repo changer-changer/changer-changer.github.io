@@ -30,7 +30,20 @@
         let flowX=(Math.sin(y*8+time*.23+p.z*2)+.5*Math.sin((x+y)*9-time*.2+p.seed*4))*.095;
         let flowY=(Math.cos(x*7-time*.21+p.z*3)+.5*Math.cos((y-x)*8+time*.18+p.seed*5))*.08;
         if(own>.001){tx=0;ty=0;for(let j=0;j<3;j++){let t=p.targets[j],r=rects[j],xx=t.x,yy=t.y;
-          if(j===2){let scale=w<=760?1.85:1;xx=w<=760?.5+(xx-.685)*scale:xx;yy=(w<=760?.58:.5)+(yy-.5)*(r.width/r.height)*scale/(2.4*.667);xx+=.0015*Math.sin(time*.14+yy*5);yy+=.001*Math.sin(time*.12+xx*5)}
+          if(j===2){
+            // Circular Keplerian orbits, projected as an inclined disc. The original
+            // image supplies the luminous structure; this is not GR ray tracing.
+            let scale=w<=760?1.85:1, cx=w<=760?.5:.685, cy=w<=760?.58:.5;
+            xx=w<=760?.5+(xx-.685)*scale:xx;
+            yy=cy+(yy-.5)*(r.width/r.height)*scale/(2.4*.667);
+            let ox=(xx-cx)*r.width, oy=(yy-cy)*r.height/.66;
+            let orbitalRadius=Math.max(.16,Math.hypot(ox,oy)/Math.min(w,h));
+            let orbit=time*.065/Math.pow(.45+orbitalRadius,1.5);
+            let cs=Math.cos(orbit),sn=Math.sin(orbit);
+            xx=cx+(ox*cs-oy*sn)/r.width;
+            yy=cy+(ox*sn+oy*cs)*.66/r.height;
+            p.orbit=orbit;
+          }
           tx+=(r.left+xx*r.width)/w*mix[j];ty+=(r.top+yy*r.height)/h*mix[j];}tx=clamp(tx);ty=clamp(ty);}
         let dx=x-mouse.x,dy=y-mouse.y,dist=Math.sqrt(dx*dx+(dy*h/w)**2),repel=mouse.active&&dist<.11?(1-dist/.11)*.035:0;
         let edgeX=x<.02?(.02-x)*1.4:x>.98?(.98-x)*1.4:0,edgeY=y<.02?(.02-y)*1.4:y>.98?(.98-y)*1.4:0;
@@ -42,7 +55,7 @@
       let growth=clamp((lineAmount-.24)/.65);growth=growth*growth*(3-2*growth);
       ctx.beginPath();
       if(growth>.005){
-        const t=p.targets[2], angle=t.angle+.055*Math.sin(time*.13+t.phase), length=t.length*Math.min(w,h)/800*growth,dx=Math.cos(angle)*length*.5,dy=Math.sin(angle)*length*.5;
+        const t=p.targets[2], angle=t.angle+(p.orbit||0)+.055*Math.sin(time*.13+t.phase), length=t.length*Math.min(w,h)/800*growth,dx=Math.cos(angle)*length*.5,dy=Math.sin(angle)*length*.5;
         ctx.strokeStyle=tone;ctx.lineWidth=radius*2*(1-growth)+(.35+flowLight*.95)*growth;ctx.lineCap='round';ctx.moveTo(p.x*w-dx,p.y*h-dy);ctx.lineTo(p.x*w+dx,p.y*h+dy);ctx.stroke();
       }else{ctx.fillStyle=tone;ctx.arc(p.x*w,p.y*h,radius,0,Math.PI*2);ctx.fill();}
     }
