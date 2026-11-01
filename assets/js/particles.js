@@ -38,7 +38,7 @@
         if(p.x<.002){p.x=.002;p.vx=Math.abs(p.vx)*.65}else if(p.x>.998){p.x=.998;p.vx=-Math.abs(p.vx)*.65}if(p.y<.002){p.y=.002;p.vy=Math.abs(p.vy)*.65}else if(p.y>.998){p.y=.998;p.vy=-Math.abs(p.vy)*.65}
       }
       const homeAmount=strength*mix[0], dnaAmount=strength*mix[2], homeLight=p.targets[0].v, dnaLight=p.targets[2].v, alpha=p.alpha*(1-homeAmount-dnaAmount)+(Math.pow(homeLight,.45)*.95)*homeAmount+(.04+dnaLight*.7)*dnaAmount, radius=p.radius*(1-homeAmount-dnaAmount)+(.45+homeLight*1.65)*homeAmount+(.25+dnaLight*.8)*dnaAmount;
-      const base=document.documentElement.getAttribute('data-theme')==='light'?20:229, shade=Math.round(20*heroLight+base*(1-heroLight));ctx.fillStyle=`rgba(${shade},${shade},${shade},${alpha})`;ctx.beginPath();ctx.arc(p.x*w,p.y*h,radius,0,Math.PI*2);ctx.fill();
+      const shade=Math.round(20*heroLight+229*(1-heroLight));ctx.fillStyle=`rgba(${shade},${shade},${shade},${alpha})`;ctx.beginPath();ctx.arc(p.x*w,p.y*h,radius,0,Math.PI*2);ctx.fill();
     }
     frame=requestAnimationFrame(draw);
   }

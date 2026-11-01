@@ -32,3 +32,11 @@ html.anim [data-reveal]{opacity:1!important}
 @media(prefers-reduced-motion:reduce){#hello .figure-space img{filter:none!important}}
 
 #hello .figure-space img{filter:none!important}
+/* The narrative stays dark after the opening, even with the light reading theme. */
+.page-kind-home{background:#0b0d0b}
+#thinking .story-copy,#future .story-copy{color:#f0f1eb}
+#thinking .story-lead,#future .story-lead{color:#d5dad1}
+#thinking .story-index,#future .story-index,#thinking .story-copy h2 span,#future .story-copy h2 span,#thinking .story-bottom,#future .story-bottom,#thinking .figure-space span,#future .figure-space span{color:#a9b0a6}
+#thinking .story-bottom,#future .story-bottom{border-color:#333a32}
+.page-kind-home:not(.hero-bright) .navbar{--paper:#0b0d0b;--ink:#f0f1eb;--muted:#a9b0a6;--line:#333a32;color:#f0f1eb;background:#0b0d0b}
+#thinking .figure-space img,#future .figure-space img{filter:none!important}
