@@ -40,3 +40,19 @@ html.anim [data-reveal]{opacity:1!important}
 #thinking .story-bottom,#future .story-bottom{border-color:#333a32}
 .page-kind-home:not(.hero-bright) .navbar{--paper:#0b0d0b;--ink:#f0f1eb;--muted:#a9b0a6;--line:#333a32;color:#f0f1eb;background:#0b0d0b}
 #thinking .figure-space img,#future .figure-space img{filter:none!important}
+
+/* Opening inscription: real selectable text with fine engraved outlines. */
+.page-kind-home .home-wordmark{font-family:"Songti SC","STSong",serif;font-weight:600;font-size:1rem;letter-spacing:.12em;white-space:nowrap}
+.page-kind-home .home-wordmark small{font:500 .55rem var(--f-mono);letter-spacing:.1em;margin-left:.55rem;color:var(--muted)}
+#hello .hero-inscription{max-width:560px}
+#hello .inscription-kicker{font:400 .77rem/1.5 "Songti SC","STSong",serif;letter-spacing:.22em;color:#5b645a;margin:0 0 clamp(2.8rem,6vh,5rem)}
+#hello .inscription-kicker span{padding:0 .45rem;color:#a0a9a0}
+#hello .hero-inscription h1{font-family:"Songti SC","STSong","Noto Serif SC",serif;font-weight:400;font-size:clamp(2.7rem,4.6vw,5.15rem);letter-spacing:.035em;line-height:1.42}
+#hello .hero-inscription h1 span{display:block;color:#303630}
+#hello .hero-inscription h1 .inscription-greeting{font-size:.68em;letter-spacing:.15em;margin-bottom:.1em}
+@supports (-webkit-text-stroke:1px #222){#hello .hero-inscription h1 span{color:transparent;-webkit-text-stroke:.85px #252a25;paint-order:stroke fill}}
+#hello .inscription-intro{font-family:"Songti SC","STSong",serif;font-size:clamp(.9rem,1vw,1.05rem);letter-spacing:.08em;line-height:2.1;color:#4e554e;margin-top:clamp(2rem,5vh,3.8rem)}
+#hello .inscription-links{margin-top:2.3rem;gap:2.3rem}
+#hello .inscription-links a{font-size:.8rem;letter-spacing:.08em;padding-bottom:.7rem;border-color:#9ba399}
+#hello .inscription-links a span{margin-left:1.4rem}
+@media(max-width:760px){.page-kind-home .home-wordmark small{display:none}#hello .inscription-kicker{margin-bottom:1.4rem;font-size:.7rem}#hello .hero-inscription h1{font-size:clamp(2.25rem,9vw,3.7rem);line-height:1.35}#hello .hero-inscription h1 .inscription-greeting{font-size:.72em}#hello .inscription-intro{font-size:.86rem;margin-top:1.1rem;line-height:1.9}#hello .inscription-links{margin-top:1rem}}
