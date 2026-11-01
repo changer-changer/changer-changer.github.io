@@ -27,6 +27,16 @@
     };
     source.src=figures[2].querySelector('img').src;
   }
+  const fieldW=80, fieldH=48, rawField=new Float32Array(fieldW*fieldH), densityField=new Float32Array(fieldW*fieldH);
+  function sampleDensity(x,y){
+    const fx=Math.max(0,Math.min(fieldW-1,x/w*(fieldW-1)));
+    const fy=Math.max(0,Math.min(fieldH-1,y/h*(fieldH-1)));
+    const x0=Math.floor(fx),y0=Math.floor(fy),x1=Math.min(x0+1,fieldW-1),y1=Math.min(y0+1,fieldH-1);
+    const tx=fx-x0,ty=fy-y0;
+    const a=densityField[y0*fieldW+x0]*(1-tx)+densityField[y0*fieldW+x1]*tx;
+    const b=densityField[y1*fieldW+x0]*(1-tx)+densityField[y1*fieldW+x1]*tx;
+    return Math.min(1,a*(1-ty)+b*ty);
+  }
   let w, h, points = [], active = -1, releaseUntil = 0, time = 0, last = performance.now(), enabled = true, frame;
   const weights = [0,0,0], mouse = {x:.5,y:.5,active:false}; let mx=.5, my=.5;
   function resize(){ w=innerWidth; h=innerHeight; const d=Math.min(devicePixelRatio || 1, 1.5); canvas.width=w*d; canvas.height=h*d; canvas.style.width=w+'px'; canvas.style.height=h+'px'; ctx.setTransform(d,0,0,d,0,0); }
@@ -50,7 +60,8 @@
         const lum=u>=0&&u<160&&v>=0&&v<90?lensLight[(v*160+u)*4]/255:0;
         const envelope=Math.exp(-Math.pow((d-1.05)*1.4,2));
         const push=(ny===0?0:Math.sign(ny))*ry*.30*envelope*(.8+.2*lum);
-        const ripple=Math.sin(nx*3.5-time*.16+y*.018)*lum*2.1*envelope;
+        const density=sampleDensity(x,y);
+        const ripple=(density-.16)*gap*1.5*envelope;
         const yy=y+push+ripple;
         if(d<.76){open=false;continue;}
         if(!open){ctx.moveTo(x,yy);open=true}else ctx.lineTo(x,yy);
@@ -60,11 +71,12 @@
       ctx.beginPath(); open=false;
       for(let x=cx-rx*1.8;x<=cx+rx*1.8;x+=step){
         const nx=(x-cx)/rx, ny=(y-cy)/ry, d=Math.hypot(nx,ny);
-        if(d<.82 || d>1.28){open=false;continue;}
+        const density=sampleDensity(x,y);
+        if(d<.80 || d>1.8 || density<.14){open=false;continue;}
         const u=Math.round(80+(x-cx)/(rx*2.6)*80), v=Math.round(45+(y-cy)/(ry*3.2)*45);
         const lum=u>=0&&u<160&&v>=0&&v<90?lensLight[(v*160+u)*4]/255:0;
         const envelope=Math.exp(-Math.pow((d-1.05)*1.4,2));
-        const yy=y+(ny===0?0:Math.sign(ny))*ry*.30*envelope*(.8+.2*lum)+Math.sin(nx*3.5-time*.16+y*.018)*lum*2.1*envelope;
+        const yy=y+(ny===0?0:Math.sign(ny))*ry*.30*envelope*(.8+.2*lum)+(density-.16)*gap*1.5*envelope;
         if(!open){ctx.moveTo(x,yy);open=true}else ctx.lineTo(x,yy);
       }
       ctx.strokeStyle=`rgba(250,250,247,${amount*.46})`;ctx.stroke();
@@ -78,13 +90,14 @@
     if(enabled){if(active>=0&&active!==desired){weights[active]=0;active=-1;releaseUntil=time+.85} if(active<0&&desired>=0&&time>=releaseUntil)active=desired; if(active>=0)weights[active]+=(raw[active]-weights[active])*(1-Math.exp(-dt*1.15));}
     const strength=Math.min(1,weights.reduce((a,b)=>a+b,0)), mix=weights.map(v=>strength>0?v/strength:0);
     mx+=(mouse.x-mx)*.035; my+=(mouse.y-my)*.035; ctx.clearRect(0,0,w,h);
+    if(stripeMode) rawField.fill(0);
     for(const p of points){
       if(enabled && active===2 && orbitMap){
         // Timelike Schwarzschild geodesic in proper time (G = c = M = 1).
         // The material starts slightly below circular angular momentum, so it
         // spirals inward. At the inner edge it rejoins the continuous flow.
         let r=p.orbitR, L=p.orbitL, factor=Math.max(0,1-2/r)/p.orbitE;
-        let dTau=dt*8*factor;
+        let dTau=dt*(stripeMode?14:8)*factor;
         const gravity=rr=>-1/(rr*rr)+L*L/(rr*rr*rr)-3*L*L/(rr*rr*rr*rr);
         p.orbitVr+=gravity(r)*dTau*.5; p.orbitR+=p.orbitVr*dTau;
         p.orbitPhi+=L/(r*r)*dTau; p.orbitVr+=gravity(Math.max(5.9,p.orbitR))*dTau*.5;
@@ -113,13 +126,18 @@
         let damp=Math.exp(-(1.4+own*4.2)*dt); p.vx=(p.vx+(flowX*(1-own*.94)+(tx-x)*own*10+edgeX+dx*repel)*dt)*damp;p.vy=(p.vy+(flowY*(1-own*.94)+(ty-y)*own*10+edgeY+dy*repel)*dt)*damp;p.x+=p.vx*dt;p.y+=p.vy*dt;
         if(p.x<.002){p.x=.002;p.vx=Math.abs(p.vx)*.65}else if(p.x>.998){p.x=.998;p.vx=-Math.abs(p.vx)*.65}if(p.y<.002){p.y=.002;p.vy=Math.abs(p.vy)*.65}else if(p.y>.998){p.y=.998;p.vy=-Math.abs(p.vy)*.65}
       }
+      if(stripeMode && active===2){
+        const fx=Math.max(0,Math.min(fieldW-1,Math.round(p.x*(fieldW-1))));
+        const fy=Math.max(0,Math.min(fieldH-1,Math.round(p.y*(fieldH-1))));
+        rawField[fy*fieldW+fx]+=.3+p.targets[2].v;
+      }
       const disk=p.targets[2], diskR=disk.diskR||10, diskPhi=disk.diskPhi||0;
       // Circular orbital angular velocity in Schwarzschild coordinate time, M=1.
       const phiNow=p.orbitPhi;
       const diskTexture=phi=>.55+.25*Math.sin(3*phi+2.1*Math.log(diskR))+.2*Math.sin(11*phi-1.8*diskR);
       const illumination=Math.min(1.25,Math.max(.15,diskTexture(phiNow)/Math.max(.25,diskTexture(diskPhi))));
       const homeAmount=strength*mix[0], lineAmount=strength*mix[2], homeLight=p.targets[0].v, flowLight=Math.min(1,disk.v*illumination), alpha=p.alpha*(1-homeAmount-lineAmount)+(Math.pow(homeLight,.45)*.95)*homeAmount+(.13+flowLight*.82)*lineAmount, radius=p.radius*(1-homeAmount-lineAmount)+(.45+homeLight*1.65)*homeAmount+(.35+flowLight*.7)*lineAmount;
-      const shade=Math.round(20*heroLight+229*(1-heroLight)),visibleAlpha=alpha*(stripeMode?1-lineAmount:1),tone=`rgba(${shade},${shade},${shade},${visibleAlpha})`;
+      const shade=Math.round(20*heroLight+229*(1-heroLight)),visibleAlpha=alpha*(stripeMode&&active===2?0:1),tone=`rgba(${shade},${shade},${shade},${visibleAlpha})`;
       let growth=clamp((lineAmount-.24)/.65);growth=growth*growth*(3-2*growth);
       ctx.beginPath();
       if(growth>.005 && !dotOnly){
@@ -134,7 +152,19 @@
         ctx.strokeStyle=tone;ctx.lineWidth=radius*2*(1-growth)+(.42+flowLight*.8)*growth;ctx.lineCap='round';ctx.moveTo(p.x*w-dx,p.y*h-dy);ctx.lineTo(p.x*w+dx,p.y*h+dy);ctx.stroke();
       }else{ctx.fillStyle=tone;ctx.arc(p.x*w,p.y*h,radius,0,Math.PI*2);ctx.fill();}
     }
-    if(stripeMode) drawStripes(strength*mix[2],rects[2]);
+    if(stripeMode && active===2){
+      // Smooth the projected moving matter into a density field; no particles
+      // are drawn in this mode. Lines respond to that evolving field.
+      for(let fy=0;fy<fieldH;fy++) for(let fx=0;fx<fieldW;fx++){
+        let sum=0, count=0;
+        for(let dy=-2;dy<=2;dy++) for(let dx=-2;dx<=2;dx++){
+          const x=fx+dx,y=fy+dy;
+          if(x>=0&&x<fieldW&&y>=0&&y<fieldH){sum+=rawField[y*fieldW+x];count++;}
+        }
+        densityField[fy*fieldW+fx]=Math.min(1,sum/count/2.4);
+      }
+      drawStripes(strength*mix[2],rects[2]);
+    }
     frame=requestAnimationFrame(draw);
   }
   if(button) button.addEventListener('click',()=>{enabled=!enabled;last=performance.now();button.textContent=enabled?'暂停粒子 Ⅱ':'播放粒子 ▶';button.setAttribute('aria-pressed',String(enabled));});
