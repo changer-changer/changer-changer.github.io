@@ -50,53 +50,55 @@
     const mobile=w<=760, cx=rect.left+(mobile?.5:.685)*rect.width;
     const cy=rect.top+(mobile?.58:.5)*rect.height;
     const rx=Math.min(w*(mobile?.30:.18),h*.31), ry=rx*.64;
-    const gap=mobile?14:15, step=mobile?6:9;
-    ctx.lineWidth=mobile?.72:.85; ctx.lineCap='round';
+    const gap=mobile?14:15, step=mobile?4:6;
+    const surfaceY=(x,y)=>{
+      const nx=(x-cx)/rx, ny=(y-cy)/ry, d=Math.hypot(nx,ny);
+      const u=Math.round(80+(x-cx)/(rx*2.6)*80), v=Math.round(45+(y-cy)/(ry*3.2)*45);
+      const lum=u>=0&&u<160&&v>=0&&v<90?lensLight[(v*160+u)*4]/255:0;
+      const envelope=Math.exp(-Math.pow((d-1.05)*1.4,2));
+      const push=(ny===0?0:Math.sign(ny))*ry*.30*envelope*(.8+.2*lum);
+      const ripple=(sampleDensity(x,y)-.16)*gap*1.5*envelope + Math.sin(d*7-time*.58)*3*envelope;
+      return y+push+ripple;
+    };
+    ctx.lineWidth=mobile?.72:.85;ctx.lineCap='round';ctx.lineJoin='round';
     for(let y=-gap;y<h+gap;y+=gap){
-      ctx.beginPath(); let open=false;
-      for(let x=-step;x<=w+step;x+=step){
-        const nx=(x-cx)/rx, ny=(y-cy)/ry, d=Math.hypot(nx,ny);
-        const u=Math.round(80+(x-cx)/(rx*2.6)*80), v=Math.round(45+(y-cy)/(ry*3.2)*45);
-        const lum=u>=0&&u<160&&v>=0&&v<90?lensLight[(v*160+u)*4]/255:0;
-        const envelope=Math.exp(-Math.pow((d-1.05)*1.4,2));
-        const push=(ny===0?0:Math.sign(ny))*ry*.30*envelope*(.8+.2*lum);
-        const density=sampleDensity(x,y);
-        const ripple=(density-.16)*gap*1.5*envelope+Math.sin(d*7-time*.42)*2*envelope;
-        const yy=y+push+ripple;
-        if(d<.76){open=false;continue;}
-        if(!open){ctx.moveTo(x,yy);open=true}else ctx.lineTo(x,yy);
+      const ny=(y-cy)/ry;
+      const cuts=Math.abs(ny)<.76;
+      const span=cuts?rx*Math.sqrt(Math.max(0,.76*.76-ny*ny)):0;
+      const left=cx-span, right=cx+span;
+      ctx.beginPath();
+      ctx.moveTo(-step,surfaceY(-step,y));
+      if(cuts){
+        for(let x=0;x<left;x+=step)ctx.lineTo(x,surfaceY(x,y));
+        const leftY=surfaceY(left,y), rightY=surfaceY(right,y);
+        ctx.lineTo(left,leftY);
+        const depth=cy+ry*1.6, endX=cx+(y-cy)*.13, endY=depth+(y-cy)*.06;
+        ctx.bezierCurveTo(left+span*.48,leftY,cx-span*.18,endY-ry*.10,endX,endY);
+        ctx.moveTo(endX,endY);
+        ctx.bezierCurveTo(cx+span*.18,endY-ry*.10,right-span*.48,rightY,right,rightY);
+        for(let x=right+step;x<=w+step;x+=step)ctx.lineTo(x,surfaceY(x,y));
+      }else{
+        // Bend the far-side lines beneath the throat without breaking them.
+        const depth=cy+ry*1.6, behind=y>cy+ry*.76 && y<depth;
+        for(let x=0;x<=w+step;x+=step){
+          let yy=surfaceY(x,y);
+          if(behind){const bend=Math.exp(-Math.pow((x-cx)/(rx*.6),2));yy+=bend*Math.max(0,depth+gap-yy);}
+          ctx.lineTo(x,yy);
+        }
       }
-      ctx.strokeStyle=`rgba(242,244,239,${amount*.48})`;ctx.stroke();
-      // The two cut edges fall toward a lower vanishing point. This is an
-      // illustrative embedding diagram, not a literal direction in spacetime.
-      const wellY=(y-cy)/ry;
-      if(Math.abs(wellY)<.75){
-        const span=rx*Math.sqrt(Math.max(0,.76*.76-wellY*wellY));
-        const edgeY=y+(wellY===0?0:Math.sign(wellY))*ry*.30;
-        const depth=cy+ry*1.6;
-        const spread=(y-cy)*.14;
-        ctx.beginPath();
-        ctx.moveTo(cx-span,edgeY);
-        ctx.bezierCurveTo(cx-span*.65,edgeY,cx-span*.12,depth-ry*.08,cx+spread,depth);
-        ctx.moveTo(cx+span,edgeY);
-        ctx.bezierCurveTo(cx+span*.65,edgeY,cx+span*.12,depth-ry*.08,cx+spread,depth);
-        ctx.strokeStyle=`rgba(242,244,239,${amount*.30})`;ctx.stroke();
-      }
-      // A second, brighter pass is limited to the lensed rim.
-      ctx.beginPath(); open=false;
+      ctx.strokeStyle=`rgba(242,244,239,${amount*.46})`;ctx.stroke();
+      // Highlights follow the same surface, never a separate geometry.
+      ctx.beginPath();let open=false;
       for(let x=cx-rx*1.8;x<=cx+rx*1.8;x+=step){
-        const nx=(x-cx)/rx, ny=(y-cy)/ry, d=Math.hypot(nx,ny);
-        const density=sampleDensity(x,y);
-        if(d<.80 || d>1.8 || density<.14){open=false;continue;}
-        const u=Math.round(80+(x-cx)/(rx*2.6)*80), v=Math.round(45+(y-cy)/(ry*3.2)*45);
-        const lum=u>=0&&u<160&&v>=0&&v<90?lensLight[(v*160+u)*4]/255:0;
-        const envelope=Math.exp(-Math.pow((d-1.05)*1.4,2));
-        const yy=y+(ny===0?0:Math.sign(ny))*ry*.30*envelope*(.8+.2*lum)+(density-.16)*gap*1.5*envelope+Math.sin(d*7-time*.42)*2*envelope;
+        const d=Math.hypot((x-cx)/rx,(y-cy)/ry), density=sampleDensity(x,y);
+        if(d<.8 || d>1.8 || density<.14 || (y>cy+ry*.76 && y<cy+ry*1.6)){open=false;continue;}
+        const yy=surfaceY(x,y);
         if(!open){ctx.moveTo(x,yy);open=true}else ctx.lineTo(x,yy);
       }
-      ctx.strokeStyle=`rgba(250,250,247,${amount*.46})`;ctx.stroke();
+      ctx.strokeStyle=`rgba(250,250,247,${amount*.34})`;ctx.stroke();
     }
   }
+
   function draw(now){
     const dt=Math.min(.04,Math.max(0,(now-last)/1000)); last=now; if(enabled) time+=dt;
     const rects=figures.map(x=>x.getBoundingClientRect());
