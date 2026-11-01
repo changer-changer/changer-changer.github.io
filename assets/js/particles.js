@@ -11,7 +11,7 @@
   const ctx = canvas.getContext('2d'); if (!ctx) return;
   const clamp = n => Math.max(0, Math.min(1, n));
   const style = new URLSearchParams(location.search).get('style');
-  const dotOnly = style === 'dots', stripeMode = style === 'stripes';
+  const dotOnly = style === 'dots', stripeMode = style !== 'dots' && style !== 'particles';
   const random = n => { const x = Math.sin(n * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
   let orbitMap = null;
   const orbitImage = new Image();
@@ -61,12 +61,27 @@
         const envelope=Math.exp(-Math.pow((d-1.05)*1.4,2));
         const push=(ny===0?0:Math.sign(ny))*ry*.30*envelope*(.8+.2*lum);
         const density=sampleDensity(x,y);
-        const ripple=(density-.16)*gap*1.5*envelope;
+        const ripple=(density-.16)*gap*1.5*envelope+Math.sin(d*7-time*.42)*2*envelope;
         const yy=y+push+ripple;
         if(d<.76){open=false;continue;}
         if(!open){ctx.moveTo(x,yy);open=true}else ctx.lineTo(x,yy);
       }
       ctx.strokeStyle=`rgba(242,244,239,${amount*.48})`;ctx.stroke();
+      // The two cut edges fall toward a lower vanishing point. This is an
+      // illustrative embedding diagram, not a literal direction in spacetime.
+      const wellY=(y-cy)/ry;
+      if(Math.abs(wellY)<.75){
+        const span=rx*Math.sqrt(Math.max(0,.76*.76-wellY*wellY));
+        const edgeY=y+(wellY===0?0:Math.sign(wellY))*ry*.30;
+        const depth=cy+ry*1.6;
+        const spread=(y-cy)*.14;
+        ctx.beginPath();
+        ctx.moveTo(cx-span,edgeY);
+        ctx.bezierCurveTo(cx-span*.65,edgeY,cx-span*.12,depth-ry*.08,cx+spread,depth);
+        ctx.moveTo(cx+span,edgeY);
+        ctx.bezierCurveTo(cx+span*.65,edgeY,cx+span*.12,depth-ry*.08,cx+spread,depth);
+        ctx.strokeStyle=`rgba(242,244,239,${amount*.30})`;ctx.stroke();
+      }
       // A second, brighter pass is limited to the lensed rim.
       ctx.beginPath(); open=false;
       for(let x=cx-rx*1.8;x<=cx+rx*1.8;x+=step){
@@ -76,7 +91,7 @@
         const u=Math.round(80+(x-cx)/(rx*2.6)*80), v=Math.round(45+(y-cy)/(ry*3.2)*45);
         const lum=u>=0&&u<160&&v>=0&&v<90?lensLight[(v*160+u)*4]/255:0;
         const envelope=Math.exp(-Math.pow((d-1.05)*1.4,2));
-        const yy=y+(ny===0?0:Math.sign(ny))*ry*.30*envelope*(.8+.2*lum)+(density-.16)*gap*1.5*envelope;
+        const yy=y+(ny===0?0:Math.sign(ny))*ry*.30*envelope*(.8+.2*lum)+(density-.16)*gap*1.5*envelope+Math.sin(d*7-time*.42)*2*envelope;
         if(!open){ctx.moveTo(x,yy);open=true}else ctx.lineTo(x,yy);
       }
       ctx.strokeStyle=`rgba(250,250,247,${amount*.46})`;ctx.stroke();
@@ -107,6 +122,7 @@
         let flowX=(Math.sin(y*8+time*.23+p.z*2)+.5*Math.sin((x+y)*9-time*.2+p.seed*4))*.095;
         let flowY=(Math.cos(x*7-time*.21+p.z*3)+.5*Math.cos((y-x)*8+time*.18+p.seed*5))*.08;
         if(own>.001){tx=0;ty=0;for(let j=0;j<3;j++){let t=p.targets[j],r=rects[j],xx=t.x,yy=t.y;
+          if(j===1 && w<=760){xx=.5+(xx-.5)*.84;yy=.5+(yy-.5)*.84;}
           if(j===2){
             let scale=w<=760?1.85:1;
             if(orbitMap){
@@ -130,6 +146,7 @@
         const fx=Math.max(0,Math.min(fieldW-1,Math.round(p.x*(fieldW-1))));
         const fy=Math.max(0,Math.min(fieldH-1,Math.round(p.y*(fieldH-1))));
         rawField[fy*fieldW+fx]+=.3+p.targets[2].v;
+        continue;
       }
       const disk=p.targets[2], diskR=disk.diskR||10, diskPhi=disk.diskPhi||0;
       // Circular orbital angular velocity in Schwarzschild coordinate time, M=1.

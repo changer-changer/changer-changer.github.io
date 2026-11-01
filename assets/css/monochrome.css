@@ -97,3 +97,18 @@ html.anim [data-reveal]{opacity:1!important}
 #future .lens-engraving{animation:lens-drift 18s ease-in-out infinite}
 @keyframes lens-drift{0%,100%{transform:translateX(-1.5px)}50%{transform:translateX(1.5px)}}
 @media(prefers-reduced-motion:reduce){#future .lens-engraving{animation:none}}
+
+/* Reading comfort and touch targets across the four home sections. */
+@media(max-width:760px){
+  .story-links a{min-height:44px;display:inline-flex;align-items:center}
+  .journal-title{line-height:1.6;overflow-wrap:anywhere}
+  .journal-row{padding:1.55rem 0}
+  .journal-head>a{min-height:44px;display:inline-flex;align-items:center}
+  #thinking .figure-space span{bottom:5%}
+}
+@media(max-width:360px){
+  .story-scene{padding-inline:1.1rem}
+  .story-links{gap:1rem}
+  #future .lens-title{max-width:100%}
+  #future .story-index{font-size:.58rem;letter-spacing:.1em}
+}
