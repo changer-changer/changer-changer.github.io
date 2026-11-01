@@ -78,3 +78,14 @@ html.anim [data-reveal]{opacity:1!important}
 }
 @media(max-width:760px){@supports ((-webkit-background-clip:text) or (background-clip:text)){#hello .hero-inscription h1 span{-webkit-text-stroke:0 transparent;background-image:repeating-linear-gradient(180deg,#202520 0,#202520 1px,transparent 1px,transparent 2.3px)}}}
 @media(max-width:760px){@supports ((-webkit-background-clip:text) or (background-clip:text)){#hello .hero-inscription h1 span{background-image:repeating-linear-gradient(180deg,#202520 0,#202520 1.25px,transparent 1.25px,transparent 2px)}}}
+
+/* Quiet comparison controls for the two ink studies. */
+#hello .art-switch{display:flex;align-items:center;gap:.45rem;margin-top:2rem;font-size:.7rem;letter-spacing:.04em;color:#687068}
+#hello .art-switch[hidden]{display:none}
+#hello .art-switch>span{margin-right:.45rem}
+#hello .art-switch button{padding:.27rem .7rem;border:1px solid #abb2a9;border-radius:1rem;color:#586158;transition:background .2s,color .2s}
+#hello .art-switch button[aria-pressed="true"]{background:#252d27;border-color:#252d27;color:#f0f0eb}
+#hello .figure-space span{font-size:.57rem;letter-spacing:.05em}
+@media(max-width:760px){#hello .art-switch{margin-top:.9rem;font-size:.65rem}#hello .figure-space span{bottom:3%;font-size:.5rem}}
+#hello .figure-space span{font-size:.65rem}
+@media(max-width:760px){#hello .figure-space{height:min(37svh,350px)}#hello .figure-space span{font-size:.56rem}}
