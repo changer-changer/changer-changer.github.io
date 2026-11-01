@@ -69,3 +69,12 @@ html.anim [data-reveal]{opacity:1!important}
 }
 @media(max-width:760px){@supports ((-webkit-background-clip:text) or (background-clip:text)){#hello .hero-inscription h1 span{-webkit-text-stroke:.45px rgba(27,32,27,.85);background-image:repeating-linear-gradient(165deg,#272e28 0,#272e28 1px,transparent 1px,transparent 2.2px)}}}
 #hello .hero-inscription h1{font-family:'Noto Serif SC','Songti SC','STSong',serif;font-weight:900}
+/* Characters are formed only by horizontal engraving lines. */
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  #hello .hero-inscription h1 span{
+    -webkit-text-stroke:0 transparent;
+    background-image:repeating-linear-gradient(180deg,#202520 0,#202520 1.2px,transparent 1.2px,transparent 3px);
+  }
+}
+@media(max-width:760px){@supports ((-webkit-background-clip:text) or (background-clip:text)){#hello .hero-inscription h1 span{-webkit-text-stroke:0 transparent;background-image:repeating-linear-gradient(180deg,#202520 0,#202520 1px,transparent 1px,transparent 2.3px)}}}
+@media(max-width:760px){@supports ((-webkit-background-clip:text) or (background-clip:text)){#hello .hero-inscription h1 span{background-image:repeating-linear-gradient(180deg,#202520 0,#202520 1.25px,transparent 1.25px,transparent 2px)}}}
