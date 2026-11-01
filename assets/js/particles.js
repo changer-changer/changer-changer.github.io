@@ -102,7 +102,7 @@
   function draw(now){
     const dt=Math.min(.04,Math.max(0,(now-last)/1000)); last=now; if(enabled) time+=dt;
     const rects=figures.map(x=>x.getBoundingClientRect());
-    const raw=rects.map((r,j)=>{let anchor=j===2?.5:(w<=760?.70:.5);let dist=Math.abs((r.top+r.bottom)/2-h*anchor)/h;let u=clamp((.36-dist)/.20);return u*u*(3-2*u)});
+    const raw=rects.map((r,j)=>{if(j===2)return 0;let anchor=j===2?.5:(w<=760?.70:.5);let dist=Math.abs((r.top+r.bottom)/2-h*anchor)/h;let u=clamp((.36-dist)/.20);return u*u*(3-2*u)});
     let desired=raw.indexOf(Math.max(...raw)); if(raw[desired]<.015) desired=-1;
     if(enabled){if(active>=0&&active!==desired){weights[active]=0;active=-1;releaseUntil=time+.85} if(active<0&&desired>=0&&time>=releaseUntil)active=desired; if(active>=0)weights[active]+=(raw[active]-weights[active])*(1-Math.exp(-dt*1.15));}
     const strength=Math.min(1,weights.reduce((a,b)=>a+b,0)), mix=weights.map(v=>strength>0?v/strength:0);
@@ -121,8 +121,15 @@
         if(p.orbitR<6.01){ p.orbitR=p.targets[2].diskR; p.orbitPhi=p.targets[2].diskPhi; p.orbitVr=-.008; }
       }
       if(enabled){let x=p.x,y=p.y,own=strength,tx=x,ty=y;
-        let flowX=(Math.sin(y*8+time*.23+p.z*2)+.5*Math.sin((x+y)*9-time*.2+p.seed*4))*.095;
-        let flowY=(Math.cos(x*7-time*.21+p.z*3)+.5*Math.cos((y-x)*8+time*.18+p.seed*5))*.08;
+        let flowX=(Math.sin(y*8+time*.23+p.z*(2+4*(1-own)))+.5*Math.sin((x+y)*9-time*.2+p.seed*4))*.095;
+        let flowY=(Math.cos(x*7-time*.21+p.z*(3+4*(1-own)))+.5*Math.cos((y-x)*8+time*.18+p.seed*5))*.08;
+        // Turn outward currents back toward the interior before they reach an edge.
+        const free=1-own;
+        const turn=.79+.14*p.seed;
+        flowX-=free*2*Math.max(0,flowX)*clamp((x-turn)/.12);
+        flowX+=free*2*Math.max(0,-flowX)*clamp((1-turn-x)/.12);
+        flowY-=free*2*Math.max(0,flowY)*clamp((y-turn)/.12);
+        flowY+=free*2*Math.max(0,-flowY)*clamp((1-turn-y)/.12);
         if(own>.001){tx=0;ty=0;for(let j=0;j<3;j++){let t=p.targets[j],r=rects[j],xx=t.x,yy=t.y;
           if(j===1 && w<=760){xx=.5+(xx-.5)*.84;yy=.5+(yy-.5)*.84;}
           if(j===2){
@@ -140,7 +147,11 @@
           }
           tx+=(r.left+xx*r.width)/w*mix[j];ty+=(r.top+yy*r.height)/h*mix[j];}tx=clamp(tx);ty=clamp(ty);}
         let dx=x-mouse.x,dy=y-mouse.y,dist=Math.sqrt(dx*dx+(dy*h/w)**2),repel=mouse.active&&dist<.11?(1-dist/.11)*.035:0;
-        let edgeX=x<.02?(.02-x)*1.4:x>.98?(.98-x)*1.4:0,edgeY=y<.02?(.02-y)*1.4:y>.98?(.98-y)*1.4:0;
+        // A soft interior boundary keeps the free-flowing field from collecting
+        // against the viewport edge; figures retain their original placement.
+        let margin=.02+(.04+.13*p.seed)*(1-own), edgeForce=1.4+2*(1-own);
+        let edgeX=x<margin?(margin-x)*edgeForce:x>1-margin?(1-margin-x)*edgeForce:0;
+        let edgeY=y<margin?(margin-y)*edgeForce:y>1-margin?(1-margin-y)*edgeForce:0;
         let damp=Math.exp(-(1.4+own*4.2)*dt); p.vx=(p.vx+(flowX*(1-own*.94)+(tx-x)*own*10+edgeX+dx*repel)*dt)*damp;p.vy=(p.vy+(flowY*(1-own*.94)+(ty-y)*own*10+edgeY+dy*repel)*dt)*damp;p.x+=p.vx*dt;p.y+=p.vy*dt;
         if(p.x<.002){p.x=.002;p.vx=Math.abs(p.vx)*.65}else if(p.x>.998){p.x=.998;p.vx=-Math.abs(p.vx)*.65}if(p.y<.002){p.y=.002;p.vy=Math.abs(p.vy)*.65}else if(p.y>.998){p.y=.998;p.vy=-Math.abs(p.vy)*.65}
       }
@@ -189,7 +200,7 @@
   if(button) button.addEventListener('click',()=>{enabled=!enabled;last=performance.now();button.textContent=enabled?'暂停粒子 Ⅱ':'播放粒子 ▶';button.setAttribute('aria-pressed',String(enabled));});
   document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(frame)} else if(points.length){last=performance.now();frame=requestAnimationFrame(draw)}});
   fetch(story.dataset.particleSource).then(r=>{if(!r.ok)throw Error('particle data unavailable');return r.json()}).then(data=>{
-    resize();const rect=figures[0].getBoundingClientRect();points=data.forms[0].map((target,i)=>{const v=data.brightness[i]||0,b=Math.pow(Math.max(0,(v-.045)/.955),.8);return{x:(rect.left+target.x*rect.width)/w,y:(rect.top+target.y*rect.height)/h,vx:0,vy:0,z:random(i+544),seed:random(i+87),targets:data.forms.map(a=>a[i]),alpha:.045+b*.95,radius:.18+b*1.42,
+    resize();const rect=figures[0].getBoundingClientRect(),heroVisible=rect.bottom>0&&rect.top<h;points=data.forms[0].map((target,i)=>{const v=data.brightness[i]||0,b=Math.pow(Math.max(0,(v-.045)/.955),.8);return{x:heroVisible?(rect.left+target.x*rect.width)/w:.08+.84*random(i+1133),y:heroVisible?(rect.top+target.y*rect.height)/h:.08+.84*random(i+9411),vx:0,vy:0,z:random(i+544),seed:random(i+87),targets:data.forms.map(a=>a[i]),alpha:.045+b*.95,radius:.18+b*1.42,
       orbitR:data.forms[2][i].diskR,orbitPhi:data.forms[2][i].diskPhi,orbitVr:-.008,
       orbitL:data.forms[2][i].diskR/Math.sqrt(data.forms[2][i].diskR-3)*(.965+.025*random(i+29)),
       orbitE:Math.sqrt((1-2/data.forms[2][i].diskR)*(1+(data.forms[2][i].diskR**2/(data.forms[2][i].diskR-3))*(.965+.025*random(i+29))**2/data.forms[2][i].diskR**2)+.008**2)}});document.body.classList.add('particles-ready'); if(!document.hidden)frame=requestAnimationFrame(draw);

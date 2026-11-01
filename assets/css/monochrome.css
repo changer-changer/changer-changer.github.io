@@ -112,3 +112,6 @@ html.anim [data-reveal]{opacity:1!important}
   #future .lens-title{max-width:100%}
   #future .story-index{font-size:.58rem;letter-spacing:.1em}
 }
+
+/* The third scene is an open particle field, including its static fallback. */
+#future .figure-space img{display:none}
