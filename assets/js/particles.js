@@ -60,7 +60,7 @@
       const ripple=(sampleDensity(x,y)-.16)*gap*1.5*envelope + Math.sin(d*7-time*.58)*3*envelope;
       return y+push+ripple;
     };
-    ctx.lineWidth=mobile?.72:.85;ctx.lineCap='round';ctx.lineJoin='round';
+    ctx.lineWidth=mobile?1.25:1.5;ctx.lineCap='round';ctx.lineJoin='round';
     for(let y=-gap;y<h+gap;y+=gap){
       const ny=(y-cy)/ry;
       const cuts=Math.abs(ny)<.76;
