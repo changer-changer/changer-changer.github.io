@@ -7,22 +7,35 @@
   function updateHeroTone(){ heroLight=1-Math.max(0,Math.min(1,window.scrollY/(innerHeight*.85))); document.body.style.setProperty('--hero-light',heroLight.toFixed(3)); document.body.classList.toggle('hero-bright',heroLight>.55); }
   updateHeroTone(); addEventListener('scroll',updateHeroTone,{passive:true}); addEventListener('resize',updateHeroTone,{passive:true});
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  const style = new URLSearchParams(location.search).get('style');
-  const dotOnly = style === 'dots', stripeMode = style !== 'dots' && style !== 'particles';
-  if (stripeMode) document.body.classList.add('surface-mode');
-  if (reduced.matches || localStorage.getItem('cz-motion') === 'reduced') {
-    if (stripeMode) document.body.classList.add('surface-still');
-    if (button) button.hidden = true;
-    return;
-  }
+  if (reduced.matches || localStorage.getItem('cz-motion') === 'reduced') { if (button) button.hidden = true; return; }
   const ctx = canvas.getContext('2d'); if (!ctx) return;
   const clamp = n => Math.max(0, Math.min(1, n));
+  const style = new URLSearchParams(location.search).get('style');
+  const dotOnly = style === 'dots', stripeMode = style !== 'dots' && style !== 'particles';
   const random = n => { const x = Math.sin(n * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
   let orbitMap = null;
-  if(!stripeMode){
-    const orbitImage = new Image();
-    orbitImage.onload = () => { const c=document.createElement('canvas'); c.width=orbitImage.width; c.height=orbitImage.height; const x=c.getContext('2d',{willReadFrequently:true}); x.drawImage(orbitImage,0,0); orbitMap={data:x.getImageData(0,0,c.width,c.height).data,w:c.width,h:c.height}; };
-    orbitImage.src=story.dataset.orbitMap;
+  const orbitImage = new Image();
+  orbitImage.onload = () => { const c=document.createElement('canvas'); c.width=orbitImage.width; c.height=orbitImage.height; const x=c.getContext('2d',{willReadFrequently:true}); x.drawImage(orbitImage,0,0); orbitMap={data:x.getImageData(0,0,c.width,c.height).data,w:c.width,h:c.height}; };
+  orbitImage.src=story.dataset.orbitMap;
+  let lensLight = null;
+  if (stripeMode) {
+    const source = new Image();
+    source.onload = () => {
+      const c = document.createElement('canvas'); c.width=160; c.height=90;
+      const x=c.getContext('2d',{willReadFrequently:true}); x.drawImage(source,0,0,c.width,c.height);
+      lensLight=x.getImageData(0,0,c.width,c.height).data;
+    };
+    source.src=figures[2].querySelector('img').src;
+  }
+  const fieldW=80, fieldH=48, rawField=new Float32Array(fieldW*fieldH), densityField=new Float32Array(fieldW*fieldH);
+  function sampleDensity(x,y){
+    const fx=Math.max(0,Math.min(fieldW-1,x/w*(fieldW-1)));
+    const fy=Math.max(0,Math.min(fieldH-1,y/h*(fieldH-1)));
+    const x0=Math.floor(fx),y0=Math.floor(fy),x1=Math.min(x0+1,fieldW-1),y1=Math.min(y0+1,fieldH-1);
+    const tx=fx-x0,ty=fy-y0;
+    const a=densityField[y0*fieldW+x0]*(1-tx)+densityField[y0*fieldW+x1]*tx;
+    const b=densityField[y1*fieldW+x0]*(1-tx)+densityField[y1*fieldW+x1]*tx;
+    return Math.min(1,a*(1-ty)+b*ty);
   }
   let w, h, points = [], active = -1, releaseUntil = 0, time = 0, last = performance.now(), enabled = true, frame;
   const weights = [0,0,0], mouse = {x:.5,y:.5,active:false}; let mx=.5, my=.5;
@@ -30,39 +43,59 @@
   addEventListener('resize',resize,{passive:true});
   addEventListener('pointermove', e => {mouse.x=e.clientX/w; mouse.y=e.clientY/h; mouse.active=true;},{passive:true});
   document.addEventListener('pointerleave',()=>mouse.active=false);
-  // Continuous parallel contours drape over a softly evolving imagined surface.
+  // The image is a precomputed Schwarzschild ray trace. Its brightness shapes
+  // the lines; the displacement and the breathing motion are artistic.
   function drawStripes(amount, rect){
-    if(amount<.005) return;
-    const mobile=w<=760;
-    const cx=rect.left+(mobile?.50:.70)*rect.width;
-    const cy=rect.top+(mobile?.64:.53)*rect.height;
-    const sx=w*(mobile?.43:.31), sy=h*(mobile?.27:.31);
-    const rise=Math.min(h*.20,w*(mobile?.20:.16));
-    const gap=mobile?14:15, step=mobile?5:7;
-    const height=(x,y)=>{
-      const nx=(x-cx)/sx, ny=(y-cy)/sy;
-      const drift=.11*Math.sin(time*.20);
-      const a=Math.exp(-1.3*(nx+.23+drift)**2-1.35*(ny+.06)**2);
-      const b=Math.exp(-2.5*(nx-.48+drift*.5)**2-1.55*(ny-.10)**2);
-      const envelope=Math.exp(-.8*nx*nx-1.1*ny*ny);
-      return rise*(.80*a+.32*b + .055*envelope*Math.sin(nx*3.2+ny*1.4-time*.32));
+    if(amount<.005 || !lensLight) return;
+    const mobile=w<=760, cx=rect.left+(mobile?.5:.685)*rect.width;
+    const cy=rect.top+(mobile?.58:.5)*rect.height;
+    const rx=Math.min(w*(mobile?.30:.18),h*.31), ry=rx*.64;
+    const gap=mobile?14:15, step=mobile?4:6;
+    const surfaceY=(x,y)=>{
+      const nx=(x-cx)/rx, ny=(y-cy)/ry, d=Math.hypot(nx,ny);
+      const u=Math.round(80+(x-cx)/(rx*2.6)*80), v=Math.round(45+(y-cy)/(ry*3.2)*45);
+      const lum=u>=0&&u<160&&v>=0&&v<90?lensLight[(v*160+u)*4]/255:0;
+      const envelope=Math.exp(-Math.pow((d-1.05)*1.4,2));
+      const push=(ny===0?0:Math.sign(ny))*ry*.30*envelope*(.8+.2*lum);
+      const ripple=(sampleDensity(x,y)-.16)*gap*1.5*envelope + Math.sin(d*7-time*.58)*3*envelope;
+      return y+push+ripple;
     };
     ctx.lineWidth=mobile?1.25:1.5;ctx.lineCap='round';ctx.lineJoin='round';
     for(let y=-gap;y<h+gap;y+=gap){
+      const ny=(y-cy)/ry;
+      const cuts=Math.abs(ny)<.76;
+      const span=cuts?rx*Math.sqrt(Math.max(0,.76*.76-ny*ny)):0;
+      const left=cx-span, right=cx+span;
       ctx.beginPath();
-      for(let x=-step;x<=w+step;x+=step){
-        const yy=y-height(x,y);
-        if(x===-step)ctx.moveTo(x,yy); else ctx.lineTo(x,yy);
+      ctx.moveTo(-step,surfaceY(-step,y));
+      if(cuts){
+        for(let x=0;x<left;x+=step)ctx.lineTo(x,surfaceY(x,y));
+        const leftY=surfaceY(left,y), rightY=surfaceY(right,y);
+        ctx.lineTo(left,leftY);
+        const depth=cy+ry*1.6, endX=cx+(y-cy)*.13, endY=depth+(y-cy)*.06;
+        ctx.bezierCurveTo(left+span*.48,leftY,cx-span*.18,endY-ry*.10,endX,endY);
+        ctx.moveTo(endX,endY);
+        ctx.bezierCurveTo(cx+span*.18,endY-ry*.10,right-span*.48,rightY,right,rightY);
+        for(let x=right+step;x<=w+step;x+=step)ctx.lineTo(x,surfaceY(x,y));
+      }else{
+        // Bend the far-side lines beneath the throat without breaking them.
+        const depth=cy+ry*1.6, behind=y>cy+ry*.76 && y<depth;
+        for(let x=0;x<=w+step;x+=step){
+          let yy=surfaceY(x,y);
+          if(behind){const bend=Math.exp(-Math.pow((x-cx)/(rx*.6),2));yy+=bend*Math.max(0,depth+gap-yy);}
+          ctx.lineTo(x,yy);
+        }
       }
-      ctx.strokeStyle=`rgba(242,244,239,${amount*.48})`;ctx.stroke();
-      // Light grazes the raised surface; no separate outline is drawn.
-      ctx.beginPath();let drawing=false;
-      for(let x=cx-sx*1.6;x<=cx+sx*1.6;x+=step){
-        const elevation=height(x,y);
-        if(elevation<rise*.28){drawing=false;continue;}
-        if(!drawing){ctx.moveTo(x,y-elevation);drawing=true;}else ctx.lineTo(x,y-elevation);
+      ctx.strokeStyle=`rgba(242,244,239,${amount*.46})`;ctx.stroke();
+      // Highlights follow the same surface, never a separate geometry.
+      ctx.beginPath();let open=false;
+      for(let x=cx-rx*1.8;x<=cx+rx*1.8;x+=step){
+        const d=Math.hypot((x-cx)/rx,(y-cy)/ry), density=sampleDensity(x,y);
+        if(d<.8 || d>1.8 || density<.14 || (y>cy+ry*.76 && y<cy+ry*1.6)){open=false;continue;}
+        const yy=surfaceY(x,y);
+        if(!open){ctx.moveTo(x,yy);open=true}else ctx.lineTo(x,yy);
       }
-      ctx.strokeStyle=`rgba(250,250,247,${amount*.20})`;ctx.stroke();
+      ctx.strokeStyle=`rgba(250,250,247,${amount*.34})`;ctx.stroke();
     }
   }
 
@@ -74,8 +107,9 @@
     if(enabled){if(active>=0&&active!==desired){weights[active]=0;active=-1;releaseUntil=time+.85} if(active<0&&desired>=0&&time>=releaseUntil)active=desired; if(active>=0)weights[active]+=(raw[active]-weights[active])*(1-Math.exp(-dt*1.15));}
     const strength=Math.min(1,weights.reduce((a,b)=>a+b,0)), mix=weights.map(v=>strength>0?v/strength:0);
     mx+=(mouse.x-mx)*.035; my+=(mouse.y-my)*.035; ctx.clearRect(0,0,w,h);
+    if(stripeMode) rawField.fill(0);
     for(const p of points){
-      if(enabled && active===2 && orbitMap && !stripeMode){
+      if(enabled && active===2 && orbitMap){
         // Timelike Schwarzschild geodesic in proper time (G = c = M = 1).
         // The material starts slightly below circular angular momentum, so it
         // spirals inward. At the inner edge it rejoins the continuous flow.
@@ -110,7 +144,12 @@
         let damp=Math.exp(-(1.4+own*4.2)*dt); p.vx=(p.vx+(flowX*(1-own*.94)+(tx-x)*own*10+edgeX+dx*repel)*dt)*damp;p.vy=(p.vy+(flowY*(1-own*.94)+(ty-y)*own*10+edgeY+dy*repel)*dt)*damp;p.x+=p.vx*dt;p.y+=p.vy*dt;
         if(p.x<.002){p.x=.002;p.vx=Math.abs(p.vx)*.65}else if(p.x>.998){p.x=.998;p.vx=-Math.abs(p.vx)*.65}if(p.y<.002){p.y=.002;p.vy=Math.abs(p.vy)*.65}else if(p.y>.998){p.y=.998;p.vy=-Math.abs(p.vy)*.65}
       }
-      if(stripeMode && active===2) continue;
+      if(stripeMode && active===2){
+        const fx=Math.max(0,Math.min(fieldW-1,Math.round(p.x*(fieldW-1))));
+        const fy=Math.max(0,Math.min(fieldH-1,Math.round(p.y*(fieldH-1))));
+        rawField[fy*fieldW+fx]+=.3+p.targets[2].v;
+        continue;
+      }
       const disk=p.targets[2], diskR=disk.diskR||10, diskPhi=disk.diskPhi||0;
       // Circular orbital angular velocity in Schwarzschild coordinate time, M=1.
       const phiNow=p.orbitPhi;
@@ -132,7 +171,19 @@
         ctx.strokeStyle=tone;ctx.lineWidth=radius*2*(1-growth)+(.42+flowLight*.8)*growth;ctx.lineCap='round';ctx.moveTo(p.x*w-dx,p.y*h-dy);ctx.lineTo(p.x*w+dx,p.y*h+dy);ctx.stroke();
       }else{ctx.fillStyle=tone;ctx.arc(p.x*w,p.y*h,radius,0,Math.PI*2);ctx.fill();}
     }
-    if(stripeMode && active===2) drawStripes(strength*mix[2],rects[2]);
+    if(stripeMode && active===2){
+      // Smooth the projected moving matter into a density field; no particles
+      // are drawn in this mode. Lines respond to that evolving field.
+      for(let fy=0;fy<fieldH;fy++) for(let fx=0;fx<fieldW;fx++){
+        let sum=0, count=0;
+        for(let dy=-2;dy<=2;dy++) for(let dx=-2;dx<=2;dx++){
+          const x=fx+dx,y=fy+dy;
+          if(x>=0&&x<fieldW&&y>=0&&y<fieldH){sum+=rawField[y*fieldW+x];count++;}
+        }
+        densityField[fy*fieldW+fx]=Math.min(1,sum/count/2.4);
+      }
+      drawStripes(strength*mix[2],rects[2]);
+    }
     frame=requestAnimationFrame(draw);
   }
   if(button) button.addEventListener('click',()=>{enabled=!enabled;last=performance.now();button.textContent=enabled?'暂停粒子 Ⅱ':'播放粒子 ▶';button.setAttribute('aria-pressed',String(enabled));});

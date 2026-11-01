@@ -112,7 +112,3 @@ html.anim [data-reveal]{opacity:1!important}
   #future .lens-title{max-width:100%}
   #future .story-index{font-size:.58rem;letter-spacing:.1em}
 }
-
-/* A quiet, static field when motion is disabled. */
-.surface-mode #future .figure-space img{display:none}
-.surface-still #future .figure-space::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(to bottom,transparent 0,transparent 13px,rgba(242,244,239,.32) 13px,rgba(242,244,239,.32) 14px);mask-image:linear-gradient(to right,transparent,black 38%);pointer-events:none}
