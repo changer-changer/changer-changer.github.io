@@ -10,6 +10,7 @@
   if (reduced.matches || localStorage.getItem('cz-motion') === 'reduced') { if (button) button.hidden = true; return; }
   const ctx = canvas.getContext('2d'); if (!ctx) return;
   const clamp = n => Math.max(0, Math.min(1, n));
+  const dotOnly = new URLSearchParams(location.search).get('style') === 'dots';
   const random = n => { const x = Math.sin(n * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
   let orbitMap = null;
   const orbitImage = new Image();
@@ -69,13 +70,20 @@
       const phiNow=p.orbitPhi;
       const diskTexture=phi=>.55+.25*Math.sin(3*phi+2.1*Math.log(diskR))+.2*Math.sin(11*phi-1.8*diskR);
       const illumination=Math.min(1.25,Math.max(.15,diskTexture(phiNow)/Math.max(.25,diskTexture(diskPhi))));
-      const homeAmount=strength*mix[0], lineAmount=strength*mix[2], homeLight=p.targets[0].v, flowLight=Math.min(1,disk.v*illumination), alpha=p.alpha*(1-homeAmount-lineAmount)+(Math.pow(homeLight,.45)*.95)*homeAmount+(.07+flowLight*.74)*lineAmount, radius=p.radius*(1-homeAmount-lineAmount)+(.45+homeLight*1.65)*homeAmount+(.35+flowLight*.7)*lineAmount;
+      const homeAmount=strength*mix[0], lineAmount=strength*mix[2], homeLight=p.targets[0].v, flowLight=Math.min(1,disk.v*illumination), alpha=p.alpha*(1-homeAmount-lineAmount)+(Math.pow(homeLight,.45)*.95)*homeAmount+(.13+flowLight*.82)*lineAmount, radius=p.radius*(1-homeAmount-lineAmount)+(.45+homeLight*1.65)*homeAmount+(.35+flowLight*.7)*lineAmount;
       const shade=Math.round(20*heroLight+229*(1-heroLight)),tone=`rgba(${shade},${shade},${shade},${alpha})`;
       let growth=clamp((lineAmount-.24)/.65);growth=growth*growth*(3-2*growth);
       ctx.beginPath();
-      if(growth>.005){
-        const t=p.targets[2], angle=t.angle+.055*Math.sin(time*.13+t.phase), length=t.length*Math.min(w,h)/800*growth,dx=Math.cos(angle)*length*.5,dy=Math.sin(angle)*length*.5;
-        ctx.strokeStyle=tone;ctx.lineWidth=radius*2*(1-growth)+(.35+flowLight*.95)*growth;ctx.lineCap='round';ctx.moveTo(p.x*w-dx,p.y*h-dy);ctx.lineTo(p.x*w+dx,p.y*h+dy);ctx.stroke();
+      if(growth>.005 && !dotOnly){
+        const t=p.targets[2], r=rects[2];
+        // Orient each mark along the visible disk's projected flow, with a
+        // flatter angle through the broad upper and lower arcs.
+        const cx=r.left+(w<=760?.5:.685)*r.width, cy=r.top+(w<=760?.58:.5)*r.height;
+        const px=p.x*w-cx, py=p.y*h-cy;
+        const angle=Math.atan2(-px*.28,py*2.3);
+        const length=Math.min(8,Math.max(2,t.length*.55))*Math.min(1,Math.min(w,h)/650)*growth;
+        const dx=Math.cos(angle)*length*.5,dy=Math.sin(angle)*length*.5;
+        ctx.strokeStyle=tone;ctx.lineWidth=radius*2*(1-growth)+(.42+flowLight*.8)*growth;ctx.lineCap='round';ctx.moveTo(p.x*w-dx,p.y*h-dy);ctx.lineTo(p.x*w+dx,p.y*h+dy);ctx.stroke();
       }else{ctx.fillStyle=tone;ctx.arc(p.x*w,p.y*h,radius,0,Math.PI*2);ctx.fill();}
     }
     frame=requestAnimationFrame(draw);
