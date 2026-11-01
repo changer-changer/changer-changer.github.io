@@ -78,3 +78,13 @@ html.anim [data-reveal]{opacity:1!important}
 }
 @media(max-width:760px){@supports ((-webkit-background-clip:text) or (background-clip:text)){#hello .hero-inscription h1 span{-webkit-text-stroke:0 transparent;background-image:repeating-linear-gradient(180deg,#202520 0,#202520 1px,transparent 1px,transparent 2.3px)}}}
 @media(max-width:760px){@supports ((-webkit-background-clip:text) or (background-clip:text)){#hello .hero-inscription h1 span{background-image:repeating-linear-gradient(180deg,#202520 0,#202520 1.25px,transparent 1.25px,transparent 2px)}}}
+
+/* Constructivist lines divide the full third-scene canvas. */
+#future.story-scene{max-width:none;overflow:clip}
+#future .figure-space{position:absolute;inset:0;width:100%;height:100%;max-width:none;pointer-events:none;transform:none}
+#future .figure-space span{right:clamp(1.4rem,7vw,7rem);bottom:4.7rem;z-index:2}
+#future .story-copy{z-index:3}
+#future .story-copy::before{content:"";position:absolute;z-index:-1;inset:-3rem -6rem;pointer-events:none;background:radial-gradient(ellipse at 30% 48%,rgba(11,13,11,.98),rgba(11,13,11,.90) 43%,transparent 78%)}
+@media(max-width:760px){#future .figure-space{width:100%;height:100%}#future .figure-space span{right:1.4rem;bottom:4rem}#future .story-copy::before{inset:-2rem -1.5rem;background:radial-gradient(ellipse at 28% 42%,rgba(11,13,11,.98),rgba(11,13,11,.9) 55%,transparent 90%)}}
+
+#future .figure-space{grid-area:1 / 1 / -1 / -1;align-self:stretch;justify-self:stretch}
