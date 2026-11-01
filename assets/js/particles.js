@@ -3,6 +3,9 @@
   const story = document.querySelector('.particle-story'), canvas = document.querySelector('#particle-field');
   if (!story || !canvas) return;
   const button = document.querySelector('#particle-toggle'), figures = [...document.querySelectorAll('[data-figure]')];
+  let heroLight=1;
+  function updateHeroTone(){ heroLight=1-Math.max(0,Math.min(1,window.scrollY/(innerHeight*.85))); document.body.style.setProperty('--hero-light',heroLight.toFixed(3)); document.body.classList.toggle('hero-bright',heroLight>.55); }
+  updateHeroTone(); addEventListener('scroll',updateHeroTone,{passive:true}); addEventListener('resize',updateHeroTone,{passive:true});
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   if (reduced.matches || localStorage.getItem('cz-motion') === 'reduced') { if (button) button.hidden = true; return; }
   const ctx = canvas.getContext('2d'); if (!ctx) return;
@@ -27,15 +30,15 @@
         let flowX=(Math.sin(y*8+time*.23+p.z*2)+.5*Math.sin((x+y)*9-time*.2+p.seed*4))*.095;
         let flowY=(Math.cos(x*7-time*.21+p.z*3)+.5*Math.cos((y-x)*8+time*.18+p.seed*5))*.08;
         if(own>.001){tx=0;ty=0;for(let j=0;j<3;j++){let t=p.targets[j],r=rects[j],xx=t.x,yy=t.y;
-          if(j===0||j===2){let X=xx-.5,Y=(yy-.43)*1.22,Z=t.z||0,yaw=(mx-.5)*.35+time*(j===2?.12:.09)+(j===2?.25:0),pitch=(my-.5)*.22+(j===2?.08:.26);let rx=X*Math.cos(yaw)+Z*Math.sin(yaw),rz=Z*Math.cos(yaw)-X*Math.sin(yaw),ry=Y*Math.cos(pitch)-rz*Math.sin(pitch),depth=Y*Math.sin(pitch)+rz*Math.cos(pitch),perspective=1/(1-depth*.30);xx=.5+rx*perspective;yy=.46+((.43+ry*perspective/1.22)-.46)*(r.width/r.height)}
+          if(j===2){let X=xx-.5,Y=(yy-.43)*1.22,Z=t.z||0,yaw=(mx-.5)*.35+time*(j===2?.12:.09)+(j===2?.25:0),pitch=(my-.5)*.22+(j===2?.08:.26);let rx=X*Math.cos(yaw)+Z*Math.sin(yaw),rz=Z*Math.cos(yaw)-X*Math.sin(yaw),ry=Y*Math.cos(pitch)-rz*Math.sin(pitch),depth=Y*Math.sin(pitch)+rz*Math.cos(pitch),perspective=1/(1-depth*.30);xx=.5+rx*perspective;yy=.46+((.43+ry*perspective/1.22)-.46)*(r.width/r.height)}
           tx+=(r.left+xx*r.width)/w*mix[j];ty+=(r.top+yy*r.height)/h*mix[j];}tx=clamp(tx);ty=clamp(ty);}
         let dx=x-mouse.x,dy=y-mouse.y,dist=Math.sqrt(dx*dx+(dy*h/w)**2),repel=mouse.active&&dist<.11?(1-dist/.11)*.035:0;
         let edgeX=x<.02?(.02-x)*1.4:x>.98?(.98-x)*1.4:0,edgeY=y<.02?(.02-y)*1.4:y>.98?(.98-y)*1.4:0;
         let damp=Math.exp(-(1.4+own*4.2)*dt); p.vx=(p.vx+(flowX*(1-own*.94)+(tx-x)*own*10+edgeX+dx*repel)*dt)*damp;p.vy=(p.vy+(flowY*(1-own*.94)+(ty-y)*own*10+edgeY+dy*repel)*dt)*damp;p.x+=p.vx*dt;p.y+=p.vy*dt;
         if(p.x<.002){p.x=.002;p.vx=Math.abs(p.vx)*.65}else if(p.x>.998){p.x=.998;p.vx=-Math.abs(p.vx)*.65}if(p.y<.002){p.y=.002;p.vy=Math.abs(p.vy)*.65}else if(p.y>.998){p.y=.998;p.vy=-Math.abs(p.vy)*.65}
       }
-      const homeAmount=strength*mix[0], dnaAmount=strength*mix[2], homeLight=p.targets[0].v, dnaLight=p.targets[2].v, alpha=p.alpha*(1-homeAmount-dnaAmount)+(.075+Math.pow(homeLight,2)*.8)*homeAmount+(.04+dnaLight*.7)*dnaAmount, radius=p.radius*(1-homeAmount-dnaAmount)+(.32+homeLight*.85)*homeAmount+(.25+dnaLight*.8)*dnaAmount;
-      ctx.fillStyle=document.documentElement.getAttribute('data-theme')==='light' ? `rgba(20,25,20,${alpha})` : `rgba(229,234,223,${alpha})`;ctx.beginPath();ctx.arc(p.x*w,p.y*h,radius,0,Math.PI*2);ctx.fill();
+      const homeAmount=strength*mix[0], dnaAmount=strength*mix[2], homeLight=p.targets[0].v, dnaLight=p.targets[2].v, alpha=p.alpha*(1-homeAmount-dnaAmount)+(Math.pow(homeLight,.45)*.95)*homeAmount+(.04+dnaLight*.7)*dnaAmount, radius=p.radius*(1-homeAmount-dnaAmount)+(.45+homeLight*1.65)*homeAmount+(.25+dnaLight*.8)*dnaAmount;
+      const base=document.documentElement.getAttribute('data-theme')==='light'?20:229, shade=Math.round(20*heroLight+base*(1-heroLight));ctx.fillStyle=`rgba(${shade},${shade},${shade},${alpha})`;ctx.beginPath();ctx.arc(p.x*w,p.y*h,radius,0,Math.PI*2);ctx.fill();
     }
     frame=requestAnimationFrame(draw);
   }

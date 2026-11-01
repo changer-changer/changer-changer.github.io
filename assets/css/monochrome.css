@@ -15,3 +15,20 @@
 html.anim [data-reveal]{opacity:1!important}
 .post-content table{display:block;overflow-x:auto}
 @media(max-width:760px){#future.story-scene{grid-template-rows:auto minmax(0,1fr);padding-top:calc(var(--nav-h) + 1rem)}#future .story-copy{align-self:start}#future .figure-space{height:min(34svh,300px);align-self:center}}
+
+@media(min-width:761px){#hello.story-scene{grid-template-columns:.87fr 1.13fr;gap:1vw}#hello .figure-space{width:min(100%,660px);height:min(78vh,760px)}}
+@media(max-width:760px){#hello .figure-space{width:min(92vw,480px);height:min(47svh,460px)}}
+
+/* The first scene starts as paper; scrolling dissolves it into the dark field. */
+.page-kind-home::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:#f0f0eb;opacity:var(--hero-light,1)}
+.page-kind-home #particle-field{z-index:1}
+.page-kind-home .site-main,.page-kind-home .footer{z-index:2}
+#hello .story-copy,#hello .story-bottom{color:#171a17;opacity:var(--hero-light,1)}
+#hello .story-index,#hello .story-copy h1 span,#hello .story-lead,#hello .story-bottom{color:#4e554e}
+#hello .story-links a,#hello .story-bottom{border-color:#a5ada3}
+#hello .figure-space span{color:#596159;opacity:var(--hero-light,1)}
+.page-kind-home.hero-bright .navbar{--paper:#f0f0eb;--ink:#171a17;--muted:#505950;--line:#c8cec4;color:#171a17;background:#f0f0eb}
+.page-kind-home.hero-bright .site-mark{background:#171a17;color:#f0f0eb}
+@media(prefers-reduced-motion:reduce){#hello .figure-space img{filter:none!important}}
+
+#hello .figure-space img{filter:none!important}
