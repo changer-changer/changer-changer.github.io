@@ -100,8 +100,8 @@ cases:
     role: 独立制作
     summary: 把缓存、流水线和虚拟内存做成能预测、能操作、能核对的模型。
     result: 被北邮计算机基础课采用 · 抖音约 25 万播放
-    cover: computing-course-home
-    featured_thumbnail: false
+    cover: computing-3d-overview
+    cover_position: center 61%
     flow: [预测下一步, 操作模型, 核对系统状态]
     links:
       - label: 在线体验
@@ -118,8 +118,10 @@ cases:
       - title: 怎么验证学生能用
         text: 课程让学生先预测，再操作，最后比较自己的答案和模型状态。平台目前有 12 章教学内容和 10 个实验入口，并提供即时检查和学习记录。北邮计算机基础课老师已把它用作课堂材料；按我的发布记录，抖音播放约 25 万，点赞约八九千。
     gallery:
+      - image: computing-3d-overview
+        caption: 3D 实验台 · 可旋转查看整机与内部组件
       - image: computing-course-home
-        caption: 课程入口与 3D 学习场景
+        caption: CS:APP 课程主页
       - image: computing-arch-lab
         caption: Y86-64 体系结构实验台
       - image: computing-datalab
