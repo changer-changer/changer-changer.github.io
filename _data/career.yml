@@ -97,7 +97,7 @@ cases:
     period: 2026.09
     role: 方案、实现、实验与答辩
     summary: 自动核对 Agent 交付的文件，把问题退回原子任务修复。
-    result: 接入 PilotDeck 原生流程 · 面壁智能黑客松一等奖
+    result: 跑通原生验收流程 · 面壁智能黑客松一等奖
     cover: pilotdeck-poster
     cover_position: center 18%
     flow: [规则核对文件, 独立模型对照原始资料, 通过交付或退回原任务]
