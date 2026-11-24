@@ -130,7 +130,7 @@ experience:
       - "参与 AI 专家团工作台与 AI 实战派产品化，其中一家药企进入后续落地。"
     metrics: ["傅盛 AI 战队", "3 → 8 个工作台工具", "10 名内测用户 / 4 人产出业务成果"]
   - id: "orionstar"
-    period: "2026 年夏"
+    period: "2026 年 8 月初—9 月中旬"
     organization: "猎户星空"
     role: "具身智能机器人场景探索 · 产品研发与售前实践"
     label: "ROBOTICS PRODUCT"
@@ -223,7 +223,7 @@ projects:
   - id: "hackathon"
     kind: "PRODUCT"
     label: "HACKATHON / ROBOTICS PRODUCT"
-    period: "2026 · 加入战队前"
+    period: "2026 年 5 月底"
     title: "猎豹移动 AI Native 黑客松 · 全国总冠军"
     hook: "在极短时间里，把机器人能力翻译成用户看得懂的零售体验。"
     summary: "围绕服装零售构建衣物识别、场景化搭配与一键换衣体验，把机器人能力组织成用户看得懂、现场能演示的完整产品场景。"
@@ -237,11 +237,11 @@ projects:
     kind: "PRODUCT"
     label: "HACKATHON / HI YOUTH × 面壁智能"
     period: "2026.09.11 — 2026.09.12"
-    title: "面壁智能黑客松 · 一等奖（第1名）"
+    title: "AI 原点社区 · 面壁智能黑客松全场总冠军"
     hook: "把一个真实 AI 工作流压缩成评委看得懂、现场讲得清的可演示方案。"
     summary: "参加 Hi Youth 海淀青年创想训练营黑客松·面壁智能，以第72队成员身份围绕 PilotDeck 完成方案表达与现场答辩。"
     contribution: "围绕“检查 AI 生成文件，只让出错的任务返工”这一核心问题，把整份重做拆成任务级验证与局部返工；参与问题拆解、产品方案呈现与现场答辩，在两天赛程内完成可评审的完整表达。"
-    outcome: "获得 Hi Youth 海淀青年创想训练营黑客松·面壁智能一等奖（第1名）；证书日期为 2026-09-12，公开证据口径为一等奖。"
+    outcome: "第 72 队获 Hi Youth 训练营面壁智能专场一等奖，排名全场第一。证书日期为 2026-09-12。"
     metrics: ["一等奖 / 第1名", "第72队", "PilotDeck", "2026.09.12"]
     tags: ["AI workflow", "Agent product", "hackathon", "pitch"]
     status: "一等奖 / 第1名"
@@ -267,10 +267,10 @@ projects:
     hook: "把触觉信号从传感器端带到研究者眼前。"
     summary: "集成 Tac3D SDK，开发 ROS2 节点和机器人端数据处理逻辑，用 UDP 与 ROS2—VR 桥接，把触觉点云渲染到 Meta Quest 3S。"
     contribution: "完成“传感器采集 → 机器人处理 → VR 可视化”的端到端闭环，并作为后续触觉实验的基础设施。"
-    outcome: "相关发明专利申请已受理；旧简历中的延迟数字保留为待日志核验，不在公开页夸大。"
+    outcome: "相关发明专利申请已受理，担任共同发明人。"
     metrics: ["Tac3D", "ROS2", "Meta Quest 3S", "UDP / 3D point cloud"]
     tags: ["tactile sensing", "ROS2", "VR", "systems"]
-    status: "专利已受理 / 指标待补"
+    status: "发明专利申请已受理"
     media_ids: ["tactile-rollout", "patent-accepted"]
   - id: "tron2"
     kind: "RESEARCH"
@@ -385,7 +385,7 @@ profiles:
       - value: "共同发明人"
         label: "触觉数据 VR 可视化 · 发明专利申请已受理"
     focus: ["AI systems", "Embodied intelligence", "Product practice", "Research engineering"]
-    featured: ["hackathon", "mibi-hackathon", "tactile-vla", "electronic-design", "jingcai"]
+    featured: ["hackathon", "mibi-hackathon", "tactile-vla", "tactile-vr", "electronic-design", "jingcai"]
     supporting: ["agentos-media", "ai-workbench", "ai-field-ops", "residual", "agent-evolution", "tron2"]
     experience_order: ["current", "orionstar", "robotics"]
     proof_media: ["mibi-award-portrait", "mibi-award-stage", "fusheng-field", "award-jingcai", "patent-accepted"]
@@ -403,8 +403,8 @@ profiles:
       - value: "第1名"
         label: "面壁智能黑客松 / 第72队"
     focus: ["Robotics systems", "Diffusion Policy", "Tactile sensing", "Agent evolution"]
-    featured: ["tactile-vla", "mibi-hackathon", "electronic-design", "jingcai", "hackathon"]
-    supporting: ["tron2", "tactile-vr", "agent-evolution", "robot-data-loop", "fusheng-ai-team"]
+    featured: ["tactile-vla", "tactile-vr", "mibi-hackathon", "electronic-design", "jingcai", "hackathon"]
+    supporting: ["tron2", "agent-evolution", "robot-data-loop", "fusheng-ai-team"]
     experience_order: ["current", "orionstar", "robotics"]
     proof_media: ["mibi-award-portrait", "mibi-award-talk", "patent-accepted", "tactile-robot", "tactile-training"]
   product:

@@ -16,21 +16,21 @@ timeline:
     title: 瞬恒智能 · 具身智能科研实习
     summary: 从触觉采集、遥操作和策略训练，到动作控制、真机装配和嵌入式开发，完成了完整的机器人系统工程训练。
   - id: retail-tryon
-    date: 2026 · 加入战队前
-    title: 猎豹 AI Native 黑客松冠军
-    summary: 用约 13 小时做出零售一键换衣机器人，跑通服装选款和 AI 试穿演示。
+    date: 2026 年 5 月底
+    title: 猎豹移动 AI Native 黑客松 · 全国总冠军
+    summary: 用约 13 小时在豹小秘上跑通选款和 AI 一键换衣，试穿功能后来接入 AgentOS。
   - id: field-fde
     date: 2026.07 起
     title: 傅盛 AI 战队 · 企业 AI 场景诊断
     summary: 拆解企业工作流程，现场验证 Agent 能解决哪一步。其中一家药企进入后续落地。
   - id: wheelchair
-    date: 2026 年夏
+    date: 2026 年 8 月初—9 月中旬
     title: 猎户星空 · 具身智能机器人场景探索
     summary: 走访商场和门店，尝试售前沟通与产品研发，做出轮椅销售助手并在两家门店试部署。
   - id: pilotdeck
-    date: 2026.09
-    title: 面壁智能黑客松冠军
-    summary: 把子任务验收和局部修复接入 PilotDeck，获一等奖，并向上游提交 PR。
+    date: 2026.09.11 — 09.12
+    title: AI 原点社区 · 面壁智能黑客松全场总冠军
+    summary: 在 PilotDeck 上实现交付自动验收，只让出错的子任务返工，并向上游提交 PR。
   - id: inside-computing
     date: 2026 年秋
     title: 计算之境 · 课程工具与知识分享
@@ -65,6 +65,7 @@ resume_sections:
     entries:
       - case: pilotdeck
       - case: tactile-vla
+      - case: tactile-visualization
       - case: wheelchair
       - case: retail-tryon
       - case: inside-computing
@@ -131,13 +132,13 @@ cases:
 
   pilotdeck:
     title: PilotDeck 子任务验收与局部修复
-    featured_title: 面壁智能黑客松全场冠军
-    featured_result: 在 PilotDeck 跑通交付验收与局部修复
+    featured_title: 面壁智能黑客松全场总冠军
+    featured_result: AI 原点社区 · PilotDeck 交付验收与局部修复
     category: AI Agent · Harness
-    period: 2026.09
+    period: 2026.09.11 — 09.12
     role: 方案、实现、实验与答辩
     summary: 自动核对 Agent 交付的文件，把问题退回原子任务修复。
-    result: 在 PilotDeck 跑通交付验收与局部修复 · 获一等奖
+    result: Hi Youth 面壁智能专场全场总冠军 · 第 72 队获一等奖
     cover: pilotdeck-poster
     featured_certificate: pilotdeck-certificate
     flow: [规则核对文件, 独立模型对照原始资料, 通过交付或退回原任务]
@@ -150,6 +151,8 @@ cases:
         url: https://github.com/changer-changer/PilotDeck-Verified-Subtasks/blob/main/docs/verified-subtasks/STATISTICS.zh-CN.md
       - label: "上游 PR #578"
         url: https://github.com/OpenBMB/PilotDeck/pull/578
+      - label: 清华新闻网活动记录
+        url: https://www.tsinghua.edu.cn/info/3055/128435.htm
     sections:
       - title: 子任务怎样才算完成
         text: 我把「跑完了」和「交付能用」当作两个需要分别检查的状态。例如，供应风险简报可以有合法的 JSON 格式，却漏掉原始材料里延期七天的信息。验收要对照任务、源材料和实际文件，再决定能不能交给下一步。
@@ -206,10 +209,34 @@ cases:
       - path: /assets/images/resume/portfolio/patent-accepted.jpg
         caption: 发明专利申请受理通知书
 
+  tactile-visualization:
+    title: 触觉数据 VR 可视化系统
+    category: 具身智能 · 发明专利
+    period: 2025.11 — 2025.12
+    role: 瞬恒智能 · 独立实现系统 · 共同发明人
+    summary: 打通 Tac3D → ROS2 → Meta Quest 3S，将接触面的触觉数据实时重建成可观察的 3D 点云。
+    result: 相关发明专利申请已受理
+    cover: tactile-vr-cloud
+    flow: [采集接触面触觉数据, 经 ROS2 处理并通过 UDP 转发, 在 Quest 3S 渲染点云]
+    sections:
+      - title: 想解决什么问题
+        text: 机械臂接触物体时，研究者需要看清接触位置和接触面的变化。我把传感器输出接到 VR，让这些变化能在三维空间里直接观察。
+      - title: 我做了哪些工作
+        text: 我集成了 Tac3D SDK，开发 ROS2 节点和数据处理流程，再通过 UDP 把点云传给 Meta Quest 3S。在方老师提供的实验环境里，我独立完成了采集、传输与显示的联调。
+      - title: 交付与专利
+        text: 系统用于后续的触觉实验。相关发明专利《高密度柔性触觉传感器接触表面 VR 可视化方法及系统》的申请已受理，我是共同发明人。
+    gallery:
+      - image: tactile-vr-cloud
+        caption: VR 中重建的触觉接触面
+      - image: tactile-sensor-rig
+        caption: 触觉传感器与采集设备
+      - path: /assets/images/resume/portfolio/patent-accepted.jpg
+        caption: 发明专利申请受理通知书
+
   wheelchair:
     title: 轮椅门店的机器人销售助手
     category: 机器人 · 调研、产品与开发
-    period: 2026 年夏
+    period: 2026 年 8 月初—9 月中旬
     role: 猎户星空 · 具身智能机器人场景探索、产品研发与售前实践
     summary: 用连续对话调出 Android 页面、产品资料和演示视频。
     result: 完成初版并在两家门店试部署
@@ -233,13 +260,13 @@ cases:
 
   retail-tryon:
     title: 零售一键换衣机器人
-    featured_title: 猎豹移动黑客松冠军
+    featured_title: 猎豹移动黑客松全国总冠军
     featured_result: 零售一键换衣机器人 · 约 13 小时完成演示
     category: 零售机器人 · 快速产品开发
-    period: 2026 · 加入战队前
-    role: 猎豹移动 AI Native 黑客松
+    period: 2026 年 5 月底
+    role: 猎豹移动 AI 少年派黑客松
     summary: 把店员上传、商品浏览和 AI 换装接成同一条流程。
-    result: 约 13 小时完成演示 · 全场总冠军 · 功能后续进入 AgentOS
+    result: 全国总冠军 · 约 13 小时完成演示 · 试穿功能接入 AgentOS
     cover: hackathon-pitch
     cover_caption: 黑客松现场，讲解豹小秘的服装零售方案。
     flow: [店员给新品拍照上传, 顾客在屏幕上浏览和选款, 拍照生成试穿图]
@@ -256,7 +283,7 @@ cases:
       - image: hackathon-robot
         caption: 开发现场的豹小秘轮式机器人
       - image: hackathon-field
-        caption: 猎豹 AI Native 黑客松现场
+        caption: 2026 年 5 月底，猎豹 AI 少年派黑客松现场
       - path: /assets/images/resume/evidence/retail-robot-ui.png
         caption: 机器人零售界面参考 · 商品与多语交互
 
