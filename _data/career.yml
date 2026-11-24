@@ -35,6 +35,14 @@ timeline:
     date: 2026 年秋
     title: 计算之境 · 课程工具与知识分享
     summary: 觉得计算机基础课有点无聊，就用 3D 网页建模做了一套可操作的 CS:APP 课程平台，抖音约 25 万次观看。
+  - id: community
+    date: 2026 年秋
+    title: 北邮具身智能社团
+    summary: 发起社团，组织技术交流和校外参访。
+  - id: agent-research
+    date: 2026 年秋起 · 进行中
+    title: 多智能体协作与任务恢复 · 科研训练
+    summary: 和一位博士生做对照实验，研究一个 Agent 的交付失效后，哪些任务要重做、哪些成果还能用。
 
 resume_sections:
   - id: internships
@@ -60,7 +68,6 @@ resume_sections:
       - case: wheelchair
       - case: retail-tryon
       - case: inside-computing
-      - case: research-nexus
 skills:
   - area: 机器人
     text: ROS2、触觉感知、VR 遥操作、Diffusion Policy、嵌入式与真机调试

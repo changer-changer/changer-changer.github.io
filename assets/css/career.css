@@ -156,6 +156,8 @@ h3 { font-size: 1.125rem; }
 }
 .career-timeline a { display: grid; grid-template-columns: 11rem minmax(0, 1fr) auto; gap: .1rem 1rem; padding: .75rem 1rem; text-decoration: none; }
 .career-timeline a:hover { background: #eef0ea; }
+.career-timeline .timeline-current { scroll-margin-top: 1rem; }
+.timeline-current > a { background: #eef0e8; }
 .timeline-detail { align-self: start; color: var(--accent); font-size: .875rem; text-decoration: underline; }
 .career-date { padding-top: .1rem; color: var(--muted); font-size: .875rem; font-variant-numeric: tabular-nums; }
 .career-timeline p { margin-top: .25rem; }
@@ -176,7 +178,6 @@ h3 { font-size: 1.125rem; }
 .career-skills dt { font-weight: 600; }
 .career-skills dl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .65rem 1.25rem; }
 .career-skills dd { color: var(--muted); }
-.career-now .career-work { border-inline-start: 3px solid var(--accent); background: #eef0e8; }
 
 .career-awards h2 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
 .career-awards summary { width: fit-content; min-height: 44px; padding: .5rem 0; cursor: pointer; }

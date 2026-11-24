@@ -322,18 +322,6 @@ projects:
     metrics: ["视觉算法", "PID", "UART", "系统联调"]
     tags: ["computer vision", "PID", "embedded", "system integration"]
     status: "奖项自述 / 证书待补"
-  - id: "computer-design"
-    kind: "RESEARCH"
-    label: "AI APPLICATION / COMPETITION"
-    period: "2026"
-    title: "中国大学生计算机设计大赛 · 北京赛区二等奖"
-    hook: "把 Agent 研究辅助做成真正可使用的系统，而不是停在概念演示。"
-    summary: "以 Research-Nexus Pro 为载体，围绕资料检索、研究流程与 Agent 协同组织完整的 AI 科研辅助系统。"
-    contribution: "担任项目负责人，负责系统方案、Agent 工作流和产品化表达，推动研究辅助能力从想法进入可演示、可评审的系统。"
-    outcome: "获得中国大学生计算机设计大赛北京赛区二等奖。"
-    metrics: ["北京赛区二等奖", "Research-Nexus Pro", "Agent 科研辅助"]
-    tags: ["agent", "research assistant", "product system"]
-    status: "北京赛区二等奖"
   - id: "jingcai"
     kind: "AI PROJECT"
     label: "AI APPLICATION / INNOVATION"
@@ -379,7 +367,7 @@ awards:
     status: "已确认"
   - title: "中国大学生计算机设计大赛北京赛区二等奖"
     period: "2026"
-    detail: "Research-Nexus Pro / Agent 科研辅助系统 · 正式口径待核"
+    detail: "项目负责人"
     status: "已确认"
 profiles:
   overview:
@@ -397,7 +385,7 @@ profiles:
       - value: "共同发明人"
         label: "触觉数据 VR 可视化 · 发明专利申请已受理"
     focus: ["AI systems", "Embodied intelligence", "Product practice", "Research engineering"]
-    featured: ["hackathon", "mibi-hackathon", "tactile-vla", "electronic-design", "computer-design", "jingcai"]
+    featured: ["hackathon", "mibi-hackathon", "tactile-vla", "electronic-design", "jingcai"]
     supporting: ["agentos-media", "ai-workbench", "ai-field-ops", "residual", "agent-evolution", "tron2"]
     experience_order: ["current", "orionstar", "robotics"]
     proof_media: ["mibi-award-portrait", "mibi-award-stage", "fusheng-field", "award-jingcai", "patent-accepted"]
@@ -415,7 +403,7 @@ profiles:
       - value: "第1名"
         label: "面壁智能黑客松 / 第72队"
     focus: ["Robotics systems", "Diffusion Policy", "Tactile sensing", "Agent evolution"]
-    featured: ["tactile-vla", "mibi-hackathon", "electronic-design", "computer-design", "jingcai", "hackathon"]
+    featured: ["tactile-vla", "mibi-hackathon", "electronic-design", "jingcai", "hackathon"]
     supporting: ["tron2", "tactile-vr", "agent-evolution", "robot-data-loop", "fusheng-ai-team"]
     experience_order: ["current", "orionstar", "robotics"]
     proof_media: ["mibi-award-portrait", "mibi-award-talk", "patent-accepted", "tactile-robot", "tactile-training"]
@@ -434,6 +422,6 @@ profiles:
         label: "从客户现场到数据决策闭环"
     focus: ["Customer discovery", "Product strategy", "FDE delivery", "AI-native workflow"]
     featured: ["fusheng-ai-team", "mibi-hackathon", "robot-data-loop", "hackathon", "agentos-media", "ai-workbench"]
-    supporting: ["tactile-vla", "electronic-design", "computer-design", "jingcai", "tron2", "residual"]
+    supporting: ["tactile-vla", "electronic-design", "jingcai", "tron2", "residual"]
     experience_order: ["current", "orionstar", "robotics"]
     proof_media: ["mibi-award-portrait", "mibi-award-stage", "fusheng-field", "fusheng-team", "retail-ui"]
