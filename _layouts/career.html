@@ -30,8 +30,8 @@
       {% if work %}
         <a href="{{ '/resume/' | relative_url }}">返回履历</a>
       {% else %}
-        <a href="#experience">时间线</a>
         <a href="#works">作品</a>
+        <a href="#experience">时间线</a>
         <a href="#awards">奖项</a>
       {% endif %}
       <a href="{{ career.identity.github }}">GitHub</a>
@@ -115,27 +115,6 @@
         </div>
       </header>
 
-      <section class="career-section" id="experience" aria-labelledby="experience-title">
-        <h2 id="experience-title">时间线</h2>
-        <p class="timeline-hint" id="timeline-hint">点开任一节点，查看完整经历和相关材料。</p>
-        <ol class="career-timeline" aria-describedby="timeline-hint">
-          {% for entry in career.timeline %}
-            {% assign url = '/resume/cases/' | append: entry.id | append: '/' %}
-            <li{% if entry.id == career.current %} id="now" class="timeline-current"{% endif %}>
-              <a href="{{ url | relative_url }}">
-                <span class="career-date">{{ entry.date }}</span>
-                <div class="timeline-copy">
-                  <h3>{{ entry.title }}</h3>
-                  <p>{{ entry.summary }}</p>
-                </div>
-                <span class="timeline-detail">查看详情</span>
-              </a>
-            </li>
-          {% endfor %}
-        </ol>
-        <p class="timeline-summary">{{ career.timeline_summary }}</p>
-      </section>
-
       <section class="career-section" id="works" aria-labelledby="works-title">
         <h2 id="works-title">代表作品</h2>
         <div class="career-works">
@@ -171,6 +150,27 @@
             </article>
           {% endfor %}
         </div>
+      </section>
+
+      <section class="career-section" id="experience" aria-labelledby="experience-title">
+        <h2 id="experience-title">时间线</h2>
+        <p class="timeline-hint" id="timeline-hint">点开任一节点，查看完整经历和相关材料。</p>
+        <ol class="career-timeline" aria-describedby="timeline-hint">
+          {% for entry in career.timeline %}
+            {% assign url = '/resume/cases/' | append: entry.id | append: '/' %}
+            <li{% if entry.id == career.current %} id="now" class="timeline-current"{% endif %}>
+              <a href="{{ url | relative_url }}">
+                <span class="career-date">{{ entry.date }}</span>
+                <div class="timeline-copy">
+                  <h3>{{ entry.title }}</h3>
+                  <p>{{ entry.summary }}</p>
+                </div>
+                <span class="timeline-detail">查看详情</span>
+              </a>
+            </li>
+          {% endfor %}
+        </ol>
+        <p class="timeline-summary">{{ career.timeline_summary }}</p>
       </section>
 
       {% for group in career.resume_sections %}

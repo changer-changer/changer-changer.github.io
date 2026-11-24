@@ -63,12 +63,8 @@ resume_sections:
   - id: projects
     title: 项目经历
     entries:
-      - case: pilotdeck
-      - case: tactile-vla
       - case: tactile-visualization
       - case: wheelchair
-      - case: retail-tryon
-      - case: inside-computing
 skills:
   - area: 机器人
     text: ROS2、触觉感知、VR 遥操作、Diffusion Policy、嵌入式与真机调试
