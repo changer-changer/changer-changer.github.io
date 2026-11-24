@@ -10,6 +10,31 @@ identity:
   blog: "/"
   contact_note: "公开版不放手机号与邮箱；可通过 GitHub 或博客联系。"
   short_line: "把传感器、模型和真实用户问题，推进成可运行、可验证、可交付的系统。"
+selected_work:
+  - area: "AI Agent"
+    title: "PilotDeck 子任务验收与局部修复"
+    description: "我和队友在 PilotDeck 上做了一套交付检查。系统核对任务要求和实际文件，发现问题时只让出错的子任务返工。项目获 Hi Youth × 面壁智能黑客松一等奖。"
+    links:
+      - label: "代码"
+        href: "https://github.com/changer-changer/PilotDeck-Verified-Subtasks"
+      - label: "演示录像"
+        href: "https://github.com/changer-changer/PilotDeck-Verified-Subtasks/releases/tag/demo-recording-20260911"
+      - label: "实验记录"
+        href: "https://github.com/changer-changer/PilotDeck-Verified-Subtasks/blob/main/docs/verified-subtasks/STATISTICS.zh-CN.md"
+  - area: "计算机系统教学"
+    title: "计算之境 · Inside Computing"
+    description: "我做了一个交互式 CS:APP 学习平台，把缓存、流水线、虚拟内存等概念做成可以动手操作的模型，配上 12 章教学内容和 10 个实验入口。"
+    links:
+      - label: "在线体验"
+        href: "https://changer-changer.github.io/inside-computing/"
+      - label: "代码"
+        href: "https://github.com/changer-changer/inside-computing"
+  - area: "具身智能"
+    title: "触觉机器人与 VR 可视化"
+    description: "我把 Tac3D 传感器的数据经 ROS2 接入 Quest 3S，随后参与 TRON2 的遥操作、策略训练和真机执行。相关发明专利申请已受理。"
+    links:
+      - label: "真机记录与项目细节"
+        href: "#tactile-vla"
 media:
   - id: "fusheng-field"
     image: "/assets/images/resume/field-fusheng.jpg"
@@ -248,7 +273,7 @@ projects:
     metrics: ["Tac3D / ROS2", "VR teleoperation", "Diffusion Policy", "专利申请已受理"]
     tags: ["tactile sensing", "VLA", "robot assembly", "full stack"]
     status: "全栈研发 / 专利申请已受理"
-    media_ids: ["tactile-robot", "tactile-training", "tactile-rollout", "patent-accepted"]
+    media_ids: ["tactile-rollout", "tactile-robot", "tactile-training", "patent-accepted"]
   - id: "tactile-vr"
     kind: "RESEARCH"
     label: "ROBOTICS / SYSTEM"
@@ -373,20 +398,19 @@ awards:
     status: "已确认"
 profiles:
   overview:
-    nav_label: "全能版"
-    eyebrow: "FULL SPECTRUM / RESUME"
-    title: "傅盛 AI 战队成员，负责轮式机器人零售场景破局。"
-    summary: "我把机器人、模型与真实业务接在一起：能下现场找真问题，也能把感知、数据、控制和 Demo 推进到需求、研发与交付。"
+    nav_label: "作品与履历"
+    eyebrow: "公开履历"
+    updated: "2026.11"
+    title: "你好，我是崔之行。"
+    summary: "我在北京邮电大学学计算机。现在我在研究多智能体如何分工和协作，也做过触觉机器人、AI 产品和计算机系统教学工具。"
     audience: "给招聘者的一句话：你看到的不是“会很多工具”的人，而是一个能在技术深水区和业务现场之间来回切换、并把两边接起来的人。"
     signals:
       - value: "第1名"
         label: "Hi Youth × 面壁智能黑客松 / 第72队"
       - value: "傅盛 AI 战队"
         label: "由傅盛发起并指导的管培生计划"
-      - value: "3.39M"
-        label: "机器人交互被转成产品决策"
-      - value: "FULL LOOP"
-        label: "传感器 → 模型 → 真机 → 用户"
+      - value: "共同发明人"
+        label: "触觉数据 VR 可视化 · 发明专利申请已受理"
     focus: ["AI systems", "Embodied intelligence", "Product practice", "Research engineering"]
     featured: ["hackathon", "mibi-hackathon", "tactile-vla", "electronic-design", "computer-design", "jingcai"]
     supporting: ["agentos-media", "ai-workbench", "ai-field-ops", "residual", "agent-evolution", "tron2"]
