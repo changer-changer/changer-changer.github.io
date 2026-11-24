@@ -20,7 +20,7 @@
   <meta name="theme-color" content="#f7f7f4">
   <link rel="canonical" href="{{ page.url | absolute_url }}">
   <link rel="preload" href="{{ '/assets/fonts/noto-serif-sc-900.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="{{ '/assets/css/career.css' | relative_url }}?v=4">
+  <link rel="stylesheet" href="{{ '/assets/css/career.css' | relative_url }}?v=5">
 </head>
 <body>
   <a class="skip-link" href="#main">跳到正文</a>
@@ -31,7 +31,7 @@
         <a href="{{ '/resume/' | relative_url }}">返回履历</a>
       {% else %}
         <a href="#works">作品</a>
-        <a href="#experience">经历</a>
+        <a href="#experience">时间线</a>
         <a href="#awards">奖项</a>
       {% endif %}
       <a href="{{ career.identity.github }}">GitHub</a>
@@ -139,39 +139,61 @@
       </section>
 
       <section class="career-section" id="experience" aria-labelledby="experience-title">
-        <h2 id="experience-title">经历</h2>
-        <ol class="career-timeline">
+        <h2 id="experience-title">时间线</h2>
+        <p class="timeline-hint" id="timeline-hint">点开任一节点，查看完整经历和相关材料。</p>
+        <ol class="career-timeline" aria-describedby="timeline-hint">
           {% for entry in career.timeline %}
             {% assign url = '/resume/cases/' | append: entry.id | append: '/' %}
             <li>
               <a href="{{ url | relative_url }}">
                 <span class="career-date">{{ entry.date }}</span>
-                <div>
+                <div class="timeline-copy">
                   <h3>{{ entry.title }}</h3>
                   <p>{{ entry.summary }}</p>
                 </div>
+                <span class="timeline-detail">查看详情</span>
               </a>
             </li>
           {% endfor %}
         </ol>
       </section>
 
-      <section class="career-section" id="projects" aria-labelledby="projects-title">
-        <h2 id="projects-title">其他项目</h2>
-        <div class="career-projects">
-          {% for id in career.projects %}
-            {% assign project = career.cases[id] %}
-            {% assign url = '/resume/cases/' | append: id | append: '/' %}
-            <article>
-              <a href="{{ url | relative_url }}">
-                <h3>{{ project.title }}</h3>
-                <p>{{ project.summary }}</p>
-                <p class="work-result">{{ project.result }}</p>
-              </a>
-            </article>
-          {% endfor %}
-        </div>
-      </section>
+      {% for group in career.resume_sections %}
+        <section class="career-section" id="{{ group.id }}" aria-labelledby="{{ group.id }}-title">
+          <h2 id="{{ group.id }}-title">{{ group.title }}</h2>
+          <div class="career-entries">
+            {% for entry in group.entries %}
+              {% assign project = career.cases[entry.case] %}
+              {% assign url = '/resume/cases/' | append: entry.case | append: '/' %}
+              <article class="career-entry">
+                <p class="career-date">{{ project.period }}</p>
+                <div class="career-entry-copy">
+                  <h3><a href="{{ url | relative_url }}">{{ entry.title | default: project.title }}</a></h3>
+                  <p class="career-role">{{ entry.role | default: project.role }}</p>
+                  <p>{{ entry.summary | default: project.summary }}</p>
+                  <p class="work-result">{{ project.result }}</p>
+                </div>
+              </article>
+            {% endfor %}
+          </div>
+        </section>
+      {% endfor %}
+
+      <div class="career-background">
+        <section class="career-section" id="education" aria-labelledby="education-title">
+          <h2 id="education-title">教育背景</h2>
+          <h3>{{ career.identity.school }}</h3>
+          <p>{{ career.identity.degree }}</p>
+        </section>
+        <section class="career-section" id="skills" aria-labelledby="skills-title">
+          <h2 id="skills-title">技术与研究能力</h2>
+          <dl>
+            {% for skill in career.skills %}
+              <div><dt>{{ skill.area }}</dt><dd>{{ skill.text }}</dd></div>
+            {% endfor %}
+          </dl>
+        </section>
+      </div>
 
       {% assign current = career.cases[career.current] %}
       {% if current %}

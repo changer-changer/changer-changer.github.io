@@ -38,7 +38,42 @@ timeline:
     title: 北邮具身智能社团
     summary: 发起校内具身智能社团，组织同学做分享并对接校外社区。
 
-projects: [retail-tryon, research-nexus]
+resume_sections:
+  - id: internships
+    title: 实习经历
+    entries:
+      - case: field-fde
+        title: 傅盛 AI 战队
+        role: FDE · 企业 AI 场景诊断
+        summary: 和企业客户拆解工作流程，在活动现场做 Agent 演示，验证哪些环节值得继续落地。
+      - case: wheelchair
+        title: 猎户星空
+        role: 轮式机器人产品与研发
+        summary: 实地走访商场和门店，选定智能轮椅的销售场景，完成对话、产品资料和双屏展示的联调。
+      - case: tactile-vla
+        title: 方斌教授实验室
+        role: 科研实习 · 具身智能
+        summary: 负责触觉数据采集和 VR 可视化，并参与触觉编码、策略训练与双臂真机装配。
+  - id: projects
+    title: 项目经历
+    entries:
+      - case: pilotdeck
+      - case: tactile-vla
+      - case: wheelchair
+      - case: retail-tryon
+      - case: inside-computing
+      - case: research-nexus
+  - id: campus
+    title: 校园与社区经历
+    entries:
+      - case: community
+skills:
+  - area: 机器人
+    text: ROS2、触觉感知、VR 遥操作、Diffusion Policy、嵌入式与真机调试
+  - area: Agent 与研究
+    text: 工作流编排、工具调用、交付验收、对照实验
+  - area: 产品与交付
+    text: 客户调研、需求验证、交互原型、Android 二次开发、门店试部署
 current: agent-research
 awards:
   - title: 中国国际大学生创新大赛 · 省级金奖
