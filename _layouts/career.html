@@ -20,7 +20,7 @@
   <meta name="theme-color" content="#f7f7f4">
   <link rel="canonical" href="{{ page.url | absolute_url }}">
   <link rel="preload" href="{{ '/assets/fonts/noto-serif-sc-900.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="{{ '/assets/css/career.css' | relative_url }}?v=1">
+  <link rel="stylesheet" href="{{ '/assets/css/career.css' | relative_url }}?v=2">
 </head>
 <body>
   <a class="skip-link" href="#main">跳到正文</a>
@@ -63,6 +63,11 @@
             <a href="{{ work.video.src | relative_url }}">查看视频文件</a>
           </video>
           <figcaption>{{ work.video.caption }}</figcaption>
+        </figure>
+      {% elsif work.cover_caption %}
+        <figure class="case-cover">
+          <img src="{{ social_image | relative_url }}" alt="{{ work.cover_caption | escape }}" width="1500" height="1000">
+          <figcaption>{{ work.cover_caption }}</figcaption>
         </figure>
       {% endif %}
       {% if work.flow %}

@@ -168,9 +168,10 @@ h3 { font-size: 1.125rem; }
 .case-links { display: flex; flex-wrap: wrap; gap: .25rem 1.2rem; margin: .8rem 0 0; padding: 0; list-style: none; }
 .case-links a { display: inline-flex; align-items: center; min-height: 44px; }
 
-.case-video { margin: 0 0 1.85rem; }
+.case-video, .case-cover { margin: 0 0 1.85rem; }
+.case-cover img { height: auto; max-height: 28rem; object-fit: contain; background: #e9ece4; }
 .case-video video { display: block; width: 100%; max-height: min(66vh, 32rem); background: #20231f; }
-.case-video figcaption, .case-gallery figcaption { margin-top: .35rem; color: var(--muted); font-size: .875rem; }
+.case-video figcaption, .case-cover figcaption, .case-gallery figcaption { margin-top: .35rem; color: var(--muted); font-size: .875rem; }
 .case-flow {
   display: flex;
   flex-wrap: wrap;

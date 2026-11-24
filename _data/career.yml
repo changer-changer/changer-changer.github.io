@@ -194,7 +194,8 @@ cases:
     role: 猎豹移动 AI Native 黑客松
     summary: 把店员上传、商品浏览和 AI 换装接成同一条流程。
     result: 约 13 小时完成演示 · 全场总冠军 · 功能后续进入 AgentOS
-    cover: hackathon-field
+    cover: hackathon-pitch
+    cover_caption: 黑客松现场，讲解豹小秘的服装零售方案。
     flow: [店员给新品拍照上传, 顾客在屏幕上浏览和选款, 拍照生成试穿图]
     sections:
       - title: 从一次真实的买衣服体验出发
@@ -204,6 +205,10 @@ cases:
       - title: 怎样跑通店员和顾客两端
         text: 店员用上传链接给新品拍照，屏幕同步展示商品；顾客选款、拍照并一键生成试穿图。团队借用机器人已有接口接了导航和导览，约 13 小时完成可演示的端到端流程。获奖后，试穿功能进入 AgentOS，随后随零售方案面向部分门店交付。
     gallery:
+      - image: hackathon-team-pitch
+        caption: 团队答辩 · AI 少年派黑客松
+      - image: hackathon-robot
+        caption: 开发现场的豹小秘轮式机器人
       - image: hackathon-field
         caption: 猎豹 AI Native 黑客松现场
       - path: /assets/images/resume/evidence/retail-robot-ui.png
