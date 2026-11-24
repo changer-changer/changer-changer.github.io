@@ -107,7 +107,7 @@ cases:
         url: https://github.com/changer-changer/PilotDeck-Verified-Subtasks/releases/tag/demo-recording-20260911
       - label: 四模型实验与原始数据入口
         url: https://github.com/changer-changer/PilotDeck-Verified-Subtasks/blob/main/docs/verified-subtasks/STATISTICS.zh-CN.md
-      - label: 上游 PR #578
+      - label: "上游 PR #578"
         url: https://github.com/OpenBMB/PilotDeck/pull/578
     sections:
       - title: 子任务怎样才算完成
@@ -115,7 +115,8 @@ cases:
       - title: 为什么把验收接进 Harness
         text: 先由规则检查文件和字段，再给独立的只读模型核对上下文。发现问题时，原子任务沿用自己的会话和工具权限，在轮次上限内继续修，已经通过的兄弟任务不动。原生界面同步状态，验收记录进入 PilotDeck 的白盒项目记忆，后续任务可以检索。
       - title: 怎么验证修复真的发生
-        text: 在 GLM-5.3 原生演示里，我们预置了错误交付，核对修复后的文件，同时确认三份正确报表未改动，并追踪写入记忆的验收记录。另有四模型的配对合成对照，报告保留分母、失败和模型差异。上游 #578 已提交，状态为关闭且未合并。
+        text: >-
+          在 GLM-5.3 原生演示里，我们预置了错误交付，核对修复后的文件，同时确认三份正确报表未改动，并追踪写入记忆的验收记录。另有四模型的配对合成对照，报告保留分母、失败和模型差异。上游 #578 已提交，状态为关闭且未合并。
     gallery:
       - image: pilotdeck-poster
         caption: 项目海报 · 规则检查、独立复核、原任务返工与白盒记忆
