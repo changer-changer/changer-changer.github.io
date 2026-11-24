@@ -20,7 +20,7 @@
   <meta name="theme-color" content="#f7f7f4">
   <link rel="canonical" href="{{ page.url | absolute_url }}">
   <link rel="preload" href="{{ '/assets/fonts/noto-serif-sc-900.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="{{ '/assets/css/career.css' | relative_url }}?v=9">
+  <link rel="stylesheet" href="{{ '/assets/css/career.css' | relative_url }}?v=10">
 </head>
 <body>
   <a class="skip-link" href="#main">跳到正文</a>
@@ -141,19 +141,33 @@
         <div class="career-works">
           {% for id in career.featured %}
             {% assign project = career.cases[id] %}
-            {% assign cover = '/assets/images/resume/cases/' | append: project.cover | append: '.webp' %}
             {% assign url = '/resume/cases/' | append: id | append: '/' %}
+            {% capture work_copy %}
+              <h3>{{ project.featured_title | default: project.title }}</h3>
+              <p class="work-result">{{ project.featured_result | default: project.result }}</p>
+              <p class="work-summary">{{ project.summary }}</p>
+            {% endcapture %}
             <article id="{{ id }}"{% if forloop.first %} class="work-featured"{% endif %}>
-              <a class="career-work" href="{{ url | relative_url }}">
-                <div class="work-copy">
-                  <h3>{{ project.featured_title | default: project.title }}</h3>
-                  <p class="work-result">{{ project.featured_result | default: project.result }}</p>
-                  <p class="work-summary">{{ project.summary }}</p>
+              {% if project.featured_video and project.video %}
+                {% assign poster = '/assets/images/resume/cases/' | append: project.video.poster | append: '.webp' %}
+                <div class="career-work career-work--video">
+                  <a class="work-copy" href="{{ url | relative_url }}">{{ work_copy }}</a>
+                  <video class="work-video" controls playsinline preload="none" poster="{{ poster | relative_url }}" aria-label="{{ project.video.caption | escape }}">
+                    <source src="{{ project.video.src | relative_url }}" type="video/mp4">
+                    <a href="{{ project.video.src | relative_url }}">查看真机演示视频</a>
+                  </video>
                 </div>
-                {% if project.featured_thumbnail != false %}
-                  <img src="{{ cover | relative_url }}" alt="" class="work-cover"{% if project.cover_position %} style="object-position:{{ project.cover_position }}"{% endif %} loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" decoding="async">
+              {% else %}
+                {% assign cover_id = project.featured_certificate | default: project.cover %}
+                {% assign cover = '/assets/images/resume/cases/' | append: cover_id | append: '.webp' %}
+                {% if project.featured_certificate %}
+                  {% assign certificate = project.gallery | where: 'image', project.featured_certificate | first %}
                 {% endif %}
-              </a>
+                <a class="career-work" href="{{ url | relative_url }}">
+                  <div class="work-copy">{{ work_copy }}</div>
+                  <img src="{{ cover | relative_url }}" alt="{% if project.featured_certificate %}{{ certificate.caption | escape }}{% endif %}" class="work-cover{% if project.featured_certificate %} work-cover--certificate{% endif %}"{% if project.cover_position %} style="object-position:{{ project.cover_position }}"{% endif %} loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" decoding="async">
+                </a>
+              {% endif %}
             </article>
           {% endfor %}
         </div>

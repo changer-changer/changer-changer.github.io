@@ -139,7 +139,7 @@ cases:
     summary: 自动核对 Agent 交付的文件，把问题退回原子任务修复。
     result: 在 PilotDeck 跑通交付验收与局部修复 · 获一等奖
     cover: pilotdeck-poster
-    cover_position: center 18%
+    featured_certificate: pilotdeck-certificate
     flow: [规则核对文件, 独立模型对照原始资料, 通过交付或退回原任务]
     links:
       - label: 项目代码
@@ -173,6 +173,7 @@ cases:
   tactile-vla:
     title: 触觉感知与机器人精密装配
     featured_title: 具身智能触觉工程 · 科研实习
+    featured_video: true
     category: 具身智能 · 真机研发
     period: 2025.09 — 2026.03
     role: 瞬恒智能（方斌老师的实验室） · 科研实习
