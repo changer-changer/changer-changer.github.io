@@ -20,7 +20,7 @@
   <meta name="theme-color" content="#f7f7f4">
   <link rel="canonical" href="{{ page.url | absolute_url }}">
   <link rel="preload" href="{{ '/assets/fonts/noto-serif-sc-900.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="{{ '/assets/css/career.css' | relative_url }}?v=3">
+  <link rel="stylesheet" href="{{ '/assets/css/career.css' | relative_url }}?v=4">
 </head>
 <body>
   <a class="skip-link" href="#main">跳到正文</a>
@@ -172,6 +172,19 @@
           {% endfor %}
         </div>
       </section>
+
+      {% assign current = career.cases[career.current] %}
+      {% if current %}
+        {% assign current_url = '/resume/cases/' | append: career.current | append: '/' %}
+        <section class="career-section" id="now" aria-labelledby="now-title">
+          <h2 id="now-title">现在在做</h2>
+          <a class="career-work work-copy" href="{{ current_url | relative_url }}">
+            <h3>{{ current.title }}</h3>
+            <p class="work-summary">{{ current.summary }}</p>
+            <p class="work-result">{{ current.result }}</p>
+          </a>
+        </section>
+      {% endif %}
 
       <section class="career-section career-awards" id="awards" aria-labelledby="awards-title">
         <h2 id="awards-title">一些不太重要的小奖项</h2>
