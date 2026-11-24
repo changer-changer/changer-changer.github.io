@@ -234,6 +234,13 @@ a.career-work:hover h3, .career-timeline a:hover h3 { text-decoration: underline
 .case-links a { display: inline-flex; align-items: center; min-height: 44px; }
 
 .case-video, .case-cover { margin: 0 0 1.85rem; }
+.case-videos { display: grid; gap: 1.15rem; margin-bottom: 1.85rem; }
+.case-videos .case-video { min-width: 0; margin: 0; }
+@media (min-width: 761px) {
+  .case-videos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .case-videos > :first-child { grid-column: 1 / -1; }
+  .case-videos > :not(:first-child) video { aspect-ratio: 4 / 3; object-fit: contain; }
+}
 .case-cover img { height: auto; max-height: 28rem; object-fit: contain; background: #e9ece4; }
 .case-video video { display: block; width: 100%; max-height: min(66vh, 32rem); background: #20231f; }
 .case-video figcaption, .case-cover figcaption, .case-gallery figcaption { margin-top: .35rem; color: var(--muted); font-size: .875rem; }

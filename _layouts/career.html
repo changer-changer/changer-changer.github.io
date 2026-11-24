@@ -20,7 +20,7 @@
   <meta name="theme-color" content="#f7f7f4">
   <link rel="canonical" href="{{ page.url | absolute_url }}">
   <link rel="preload" href="{{ '/assets/fonts/noto-serif-sc-900.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="{{ '/assets/css/career.css' | relative_url }}?v=12">
+  <link rel="stylesheet" href="{{ '/assets/css/career.css' | relative_url }}?v=13">
 </head>
 <body>
   <a class="skip-link" href="#main">跳到正文</a>
@@ -56,14 +56,20 @@
         {% endif %}
       </header>
       {% if work.video %}
-        {% assign poster = '/assets/images/resume/cases/' | append: work.video.poster | append: '.webp' %}
-        <figure class="case-video{% if work.video.orientation == 'portrait' %} case-video--portrait{% endif %}">
-          <video controls playsinline preload="none" poster="{{ poster | relative_url }}" aria-label="{{ work.video.caption | escape }}">
-            <source src="{{ work.video.src | relative_url }}" type="video/mp4">
-            <a href="{{ work.video.src | relative_url }}">查看视频文件</a>
-          </video>
-          <figcaption>{{ work.video.caption }}</figcaption>
-        </figure>
+        {% assign no_additional_videos = '' | split: ',' %}
+        {% assign case_videos = work.additional_videos | default: no_additional_videos | unshift: work.video %}
+        <div{% if case_videos.size > 1 %} class="case-videos"{% endif %}>
+          {% for clip in case_videos %}
+            {% assign poster = '/assets/images/resume/cases/' | append: clip.poster | append: '.webp' %}
+            <figure class="case-video{% if clip.orientation == 'portrait' %} case-video--portrait{% endif %}">
+              <video controls playsinline preload="none" poster="{{ poster | relative_url }}" aria-label="{{ clip.caption | escape }}">
+                <source src="{{ clip.src | relative_url }}" type="video/mp4">
+                <a href="{{ clip.src | relative_url }}">查看视频文件</a>
+              </video>
+              <figcaption>{{ clip.caption }}</figcaption>
+            </figure>
+          {% endfor %}
+        </div>
       {% elsif work.cover_caption %}
         <figure class="case-cover">
           <img src="{{ social_image | relative_url }}" alt="{{ work.cover_caption | escape }}" width="1500" height="1000">

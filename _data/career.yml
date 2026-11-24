@@ -172,12 +172,20 @@ cases:
     role: 瞬恒智能（方斌老师的实验室） · 科研实习
     summary: 在自习室搭起 SO-101、跑通 π₀，后来进组做触觉编码、策略训练和真机装配。
     result: 完成公差要求小于 0.1 毫米的装配任务 · 发明专利申请已公开
-    cover: tactile-assembly
+    cover: metal-cylinder-closeup
     flow: [读取接触面触觉数据, 单独编码并给策略提供条件, 在真机上执行装配]
     video:
-      src: /assets/video/resume/tactile-assembly.mp4
-      poster: tactile-demo
-      caption: 真机装配记录 · 视频展示末端执行动作，公差数值为项目要求。
+      src: /assets/video/resume/metal-cylinder-closeup.mp4
+      poster: metal-cylinder-closeup
+      caption: 金属圆柱插拔近景 · 夹爪取出金属圆柱，再将它插回夹具。
+    additional_videos:
+      - src: /assets/video/resume/metal-cylinder-workcell.mp4
+        poster: metal-cylinder-workcell
+        orientation: portrait
+        caption: 金属圆柱插拔工位 · 从侧面看机械臂与夹具的位置。
+      - src: /assets/video/resume/tactile-assembly.mp4
+        poster: tactile-demo
+        caption: 连接器插拔 · 另一项真机装配演示。
     sections:
       - title: 从自习室里的第一台机械臂开始
         text: 我想做具身智能，那时还没有实验室资源，就自己买了台机械臂，在学校自习室从零搭起 SO-101 系统，跑通了 π₀ 策略。之后我带着这个原型去找方斌老师交流，加入瞬恒智能，开始做触觉感知和机器人精密装配。
@@ -188,6 +196,8 @@ cases:
       - title: 我交付了什么
         text: 我和一位研究生合作，为精密装配客户完成公差要求小于 0.1 毫米的装配任务。我还独立实现了 Tac3D 到 Quest 3S 的触觉点云可视化，方老师提供实验环境。相关发明专利申请已公开（CN122547231A），我是共同发明人。
     gallery:
+      - image: metal-cylinder-fixture
+        caption: 金属圆柱与插拔夹具 · 实拍视频截帧
       - image: tactile-assembly
         caption: 双臂装配现场
       - image: tactile-vr-cloud
