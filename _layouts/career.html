@@ -20,7 +20,7 @@
   <meta name="theme-color" content="#f7f7f4">
   <link rel="canonical" href="{{ page.url | absolute_url }}">
   <link rel="preload" href="{{ '/assets/fonts/noto-serif-sc-900.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="{{ '/assets/css/career.css' | relative_url }}?v=7">
+  <link rel="stylesheet" href="{{ '/assets/css/career.css' | relative_url }}?v=8">
 </head>
 <body>
   <a class="skip-link" href="#main">跳到正文</a>
@@ -133,6 +133,7 @@
             </li>
           {% endfor %}
         </ol>
+        <p class="timeline-summary">{{ career.timeline_summary }}</p>
       </section>
 
       <section class="career-section" id="works" aria-labelledby="works-title">

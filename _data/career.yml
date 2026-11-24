@@ -9,6 +9,7 @@ identity:
   current_intro: 现在研究多智能体如何分工、怎样验收
 
 featured: [pilotdeck, tactile-vla, retail-tryon, inside-computing]
+timeline_summary: 做机器人让我学会把一套系统跑通，黑客松让我习惯用原型快速验证想法。在猎豹移动接触真实业务后，我看到了前沿 AI 能力和客户日常工作之间的距离，也开始关注新技术怎样解决现场问题。
 timeline:
   - id: tactile-vla
     date: 2025.09 — 2026.03
