@@ -68,7 +68,6 @@ resume_sections:
       - case: tactile-visualization
       - case: wheelchair
       - case: retail-tryon
-      - case: automotive-video-studio
       - case: inside-computing
 skills:
   - area: 机器人
@@ -292,11 +291,11 @@ cases:
         caption: 机器人零售界面参考 · 商品与多语交互
 
   field-fde:
-    title: 在企业现场做 AI 需求诊断
+    title: 企业 AI 需求验证与交付
     category: 傅盛 AI 战队 · FDE
     period: 2026.07 起
     role: 商业场景诊断与 Demo
-    summary: 和企业一起拆工作流程，把一条能验证的需求做成现场演示。
+    summary: 和企业一起拆解工作流程，做现场演示验证需求，也为一家车企交付了 AI 视频样片和可复用的工具原型。
     result: 两场完成现场诊断与演示 · 一家药企进入后续落地
     cover: fde-diagnostic
     links:
@@ -310,7 +309,7 @@ cases:
         text: 我把需求缩到可演示的一条链路：通过平台官方接口汇总反馈，提炼常见问题，再把建议对应回具体的店铺和产品。现场用 Demo 说明 AI 能帮到哪一步，后续接入与交付由团队承接。
       - title: 为什么有些场景停在演示
         text: 另一次讨论里，金融企业想汇总分散在多套内部系统里的信息，后续选择自行推进。两次经历让我更重视现场验证的三个条件：数据能否接到、用结果的人是谁、演示之后谁继续负责。
-      - title: 车企客户如何复用一次视频交付
+      - title: 车企交付 · AI 视频生成系统
         text: 我们先为客户定制生成流程并交付样片。客户希望复用这套流程，我用一个周末做出 Video Studio 原型，继续对接业务人员，再交给研发团队推进落地。
     gallery:
       - image: fde-diagnostic
@@ -320,11 +319,14 @@ cases:
 
   automotive-video-studio:
     title: 车企 AI 视频生成系统 · Video Studio
-    category: 企业 AI · 视频生成
-    period: 2026 · 傅盛 AI 战队期间
+    category: 傅盛 AI 战队 · 企业交付
+    period: 2026 年
     role: 工作流设计、原型开发与客户对接
     summary: 用字级台词时间轴对齐镜头和声音，把一次定制视频交付做成可复用的前端工具。
     result: 交付车企样片 · 周末完成 Video Studio 原型 · 移交研发推进落地
+    links:
+      - label: 返回傅盛 AI 战队经历
+        url: /resume/cases/field-fde/
     flow: [拆解台词与镜头要求, 确定 TTS 配音并切出时间轴, 按时间轴生成画面和声音, 把流程封装进 Video Studio]
     sections:
       - title: 先定清楚视频怎么验收
