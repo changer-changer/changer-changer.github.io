@@ -134,15 +134,15 @@ cases:
   pilotdeck:
     title: PilotDeck 子任务验收与局部修复
     featured_title: 面壁智能黑客松全场总冠军
-    featured_result: AI 原点社区 · PilotDeck 交付验收与局部修复
+    featured_result: AI 原点社区 · 约 80% 的参赛者为清华本硕博
     category: AI Agent · Harness
     period: 2026.09.11 — 09.12
     role: 方案、实现、实验与答辩
-    summary: 自动核对 Agent 交付的文件，把问题退回原子任务修复。
+    summary: 在 PilotDeck 实现交付验收和局部修复，只让出错的子任务返工。
     result: Hi Youth 面壁智能专场全场总冠军 · 第 72 队获一等奖
     cover: pilotdeck-poster
     featured_certificate: pilotdeck-certificate
-    flow: [规则核对文件, 独立模型对照原始资料, 通过交付或退回原任务]
+    flow: [规则检查文件, 独立模型对照原始资料, 验收通过或退回修复]
     links:
       - label: 项目代码
         url: https://github.com/changer-changer/PilotDeck-Verified-Subtasks
@@ -152,16 +152,14 @@ cases:
         url: https://github.com/changer-changer/PilotDeck-Verified-Subtasks/blob/main/docs/verified-subtasks/STATISTICS.zh-CN.md
       - label: "上游 PR #578"
         url: https://github.com/OpenBMB/PilotDeck/pull/578
-      - label: 清华新闻网活动记录
-        url: https://www.tsinghua.edu.cn/info/3055/128435.htm
     sections:
       - title: 子任务怎样才算完成
         text: 我把「跑完了」和「交付能用」当作两个需要分别检查的状态。例如，供应风险简报可以有合法的 JSON 格式，却漏掉原始材料里延期七天的信息。验收要对照任务、源材料和实际文件，再决定能不能交给下一步。
       - title: 为什么把验收接进 Harness
-        text: 先由规则检查文件和字段，再给独立的只读模型核对上下文。发现问题时，原子任务沿用自己的会话和工具权限，在轮次上限内继续修，已经通过的兄弟任务不动。原生界面同步状态，验收记录进入 PilotDeck 的白盒项目记忆，后续任务可以检索。
+        text: 先由规则检查文件和字段，再由独立的只读模型验收。发现问题时，原子任务沿用自己的会话和工具权限，在轮次上限内继续修，已经通过的兄弟任务不动。原生界面同步状态，验收记录进入 PilotDeck 的白盒项目记忆，后续任务可以检索。
       - title: 怎么验证修复真的发生
         text: >-
-          在 GLM-5.3 原生演示里，我们预置了错误交付，核对修复后的文件，同时确认三份正确报表未改动，并追踪写入记忆的验收记录。另有四模型的配对合成对照，报告保留分母、失败和模型差异。上游 #578 已提交，状态为关闭且未合并。
+          在 GLM-5.3 原生演示里，我们预置了错误交付，用它演示局部修复和验收记录。四模型配对实验的分母、失败和模型差异见实验记录。上游 #578 已提交，状态为关闭且未合并。
     gallery:
       - image: pilotdeck-poster
         caption: 项目海报 · 规则检查、独立复核、原任务返工与白盒记忆
