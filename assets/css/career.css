@@ -71,8 +71,8 @@ h3 { font-size: 1.125rem; }
   font: .7rem ui-monospace, monospace;
 }
 
-.career-intro { padding: clamp(2rem, 4vw, 3.2rem) 0 clamp(1.8rem, 3.2vw, 2.65rem); }
-.career-intro h1 { font-size: clamp(2.75rem, 6.2vw, 5.4rem); letter-spacing: -.035em; }
+.career-intro { padding: clamp(1.5rem, 3vw, 2.45rem) 0 clamp(1.25rem, 2.4vw, 1.95rem); }
+.career-intro h1 { font-size: clamp(2.6rem, 5vw, 4.3rem); letter-spacing: -.035em; }
 .career-education {
   display: flex;
   flex-wrap: wrap;
@@ -82,8 +82,9 @@ h3 { font-size: 1.125rem; }
   font-weight: 600;
 }
 .career-education span { font-weight: 400; }
-.career-intro-copy, .case-lead { max-width: 43rem; margin-top: .95rem; color: var(--muted); }
-.career-contacts { display: flex; align-items: center; gap: .45rem 1.1rem; flex-wrap: wrap; margin-top: 1rem; }
+.career-intro-copy, .case-lead { max-width: 43rem; margin-top: .75rem; color: var(--muted); }
+.career-intro-copy { max-width: 47rem; }
+.career-contacts { display: flex; align-items: center; gap: .45rem 1.1rem; flex-wrap: wrap; margin-top: .6rem; }
 .career-contacts a, .career-contacts button {
   display: inline-flex;
   align-items: center;
@@ -100,7 +101,7 @@ h3 { font-size: 1.125rem; }
 .career-section { padding: 1.75rem 0 2.25rem; border-top: 1px solid var(--line); scroll-margin-top: 1rem; }
 .career-section > h2 { margin-bottom: 1.2rem; }
 .career-works, .career-projects { display: grid; gap: .9rem; }
-.career-works { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.career-works { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .career-works article { display: flex; }
 .career-work, .career-projects a {
   display: block;
@@ -111,15 +112,30 @@ h3 { font-size: 1.125rem; }
 }
 .career-work:hover, .career-projects a:hover { border-color: var(--accent); }
 .career-work:hover h3, .career-projects a:hover h3, .career-timeline a:hover h3 { text-decoration: underline; }
+.work-featured { grid-column: 1 / -1; }
+.work-featured .career-work {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 32%);
+  align-items: center;
+  border-top: 3px solid var(--accent);
+}
+.work-featured h3 { font-size: clamp(1.4rem, 2.5vw, 2rem); text-wrap: balance; }
 .work-cover {
-  aspect-ratio: 2.8 / 1;
+  aspect-ratio: 3 / 1;
   object-fit: cover;
   background: #e2e6dc;
-  border-bottom: 1px solid var(--line);
+  border-top: 1px solid var(--line);
+}
+.work-featured .work-cover {
+  aspect-ratio: 2.15 / 1;
+  border: 0;
+  border-left: 1px solid var(--line);
+  filter: saturate(.72);
 }
 .work-copy, .career-projects a { padding: 1rem 1.1rem 1.15rem; }
-.work-copy h3, .career-projects h3 { margin-top: .12rem; }
-.work-copy > p:not(.career-meta), .career-projects p { margin-top: .38rem; font-size: .94rem; }
+.work-featured .work-copy { padding: clamp(1rem, 2.4vw, 1.65rem); }
+.work-copy > p, .career-projects p { margin-top: .38rem; font-size: .94rem; }
+.work-summary { color: var(--muted); }
 .career-meta { color: var(--muted); font-size: .875rem; }
 .work-result { color: var(--accent); font-weight: 600; }
 
@@ -213,6 +229,7 @@ h3 { font-size: 1.125rem; }
 
 @media (max-width: 760px) {
   .career-bar, .career-main, .career-foot { width: calc(100% - 2rem); }
+  .career-works { grid-template-columns: 1fr; }
   .career-projects { grid-template-columns: 1fr; }
   .career-timeline a { grid-template-columns: 1fr; }
   .career-timeline li::before { top: 1.02rem; }
@@ -222,8 +239,9 @@ h3 { font-size: 1.125rem; }
 @media (max-width: 530px) {
   .career-bar { min-height: 3.55rem; }
   .career-bar nav { gap: .62rem; }
-  .career-works, .career-awards ul { grid-template-columns: 1fr; }
-  .career-intro { padding: 1.7rem 0 1.3rem; }
+  .career-awards ul { grid-template-columns: 1fr; }
+  .work-featured .career-work { grid-template-columns: 1fr; }
+  .work-featured .work-cover { aspect-ratio: 3.5 / 1; border: 0; border-top: 1px solid var(--line); }
   .career-section { padding-top: 1.25rem; padding-bottom: 1.55rem; }
   .case-video video { max-height: 56vh; }
   .case-video--portrait video { max-height: 44vh; }
@@ -239,6 +257,7 @@ h3 { font-size: 1.125rem; }
   .career-intro h1 { font-size: 2.4rem; }
   .career-section { padding: .75rem 0; }
   .career-works { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .work-featured .career-work { display: block; }
   .career-projects { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .career-works article, .career-timeline li, .career-projects article { break-inside: avoid; }
   .career-timeline a, .work-copy, .career-projects a { padding: .5rem; }

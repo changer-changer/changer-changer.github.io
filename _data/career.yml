@@ -5,9 +5,9 @@ identity:
   age: 2006 年生
   email: 2024210487@bupt.cn
   github: https://github.com/changer-changer
-  intro: 我从触觉机器人开始做工程，后来在零售门店做过调研、产品和开发。回到学校后，我把做系统的经验用在 Agent 验收和计算机教学上。
+  intro: 我从触觉装配做到门店机器人，做过真机研发和产品交付。现在研究多智能体如何分工、怎样验收。
 
-featured: [inside-computing, pilotdeck, tactile-vla, wheelchair]
+featured: [pilotdeck, tactile-vla, wheelchair, inside-computing]
 timeline:
   - id: tactile-vla
     date: 2025.09 — 2026.03
@@ -64,7 +64,7 @@ cases:
     summary: 把缓存、流水线和虚拟内存做成能预测、能操作、能核对的模型。
     result: 被北邮计算机基础课采用 · 抖音约 25 万播放
     cover: computing-course-home
-    cover_position: center 19%
+    featured_thumbnail: false
     flow: [预测下一步, 操作模型, 核对系统状态]
     links:
       - label: 在线体验
@@ -92,11 +92,12 @@ cases:
 
   pilotdeck:
     title: PilotDeck 子任务验收与局部修复
+    featured_title: PilotDeck 交付验收
     category: AI Agent · Harness
     period: 2026.09
     role: 方案、实现、实验与答辩
     summary: 自动核对 Agent 交付的文件，把问题退回原子任务修复。
-    result: 面壁智能黑客松一等奖 · 已提交上游 PR
+    result: 接入 PilotDeck 原生流程 · 面壁智能黑客松一等奖
     cover: pilotdeck-poster
     cover_position: center 18%
     flow: [规则核对文件, 独立模型对照原始资料, 通过交付或退回原任务]

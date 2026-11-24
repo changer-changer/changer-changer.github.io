@@ -20,7 +20,7 @@
   <meta name="theme-color" content="#f7f7f4">
   <link rel="canonical" href="{{ page.url | absolute_url }}">
   <link rel="preload" href="{{ '/assets/fonts/noto-serif-sc-900.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="{{ '/assets/css/career.css' | relative_url }}?v=2">
+  <link rel="stylesheet" href="{{ '/assets/css/career.css' | relative_url }}?v=3">
 </head>
 <body>
   <a class="skip-link" href="#main">跳到正文</a>
@@ -122,15 +122,16 @@
             {% assign project = career.cases[id] %}
             {% assign cover = '/assets/images/resume/cases/' | append: project.cover | append: '.webp' %}
             {% assign url = '/resume/cases/' | append: id | append: '/' %}
-            <article id="{{ id }}">
+            <article id="{{ id }}"{% if forloop.first %} class="work-featured"{% endif %}>
               <a class="career-work" href="{{ url | relative_url }}">
-                <img src="{{ cover | relative_url }}" alt="" class="work-cover"{% if project.cover_position %} style="object-position:{{ project.cover_position }}"{% endif %} loading="{% if forloop.index <= 2 %}eager{% else %}lazy{% endif %}" decoding="async">
                 <div class="work-copy">
-                  <p class="career-meta">{{ project.category }}</p>
-                  <h3>{{ project.title }}</h3>
-                  <p>{{ project.summary }}</p>
+                  <h3>{{ project.featured_title | default: project.title }}</h3>
                   <p class="work-result">{{ project.result }}</p>
+                  <p class="work-summary">{{ project.summary }}</p>
                 </div>
+                {% if project.featured_thumbnail != false %}
+                  <img src="{{ cover | relative_url }}" alt="" class="work-cover"{% if project.cover_position %} style="object-position:{{ project.cover_position }}"{% endif %} loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" decoding="async">
+                {% endif %}
               </a>
             </article>
           {% endfor %}
