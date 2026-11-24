@@ -198,6 +198,10 @@ a.career-work:hover h3, .career-timeline a:hover h3 { text-decoration: underline
 .career-entry-copy h3 a { text-decoration-thickness: 1px; }
 .career-entry-copy p { margin-top: .24rem; }
 .career-entry-copy .career-role { color: var(--muted); font-size: .875rem; }
+.career-placements { margin: .6rem 0 0; padding-inline-start: 1.15rem; }
+.career-placements li + li { margin-top: .6rem; }
+.career-placement-heading { display: flex; flex-wrap: wrap; align-items: baseline; gap: .05rem .65rem; }
+.career-placement-heading .career-date { padding-top: 0; }
 .career-skills h2 { font-size: clamp(1.35rem, 2.5vw, 1.65rem); }
 .career-skills dl, .career-skills dd { margin: 0; }
 .career-skills dt { font-weight: 600; }

@@ -19,14 +19,10 @@ timeline:
     date: 2026 年 5 月底
     title: 猎豹移动 AI Native 黑客松 · 全国总冠军
     summary: 用约 13 小时在豹小秘上跑通选款和 AI 一键换衣，试穿功能后来接入 AgentOS。
-  - id: field-fde
-    date: 2026.07 起
-    title: 傅盛 AI 战队 · 企业 AI 场景诊断
-    summary: 拆解企业流程，现场验证 Agent 需求，也为一家车企交付了 AI 视频样片和可复用流程原型。
-  - id: wheelchair
-    date: 2026 年 8 月初—9 月中旬
-    title: 猎户星空 · 具身智能机器人场景探索
-    summary: 走访商场和门店，尝试售前沟通与产品研发，做出轮椅销售助手并在两家门店试部署。
+  - id: fusheng-ai-team
+    date: 2026 年 7 月中旬—9 月中旬
+    title: 傅盛 AI 战队 · 管培生
+    summary: 先在猎豹移动做企业 AI 需求验证，随后在猎户星空做机器人场景探索、产品研发和售前实践。
   - id: pilotdeck
     date: 2026.09.11 — 09.12
     title: AI 原点社区 · 面壁智能黑客松全场总冠军
@@ -48,14 +44,14 @@ resume_sections:
   - id: internships
     title: 实习经历
     entries:
-      - case: field-fde
-        title: 傅盛 AI 战队
-        role: FDE · 企业 AI 场景诊断
-        summary: 为企业客户梳理工作流程、现场验证 Agent 需求。为一家车企定制 AI 视频流程，并用一个周末做出 Video Studio 原型。
-      - case: wheelchair
-        title: 猎户星空
-        role: 具身智能机器人场景探索 · 产品研发与售前实践
-        summary: 通过客户走访和售前沟通筛选场景，选定智能轮椅销售，再做产品设计和双屏联调。
+      - case: fusheng-ai-team
+        placements:
+          - case: field-fde
+            title: 猎豹移动
+            summary: 短期参与 FDE，现场验证企业 AI 需求，也为一家车企交付视频样片并开发 Video Studio 原型。
+          - case: wheelchair
+            title: 猎户星空
+            summary: 做具身智能机器人场景探索、产品研发和售前实践，开发的轮椅销售助手在两家门店试部署。
       - case: tactile-vla
         title: 瞬恒智能
         role: 科研实习 · 具身智能
@@ -236,13 +232,16 @@ cases:
 
   wheelchair:
     title: 轮椅门店的机器人销售助手
-    category: 机器人 · 调研、产品与开发
+    category: 傅盛 AI 战队 · 猎户星空
     period: 2026 年 8 月初—9 月中旬
     role: 猎户星空 · 具身智能机器人场景探索、产品研发与售前实践
     summary: 用连续对话调出 Android 页面、产品资料和演示视频。
     result: 完成初版并在两家门店试部署
     cover: wheelchair-demo
     cover_position: center 32%
+    links:
+      - label: 返回傅盛 AI 战队经历
+        url: /resume/cases/fusheng-ai-team/
     flow: [听懂顾客问题, 检索产品资料, 调出页面或视频, 结合当前画面回答追问]
     video:
       src: /assets/video/resume/wheelchair.mp4
@@ -288,15 +287,36 @@ cases:
       - path: /assets/images/resume/evidence/retail-robot-ui.png
         caption: 机器人零售界面参考 · 商品与多语交互
 
+  fusheng-ai-team:
+    title: 傅盛 AI 战队
+    category: 实习经历
+    period: 2026 年 7 月中旬—9 月中旬
+    role: 管培生
+    summary: 先在猎豹移动做企业 AI 需求验证，随后到猎户星空做机器人场景探索、产品研发和售前实践。
+    result: 一家药企进入后续落地 · 轮椅销售助手在两家门店试部署
+    cover: fusheng-photo
+    links:
+      - label: 猎豹移动经历
+        url: /resume/cases/field-fde/
+      - label: 猎户星空经历
+        url: /resume/cases/wheelchair/
+    sections:
+      - title: 猎豹移动 · 7 月中旬—8 月初
+        text: 我短期参与 FDE，和企业客户一起梳理业务流程，把需求做成现场可验证的演示。这段期间，我也为一家车企定制 AI 视频流程，用一个周末做出 Video Studio 原型，再交给研发团队推进落地。
+      - title: 猎户星空 · 8 月初—9 月中旬
+        text: 我走访商场和门店，先了解机器人在现场的使用和运维条件。随后我在智能轮椅门店做售前调研、产品设计和开发联调，让机器人能一边回答顾客问题，一边调出产品资料或演示视频。
+
   field-fde:
     title: 企业 AI 需求验证与交付
-    category: 傅盛 AI 战队 · FDE
-    period: 2026.07 起
-    role: 商业场景诊断与 Demo
-    summary: 和企业一起拆解工作流程，做现场演示验证需求，也为一家车企交付了 AI 视频样片和可复用的工具原型。
+    category: 傅盛 AI 战队 · 猎豹移动
+    period: 2026 年 7 月中旬—8 月初
+    role: 管培生 · 企业 AI 需求验证与交付
+    summary: 短期参与 FDE，和企业一起拆解工作流程，做现场演示验证需求，也为一家车企交付了 AI 视频样片和可复用的工具原型。
     result: 两场完成现场诊断与演示 · 一家药企进入后续落地
     cover: fde-diagnostic
     links:
+      - label: 返回傅盛 AI 战队经历
+        url: /resume/cases/fusheng-ai-team/
       - label: 车企 AI 视频生成系统 · Video Studio
         url: /resume/cases/automotive-video-studio/
     flow: [读取各店消费者反馈, 汇总高频问题, 对照备货与商品页决策]
@@ -324,6 +344,8 @@ cases:
     result: 交付车企样片 · 周末完成 Video Studio 原型 · 移交研发推进落地
     links:
       - label: 返回傅盛 AI 战队经历
+        url: /resume/cases/fusheng-ai-team/
+      - label: 返回猎豹移动经历
         url: /resume/cases/field-fde/
     flow: [拆解台词与镜头要求, 确定 TTS 配音并切出时间轴, 按时间轴生成画面和声音, 把流程封装进 Video Studio]
     sections:

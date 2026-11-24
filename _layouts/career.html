@@ -20,7 +20,7 @@
   <meta name="theme-color" content="#f7f7f4">
   <link rel="canonical" href="{{ page.url | absolute_url }}">
   <link rel="preload" href="{{ '/assets/fonts/noto-serif-sc-900.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="{{ '/assets/css/career.css' | relative_url }}?v=10">
+  <link rel="stylesheet" href="{{ '/assets/css/career.css' | relative_url }}?v=12">
 </head>
 <body>
   <a class="skip-link" href="#main">跳到正文</a>
@@ -185,8 +185,24 @@
                 <div class="career-entry-copy">
                   <h3><a href="{{ url | relative_url }}">{{ entry.title | default: project.title }}</a></h3>
                   <p class="career-role">{{ entry.role | default: project.role }}</p>
-                  <p>{{ entry.summary | default: project.summary }}</p>
-                  <p class="work-result">{{ project.result }}</p>
+                  {% if entry.placements %}
+                    <ul class="career-placements">
+                      {% for placement in entry.placements %}
+                        {% assign placement_case = career.cases[placement.case] %}
+                        {% assign placement_url = '/resume/cases/' | append: placement.case | append: '/' %}
+                        <li>
+                          <p class="career-placement-heading">
+                            <strong><a href="{{ placement_url | relative_url }}">{{ placement.title }}</a></strong>
+                            <span class="career-date">{{ placement_case.period }}</span>
+                          </p>
+                          <p>{{ placement.summary }}</p>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  {% else %}
+                    <p>{{ entry.summary | default: project.summary }}</p>
+                    <p class="work-result">{{ project.result }}</p>
+                  {% endif %}
                 </div>
               </article>
             {% endfor %}
