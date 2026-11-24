@@ -20,7 +20,7 @@
   <meta name="theme-color" content="#f7f7f4">
   <link rel="canonical" href="{{ page.url | absolute_url }}">
   <link rel="preload" href="{{ '/assets/fonts/noto-serif-sc-900.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="{{ '/assets/css/career.css' | relative_url }}?v=6">
+  <link rel="stylesheet" href="{{ '/assets/css/career.css' | relative_url }}?v=7">
 </head>
 <body>
   <a class="skip-link" href="#main">跳到正文</a>
@@ -108,7 +108,7 @@
       <header class="career-intro">
         <h1>{{ career.identity.name }}</h1>
         <p class="career-education">{{ career.identity.school }} <span>{{ career.identity.degree }}</span>{% if career.identity.age %} <span>{{ career.identity.age }}</span>{% endif %}</p>
-        <p class="career-intro-copy">{{ career.identity.intro }}</p>
+        <p class="career-intro-copy">{{ career.identity.intro }}{% if career.current %}<a href="#now">{{ career.identity.current_intro }}</a>。{% endif %}</p>
         <div class="career-contacts">
           <a href="mailto:{{ career.identity.email }}">{{ career.identity.email }}</a>
           <button type="button" data-print-resume>打印履历</button>
@@ -191,7 +191,7 @@
       {% assign current = career.cases[career.current] %}
       {% if current %}
         {% assign current_url = '/resume/cases/' | append: career.current | append: '/' %}
-        <section class="career-section" id="now" aria-labelledby="now-title">
+        <section class="career-section career-now" id="now" aria-labelledby="now-title">
           <h2 id="now-title">现在在做</h2>
           <a class="career-work work-copy" href="{{ current_url | relative_url }}">
             <h3>{{ current.title }}</h3>

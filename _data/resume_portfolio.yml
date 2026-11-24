@@ -132,11 +132,11 @@ experience:
   - id: "orionstar"
     period: "2026 年夏"
     organization: "猎户星空"
-    role: "轮式机器人产品与研发"
+    role: "具身智能机器人场景探索 · 产品研发与售前实践"
     label: "ROBOTICS PRODUCT"
     proof: "轮椅销售助手已在两家门店试部署。"
     bullets:
-      - "走访商场和门店，验证轮式机器人在零售场景中的使用与运维需求。"
+      - "走访商场和门店，通过售前沟通验证机器人在零售场景中的使用与运维需求。"
       - "实现轮椅销售助手，联调连续对话、产品资料和双屏展示。"
     metrics: ["现场需求验证", "Android 二次开发", "两家门店试部署"]
   - id: "robotics"

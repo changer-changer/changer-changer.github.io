@@ -5,7 +5,8 @@ identity:
   age: 2006 年生
   email: 2024210487@bupt.cn
   github: https://github.com/changer-changer
-  intro: 我从触觉装配做到门店机器人，做过真机研发和产品交付。现在研究多智能体如何分工、怎样验收。
+  intro: 我从触觉装配做到门店机器人，做过真机研发和产品交付。
+  current_intro: 现在研究多智能体如何分工、怎样验收
 
 featured: [pilotdeck, tactile-vla, retail-tryon, inside-computing]
 timeline:
@@ -23,8 +24,8 @@ timeline:
     summary: 拆解企业工作流程，现场验证 Agent 能解决哪一步。其中一家药企进入后续落地。
   - id: wheelchair
     date: 2026 年夏
-    title: 猎户星空 · 轮式机器人产品与研发
-    summary: 走访商场和门店，从筛选场景到开发轮椅销售助手，推动初版在两家店内试部署。
+    title: 猎户星空 · 具身智能机器人场景探索
+    summary: 走访商场和门店，尝试售前沟通与产品研发，做出轮椅销售助手并在两家门店试部署。
   - id: pilotdeck
     date: 2026.09
     title: 面壁智能黑客松冠军
@@ -44,8 +45,8 @@ resume_sections:
         summary: 和企业客户拆解工作流程，在活动现场做 Agent 演示，验证哪些环节值得继续落地。
       - case: wheelchair
         title: 猎户星空
-        role: 轮式机器人产品与研发
-        summary: 实地走访商场和门店，选定智能轮椅的销售场景，完成对话、产品资料和双屏展示的联调。
+        role: 具身智能机器人场景探索 · 产品研发与售前实践
+        summary: 通过客户走访和售前沟通筛选场景，选定智能轮椅销售，再做产品设计和双屏联调。
       - case: tactile-vla
         title: 瞬恒智能
         role: 科研实习 · 具身智能
@@ -198,7 +199,7 @@ cases:
     title: 轮椅门店的机器人销售助手
     category: 机器人 · 调研、产品与开发
     period: 2026 年夏
-    role: 猎户星空 · 轮式机器人产品与研发
+    role: 猎户星空 · 具身智能机器人场景探索、产品研发与售前实践
     summary: 用连续对话调出 Android 页面、产品资料和演示视频。
     result: 完成初版并在两家门店试部署
     cover: wheelchair-demo
@@ -217,7 +218,7 @@ cases:
       - title: 让对话负责调度页面
         text: 我把 Android 里的产品资料和视频页面封装成可调用的工具。Agent 先根据上下文理解问题，再检索本地资料、调用对应页面，并把当前展示内容留在对话上下文里。用户追问时，它可以接着解释刚放出来的东西。
       - title: 验证到了哪一步
-        text: 我做了从客户调研到现场演示、产品设计和开发的全过程。初版在两家门店试部署；我返校后结束了这段工作，销售增量仍缺少可归因的数据。
+        text: 我先参加售前沟通和客户调研，随后做产品设计、开发联调和现场演示。初版在两家门店试部署。返校后这段工作告一段落，销售增量仍缺少可归因的数据。
 
   retail-tryon:
     title: 零售一键换衣机器人

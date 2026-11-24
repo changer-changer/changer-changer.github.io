@@ -84,6 +84,7 @@ h3 { font-size: 1.125rem; }
 .career-education span { font-weight: 400; }
 .career-intro-copy, .case-lead { max-width: 43rem; margin-top: .75rem; color: var(--muted); }
 .career-intro-copy { max-width: 47rem; }
+.career-intro-copy a { color: var(--accent); font-weight: 600; }
 .career-contacts { display: flex; align-items: center; gap: .45rem 1.1rem; flex-wrap: wrap; margin-top: .6rem; }
 .career-contacts a, .career-contacts button {
   display: inline-flex;
@@ -174,6 +175,7 @@ h3 { font-size: 1.125rem; }
 .career-skills dt { font-weight: 600; }
 .career-skills dl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .65rem 1.25rem; }
 .career-skills dd { color: var(--muted); }
+.career-now .career-work { border-inline-start: 3px solid var(--accent); background: #eef0e8; }
 
 .career-awards h2 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
 .career-awards summary { width: fit-content; min-height: 44px; padding: .5rem 0; cursor: pointer; }
