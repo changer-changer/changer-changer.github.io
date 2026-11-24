@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% assign career = site.data.career %}
+  {% assign work = career.cases[page.case] %}
+  {% assign share_title = work.title | default: page.title %}
+  {% assign description = work.summary | default: page.description %}
+  <title>{{ share_title | escape }} · {{ career.identity.name }}</title>
+  <meta name="description" content="{{ description | escape }}">
+  <meta property="og:title" content="{{ share_title | escape }} · {{ career.identity.name }}">
+  <meta property="og:description" content="{{ description | escape }}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:type" content="website">
+  {% if work.cover %}
+    {% assign social_image = '/assets/images/resume/cases/' | append: work.cover | append: '.webp' %}
+    <meta property="og:image" content="{{ social_image | absolute_url }}">
+  {% endif %}
+  <meta name="theme-color" content="#f7f7f4">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  <link rel="preload" href="{{ '/assets/fonts/noto-serif-sc-900.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ '/assets/css/career.css' | relative_url }}?v=1">
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到正文</a>
+  <header class="career-bar">
+    <a class="career-brand" href="{{ '/' | relative_url }}" aria-label="崔之行的博客首页"><span aria-hidden="true">C/C</span> {{ career.identity.name }}</a>
+    <nav aria-label="履历导航">
+      {% if work %}
+        <a href="{{ '/resume/' | relative_url }}">返回履历</a>
+      {% else %}
+        <a href="#works">作品</a>
+        <a href="#experience">经历</a>
+        <a href="#awards">奖项</a>
+      {% endif %}
+      <a href="{{ career.identity.github }}">GitHub</a>
+    </nav>
+  </header>
+
+  {% if work %}
+    <main id="main" class="career-main career-case">
+      <header class="case-intro">
+        <p class="career-meta">{{ work.category }} <span>{{ work.period }}</span></p>
+        <h1>{{ work.title }}</h1>
+        <p class="case-lead">{{ work.summary }}</p>
+        <p class="case-role">{{ work.role }}</p>
+        <div class="case-result">
+          <h2>做到哪一步</h2>
+          <p>{{ work.result }}</p>
+        </div>
+        {% if work.links %}
+          <ul class="case-links" aria-label="项目链接">
+            {% for link in work.links %}<li><a href="{{ link.url }}">{{ link.label }}</a></li>{% endfor %}
+          </ul>
+        {% endif %}
+      </header>
+      {% if work.video %}
+        {% assign poster = '/assets/images/resume/cases/' | append: work.video.poster | append: '.webp' %}
+        <figure class="case-video{% if work.video.orientation == 'portrait' %} case-video--portrait{% endif %}">
+          <video controls playsinline preload="none" poster="{{ poster | relative_url }}" aria-label="{{ work.video.caption | escape }}">
+            <source src="{{ work.video.src | relative_url }}" type="video/mp4">
+            <a href="{{ work.video.src | relative_url }}">查看视频文件</a>
+          </video>
+          <figcaption>{{ work.video.caption }}</figcaption>
+        </figure>
+      {% endif %}
+      {% if work.flow %}
+        <ol class="case-flow" aria-label="项目流程">
+          {% for step in work.flow %}<li>{{ step }}</li>{% endfor %}
+        </ol>
+      {% endif %}
+      <section class="case-reasoning" aria-labelledby="reasoning-title">
+        <h2 id="reasoning-title">我是怎么做的</h2>
+        {% for section in work.sections %}
+          <article>
+            <h3>{{ section.title }}</h3>
+            <p>{{ section.text }}</p>
+          </article>
+        {% endfor %}
+      </section>
+      {% if work.gallery %}
+        <section class="case-gallery" aria-labelledby="gallery-title">
+          <h2 id="gallery-title">项目资料</h2>
+          <div class="case-gallery-grid">
+            {% for media in work.gallery %}
+              {% assign case_image = '/assets/images/resume/cases/' | append: media.image | append: '.webp' %}
+              {% assign media_path = media.path | default: case_image | relative_url %}
+              <figure>
+                <button type="button" data-lightbox data-image="{{ media_path }}" data-caption="{{ media.caption | escape }}" aria-label="放大查看：{{ media.caption | escape }}">
+                  <img src="{{ media_path }}" alt="" loading="lazy" decoding="async">
+                </button>
+                <figcaption>{{ media.caption }}{% if media.image == 'pilotdeck-poster' %} <a href="{{ media_path }}">查看海报大图</a>{% endif %}</figcaption>
+              </figure>
+            {% endfor %}
+          </div>
+        </section>
+      {% endif %}
+      <p class="return-link"><a href="{{ '/resume/#works' | relative_url }}">返回作品与履历</a></p>
+    </main>
+  {% else %}
+    <main id="main" class="career-main">
+      <header class="career-intro">
+        <h1>{{ career.identity.name }}</h1>
+        <p class="career-education">{{ career.identity.school }} <span>{{ career.identity.degree }}</span>{% if career.identity.age %} <span>{{ career.identity.age }}</span>{% endif %}</p>
+        <p class="career-intro-copy">{{ career.identity.intro }}</p>
+        <div class="career-contacts">
+          <a href="mailto:{{ career.identity.email }}">{{ career.identity.email }}</a>
+          <button type="button" data-print-resume>打印履历</button>
+        </div>
+      </header>
+
+      <section class="career-section" id="works" aria-labelledby="works-title">
+        <h2 id="works-title">代表作品</h2>
+        <div class="career-works">
+          {% for id in career.featured %}
+            {% assign project = career.cases[id] %}
+            {% assign cover = '/assets/images/resume/cases/' | append: project.cover | append: '.webp' %}
+            {% assign url = '/resume/cases/' | append: id | append: '/' %}
+            <article id="{{ id }}">
+              <a class="career-work" href="{{ url | relative_url }}">
+                <img src="{{ cover | relative_url }}" alt="" class="work-cover"{% if project.cover_position %} style="object-position:{{ project.cover_position }}"{% endif %} loading="{% if forloop.index <= 2 %}eager{% else %}lazy{% endif %}" decoding="async">
+                <div class="work-copy">
+                  <p class="career-meta">{{ project.category }}</p>
+                  <h3>{{ project.title }}</h3>
+                  <p>{{ project.summary }}</p>
+                  <p class="work-result">{{ project.result }}</p>
+                </div>
+              </a>
+            </article>
+          {% endfor %}
+        </div>
+      </section>
+
+      <section class="career-section" id="experience" aria-labelledby="experience-title">
+        <h2 id="experience-title">经历</h2>
+        <ol class="career-timeline">
+          {% for entry in career.timeline %}
+            {% assign url = '/resume/cases/' | append: entry.id | append: '/' %}
+            <li>
+              <a href="{{ url | relative_url }}">
+                <span class="career-date">{{ entry.date }}</span>
+                <div>
+                  <h3>{{ entry.title }}</h3>
+                  <p>{{ entry.summary }}</p>
+                </div>
+              </a>
+            </li>
+          {% endfor %}
+        </ol>
+      </section>
+
+      <section class="career-section" id="projects" aria-labelledby="projects-title">
+        <h2 id="projects-title">其他项目</h2>
+        <div class="career-projects">
+          {% for id in career.projects %}
+            {% assign project = career.cases[id] %}
+            {% assign url = '/resume/cases/' | append: id | append: '/' %}
+            <article>
+              <a href="{{ url | relative_url }}">
+                <h3>{{ project.title }}</h3>
+                <p>{{ project.summary }}</p>
+                <p class="work-result">{{ project.result }}</p>
+              </a>
+            </article>
+          {% endfor %}
+        </div>
+      </section>
+
+      <section class="career-section career-awards" id="awards" aria-labelledby="awards-title">
+        <h2 id="awards-title">一些不太重要的小奖项</h2>
+        <details>
+          <summary>展开查看奖项和证书</summary>
+          <ul>
+            {% for award in career.awards %}
+              <li>
+                <div><strong>{{ award.title }}</strong>{% if award.note %}<small>{{ award.note }}</small>{% endif %}</div>
+                {% if award.image %}
+                  <button type="button" data-lightbox data-image="{{ award.image | relative_url }}" data-caption="{{ award.title | escape }}" aria-label="查看图片：{{ award.title | escape }}">
+                    <img src="{{ award.image | relative_url }}" alt="" loading="lazy" decoding="async">
+                  </button>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        </details>
+      </section>
+      <nav class="career-versions" aria-label="专项简历">
+        <a href="{{ '/resume/research/' | relative_url }}">科研与算法简历</a>
+        <a href="{{ '/resume/product/' | relative_url }}">产品与 FDE 简历</a>
+      </nav>
+    </main>
+  {% endif %}
+  <footer class="career-foot">
+    <a href="{{ '/' | relative_url }}">崔之行的博客</a>
+    <a href="mailto:{{ career.identity.email }}">{{ career.identity.email }}</a>
+  </footer>
+  <dialog class="career-lightbox" id="resume-lightbox" aria-label="图片预览">
+    <button type="button" data-lightbox-close aria-label="关闭图片预览">关闭</button>
+    <img alt="">
+    <p></p>
+  </dialog>
+  <script src="{{ '/assets/js/resume-professional.js' | relative_url }}" defer></script>
+</body>
+</html>

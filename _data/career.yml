@@ -1,0 +1,274 @@
+identity:
+  name: 崔之行
+  school: 北京邮电大学
+  degree: 计算机科学与技术 · 2025 级本科
+  age: 2006 年生
+  email: 2024210487@bupt.cn
+  github: https://github.com/changer-changer
+  intro: 我从触觉机器人开始做工程，后来在零售门店做过调研、产品和开发。回到学校后，我把做系统的经验用在 Agent 验收和计算机教学上。
+
+featured: [inside-computing, pilotdeck, tactile-vla, wheelchair]
+timeline:
+  - id: tactile-vla
+    date: 2025.09 — 2026.03
+    title: 方斌教授实验室 · 科研实习
+    summary: 给方老师发邮件后进组，从触觉采集、遥操作一路做到策略训练和真机装配。
+  - id: retail-tryon
+    date: 2026 · 加入战队前
+    title: 猎豹移动 AI Native 黑客松
+    summary: 用约 13 小时做出服装选款和 AI 试穿演示，获全场总冠军。
+  - id: field-fde
+    date: 2026.07 起
+    title: 傅盛 AI 战队 · 企业 AI 场景诊断
+    summary: 拆解企业工作流程，现场验证 Agent 能解决哪一步。其中一家药企进入后续落地。
+  - id: wheelchair
+    date: 2026 年夏
+    title: 猎户星空 · 轮式机器人产品与研发
+    summary: 走访商场和门店，从筛选场景到开发轮椅销售助手，推动初版在两家店内试部署。
+  - id: pilotdeck
+    date: 2026.09
+    title: Hi Youth × 面壁智能黑客松
+    summary: 把子任务验收和局部修复接入 PilotDeck，获一等奖，并向上游提交 PR。
+  - id: inside-computing
+    date: 2026 年秋
+    title: 计算之境 · 课程工具与知识分享
+    summary: 做了一套可操作的 CS:APP 课程平台，后被北邮计算机基础课老师用作课堂材料。
+  - id: community
+    date: 2026 年秋
+    title: 北邮具身智能社团
+    summary: 发起校内具身智能社团，组织同学做分享并对接校外社区。
+
+projects: [retail-tryon, agent-research, research-nexus]
+awards:
+  - title: 中国国际大学生创新大赛 · 省级金奖
+  - title: 全国大学生电子设计竞赛 · 北京赛区二等奖
+    note: 负责视觉算法、PID 控制与软硬件联调
+  - title: 京彩大创 · 人工智能赛道二等奖
+    image: /assets/images/resume/cases/jingcai-certificate.webp
+  - title: 第三届「鸿雁杯」学生创新大赛 · 一等奖
+    image: /assets/images/resume/cases/hongyan-award.webp
+  - title: 「鸿雁杯」闭幕式现场
+    image: /assets/images/resume/cases/hongyan-showcase.webp
+  - title: 全国大学生数学竞赛 · 二等奖
+    image: /assets/images/resume/portfolio/award-national-math.jpg
+  - title: 北京市大学生数学竞赛 · 二等奖
+    image: /assets/images/resume/portfolio/award-beijing-math.jpg
+  - title: 中国大学生计算机设计大赛 · 北京赛区二等奖
+
+cases:
+  inside-computing:
+    title: 计算之境
+    category: 交互式教学 · CS:APP
+    period: 2026 年秋
+    role: 独立制作
+    summary: 把缓存、流水线和虚拟内存做成能预测、能操作、能核对的模型。
+    result: 被北邮计算机基础课采用 · 抖音约 25 万播放
+    cover: computing-course-home
+    cover_position: center 19%
+    flow: [预测下一步, 操作模型, 核对系统状态]
+    links:
+      - label: 在线体验
+        url: https://changer-changer.github.io/inside-computing/
+      - label: 项目代码
+        url: https://github.com/changer-changer/inside-computing
+      - label: 原点社区知识分享
+        url: https://weixin.qq.com/sph/ADGghVDOAB
+    sections:
+      - title: 我想让学生看见什么
+        text: 读书时，缓存、流水线和虚拟内存最难理解的地方，是学生只能看到定义和最后的计算结果。比如一次访存到底查了哪里、什么时候命中、下一步为什么变了，这些中间状态很难从静态插图里自己推出来。
+      - title: 3D 用来表达什么
+        text: 我先问每个概念的关键关系是什么。缓存是地址如何映射到组，流水线是同一时钟下多条指令的位置和依赖，虚拟内存则是地址如何一层层翻译。能靠空间和位置讲清的关系，就做成场景；需要精确核对的地方，用数值、状态表和即时检查。
+      - title: 怎么验证学生能用
+        text: 课程让学生先预测，再操作，最后比较自己的答案和模型状态。平台目前有 12 章教学内容和 10 个实验入口，并提供即时检查和学习记录。北邮计算机基础课老师已把它用作课堂材料；按我的发布记录，抖音播放约 25 万，点赞约八九千。
+    gallery:
+      - image: computing-course-home
+        caption: 课程入口与 3D 学习场景
+      - image: computing-arch-lab
+        caption: Y86-64 体系结构实验台
+      - image: computing-datalab
+        caption: 浏览器实验工作台与即时检查
+      - image: computing-chapter-02
+        caption: 章节示例与学习检查
+
+  pilotdeck:
+    title: PilotDeck 子任务验收与局部修复
+    category: AI Agent · Harness
+    period: 2026.09
+    role: 方案、实现、实验与答辩
+    summary: 自动核对 Agent 交付的文件，把问题退回原子任务修复。
+    result: 面壁智能黑客松一等奖 · 已提交上游 PR
+    cover: pilotdeck-poster
+    cover_position: center 18%
+    flow: [规则核对文件, 独立模型对照原始资料, 通过交付或退回原任务]
+    links:
+      - label: 项目代码
+        url: https://github.com/changer-changer/PilotDeck-Verified-Subtasks
+      - label: 演示录像
+        url: https://github.com/changer-changer/PilotDeck-Verified-Subtasks/releases/tag/demo-recording-20260911
+      - label: 四模型实验与原始数据入口
+        url: https://github.com/changer-changer/PilotDeck-Verified-Subtasks/blob/main/docs/verified-subtasks/STATISTICS.zh-CN.md
+      - label: 上游 PR #578
+        url: https://github.com/OpenBMB/PilotDeck/pull/578
+    sections:
+      - title: 子任务怎样才算完成
+        text: 我把「跑完了」和「交付能用」当作两个需要分别检查的状态。例如，供应风险简报可以有合法的 JSON 格式，却漏掉原始材料里延期七天的信息。验收要对照任务、源材料和实际文件，再决定能不能交给下一步。
+      - title: 为什么把验收接进 Harness
+        text: 先由规则检查文件和字段，再给独立的只读模型核对上下文。发现问题时，原子任务沿用自己的会话和工具权限，在轮次上限内继续修，已经通过的兄弟任务不动。原生界面同步状态，验收记录进入 PilotDeck 的白盒项目记忆，后续任务可以检索。
+      - title: 怎么验证修复真的发生
+        text: 在 GLM-5.3 原生演示里，我们预置了错误交付，核对修复后的文件，同时确认三份正确报表未改动，并追踪写入记忆的验收记录。另有四模型的配对合成对照，报告保留分母、失败和模型差异。上游 #578 已提交，状态为关闭且未合并。
+    gallery:
+      - image: pilotdeck-poster
+        caption: 项目海报 · 规则检查、独立复核、原任务返工与白盒记忆
+      - image: pilotdeck-certificate
+        caption: 海淀青年创想训练营 · 一等奖证书
+      - image: pilotdeck-team
+        caption: 赛后团队合影
+      - image: geek-award
+        caption: Hi Youth 极客突破奖证书
+      - image: hiyouth-award-photo
+        caption: Hi Youth 颁奖现场
+
+  tactile-vla:
+    title: 触觉感知与机器人精密装配
+    category: 具身智能 · 真机研发
+    period: 2025.09 — 2026.03
+    role: 方斌教授实验室 · 科研实习
+    summary: 做触觉编码和策略融合，把传感器、遥操作、训练接到真机。
+    result: 完成公差要求小于 0.1 毫米的装配任务 · 发明专利申请已受理
+    cover: tactile-assembly
+    flow: [读取接触面触觉数据, 单独编码并给策略提供条件, 在真机上执行装配]
+    video:
+      src: /assets/video/resume/tactile-assembly.mp4
+      poster: tactile-demo
+      caption: 真机装配记录 · 视频展示末端执行动作，公差数值为项目要求。
+    sections:
+      - title: 什么信息是装配真正需要的
+        text: 视觉能帮助机械臂接近目标，插入时还需要知道触点有没有偏、接触面怎样变化。我把任务拆成能读出的触觉信号、可以学习的示教和能回到真机验证的动作。
+      - title: 怎样把触觉接到模仿学习
+        text: 我为触觉模态单独做了编码器，将触觉表示作为条件送进 Diffusion Policy 的 U-Net，并在项目里接触了 ACT。我也做过 ROS2 数据链路、VR 遥操作、运动控制、嵌入式和 3D 打印。遇到装配问题时，先单查采集、坐标和执行，再回头看策略。
+      - title: 我交付了什么
+        text: 我和一位研究生合作，为精密装配客户完成公差要求小于 0.1 毫米的装配任务。我还独立实现了 Tac3D 到 Quest 3S 的触觉点云可视化，方老师提供实验环境。相关发明专利申请已受理，我是共同发明人。
+    gallery:
+      - image: tactile-assembly
+        caption: 双臂装配现场
+      - image: tactile-vr-cloud
+        caption: VR 里显示的触觉接触面
+      - image: tactile-sensor-rig
+        caption: 触觉传感器与定位设备搭建
+      - image: tactile-workbench
+        caption: 采集与调试工位
+      - image: tactile-dual-arm
+        caption: 双臂设备与 Quest 头显
+      - path: /assets/images/resume/portfolio/patent-accepted.jpg
+        caption: 发明专利申请受理通知书
+
+  wheelchair:
+    title: 轮椅门店的机器人销售助手
+    category: 机器人 · 调研、产品与开发
+    period: 2026 年夏
+    role: 猎户星空 · 傅盛 AI 战队
+    summary: 用连续对话调出 Android 页面、产品资料和演示视频。
+    result: 完成初版并在两家门店试部署
+    cover: wheelchair-demo
+    cover_position: center 32%
+    flow: [听懂顾客问题, 检索产品资料, 调出页面或视频, 结合当前画面回答追问]
+    video:
+      src: /assets/video/resume/wheelchair.mp4
+      poster: wheelchair-demo
+      orientation: portrait
+      caption: 豹小秘门店机器人 · 双屏界面与对话演示
+    sections:
+      - title: 我先去验证为什么商场方案难做
+        text: 我联系附近几家商场，并去双桥万达实地询问。现场讨论把问题落到了白天的移动责任、夜间可靠回充、布线位置和日常运维。商品与地图不断更新，现场维护随设备规模增长。于是我把注意力转向范围和责任更明确的单店。
+      - title: 轮椅门店需要怎样的销售辅助
+        text: 在智能轮椅门店，我看到加盟店难以长期培训熟悉所有型号的销售，而消费者需要亲眼看避障等能力才敢买。机器人既能转向迎宾，也能边回答「能上飞机吗」「能载多重」边播放已有演示素材；呼叫轮椅也可以做成短视频里的引流演示。
+      - title: 让对话负责调度页面
+        text: 我把 Android 里的产品资料和视频页面封装成可调用的工具。Agent 先根据上下文理解问题，再检索本地资料、调用对应页面，并把当前展示内容留在对话上下文里。用户追问时，它可以接着解释刚放出来的东西。
+      - title: 验证到了哪一步
+        text: 我做了从客户调研到现场演示、产品设计和开发的全过程。初版在两家门店试部署；我返校后结束了这段工作，销售增量仍缺少可归因的数据。
+
+  retail-tryon:
+    title: 服装零售机器人的一键试穿
+    category: 零售机器人 · 快速产品开发
+    period: 2026 · 加入战队前
+    role: 猎豹移动 AI Native 黑客松
+    summary: 把店员上传、商品浏览和 AI 换装接成同一条流程。
+    result: 约 13 小时完成演示 · 全场总冠军 · 功能后续进入 AgentOS
+    cover: hackathon-field
+    flow: [店员给新品拍照上传, 顾客在屏幕上浏览和选款, 拍照生成试穿图]
+    sections:
+      - title: 从一次真实的买衣服体验出发
+        text: 在运动品牌店里，我遇到一摞又一摞只露出一小部分的衣服。款式接近、SKU 又多，想看全得一件件拉出来，选完还要一件件试。问题可以拆成两步，先是看不全，再是试得慢。
+      - title: 为什么选轮式机器人
+        text: 固定屏幕可以浏览商品，轮式机器人还可以转向顾客、用语音接住问题，再让顾客在大屏直接操作。我把这些能力和 AI 换装接起来，让顾客能在同一个入口完成浏览和试穿。
+      - title: 怎样跑通店员和顾客两端
+        text: 店员用上传链接给新品拍照，屏幕同步展示商品；顾客选款、拍照并一键生成试穿图。团队借用机器人已有接口接了导航和导览，约 13 小时完成可演示的端到端流程。获奖后，试穿功能进入 AgentOS，随后随零售方案面向部分门店交付。
+    gallery:
+      - image: hackathon-field
+        caption: 猎豹 AI Native 黑客松现场
+      - path: /assets/images/resume/evidence/retail-robot-ui.png
+        caption: 机器人零售界面参考 · 商品与多语交互
+
+  field-fde:
+    title: 在企业现场做 AI 需求诊断
+    category: 傅盛 AI 战队 · FDE
+    period: 2026.07 起
+    role: 商业场景诊断与 Demo
+    summary: 和企业一起拆工作流程，把一条能验证的需求做成现场演示。
+    result: 两场完成现场诊断与演示 · 一家药企进入后续落地
+    cover: fde-diagnostic
+    flow: [读取各店消费者反馈, 汇总高频问题, 对照备货与商品页决策]
+    sections:
+      - title: 「店铺难管理」具体是什么意思
+        text: 一家药企有自己的工厂和多家线上店。工厂排期仍依赖白板，强行接 AI 要先补数据基础。销售端已有数据，我追问老板最想做哪类决定，发现各平台的用户反馈分散，他们难以判断该如何备货、优化商品页和调整渠道。
+      - title: 先找一条数据能走通的路
+        text: 我把需求缩到可演示的一条链路：通过平台官方接口汇总反馈，提炼常见问题，再把建议对应回具体的店铺和产品。现场用 Demo 说明 AI 能帮到哪一步，后续接入与交付由团队承接。
+      - title: 为什么有些场景停在演示
+        text: 另一次讨论里，金融企业想汇总分散在多套内部系统里的信息，后续选择自行推进。两次经历让我更重视现场验证的三个条件：数据能否接到、用结果的人是谁、演示之后谁继续负责。
+    gallery:
+      - image: fde-diagnostic
+        caption: 猎豹 AI 实战派 · 企业 AI 现状诊断页
+      - image: fusheng-photo
+        caption: 傅盛 AI 战队现场合影
+
+  community:
+    title: 发起北邮具身智能社团
+    category: 校园社区
+    period: 2026 年秋
+    role: 发起人
+    summary: 把对机器人感兴趣的同学聚起来，做分享并连接校外社区。
+    result: 社群超过 500 名成员
+    sections:
+      - title: 为什么要在学校做这件事
+        text: 在实验室和企业看过机器人之后，我发现刚入门的同学最缺的是一起动手的人，以及看到行业实践的机会。我发起了北邮的具身智能社团，组织技术交流，并和探月具身智能社区、活动场地方建立联系。
+      - title: 现在推进到哪一步
+        text: 据社群统计，成员已超过 500 人。11 月 25 日计划组织北邮同学赴北京亦庄参加人形机器人嘉年华参访。
+
+  agent-research:
+    title: 多智能体编排与程序进化
+    category: 研究工程
+    period: 2026 · 进行中
+    role: 工作流实现与实验设计
+    summary: 研究多个 Agent 在什么条件下值得分工，以及编排方式怎样影响结果和成本。
+    result: 在 MASFactory 上实现 ShinkaEvolve 工作流
+    sections:
+      - title: 怎样判断分工有没有带来价值
+        text: 我关心不同编排方式在相同任务、工具、预算下，是否带来更高的完成质量或更低的耗时。我把执行是否成功与产物是否合格分别记录，再回看失败是源于上下文、协作过程还是工具。
+      - title: 目前做过什么
+        text: 我在杨成老师团队的 MASFactory 框架上实现了 ShinkaEvolve 程序进化工作流，也持续做编排条件和评估方法的实验。这里展示已实现的工作和在研究的问题。
+
+  research-nexus:
+    title: Research-Nexus Pro
+    category: 科研辅助工具
+    period: 2026
+    role: 项目负责人
+    summary: 把触觉与视觉融合领域的论文、研究问题、方法和引用关系做成可浏览的图谱。
+    result: 完成可演示系统 · 计算机设计大赛北京赛区二等奖
+    links:
+      - label: 项目代码
+        url: https://github.com/changer-changer/research-nexus-pro
+    sections:
+      - title: 为什么用图谱组织论文
+        text: 我想从一个问题找到相关方法，再沿引用看到方法从哪里来。工具把问题、方法和论文建成不同节点，保留它们的对应关系，方便沿线索往下读。
+      - title: 我的工作
+        text: 我负责系统方案和 Agent 工作流，把资料检索、结构化抽取和图谱浏览串成可以演示的流程。项目获中国大学生计算机设计大赛北京赛区二等奖。

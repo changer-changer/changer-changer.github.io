@@ -10,31 +10,6 @@ identity:
   blog: "/"
   contact_note: "公开版不放手机号与邮箱；可通过 GitHub 或博客联系。"
   short_line: "把传感器、模型和真实用户问题，推进成可运行、可验证、可交付的系统。"
-selected_work:
-  - area: "AI Agent"
-    title: "PilotDeck 子任务验收与局部修复"
-    description: "我和队友在 PilotDeck 上做了一套交付检查。系统核对任务要求和实际文件，发现问题时只让出错的子任务返工。项目获 Hi Youth × 面壁智能黑客松一等奖。"
-    links:
-      - label: "代码"
-        href: "https://github.com/changer-changer/PilotDeck-Verified-Subtasks"
-      - label: "演示录像"
-        href: "https://github.com/changer-changer/PilotDeck-Verified-Subtasks/releases/tag/demo-recording-20260911"
-      - label: "实验记录"
-        href: "https://github.com/changer-changer/PilotDeck-Verified-Subtasks/blob/main/docs/verified-subtasks/STATISTICS.zh-CN.md"
-  - area: "计算机系统教学"
-    title: "计算之境 · Inside Computing"
-    description: "我做了一个交互式 CS:APP 学习平台，把缓存、流水线、虚拟内存等概念做成可以动手操作的模型，配上 12 章教学内容和 10 个实验入口。"
-    links:
-      - label: "在线体验"
-        href: "https://changer-changer.github.io/inside-computing/"
-      - label: "代码"
-        href: "https://github.com/changer-changer/inside-computing"
-  - area: "具身智能"
-    title: "触觉机器人与 VR 可视化"
-    description: "我把 Tac3D 传感器的数据经 ROS2 接入 Quest 3S，随后参与 TRON2 的遥操作、策略训练和真机执行。相关发明专利申请已受理。"
-    links:
-      - label: "真机记录与项目细节"
-        href: "#tactile-vla"
 media:
   - id: "fusheng-field"
     image: "/assets/images/resume/field-fusheng.jpg"
@@ -143,11 +118,11 @@ media:
     kind: "proof"
 experience:
   - id: "current"
-    period: "2026.07 — 至今"
+    period: "2026 年夏"
     organization: "北京金山猎豹科技有限公司"
     role: "傅盛 AI 战队成员 / 管培生 / FDE / AI 产品实践"
     label: "AI BUSINESS"
-    status: "CURRENT"
+    status: "COMPLETED"
     proof: "身份与培养机制已由 2026-07-13 确认书证实；具体业务结果按阶段材料标注。"
     bullets:
       - "入选由傅盛发起并指导的 AI 战队管培生培养计划，参与轮式语音交互机器人零售场景破局。"
@@ -155,12 +130,12 @@ experience:
       - "主导或深度参与 AgentOS 商品媒体处理、语音识别兜底、AI 专家团工作台、AI 实战派产品化与企业客户调研。"
     metrics: ["傅盛 AI 战队", "3 → 8 个工作台工具", "10 名内测用户 / 4 人产出业务成果"]
   - id: "robotics"
-    period: "2025.11 — 2026.03"
-    organization: "顺航智能"
+    period: "2025.09 — 2026.03"
+    organization: "方斌教授实验室"
     role: "算法实习生 / 具身智能研究"
     label: "ROBOTICS"
     status: "PROJECT MATERIAL"
-    proof: "公司正式名称与部分项目指标仍以实习证明、代码和日志补强。"
+    proof: "项目包括触觉可视化、机器人适配、遥操作、训练与真机执行。"
     bullets:
       - "完成 Tac3D → ROS2 → Meta Quest 3S 的触觉可视化链路，把传感器信号带到研究者眼前。"
       - "围绕 TRON2 打通机器人适配、VR 遥操作、触觉 / 动作数据采集、Diffusion Policy 训练推理与真机执行。"
@@ -175,7 +150,7 @@ projects:
   - id: "fusheng-ai-team"
     kind: "BUSINESS"
     label: "AI BUSINESS / FDE"
-    period: "2026.07 — 至今"
+    period: "2026 年夏"
     title: "傅盛 AI 战队：轮式机器人零售场景破局"
     hook: "把“会说话的机器人”推进到“值得付费、能够复制的单点价值”。"
     summary: "从真实客户问题开始，定义任务链、做 Demo、推进需求与交付；把技术能力放回业务现场验证。"
@@ -183,7 +158,7 @@ projects:
     outcome: "形成从客户问题到产品包的工作方式；对外表述严格区分“方案获认可”“进入开发”和“上线验证”。"
     metrics: ["AI 战队管培生", "FDE / AI 产品", "调研 → Demo → 需求 → 交付"]
     tags: ["customer discovery", "task chain", "Demo", "ROI", "FDE"]
-    status: "身份已证实 / 业务持续中"
+    status: "身份已证实 / 业务项目经历"
     media_ids: ["fusheng-field", "fusheng-team", "retail-ui", "retail-voice"]
   - id: "robot-data-loop"
     kind: "BUSINESS"
@@ -196,7 +171,7 @@ projects:
     outcome: "形成“真实数据 → 问题归因 → 行业洞察 → 商业路径 → 产品决策 → 功能需求”的闭环。原始数据与后台材料属于母库增量，公开页不写未经验收的上线效果。"
     metrics: ["3,387,279 条交互", "2,031,524 个会话", "47 个场景 / 4 条产品线 / 89 个组合", "零售：69,746 条 / 60,521 个会话"]
     tags: ["data analysis", "scenario design", "product strategy", "requirements"]
-    status: "母库 v0.4 增量"
+    status: "阶段性工作记录"
     media_ids: ["retail-ui", "retail-voice"]
   - id: "agentos-media"
     kind: "PRODUCT"
@@ -238,7 +213,7 @@ projects:
   - id: "hackathon"
     kind: "PRODUCT"
     label: "HACKATHON / ROBOTICS PRODUCT"
-    period: "2026.07"
+    period: "2026 · 加入战队前"
     title: "猎豹移动 AI Native 黑客松 · 全国总冠军"
     hook: "在极短时间里，把机器人能力翻译成用户看得懂的零售体验。"
     summary: "围绕服装零售构建衣物识别、场景化搭配与一键换衣体验，把机器人能力组织成用户看得懂、现场能演示的完整产品场景。"

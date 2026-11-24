@@ -15,7 +15,7 @@
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#f7f7f4">
   <link rel="preload" href="{{ '/assets/fonts/noto-serif-sc-900.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="{{ '/assets/css/resume-professional.css' | relative_url }}?v=2">
+  <link rel="stylesheet" href="{{ '/assets/css/resume-professional.css' | relative_url }}?v=3">
   <link rel="stylesheet" href="{{ '/assets/css/resume-monochrome.css' | relative_url }}">
 </head>
 <body class="resume-professional resume-professional--{{ page.profile }}">
@@ -55,26 +55,6 @@
         {% endfor %}
       </aside>
     </section>
-
-    {% if page.profile == 'overview' %}
-      <section class="resume-section resume-selected" id="selected-work" aria-labelledby="selected-work-title">
-        <div class="resume-section-title"><h2 id="selected-work-title">代表作品</h2></div>
-        <div class="resume-selected-grid">
-          {% for work in cv.selected_work %}
-            <article class="resume-selected-card">
-              <p class="resume-selected-area">{{ work.area }}</p>
-              <h3>{{ work.title }}</h3>
-              <p>{{ work.description }}</p>
-              <ul aria-label="{{ work.title }}的资料">
-                {% for link in work.links %}
-                  <li><a href="{{ link.href | escape }}">{{ link.label }}</a></li>
-                {% endfor %}
-              </ul>
-            </article>
-          {% endfor %}
-        </div>
-      </section>
-    {% endif %}
 
     <section class="resume-section" id="experience">
       <div class="resume-section-title"><span>01</span><h2>实习经历</h2><small>先看真实业务与研究现场</small></div>
