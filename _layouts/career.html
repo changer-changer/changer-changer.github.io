@@ -20,7 +20,7 @@
   <meta name="theme-color" content="#f7f7f4">
   <link rel="canonical" href="{{ page.url | absolute_url }}">
   <link rel="preload" href="{{ '/assets/fonts/noto-serif-sc-900.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="{{ '/assets/css/career.css' | relative_url }}?v=5">
+  <link rel="stylesheet" href="{{ '/assets/css/career.css' | relative_url }}?v=6">
 </head>
 <body>
   <a class="skip-link" href="#main">跳到正文</a>
@@ -30,8 +30,8 @@
       {% if work %}
         <a href="{{ '/resume/' | relative_url }}">返回履历</a>
       {% else %}
-        <a href="#works">作品</a>
         <a href="#experience">时间线</a>
+        <a href="#works">作品</a>
         <a href="#awards">奖项</a>
       {% endif %}
       <a href="{{ career.identity.github }}">GitHub</a>
@@ -115,29 +115,6 @@
         </div>
       </header>
 
-      <section class="career-section" id="works" aria-labelledby="works-title">
-        <h2 id="works-title">代表作品</h2>
-        <div class="career-works">
-          {% for id in career.featured %}
-            {% assign project = career.cases[id] %}
-            {% assign cover = '/assets/images/resume/cases/' | append: project.cover | append: '.webp' %}
-            {% assign url = '/resume/cases/' | append: id | append: '/' %}
-            <article id="{{ id }}"{% if forloop.first %} class="work-featured"{% endif %}>
-              <a class="career-work" href="{{ url | relative_url }}">
-                <div class="work-copy">
-                  <h3>{{ project.featured_title | default: project.title }}</h3>
-                  <p class="work-result">{{ project.result }}</p>
-                  <p class="work-summary">{{ project.summary }}</p>
-                </div>
-                {% if project.featured_thumbnail != false %}
-                  <img src="{{ cover | relative_url }}" alt="" class="work-cover"{% if project.cover_position %} style="object-position:{{ project.cover_position }}"{% endif %} loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" decoding="async">
-                {% endif %}
-              </a>
-            </article>
-          {% endfor %}
-        </div>
-      </section>
-
       <section class="career-section" id="experience" aria-labelledby="experience-title">
         <h2 id="experience-title">时间线</h2>
         <p class="timeline-hint" id="timeline-hint">点开任一节点，查看完整经历和相关材料。</p>
@@ -156,6 +133,29 @@
             </li>
           {% endfor %}
         </ol>
+      </section>
+
+      <section class="career-section" id="works" aria-labelledby="works-title">
+        <h2 id="works-title">代表作品</h2>
+        <div class="career-works">
+          {% for id in career.featured %}
+            {% assign project = career.cases[id] %}
+            {% assign cover = '/assets/images/resume/cases/' | append: project.cover | append: '.webp' %}
+            {% assign url = '/resume/cases/' | append: id | append: '/' %}
+            <article id="{{ id }}"{% if forloop.first %} class="work-featured"{% endif %}>
+              <a class="career-work" href="{{ url | relative_url }}">
+                <div class="work-copy">
+                  <h3>{{ project.featured_title | default: project.title }}</h3>
+                  <p class="work-result">{{ project.featured_result | default: project.result }}</p>
+                  <p class="work-summary">{{ project.summary }}</p>
+                </div>
+                {% if project.featured_thumbnail != false %}
+                  <img src="{{ cover | relative_url }}" alt="" class="work-cover"{% if project.cover_position %} style="object-position:{{ project.cover_position }}"{% endif %} loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" decoding="async">
+                {% endif %}
+              </a>
+            </article>
+          {% endfor %}
+        </div>
       </section>
 
       {% for group in career.resume_sections %}
@@ -179,21 +179,14 @@
         </section>
       {% endfor %}
 
-      <div class="career-background">
-        <section class="career-section" id="education" aria-labelledby="education-title">
-          <h2 id="education-title">教育背景</h2>
-          <h3>{{ career.identity.school }}</h3>
-          <p>{{ career.identity.degree }}</p>
-        </section>
-        <section class="career-section" id="skills" aria-labelledby="skills-title">
-          <h2 id="skills-title">技术与研究能力</h2>
-          <dl>
-            {% for skill in career.skills %}
-              <div><dt>{{ skill.area }}</dt><dd>{{ skill.text }}</dd></div>
-            {% endfor %}
-          </dl>
-        </section>
-      </div>
+      <section class="career-section career-skills" id="skills" aria-labelledby="skills-title">
+        <h2 id="skills-title">技术与研究能力</h2>
+        <dl>
+          {% for skill in career.skills %}
+            <div><dt>{{ skill.area }}</dt><dd>{{ skill.text }}</dd></div>
+          {% endfor %}
+        </dl>
+      </section>
 
       {% assign current = career.cases[career.current] %}
       {% if current %}

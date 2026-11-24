@@ -7,16 +7,16 @@ identity:
   github: https://github.com/changer-changer
   intro: 我从触觉装配做到门店机器人，做过真机研发和产品交付。现在研究多智能体如何分工、怎样验收。
 
-featured: [pilotdeck, tactile-vla, wheelchair, inside-computing]
+featured: [pilotdeck, tactile-vla, retail-tryon, inside-computing]
 timeline:
   - id: tactile-vla
     date: 2025.09 — 2026.03
-    title: 方斌教授实验室 · 科研实习
-    summary: 给方老师发邮件后进组，从触觉采集、遥操作一路做到策略训练和真机装配。
+    title: 瞬恒智能 · 具身智能科研实习
+    summary: 从触觉采集、遥操作和策略训练，到动作控制、真机装配和嵌入式开发，完成了完整的机器人系统工程训练。
   - id: retail-tryon
     date: 2026 · 加入战队前
-    title: 猎豹移动 AI Native 黑客松
-    summary: 用约 13 小时做出服装选款和 AI 试穿演示，获全场总冠军。
+    title: 猎豹 AI Native 黑客松冠军
+    summary: 用约 13 小时做出零售一键换衣机器人，跑通服装选款和 AI 试穿演示。
   - id: field-fde
     date: 2026.07 起
     title: 傅盛 AI 战队 · 企业 AI 场景诊断
@@ -27,16 +27,12 @@ timeline:
     summary: 走访商场和门店，从筛选场景到开发轮椅销售助手，推动初版在两家店内试部署。
   - id: pilotdeck
     date: 2026.09
-    title: Hi Youth × 面壁智能黑客松
+    title: 面壁智能黑客松冠军
     summary: 把子任务验收和局部修复接入 PilotDeck，获一等奖，并向上游提交 PR。
   - id: inside-computing
     date: 2026 年秋
     title: 计算之境 · 课程工具与知识分享
-    summary: 做了一套可操作的 CS:APP 课程平台，后被北邮计算机基础课老师用作课堂材料。
-  - id: community
-    date: 2026 年秋
-    title: 北邮具身智能社团
-    summary: 发起校内具身智能社团，组织同学做分享并对接校外社区。
+    summary: 觉得计算机基础课有点无聊，就用 3D 网页建模做了一套可操作的 CS:APP 课程平台，抖音约 25 万次观看。
 
 resume_sections:
   - id: internships
@@ -51,7 +47,7 @@ resume_sections:
         role: 轮式机器人产品与研发
         summary: 实地走访商场和门店，选定智能轮椅的销售场景，完成对话、产品资料和双屏展示的联调。
       - case: tactile-vla
-        title: 方斌教授实验室
+        title: 瞬恒智能
         role: 科研实习 · 具身智能
         summary: 负责触觉数据采集和 VR 可视化，并参与触觉编码、策略训练与双臂真机装配。
   - id: projects
@@ -63,10 +59,6 @@ resume_sections:
       - case: retail-tryon
       - case: inside-computing
       - case: research-nexus
-  - id: campus
-    title: 校园与社区经历
-    entries:
-      - case: community
 skills:
   - area: 机器人
     text: ROS2、触觉感知、VR 遥操作、Diffusion Policy、嵌入式与真机调试
@@ -128,12 +120,13 @@ cases:
 
   pilotdeck:
     title: PilotDeck 子任务验收与局部修复
-    featured_title: PilotDeck 交付验收
+    featured_title: 面壁智能黑客松全场冠军
+    featured_result: 在 PilotDeck 跑通交付验收与局部修复
     category: AI Agent · Harness
     period: 2026.09
     role: 方案、实现、实验与答辩
     summary: 自动核对 Agent 交付的文件，把问题退回原子任务修复。
-    result: 跑通原生验收流程 · 面壁智能黑客松一等奖
+    result: 在 PilotDeck 跑通交付验收与局部修复 · 获一等奖
     cover: pilotdeck-poster
     cover_position: center 18%
     flow: [规则核对文件, 独立模型对照原始资料, 通过交付或退回原任务]
@@ -168,9 +161,10 @@ cases:
 
   tactile-vla:
     title: 触觉感知与机器人精密装配
+    featured_title: 具身智能触觉工程 · 科研实习
     category: 具身智能 · 真机研发
     period: 2025.09 — 2026.03
-    role: 方斌教授实验室 · 科研实习
+    role: 瞬恒智能（方斌老师的实验室） · 科研实习
     summary: 做触觉编码和策略融合，把传感器、遥操作、训练接到真机。
     result: 完成公差要求小于 0.1 毫米的装配任务 · 发明专利申请已受理
     cover: tactile-assembly
@@ -204,7 +198,7 @@ cases:
     title: 轮椅门店的机器人销售助手
     category: 机器人 · 调研、产品与开发
     period: 2026 年夏
-    role: 猎户星空 · 傅盛 AI 战队
+    role: 猎户星空 · 轮式机器人产品与研发
     summary: 用连续对话调出 Android 页面、产品资料和演示视频。
     result: 完成初版并在两家门店试部署
     cover: wheelchair-demo
@@ -226,7 +220,9 @@ cases:
         text: 我做了从客户调研到现场演示、产品设计和开发的全过程。初版在两家门店试部署；我返校后结束了这段工作，销售增量仍缺少可归因的数据。
 
   retail-tryon:
-    title: 服装零售机器人的一键试穿
+    title: 零售一键换衣机器人
+    featured_title: 猎豹移动黑客松冠军
+    featured_result: 零售一键换衣机器人 · 约 13 小时完成演示
     category: 零售机器人 · 快速产品开发
     period: 2026 · 加入战队前
     role: 猎豹移动 AI Native 黑客松

@@ -119,19 +119,29 @@ media:
 experience:
   - id: "current"
     period: "2026 年夏"
-    organization: "北京金山猎豹科技有限公司"
-    role: "傅盛 AI 战队成员 / 管培生 / FDE / AI 产品实践"
+    organization: "傅盛 AI 战队（猎豹移动）"
+    role: "FDE / AI 产品实践"
     label: "AI BUSINESS"
     status: "COMPLETED"
     proof: "身份与培养机制已由 2026-07-13 确认书证实；具体业务结果按阶段材料标注。"
     bullets:
-      - "入选由傅盛发起并指导的 AI 战队管培生培养计划，参与轮式语音交互机器人零售场景破局。"
-      - "把工作推进成一条可验证链路：一线调研 → 场景与任务链 → Demo → 需求 / 方案 / 功能 → 研发推进 → 交付验证。"
-      - "主导或深度参与 AgentOS 商品媒体处理、语音识别兜底、AI 专家团工作台、AI 实战派产品化与企业客户调研。"
+      - "入选傅盛 AI 战队管培生培养计划，参与企业 AI 场景诊断与客户调研。"
+      - "从企业工作流程中定位问题，在活动现场做 Agent 演示，验证哪些环节值得继续落地。"
+      - "参与 AI 专家团工作台与 AI 实战派产品化，其中一家药企进入后续落地。"
     metrics: ["傅盛 AI 战队", "3 → 8 个工作台工具", "10 名内测用户 / 4 人产出业务成果"]
+  - id: "orionstar"
+    period: "2026 年夏"
+    organization: "猎户星空"
+    role: "轮式机器人产品与研发"
+    label: "ROBOTICS PRODUCT"
+    proof: "轮椅销售助手已在两家门店试部署。"
+    bullets:
+      - "走访商场和门店，验证轮式机器人在零售场景中的使用与运维需求。"
+      - "实现轮椅销售助手，联调连续对话、产品资料和双屏展示。"
+    metrics: ["现场需求验证", "Android 二次开发", "两家门店试部署"]
   - id: "robotics"
     period: "2025.09 — 2026.03"
-    organization: "方斌教授实验室"
+    organization: "瞬恒智能"
     role: "算法实习生 / 具身智能研究"
     label: "ROBOTICS"
     status: "PROJECT MATERIAL"
@@ -389,7 +399,7 @@ profiles:
     focus: ["AI systems", "Embodied intelligence", "Product practice", "Research engineering"]
     featured: ["hackathon", "mibi-hackathon", "tactile-vla", "electronic-design", "computer-design", "jingcai"]
     supporting: ["agentos-media", "ai-workbench", "ai-field-ops", "residual", "agent-evolution", "tron2"]
-    experience_order: ["current", "robotics"]
+    experience_order: ["current", "orionstar", "robotics"]
     proof_media: ["mibi-award-portrait", "mibi-award-stage", "fusheng-field", "award-jingcai", "patent-accepted"]
   research:
     nav_label: "科研 / 算法版"
@@ -407,7 +417,7 @@ profiles:
     focus: ["Robotics systems", "Diffusion Policy", "Tactile sensing", "Agent evolution"]
     featured: ["tactile-vla", "mibi-hackathon", "electronic-design", "computer-design", "jingcai", "hackathon"]
     supporting: ["tron2", "tactile-vr", "agent-evolution", "robot-data-loop", "fusheng-ai-team"]
-    experience_order: ["robotics", "current"]
+    experience_order: ["current", "orionstar", "robotics"]
     proof_media: ["mibi-award-portrait", "mibi-award-talk", "patent-accepted", "tactile-robot", "tactile-training"]
   product:
     nav_label: "产品 / FDE 版"
@@ -425,5 +435,5 @@ profiles:
     focus: ["Customer discovery", "Product strategy", "FDE delivery", "AI-native workflow"]
     featured: ["fusheng-ai-team", "mibi-hackathon", "robot-data-loop", "hackathon", "agentos-media", "ai-workbench"]
     supporting: ["tactile-vla", "electronic-design", "computer-design", "jingcai", "tron2", "residual"]
-    experience_order: ["current", "robotics"]
+    experience_order: ["current", "orionstar", "robotics"]
     proof_media: ["mibi-award-portrait", "mibi-award-stage", "fusheng-field", "fusheng-team", "retail-ui"]
