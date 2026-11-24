@@ -22,7 +22,7 @@ timeline:
   - id: field-fde
     date: 2026.07 起
     title: 傅盛 AI 战队 · 企业 AI 场景诊断
-    summary: 拆解企业工作流程，现场验证 Agent 能解决哪一步。其中一家药企进入后续落地。
+    summary: 拆解企业流程，现场验证 Agent 需求，也为一家车企交付了 AI 视频样片和可复用流程原型。
   - id: wheelchair
     date: 2026 年 8 月初—9 月中旬
     title: 猎户星空 · 具身智能机器人场景探索
@@ -51,7 +51,7 @@ resume_sections:
       - case: field-fde
         title: 傅盛 AI 战队
         role: FDE · 企业 AI 场景诊断
-        summary: 和企业客户拆解工作流程，在活动现场做 Agent 演示，验证哪些环节值得继续落地。
+        summary: 为企业客户梳理工作流程、现场验证 Agent 需求。为一家车企定制 AI 视频流程，并用一个周末做出 Video Studio 原型。
       - case: wheelchair
         title: 猎户星空
         role: 具身智能机器人场景探索 · 产品研发与售前实践
@@ -68,6 +68,7 @@ resume_sections:
       - case: tactile-visualization
       - case: wheelchair
       - case: retail-tryon
+      - case: automotive-video-studio
       - case: inside-computing
 skills:
   - area: 机器人
@@ -295,6 +296,9 @@ cases:
     summary: 和企业一起拆工作流程，把一条能验证的需求做成现场演示。
     result: 两场完成现场诊断与演示 · 一家药企进入后续落地
     cover: fde-diagnostic
+    links:
+      - label: 车企 AI 视频生成系统 · Video Studio
+        url: /resume/cases/automotive-video-studio/
     flow: [读取各店消费者反馈, 汇总高频问题, 对照备货与商品页决策]
     sections:
       - title: 「店铺难管理」具体是什么意思
@@ -303,11 +307,29 @@ cases:
         text: 我把需求缩到可演示的一条链路：通过平台官方接口汇总反馈，提炼常见问题，再把建议对应回具体的店铺和产品。现场用 Demo 说明 AI 能帮到哪一步，后续接入与交付由团队承接。
       - title: 为什么有些场景停在演示
         text: 另一次讨论里，金融企业想汇总分散在多套内部系统里的信息，后续选择自行推进。两次经历让我更重视现场验证的三个条件：数据能否接到、用结果的人是谁、演示之后谁继续负责。
+      - title: 车企客户如何复用一次视频交付
+        text: 我们先为客户定制生成流程并交付样片。客户希望复用这套流程，我用一个周末做出 Video Studio 原型，继续对接业务人员，再交给研发团队推进落地。
     gallery:
       - image: fde-diagnostic
         caption: 猎豹 AI 实战派 · 企业 AI 现状诊断页
       - image: fusheng-photo
         caption: 傅盛 AI 战队现场合影
+
+  automotive-video-studio:
+    title: 车企 AI 视频生成系统 · Video Studio
+    category: 企业 AI · 视频生成
+    period: 2026 · 傅盛 AI 战队期间
+    role: 工作流设计、原型开发与客户对接
+    summary: 用字级台词时间轴对齐镜头和声音，把一次定制视频交付做成可复用的前端工具。
+    result: 交付车企样片 · 周末完成 Video Studio 原型 · 移交研发推进落地
+    flow: [拆解台词与镜头要求, 确定 TTS 配音并切出时间轴, 按时间轴生成画面和声音, 把流程封装进 Video Studio]
+    sections:
+      - title: 先定清楚视频怎么验收
+        text: 客户要求台词逐字对齐时间轴，对每段对应的画面也有明确要求。我先把要求拆开，为建模、画面生成、配乐、音效和剪辑分别明确交付内容，再让它们对齐同一条时间轴。
+      - title: 让声音决定镜头和音效的时间点
+        text: 我们先定文本，再用 TTS 试音并选定配音。Agent 按配音节点切出时间线，我用每段时间线组织画面提示词、安排配乐和音效，再生成镜头并完成剪辑。这套流程解决了客户团队当时难以完成的样片需求。
+      - title: 将样片的工作流做成工具
+        text: 客户认可样片，希望用同样的流程继续做视频。我用一个周末做出 Video Studio 原型，通过前端页面发起生成，由 Agent 按步骤执行，支持调用客户自己的接口。随后我继续和业务人员对接，将原型与工作流交给研发团队推进落地。
 
   community:
     title: 发起北邮具身智能社团
