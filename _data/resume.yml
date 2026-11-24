@@ -44,13 +44,6 @@ media:
     caption: "训练监控：成功率、奖励与损失曲线"
     note: "项目训练记录截图；保留原始曲线，不把一次实验直接包装成泛化性能承诺。"
     orientation: "wide"
-  - id: "retail-robot-ui"
-    image: "/assets/images/resume/evidence/retail-robot-ui.png"
-    alt: "零售机器人商品推荐与语音交互界面"
-    label: "DEMO / RETAIL ROBOT"
-    caption: "零售界面：把语音交互放回购买任务"
-    note: "工作汇报素材：商品分类、推荐、呼叫帮助和多语交互，展示从场景到 Demo 的产品化表达。"
-    orientation: "wide"
   - id: "retail-robot-voice-ui"
     image: "/assets/images/resume/evidence/retail-robot-voice-ui.png"
     alt: "零售机器人多语言语音唤醒界面"
@@ -164,7 +157,7 @@ case_studies:
     evidence: "正式参加猎豹移动“傅盛 AI 战队”管培生培养计划已由确认书核实；客户数量、转化率和上线范围不在公开页虚构。"
     status_class: "current"
     status_label: "进行中"
-    media_ids: ["fusheng-field", "retail-robot-ui", "retail-robot-voice-ui"]
+    media_ids: ["fusheng-field", "retail-robot-voice-ui"]
     tags: ["customer discovery", "task chain", "Demo", "ROI", "requirements"]
   - id: "residual-attention"
     number: "04"

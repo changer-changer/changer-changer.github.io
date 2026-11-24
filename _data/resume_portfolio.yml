@@ -67,13 +67,6 @@ media:
     caption: "训练监控：成功率、奖励与损失"
     note: "项目训练记录截图；保留实验边界，不把一次曲线包装成泛化性能。"
     kind: "project"
-  - id: "retail-ui"
-    image: "/assets/images/resume/evidence/retail-robot-ui.png"
-    alt: "零售机器人商品推荐与语音交互界面"
-    label: "DEMO / RETAIL ROBOT"
-    caption: "把语音交互放回购买任务"
-    note: "工作汇报素材：商品分类、推荐、呼叫帮助和多语交互。"
-    kind: "project"
   - id: "retail-voice"
     image: "/assets/images/resume/evidence/retail-robot-voice-ui.png"
     alt: "零售机器人多语言语音唤醒界面"
@@ -159,7 +152,7 @@ projects:
     metrics: ["AI 战队管培生", "产品研发与售前实践", "调研 → Demo → 需求 → 交付"]
     tags: ["customer discovery", "task chain", "Demo", "ROI"]
     status: "身份已证实 / 业务项目经历"
-    media_ids: ["fusheng-field", "fusheng-team", "retail-ui", "retail-voice"]
+    media_ids: ["fusheng-field", "fusheng-team", "retail-voice"]
   - id: "robot-data-loop"
     kind: "BUSINESS"
     label: "DATA / PRODUCT DECISION"
@@ -172,7 +165,7 @@ projects:
     metrics: ["3,387,279 条交互", "2,031,524 个会话", "47 个场景 / 4 条产品线 / 89 个组合", "零售：69,746 条 / 60,521 个会话"]
     tags: ["data analysis", "scenario design", "product strategy", "requirements"]
     status: "阶段性工作记录"
-    media_ids: ["retail-ui", "retail-voice"]
+    media_ids: ["retail-voice"]
   - id: "agentos-media"
     kind: "PRODUCT"
     label: "PRODUCT / AGENTOS V12.6"
@@ -185,7 +178,6 @@ projects:
     metrics: ["PRD 评审通过", "5 步最小流程", "独立牵头 0 → 1"]
     tags: ["PRD", "prototype", "workflow", "agentOS"]
     status: "已评审 / 开发中"
-    media_ids: ["retail-ui"]
   - id: "ai-workbench"
     kind: "PRODUCT"
     label: "PRODUCT / INTERNAL PLATFORM"
@@ -414,4 +406,4 @@ profiles:
     featured: ["fusheng-ai-team", "mibi-hackathon", "robot-data-loop", "hackathon", "agentos-media", "ai-workbench"]
     supporting: ["tactile-vla", "electronic-design", "jingcai", "tron2", "residual"]
     experience_order: ["current", "robotics"]
-    proof_media: ["mibi-award-portrait", "mibi-award-stage", "fusheng-field", "fusheng-team", "retail-ui"]
+    proof_media: ["mibi-award-portrait", "mibi-award-stage", "fusheng-field", "fusheng-team"]
