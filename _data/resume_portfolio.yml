@@ -106,8 +106,8 @@ media:
     image: "/assets/images/resume/portfolio/patent-accepted.jpg"
     alt: "高密度柔性触觉传感器接触表面 VR 可视化方法及系统专利申请受理通知书"
     label: "IP / ACCEPTED"
-    caption: "发明专利申请已受理"
-    note: "共同发明人；当前不表述为已授权专利。"
+    caption: "发明专利申请受理通知书"
+    note: "共同发明人。该申请于 2026 年 8 月 11 日公布，申请公布号为 CN122547231A。"
     kind: "proof"
   - id: "ipd-certificate"
     image: "/assets/images/resume/portfolio/ipd-certificate.jpg"
@@ -255,10 +255,10 @@ projects:
     hook: "从触觉感知、VR 遥操作到策略学习，把机器人装配闭环真正接到真机。"
     summary: "围绕触觉机器人完成传感器采集、ROS2 通信、VR 可视化、动作数据获取、Diffusion Policy 训练推理与真实执行，形成从感知到动作的全栈链路。"
     contribution: "完成 Tac3D → ROS2 → Meta Quest 3S 触觉可视化链路，参与 TRON2 机器人适配、遥操作、数据管线、策略训练和真机执行。"
-    outcome: "触觉传感器接触表面 VR 可视化方法及系统发明专利申请已受理；当前公开口径为共同发明人，不表述为已授权专利。"
-    metrics: ["Tac3D / ROS2", "VR teleoperation", "Diffusion Policy", "专利申请已受理"]
+    outcome: "触觉数据 VR 可视化发明专利申请已公开（CN122547231A），我是共同发明人。"
+    metrics: ["Tac3D / ROS2", "VR teleoperation", "Diffusion Policy", "CN122547231A"]
     tags: ["tactile sensing", "VLA", "robot assembly", "full stack"]
-    status: "全栈研发 / 专利申请已受理"
+    status: "全栈研发 / 专利申请已公开"
     media_ids: ["tactile-rollout", "tactile-robot", "tactile-training", "patent-accepted"]
   - id: "tactile-vr"
     kind: "RESEARCH"
@@ -268,10 +268,10 @@ projects:
     hook: "把触觉信号从传感器端带到研究者眼前。"
     summary: "集成 Tac3D SDK，开发 ROS2 节点和机器人端数据处理逻辑，用 UDP 与 ROS2—VR 桥接，把触觉点云渲染到 Meta Quest 3S。"
     contribution: "完成“传感器采集 → 机器人处理 → VR 可视化”的端到端闭环，并作为后续触觉实验的基础设施。"
-    outcome: "相关发明专利申请已受理，担任共同发明人。"
+    outcome: "发明专利申请于 2026 年 8 月 11 日公布（CN122547231A），我是共同发明人。"
     metrics: ["Tac3D", "ROS2", "Meta Quest 3S", "UDP / 3D point cloud"]
     tags: ["tactile sensing", "ROS2", "VR", "systems"]
-    status: "发明专利申请已受理"
+    status: "发明专利申请已公开"
     media_ids: ["tactile-rollout", "patent-accepted"]
   - id: "tron2"
     kind: "RESEARCH"
@@ -347,9 +347,9 @@ awards:
     detail: "项目负责人 / 触界灵枢"
     status: "已证实"
     media_id: "award-jingcai"
-  - title: "发明专利申请已受理"
-    period: "2026.05"
-    detail: "触觉传感器接触表面 VR 可视化方法及系统 · 共同发明人"
+  - title: "发明专利申请已公开"
+    period: "2026.08"
+    detail: "触觉数据 VR 可视化 · CN122547231A · 共同发明人"
     status: "已证实"
     media_id: "patent-accepted"
   - title: "全国大学生数学竞赛二等奖"
@@ -384,7 +384,7 @@ profiles:
       - value: "傅盛 AI 战队"
         label: "由傅盛发起并指导的管培生计划"
       - value: "共同发明人"
-        label: "触觉数据 VR 可视化 · 发明专利申请已受理"
+        label: "触觉数据 VR 可视化 · CN122547231A"
     focus: ["AI systems", "Embodied intelligence", "Product practice", "Research engineering"]
     featured: ["hackathon", "mibi-hackathon", "tactile-vla", "tactile-vr", "electronic-design", "jingcai"]
     supporting: ["agentos-media", "ai-workbench", "ai-field-ops", "residual", "agent-evolution", "tron2"]
@@ -398,7 +398,7 @@ profiles:
     audience: "给导师 / 算法 HR 的一句话：这个人能吃苦，但更重要的是，他会把“现象—假设—消融—证据—边界”跑成一条完整研究链。"
     signals:
       - value: "PATENT"
-        label: "触觉 VR 可视化发明专利申请已受理"
+        label: "触觉 VR 可视化 · 发明专利申请已公开（CN122547231A）"
       - value: "TRON2"
         label: "机器人适配、数据、训练、控制与真机"
       - value: "第1名"

@@ -180,7 +180,7 @@ cases:
     period: 2025.09 — 2026.03
     role: 瞬恒智能（方斌老师的实验室） · 科研实习
     summary: 做触觉编码和策略融合，把传感器、遥操作、训练接到真机。
-    result: 完成公差要求小于 0.1 毫米的装配任务 · 发明专利申请已受理
+    result: 完成公差要求小于 0.1 毫米的装配任务 · 发明专利申请已公开
     cover: tactile-assembly
     flow: [读取接触面触觉数据, 单独编码并给策略提供条件, 在真机上执行装配]
     video:
@@ -193,7 +193,7 @@ cases:
       - title: 怎样把触觉接到模仿学习
         text: 我为触觉模态单独做了编码器，将触觉表示作为条件送进 Diffusion Policy 的 U-Net，并在项目里接触了 ACT。我也做过 ROS2 数据链路、VR 遥操作、运动控制、嵌入式和 3D 打印。遇到装配问题时，先单查采集、坐标和执行，再回头看策略。
       - title: 我交付了什么
-        text: 我和一位研究生合作，为精密装配客户完成公差要求小于 0.1 毫米的装配任务。我还独立实现了 Tac3D 到 Quest 3S 的触觉点云可视化，方老师提供实验环境。相关发明专利申请已受理，我是共同发明人。
+        text: 我和一位研究生合作，为精密装配客户完成公差要求小于 0.1 毫米的装配任务。我还独立实现了 Tac3D 到 Quest 3S 的触觉点云可视化，方老师提供实验环境。相关发明专利申请已公开（CN122547231A），我是共同发明人。
     gallery:
       - image: tactile-assembly
         caption: 双臂装配现场
@@ -214,16 +214,21 @@ cases:
     period: 2025.11 — 2025.12
     role: 瞬恒智能 · 独立实现系统 · 共同发明人
     summary: 打通 Tac3D → ROS2 → Meta Quest 3S，将接触面的触觉数据实时重建成可观察的 3D 点云。
-    result: 相关发明专利申请已受理
+    result: 发明专利申请已公开 · CN122547231A
     cover: tactile-vr-cloud
     flow: [采集接触面触觉数据, 经 ROS2 处理并通过 UDP 转发, 在 Quest 3S 渲染点云]
+    links:
+      - label: 国家知识产权局公布文献
+        url: http://epub.cnipa.gov.cn/patent/CN122547231A
+      - label: 中文专利全文
+        url: https://patents.google.com/patent/CN122547231A/zh
     sections:
       - title: 想解决什么问题
         text: 机械臂接触物体时，研究者需要看清接触位置和接触面的变化。我把传感器输出接到 VR，让这些变化能在三维空间里直接观察。
       - title: 我做了哪些工作
         text: 我集成了 Tac3D SDK，开发 ROS2 节点和数据处理流程，再通过 UDP 把点云传给 Meta Quest 3S。在方老师提供的实验环境里，我独立完成了采集、传输与显示的联调。
       - title: 交付与专利
-        text: 系统用于后续的触觉实验。相关发明专利《高密度柔性触觉传感器接触表面 VR 可视化方法及系统》的申请已受理，我是共同发明人。
+        text: 系统用于后续的触觉实验。北京邮电大学申请的《一种基于高密度柔性触觉传感器的接触表面虚拟现实可视化方法及系统》于 2026 年 8 月 11 日公布，申请公布号为 CN122547231A。我是共同发明人。
     gallery:
       - image: tactile-vr-cloud
         caption: VR 中重建的触觉接触面
