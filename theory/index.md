@@ -95,14 +95,27 @@ permalink: /theory/
 | 文章 | 它更新了哪组旧问题 |
 |------|---------|
 | [我的世界观现在长什么样：一张自用的地图](/2026/11/25/map-of-my-worldview/) | 全部：整体重排，标出还没想清楚的地方 |
-| [我怎么维护自己的想法：六条规矩](/2026/11/25/how-i-maintain-my-beliefs/) | 01：概念事实、现实反馈；新增"框架是视角"和"新的一句不自动成为原则" |
+| [我怎么维护自己的想法：四条规矩](/2026/11/25/how-i-maintain-my-beliefs/) | 01：概念事实、现实反馈；新增"新的一句不自动成为原则" |
 | [意义这件事，我改过一次口](/2026/11/25/from-survival-to-my-own-problem/) | 14：从"活下去"到"解决我的问题"；"享受是自毁"的现行版本 |
 | [如果一切早就定了，我为什么还说自己是自由的](/2026/11/25/determined-world-and-freedom/) | 02、21：确定与自由可能不在同一层 |
 | [从改造自己，到接受自己](/2026/11/25/from-transforming-myself-to-accepting-myself/) | 15、25：这两篇写于早期，"四层次"和"超人想象"的现行替代在这里 |
-| [人只能做自己想做的事](/2026/11/25/people-only-do-what-they-want/) | 14、22：被迫与想要；欲望三层；"应该"要变成"想要" |
-| [休息不是任务](/2026/11/25/rest-is-not-a-task/) | 22：放松是符合自己意志的形状，它本身是目的 |
+| [你没法在预期上欺骗自己](/2026/11/25/cannot-fool-your-own-expectations/) | 14、22：被迫与想要；欲望三层；"应该"要变成"想要" |
+| [内耗不是思考](/2026/11/25/rumination-is-not-thinking/)、[欲望像阀门，不像能填满的湖](/2026/11/25/desire-is-a-valve/) | 22：放松是符合自己意志的形状；焦虑和执念越关注越大 |
 
 其中三篇是承认自己改过口：《意义》《自由》《从改造自己》。旧文章不删，被推翻的痕迹留在这里。
+
+### 09 / 2026.10–11 新写的：决策、认知、AI 与做东西
+
+这一批来自十、十一两个月的日记和笔记，分五个方向。每一篇只讲一件事，没想清楚的地方照实留在文末。
+
+| 方向 | 文章 | 对应的问题组 |
+|------|------|------|
+| 怎么定方向、怎么做决定 | [具体的规划一定是错的](/2026/11/25/concrete-plans-are-wrong/)、[长线规划不等于 all in](/2026/11/25/long-term-plan-is-not-all-in/)、[别人的路，只是约束条件](/2026/11/25/others-paths-are-constraints/)、[做之前当构建者，做的时候当执行者](/2026/11/25/builder-and-executor/)、[两句都对的话打架时](/2026/11/25/when-two-truths-conflict/) | 16、21：方向与结果；已知与未知；目标和执行分成两层 |
+| 人和人的认知 | [努力不是一种能力](/2026/11/25/effort-is-a-habit/)、[人的工作记忆太小了](/2026/11/25/working-memory-is-the-bottleneck/)、[内耗不是思考](/2026/11/25/rumination-is-not-thinking/)、[反馈要从现实拿](/2026/11/25/feedback-from-reality/)、[靠环境，不靠意志](/2026/11/25/environment-over-willpower/) | 15、20、22：习惯与选择；认知资源有限；反馈从现实来 |
+| 看世界 | [大部分人的世界观是拼接起来的](/2026/11/25/worldview-assembled-from-outside/)、[科学说的是群体](/2026/11/25/science-speaks-for-groups/)、[只比能力，本身就是内卷](/2026/11/25/comparing-ability-is-involution/)、[一个人影响世界只有两层](/2026/11/25/two-layers-of-impact/)、[做什么，比怎么做重要](/2026/11/25/what-to-do-beats-how/)、[人类智力是必经的一环](/2026/11/25/human-intelligence-as-bottleneck/) | 01、08、17、18：文化和概念事实；群体与个人；做什么先于怎么做 |
+| 和 AI 一起做事 | [和 AI 协作，省的是人的上下文](/2026/11/25/working-with-ai-saves-human-context/)、[我对这个时代的三个判断](/2026/11/25/three-judgments-about-this-era/)、[AI 让黑客松从比执行变成了比决策](/2026/11/25/hackathon-shifts-from-execution-to-decisions/)、[AI 不是工具，是器官](/2026/11/24/ai-as-organ-long/) | 23、24：人机分工；AI 时代的判断 |
+| 做东西的记录 | [几场黑客松之后](/2026/11/24/hackathon-two-mindsets/)、[多智能体避坑手册](/2026/10/28/multi-agent-pitfalls/)、[AI 视频产线](/2026/10/20/selfmade-ai-video-pipeline/)、[机器人落地沟通会](/2026/11/07/robot-scenario-moat/)、[知识库体系](/2026/10/29/knowledge-base-as-shared-memory/)、[一场千人黑客松需要什么](/2026/11/06/what-a-hackathon-needs/)、[手机 23 秒](/2026/11/02/phone-clip-vs-animation/) | 19、24：在真实约束里做事的复盘 |
+| 学习 | [用 AI 打通一门学科](/2026/11/24/ai-study-workflow/)、[AI 能替你学会所有知识，除了一件事](/2026/10/27/ai-learning-body-mode/) | 15：认知和能力是两回事 |
 
 ## 这张图现在长到哪里了
 
