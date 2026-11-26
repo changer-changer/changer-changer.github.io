@@ -1,0 +1,16 @@
+<script>
+  (function () {
+    var links = document.querySelectorAll('.ax-rail-nav a');
+    if (!links.length || !('IntersectionObserver' in window)) return;
+    var mark = function (id) {
+      links.forEach(function (a) { a.classList.toggle('is-active', a.getAttribute('href') === '#' + id); });
+    };
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) mark(e.target.id); });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    links.forEach(function (a) {
+      var el = document.querySelector(a.getAttribute('href'));
+      if (el) io.observe(el);
+    });
+  })();
+</script>

@@ -1,0 +1,12 @@
+{% comment %}算出当前文章在文章地图里的归属：ax_top（大栏目）、ax_sub（层或小节）、ax_anchor。{% endcomment %}
+{% assign me = page.slug %}
+{% for l in site.data.atlas.worldview.layers %}
+  {% for it in l.posts %}{% if it.slug == me %}{% assign ax_top = "世界观" %}{% assign ax_url = "/worldview/" %}{% assign ax_sub = l.title %}{% assign ax_anchor = l.id %}{% endif %}{% endfor %}
+{% endfor %}
+{% for grp in site.data.atlas.research.groups %}
+  {% for it in grp.posts %}{% if it.slug == me %}{% assign ax_top = "研究" %}{% assign ax_url = "/research/" %}{% assign ax_sub = grp.title %}{% assign ax_anchor = grp.id %}{% endif %}{% endfor %}
+{% endfor %}
+{% for s in site.data.atlas.notes.sections %}
+  {% for sl in s.slugs %}{% if sl == me %}{% assign ax_top = "随笔" %}{% assign ax_url = "/notes/" %}{% assign ax_sub = s.title %}{% assign ax_anchor = s.id %}{% endif %}{% endfor %}
+{% endfor %}
+{% for s in site.data.atlas.worldview.start %}{% if s == me %}{% assign ax_top = "世界观" %}{% assign ax_url = "/worldview/" %}{% assign ax_sub = "先读这两篇" %}{% assign ax_anchor = "" %}{% endif %}{% endfor %}

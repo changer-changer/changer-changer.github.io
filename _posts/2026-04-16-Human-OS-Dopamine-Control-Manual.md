@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "人类多巴胺系统与机体控制终极指南 (Human OS: Dopamine & Control Manual)"
+title: "多巴胺与机体控制：一份 Human OS 指南"
 date: 2026-04-16
 categories: [生活]
 tags: [健康, 科学, 生活方式, 神经科学, 认知科学, 健身]

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "cross attantion 热力图"
+title: "Cross Attention 热力图是怎么算出来的"
 date: 2026-03-30
 categories: [技术]
 tags: [技术, 深度学习, 数学, Transformer, 梯度传播]

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "安静的恐慌"
+title: "安静的恐慌：大部分人不知道自己在优化什么"
 date: 2026-05-20
 categories: [思考]
 tags: [成长, 认知科学, 元认知]

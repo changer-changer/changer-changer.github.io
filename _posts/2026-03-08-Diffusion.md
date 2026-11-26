@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "终极回顾：Diffusion"
+title: "Diffusion Policy 的数学本质：一场受控的动力学输运"
 date: 2026-03-08
 categories: [技术]
 tags: [技术, 深度学习, 数学, Transformer, 神经网络, 梯度传播]

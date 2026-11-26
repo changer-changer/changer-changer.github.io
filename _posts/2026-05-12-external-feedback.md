@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "外部反馈"
+title: "外部反馈：为什么向内找答案会越找越迷茫"
 date: 2026-05-12
 categories: [思考]
 tags: [学习方法, 认知, AI]

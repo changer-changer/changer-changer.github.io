@@ -1,0 +1,295 @@
+# 全站文章地图：每一篇上站的文章归属且只归属一处。
+#  - worldview：世界观，按依赖顺序分层
+#  - research ：研究与 Research 思考
+#  - notes    ：随笔，按写作形态分节
+# 早期笔记是世界观的地基，照常上站；只有内容已被推翻、和现行说法矛盾的文章才不上站（放在 _shelf/）。
+# 加一篇新文章：把它的 slug 写进下面任意一组的 posts 或 slugs 里。
+
+worldview:
+  start: [map-of-my-worldview, how-i-maintain-my-beliefs]
+  rules:
+    - t: "没有真理，只有概念事实"
+      d: "被临时当作事实来用的假设。它有用，是因为能解释现象、指导行动，并且随时准备被更好的说法替换。"
+    - t: "只有现实的反馈算数"
+      d: "读完觉得“我懂了”，做事的结果一点没变，那不算。这是最容易骗自己的地方。"
+    - t: "新的一句话不自动成为原则"
+      d: "状态好坏时说的话不是一个水平。新的说法要先放回旧的说法里比一比。"
+  layers:
+    - id: start
+      n: "01"
+      short: 凭什么开始想
+      title: 我凭什么开始想
+      q: 在做任何判断之前，我已经接受了哪些前提？
+      points:
+        - "这是一个有运作体系的世界，我是一个人。一切经验都是“对世界的认识”叠上“人的特点”，再用语言说出来。"
+        - "想法是假设搭起来的，严格说都是幻觉，区别只在于经不经得起现实。任何描述都只是描述，未知远远多于已知。"
+      posts:
+        - {slug: theory-grand-unified-survival-theory-manifesto, q: "为什么想把这些问题放在一起"}
+        - {slug: theory-axiom-of-existence-rationality, q: "我们如何理解“存在”"}
+        - {slug: theory-reality-as-latent-space, q: "不是事物拥有性质，是性质聚合成了事物"}
+        - {slug: theory-cognition-is-abstraction, q: "描述只能被趋近，不能等于"}
+        - {slug: theory-cognitive-viruses-language, q: "语言怎样反过来塑造判断"}
+        - {slug: post-042, q: "趋向理论：性质是方向轴上的位置"}
+        - {slug: post-010, q: "逻辑、信息与本体"}
+        - {slug: post-072, q: "命题逻辑笔记"}
+        - {slug: thoughts-are-beliefs, q: "一切想法都是信念"}
+        - {slug: worldview-assembled-from-outside, q: "大部分人的世界观是拼接起来的"}
+        - {slug: known-unknown, q: "为什么越努力越迷茫"}
+        - {slug: know-what-you-dont-know, q: "知道自己不知道什么"}
+        - {slug: post-071, q: "人类认知的根本局限：三个结构性盲区"}
+        - {slug: when-two-truths-conflict, q: "两句都对的话打架时，先看它们在哪一层"}
+
+    - id: world
+      n: "02"
+      short: 世界如何运作
+      title: 世界如何运作
+      q: 事物为什么会朝某些方向变化？
+      points:
+        - "我用一个词描述世界：趋向。性质可以无限细分，有层级，有方向。已经发生的事都按逻辑运行。"
+        - "生命是能保住复杂性的一种结构。不是最强的活下来，是某些性质在那个环境里更容易延续。"
+      posts:
+        - {slug: theory-tendency-theory-core, q: "趋向性，我用来观察变化的一个概念"}
+        - {slug: theory-tendency-properties-linearity, q: "线性、守恒与认知边界"}
+        - {slug: trend-thinking, q: "比第一性原理更底层的一种观察方式"}
+        - {slug: theory-negentropy-complexity-enrichment, q: "负熵与复杂性"}
+        - {slug: theory-biology-theory-negative-entropy, q: "生命如何与环境交换秩序"}
+        - {slug: theory-consciousness-as-universe-property, q: "主观体验从哪里来"}
+        - {slug: post-069, q: "宇宙法则的方向与社会的方向如何拉扯"}
+        - {slug: post-011, q: "社会运作、欲望经济学与终极杠杆"}
+
+    - id: human
+      n: "03"
+      short: 人是什么
+      title: 我是怎样一个东西
+      q: 人的认知、能力和感受，各自能走多远？
+      points:
+        - "人的认知非常有限，只能压缩、只够建一个局部模型。知道不等于做得到，能力是练进身体里的。"
+        - "人是被反馈训练出来的。理性只在计划时好用，真做事时是感受在主导。"
+      posts:
+        - {slug: theory-dual-brain-system, q: "自动反应和后天模型如何协作"}
+        - {slug: theory-embodied-chunking, q: "知道与做到之间差了什么"}
+        - {slug: human-ability-is-patterns, q: "没有通用能力，只有局部模式"}
+        - {slug: post-065, q: "能力、认知与源于自我的认知体系"}
+        - {slug: post-055, q: "演化认知：事件而不是事物"}
+        - {slug: post-058, q: "认知能定性，不能生成行动"}
+        - {slug: post-057, q: "成功来自工匠式技能，而不是全局认知"}
+        - {slug: working-memory-is-the-bottleneck, q: "人的工作记忆太小了"}
+        - {slug: effort-is-a-habit, q: "努力不是一种能力"}
+        - {slug: intelligence-and-hardwork-are-leashes, q: "聪明和努力是拴狗链"}
+        - {slug: world-model-operation-model, q: "理解对象是什么，和它在任务里能做什么"}
+        - {slug: intelligence-is-seriousness, q: "智力是一种严肃，不是一种资源"}
+        - {slug: post-041, q: "两种大脑工作模式之间的强制切换"}
+        - {slug: post-044, q: "专注时大脑发生了什么"}
+        - {slug: post-022, q: "大脑操作系统：五大核心系统"}
+        - {slug: environment-over-willpower, q: "能持续的改变靠环境，不靠意志"}
+        - {slug: retrain-your-own-model, q: "错误的反馈环境如何塑造人"}
+        - {slug: theory-single-thread-execution, q: "注意力如何被分配"}
+        - {slug: subjectivity-and-behavior-patterns, q: "主体性与思维浪费"}
+
+    - id: want
+      n: "04"
+      short: 我要什么
+      title: 我为什么要这样活
+      q: 目的从哪里来，什么是好？
+      points:
+        - "目的是加上人的限制之后的趋向。对我来说只有一个方向：解决我自己的问题。"
+        - "主体性是出发点。我只有一个身体，后果只有我担。别人的路只是约束条件。"
+      posts:
+        - {slug: from-survival-to-my-own-problem, q: "意义这件事，我改过一次口"}
+        - {slug: post-062, q: "我的人生原则"}
+        - {slug: post-021, q: "什么算有价值的事"}
+        - {slug: post-049, q: "身体趋向与认知趋向"}
+        - {slug: post-037, q: "青年的问题不是没有欲望，是欲望分散"}
+        - {slug: others-paths-are-constraints, q: "别人的路，只是约束条件"}
+        - {slug: determined-world-and-freedom, q: "一切早已定了，我为什么还说自己是自由的"}
+        - {slug: post-039, q: "相信自己是一个事实"}
+
+    - id: act
+      n: "05"
+      short: 怎么选，怎么做
+      title: 怎么选，怎么做
+      q: 目标定了以后，判断和执行怎么分工？
+      points:
+        - "选的时候，先把事实、最好的结果、最坏的风险、代价想一遍。做的时候，执行和目标分开。"
+        - "大部分时间不是在做决定，是习惯、身体和长期积累在自动运转。反馈从现实里拿，不从脑子里拿。"
+      posts:
+        - {slug: builder-and-executor, q: "做之前当构建者，做的时候当执行者"}
+        - {slug: post-006, q: "行胜于言，做与想分开"}
+        - {slug: post-005, q: "要最值得尝试的解，不要最优解"}
+        - {slug: post-064, q: "杠杆、系统优化与行动创造信息"}
+        - {slug: concrete-plans-are-wrong, q: "具体的规划一定是错的"}
+        - {slug: long-term-plan-is-not-all-in, q: "长线规划不等于 all in"}
+        - {slug: what-to-do-beats-how, q: "做什么，比怎么做重要"}
+        - {slug: comparing-ability-is-involution, q: "只比能力，本身就是内卷"}
+        - {slug: better-definition, q: "你没法做到“更好”，因为你不知道什么是“更好”"}
+        - {slug: feedback-from-reality, q: "反馈要从现实拿，不能从脑子里拿"}
+        - {slug: theory-is-not-driver, q: "理论不应该实时驾驶你"}
+        - {slug: from-closed-to-open-cognition, q: "让现实成为判断系统"}
+        - {slug: understand-trust-verify, q: "理解能理解的，相信可靠的，验证未知的"}
+        - {slug: from-diet-to-methodology, q: "从一个具体问题长出的行动方法论"}
+        - {slug: theory-optimization-theory-three-levels, q: "效率、结构与方向"}
+        - {slug: theory-social-matrix-leverage, q: "资源和行动如何彼此放大"}
+        - {slug: theory-worldline-and-straight-line, q: "关于路径选择的一个比喻"}
+        - {slug: theory-acceleration-doctrine, q: "为什么反馈速度会改变结果"}
+        - {slug: theory-speciality-and-exceptional-events, q: "新的可能性如何出现"}
+        - {slug: opportunity-has-three-layers, q: "看见、找到、抓住"}
+        - {slug: excess-returns-come-from-outside-cognition, q: "超额收益来自认知以外"}
+        - {slug: post-052, q: "知道正确不够，你要真的想要"}
+        - {slug: post-059, q: "为什么成功者不知道自己为什么成功"}
+
+    - id: state
+      n: "06"
+      short: 状态
+      title: 撑着这一切的：状态
+      q: 什么样的状态下，上面的判断才靠得住？
+      points:
+        - "主体性、现实感、放轻松。接受现实不是指令，是承认现状是我的一部分。"
+        - "关于状态的所有思考，最后指向同一件事：把注意力放在真正重要的事情上。"
+      posts:
+        - {slug: from-transforming-myself-to-accepting-myself, q: "从改造自己，到接受自己"}
+        - {slug: cannot-fool-your-own-expectations, q: "你没法在预期上欺骗自己"}
+        - {slug: desire-is-a-valve, q: "欲望像阀门，不像能填满的湖"}
+        - {slug: post-050, q: "别把休闲和欲望弄混"}
+        - {slug: rumination-is-not-thinking, q: "内耗不是思考"}
+        - {slug: anxiety-is-lust-for-the-impossible, q: "焦虑是妄图做力所不能及的事"}
+        - {slug: feedback-loop, q: "焦虑来自反馈错了方向"}
+        - {slug: work-life-integration-not-balance, q: "长期产出不等于工时"}
+        - {slug: post-007, q: "一套个人操作系统的词汇表"}
+
+    - id: society
+      n: "07"
+      short: 组织与时代
+      title: 我身处的组织与时代
+      q: 社会怎么运转，这个时代在改变什么？
+      points:
+        - "组织会系统性地偏离它声称的目标。分界不在于聪明，在于有没有自己选过的观念。"
+        - "这个时代正在把“知道”和“做到”拆开。执行越来越便宜，人剩下的是目标、判断和责任。"
+      posts:
+        - {slug: theory-society-as-collective-organism, q: "结构如何从个体互动中出现"}
+        - {slug: grand-unification, q: "社会如何在没有总设计师时形成"}
+        - {slug: post-035, q: "价值来自欲望的满足"}
+        - {slug: post-034, q: "消费随收入怎样升级"}
+        - {slug: theory-humanity-deviation-period, q: "现代环境如何改变注意力与判断"}
+        - {slug: suppressed-thinking, q: "目标导向思维的消亡与回归"}
+        - {slug: system-optimization-vs-effort, q: "系统优化的竞争与努力的竞争"}
+        - {slug: how-things-get-done-in-organizations, q: "组织里，事情是怎么真正做成的"}
+        - {slug: post-036, q: "人只是能力的载体，彼此很难真正理解"}
+        - {slug: post-056, q: "面向任务的人际关系"}
+        - {slug: shantai-banzhi-and-hidden-inferiority, q: "组织靠机制，不靠完人"}
+        - {slug: fifty-days-in-the-real-world, q: "一次实践校准"}
+        - {slug: education-is-not-value-exchange, q: "大学从来不是为了有用而诞生"}
+        - {slug: post-051, q: "教育让人变蠢，学习让人获得能力"}
+        - {slug: name-society, q: "包装为什么比实质更重要"}
+
+    - id: intelligence
+      n: "08"
+      short: 智力与 AI
+      title: 最上面一层：智力与 AI
+      q: 当智力不再只来自人，以人为中转的体系会怎样？
+      points:
+        - "整个科学和生产的体系，一直把人的智力当作必经的中转站。这依赖三件事：智力只来自人、人接收信息的通道很窄、人的思考有固定的长处和短处。"
+        - "现在三件事都被打破了。以人为中转的体系可能要重搭。我还没想清楚搭成什么样。"
+      posts:
+        - {slug: human-intelligence-as-bottleneck, q: "人的智力是必经的一环"}
+        - {slug: theory-ai-human-symbiosis, q: "人和 AI 如何形成互补"}
+        - {slug: ai-intelligence-allocation, q: "AI 时代的智力分配"}
+        - {slug: working-with-ai-saves-human-context, q: "和 AI 协作，省的是人的上下文"}
+        - {slug: three-judgments-about-this-era, q: "我对这个时代的三个判断"}
+
+cross:
+  - {slug: competition-gives-information}
+  - {slug: science-speaks-for-groups}
+  - {slug: bounded-mind-how-to-think-right}
+  - {slug: rumination-is-not-thinking}
+  - {slug: human-intelligence-as-bottleneck}
+
+research:
+  lead: "这一部分是新的。我刚开始做研究，所以这里先是几条正在走的主线，加上做研究时想问题的方法，和一些技术底稿。它比世界观薄得多，会慢慢长厚。"
+  lines:
+    - t: 触觉与机器人学习
+      en: "TACTILE / ROBOT LEARNING"
+      d: "从传感器采集、遥操作、数据管线，到策略训练和真机执行，把感知到动作的整条链接起来。"
+      href: /resume/cases/tactile-vla/
+    - t: 策略网络的表征
+      en: "POLICY / REPRESENTATION"
+      d: "深层策略网络失效时，追问的不是“再调一调”，而是它还能否访问关键的中间表征。"
+      href: /resume/research/
+    - t: Agent 的演化
+      en: "AGENT / EVOLUTION"
+      d: "在多智能体编排框架上实现程序进化工作流，把研究闭环跑起来。"
+      href: /resume/cases/agent-research/
+  groups:
+    - id: thinking
+      en: "Thinking"
+      title: Research 思考
+      lead: "做研究时怎么想问题：什么算证据，什么时候该停，工程师和科学家各在哪一步。这一块刚开始写，文章还少。"
+      posts:
+        - {slug: hackathon-two-mindsets, q: "工程师思维与科学家思维"}
+        - {slug: intellectual-courage, q: "敢把事情想清楚"}
+        - {slug: post-045, q: "一次科研实习的复盘"}
+    - id: practice
+      en: "Practice"
+      title: 实践记录
+      lead: "做东西时留下的复盘和判断。"
+      posts:
+        - {slug: multi-agent-pitfalls, q: "约 30 次多智能体实验之后：默认先别上"}
+        - {slug: knowledge-base-as-shared-memory, q: "把知识库当成人和 Agent 共用的记忆"}
+        - {slug: robot-scenario-moat, q: "一场机器人落地沟通会"}
+        - {slug: what-a-hackathon-needs, q: "一场千人黑客松到底需要什么"}
+        - {slug: hackathon-shifts-from-execution-to-decisions, q: "AI 让黑客松从比执行变成了比决策"}
+        - {slug: ai-as-organ-long, q: "AI 不是工具，是器官"}
+    - id: foundations
+      en: "Foundations"
+      title: 技术底稿
+      lead: "学过的东西整理成的笔记，给上面几条主线打底。"
+      posts:
+        - {slug: Diffusion}
+        - {slug: VAE}
+        - {slug: cross-attantion}
+        - {slug: preln-vs-postln-deep-dive}
+        - {slug: Agent}
+        - {slug: post-029}
+        - {slug: post-031}
+        - {slug: post-014}
+        - {slug: post-012}
+        - {slug: post-033}
+        - {slug: post-067}
+
+notes:
+  lead: "不在体系里的那些文字：随笔、日记、观点、读书笔记。它们按写作的形态分开，不按结论分，因为很多篇本来就没有结论。"
+  sections:
+    - id: essays
+      en: "ESSAYS & VIEWS"
+      title: 随笔与观点
+      d: "一篇只说一件事的短文。"
+      slugs: [ai-learning, compute-encapsulation, reflection, competition-gives-information, science-speaks-for-groups, bounded-mind-how-to-think-right, knowhow-of-careers, two-layers-of-impact]
+    - id: diaries
+      en: "DIARY & RETROSPECT"
+      title: 日记与阶段复盘
+      d: "某个阶段的记录，写的时候没想给别人看。"
+      slugs: [hello-world, adulthood, post-047]
+    - id: reading
+      en: "READING & PEOPLE"
+      title: 读书与人物
+      d: "读到的、看到的别人怎么想。"
+      slugs: [post-024, post-025, post-026, post-027, hong-letong-interview, See]
+    - id: principles
+      en: "PRINCIPLES"
+      title: 原则笔记
+      d: "我给自己写的一套原则：学习、行动、关系、价值观。"
+      slugs: [Principles-of-Action-Cognition, post-001, 03-vs, post-017, post-018, post-019, post-020, post-061, post-063, post-023]
+    - id: learning
+      en: "LEARNING"
+      title: 学习与成长
+      d: "怎么学，学到什么程度才算会。"
+      slugs: [ai-learning-body-mode, ai-study-workflow, external-feedback, post-003, post-043]
+    - id: work
+      en: "WORK & PRODUCT"
+      title: 工作、产品与创作
+      d: "在真实约束里做事时学到的东西。"
+      slugs: [product-is-perceived-value, communication-is-product, selfmade-ai-video-pipeline, phone-clip-vs-animation]
+    - id: body
+      en: "BODY & STATE"
+      title: 身体与状态
+      d: "身体怎样影响想法。"
+      slugs: [Human-OS-Dopamine-Control-Manual, post-008]

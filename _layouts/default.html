@@ -35,32 +35,12 @@
   <link rel="preload" href="{{ '/assets/fonts/instrument-serif-italic.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
   <link rel="stylesheet" href="{{ '/assets/css/monochrome.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/atlas.css' | relative_url }}?v=2">
+  {% if page.layout == "front" %}<link rel="stylesheet" href="{{ '/assets/css/front.css' | relative_url }}?v=1">{% endif %}
   <noscript><style>.site-loader,.page-transition,.cursor-orbit{display:none!important}html.anim [data-reveal]{opacity:1!important}</style></noscript>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='50' fill='%231b1d1b'/%3E%3Ctext x='50' y='62' text-anchor='middle' font-size='34' font-family='monospace' fill='%23f0f0e9'%3EC/C%3C/text%3E%3C/svg%3E">
 </head>
 <body class="site-shell page-kind-{{ page.layout | default: 'default' }}">
-  {% if page.url == "/" %}
-  <!-- 入场四幕：像素星月 → 霓虹机械臂 → 结构光域 → 落地 -->
-  <div class="intro" id="intro" data-scene="1" aria-hidden="true">
-    <div class="intro-panels" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-    <div class="intro-gl" id="intro-gl" aria-hidden="true"></div>
-    <canvas class="intro-2d" id="intro-2d" aria-hidden="true"></canvas>
-    <div class="intro-hud">
-      <div class="intro-scene"><span id="intro-scene-no">SCENE 01</span><em id="intro-scene-name">PIXEL COSMOS</em></div>
-      <div class="intro-progress"><span id="intro-bar"></span></div>
-      <button class="intro-skip" id="intro-skip" type="button" data-cursor="SKIP">SKIP INTRO →</button>
-    </div>
-  </div>
-  <script type="importmap">
-    {
-      "imports": {
-        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js",
-        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
-      }
-    }
-  </script>
-  <script type="module" src="{{ '/assets/js/intro.js' | relative_url }}"></script>
-  {% endif %}
   <a class="skip-link" href="#content">跳到正文</a>
   <div class="reading-progress" aria-hidden="true"><span id="reading-progress-bar"></span></div>
 
@@ -72,11 +52,11 @@
       </a>
       <div class="nav-links">
         <a {% if page.url == "/" %}aria-current="page"{% endif %} href="{{ '/' | relative_url }}">首页</a>
-        <a {% if page.url contains "/theory/" %}aria-current="page"{% endif %} href="{{ '/theory/' | relative_url }}">思考</a>
+        <a {% if page.url contains "/worldview/" or page.url contains "/theory/" %}aria-current="page"{% endif %} href="{{ '/worldview/' | relative_url }}">世界观</a>
+        <a {% if page.url contains "/research/" %}aria-current="page"{% endif %} href="{{ '/research/' | relative_url }}">研究</a>
+        <a {% if page.url contains "/notes/" %}aria-current="page"{% endif %} href="{{ '/notes/' | relative_url }}">随笔</a>
         <a {% if page.url contains "/sparks/" %}aria-current="page"{% endif %} href="{{ '/sparks/' | relative_url }}">火花</a>
-        <a {% if page.url contains "/categories/" %}aria-current="page"{% endif %} href="{{ '/categories/' | relative_url }}">主题</a>
-        <a {% if page.url contains "/tags/" %}aria-current="page"{% endif %} href="{{ '/tags/' | relative_url }}">标签</a>
-        <a {% if page.url contains "/archive/" %}aria-current="page"{% endif %} href="{{ '/archive/' | relative_url }}">归档</a>
+        <a {% if page.url contains "/archive/" or page.url contains "/categories/" or page.url contains "/tags/" %}aria-current="page"{% endif %} href="{{ '/archive/' | relative_url }}">归档</a>
         <a {% if page.url contains "/about/" %}aria-current="page"{% endif %} href="{{ '/about/' | relative_url }}">关于</a>
         <a {% if page.url contains "/resume/" %}aria-current="page"{% endif %} href="{{ '/resume/' | relative_url }}">履历</a>
       </div>
@@ -93,13 +73,13 @@
   </nav>
 
   <aside class="mobile-menu" id="mobile-menu" aria-hidden="true">
-    <div class="mobile-menu-index">INDEX / 00—07</div>
+    <div class="mobile-menu-index">INDEX / 00—06</div>
     <nav aria-label="移动端导航">
       <a href="{{ '/' | relative_url }}"><span>00</span>首页</a>
-      <a href="{{ '/theory/' | relative_url }}"><span>01</span>思考</a>
-      <a href="{{ '/sparks/' | relative_url }}"><span>02</span>火花</a>
-      <a href="{{ '/categories/' | relative_url }}"><span>03</span>主题</a>
-      <a href="{{ '/tags/' | relative_url }}"><span>04</span>标签</a>
+      <a href="{{ '/worldview/' | relative_url }}"><span>01</span>世界观</a>
+      <a href="{{ '/research/' | relative_url }}"><span>02</span>研究</a>
+      <a href="{{ '/notes/' | relative_url }}"><span>03</span>随笔</a>
+      <a href="{{ '/sparks/' | relative_url }}"><span>04</span>火花</a>
       <a href="{{ '/archive/' | relative_url }}"><span>05</span>归档</a>
       <a href="{{ '/about/' | relative_url }}"><span>06</span>关于</a>
       <a href="{{ '/resume/' | relative_url }}"><span>07</span>履历</a>
@@ -121,8 +101,12 @@
         </div>
         <div class="footer-col">
           <p>SITEMAP</p>
-          <a href="{{ '/theory/' | relative_url }}">思考图谱</a>
-          <a href="{{ '/archive/' | relative_url }}">文章归档</a>
+          <a href="{{ '/worldview/' | relative_url }}">世界观</a>
+          <a href="{{ '/research/' | relative_url }}">研究</a>
+          <a href="{{ '/notes/' | relative_url }}">随笔</a>
+          <a href="{{ '/archive/' | relative_url }}">归档</a>
+          <a href="{{ '/categories/' | relative_url }}">主题</a>
+          <a href="{{ '/tags/' | relative_url }}">标签</a>
           <a href="{{ '/sparks/' | relative_url }}">火花</a>
           <a href="{{ '/about/' | relative_url }}">关于</a>
         </div>

@@ -16,7 +16,7 @@ description: "我是崔之行，北邮计算机本科生。这里有我的 AI �
   </section>
   <section class="story-scene" id="thinking">
     <div class="figure-space" data-figure="1"><img src="{{ '/assets/particles/form-1.webp' | relative_url }}" alt="" aria-hidden="true"><span>02 / THINKING</span></div>
-    <div class="story-copy"><p class="story-index">02 / NOTES ON THINKING</p><h2>在思考中，<br><span>塑造自己。</span></h2><p class="story-lead">我在这里记录每一点思考。<br>让零散的想法相遇，慢慢形成自己的理解。</p><div class="story-links"><a href="{{ '/theory/' | relative_url }}">进入思考图谱 <span>↗</span></a><a href="{{ '/sparks/' | relative_url }}">捕捉灵感 <span>↗</span></a></div></div>
+    <div class="story-copy"><p class="story-index">02 / NOTES ON THINKING</p><h2>在思考中，<br><span>塑造自己。</span></h2><p class="story-lead">我在这里记录每一点思考。<br>让零散的想法相遇，慢慢形成自己的理解。</p><div class="story-links"><a href="{{ '/worldview/' | relative_url }}">进入世界观 <span>↗</span></a><a href="{{ '/sparks/' | relative_url }}">捕捉灵感 <span>↗</span></a></div></div>
     <div class="story-bottom"><span>FORM / REFLECTION</span><a href="#future">继续向下 ↓</a></div>
   </section>
   <section class="story-scene" id="future">
@@ -27,5 +27,5 @@ description: "我是崔之行，北邮计算机本科生。这里有我的 AI �
 </div>
 <section class="journal" id="writing"><div class="journal-head"><div><p class="story-index">THE JOURNAL / RECENT WRITING</p><h2>最近的记录<span>。</span></h2></div><a href="{{ '/archive/' | relative_url }}">全部文章 ↗</a></div>
   <div class="journal-list">{% for post in site.posts limit:6 %}<a class="journal-row" href="{{ post.url | relative_url }}"><span class="journal-date">{{ post.date | date: '%Y.%m.%d' }}</span><span class="journal-title">{{ post.title | escape }}</span><span class="journal-cat">{{ post.categories | first }}</span><span class="journal-arrow">↗</span></a>{% endfor %}</div>
-  <div class="journal-explore"><a href="{{ '/theory/' | relative_url }}"><small>01 / THINKING</small><strong>思考图谱</strong><span>从问题出发，建立联系 ↗</span></a><a href="{{ '/sparks/' | relative_url }}"><small>02 / SPARKS</small><strong>灵感火花</strong><span>收集那些转瞬即逝的念头 ↗</span></a><a href="{{ '/resume/' | relative_url }}"><small>03 / ABOUT</small><strong>了解我</strong><span>经历、项目与正在做的事 ↗</span></a></div>
+  <div class="journal-explore"><a href="{{ '/worldview/' | relative_url }}"><small>01 / WORLDVIEW</small><strong>世界观</strong><span>一层搭一层，看我如何理解世界 ↗</span></a><a href="{{ '/research/' | relative_url }}"><small>02 / RESEARCH</small><strong>研究</strong><span>正在走的主线与做研究的想问题方式 ↗</span></a><a href="{{ '/sparks/' | relative_url }}"><small>03 / SPARKS</small><strong>灵感火花</strong><span>收集那些转瞬即逝的念头 ↗</span></a><a href="{{ '/notes/' | relative_url }}"><small>04 / NOTES</small><strong>随笔</strong><span>不在体系里的那些文字 ↗</span></a><a href="{{ '/resume/' | relative_url }}"><small>05 / ABOUT</small><strong>了解我</strong><span>经历、项目与正在做的事 ↗</span></a></div>
 </section>

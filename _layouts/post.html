@@ -9,12 +9,12 @@ layout: default
 
   <div class="article-main">
     <header id="article-start" class="post-header">
-      {% if page.categories.size > 0 %}
-      <div class="post-kicker">
-        {% for cat in page.categories limit:2 %}
-          <a href="{{ '/categories/' | relative_url }}#{{ cat }}">{{ cat }}</a>
-        {% endfor %}
-      </div>
+      {% include atlas-home.html %}
+      {% if ax_top %}
+      <nav class="ax-crumb" aria-label="这篇文章收在">
+        <a href="{{ ax_url | relative_url }}">{{ ax_top }}</a><i aria-hidden="true">›</i>
+        <a href="{{ ax_url | relative_url }}#{{ ax_anchor }}">{{ ax_sub }}</a>
+      </nav>
       {% endif %}
       <h1 class="post-title" data-split>{{ page.title }}</h1>
       <div class="post-meta">
@@ -33,6 +33,9 @@ layout: default
     </div>
 
     <footer class="post-end">
+      {% if ax_top %}
+      <p class="ax-return"><span>收在</span><a href="{{ ax_url | relative_url }}#{{ ax_anchor }}">{{ ax_top }} › {{ ax_sub }}</a><a href="{{ ax_url | relative_url }}">回到{{ ax_top }} ↗</a></p>
+      {% endif %}
       {% if page.tags.size > 0 %}
       <div class="post-tags">
         <p class="eyebrow">Tags</p>
