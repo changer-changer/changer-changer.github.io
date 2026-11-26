@@ -1,0 +1,30 @@
+/* 首页小改：从这里读起、最近记录的栏目名、页尾卡片。只加在原版首页之上。 */
+
+/* ---------- 从这里读起 ---------- */
+.start-here {
+  display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(1.5rem, 4vw, 4rem);
+  margin-top: 3rem; padding: clamp(1.8rem, 3.5vw, 2.8rem) 0 0; border-top: 1px solid var(--line);
+}
+.start-lead { display: flex; flex-direction: column; padding: clamp(1.4rem, 2.6vw, 2.2rem); background: var(--surface); border: 1px solid var(--line); transition: border-color .3s, transform .45s var(--ease-out); }
+.start-lead:hover { border-color: var(--muted); transform: translateY(-3px); }
+.start-lead small, .start-side small { font: 500 .62rem var(--f-mono); letter-spacing: .16em; color: var(--muted); }
+.start-lead strong { margin-top: 1.1rem; font: 900 clamp(1.45rem, 2.7vw, 2.1rem)/1.4 var(--f-serif); letter-spacing: -.01em; }
+.start-lead span { margin-top: .9rem; font-size: .9rem; line-height: 1.85; color: var(--muted); max-width: 28em; }
+.start-side { display: flex; flex-direction: column; justify-content: center; }
+.start-side a { display: grid; grid-template-columns: 1fr auto; align-items: baseline; column-gap: 1rem; padding: 1.15rem 0; border-top: 1px solid var(--line); transition: padding-left .35s var(--ease-out), color .3s; }
+.start-side a:last-child { border-bottom: 1px solid var(--line); }
+.start-side a small { grid-column: 1 / -1; margin-bottom: .45rem; }
+.start-side a { font-family: var(--f-serif); font-weight: 900; font-size: 1.12rem; line-height: 1.5; }
+.start-side a span { font: 400 1rem var(--f-mono); color: var(--faint); }
+.start-side a:hover { padding-left: .7rem; color: var(--muted); }
+.start-here + .journal-list { margin-top: 1.6rem; }
+
+/* ---------- 最近的记录：标题略放大，行距略放松 ---------- */
+.journal-row { padding: 1.9rem 0; }
+.journal-title { font-size: clamp(1.15rem, 1.75vw, 1.5rem); letter-spacing: .005em; }
+.journal-cat { letter-spacing: .12em; }
+
+@media (max-width: 760px) {
+  .start-here { grid-template-columns: 1fr; gap: 1rem; margin-top: 2rem; padding-top: 1.4rem; }
+  .journal-row { padding: 1.6rem 0; }
+}

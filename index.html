@@ -9,7 +9,7 @@ description: "我是崔之行，北邮计算机本科生。这里有我的 AI �
       <p class="inscription-kicker">个人笔记 <span aria-hidden="true">/</span> 崔之行</p>
       <h1 aria-label="你好，我是崔之行"><span class="inscription-greeting" aria-hidden="true">你好，</span><span class="inscription-name" aria-hidden="true">我是崔之行</span></h1>
       <p class="story-lead inscription-intro">我在北邮学计算机，做过 Agent 工具、触觉机器人和交互式教学网站。这里也记录我做项目时遇到的问题和想法。</p>
-      <div class="story-links inscription-links"><a href="{{ '/resume/' | relative_url }}">作品与履历 <span aria-hidden="true">↗</span></a><a href="{{ '/archive/' | relative_url }}">读我的文章 <span aria-hidden="true">↗</span></a></div>
+      <div class="story-links inscription-links"><a href="{{ '/worldview/' | relative_url }}">从世界观读起 <span aria-hidden="true">↗</span></a><a href="{{ '/resume/' | relative_url }}">作品与履历 <span aria-hidden="true">↗</span></a></div>
     </div>
     <div class="figure-space" data-figure="0"><img src="{{ '/assets/particles/form-0.webp' | relative_url }}?v=7" alt="" aria-hidden="true"><span><a href="https://commons.wikimedia.org/wiki/File:Alexandre_Cabanel_-_Fallen_Angel.jpg" target="_blank" rel="noopener noreferrer">01 / THE FALLEN ANGEL ↗</a></span></div>
     <div class="story-bottom"><span>写作 / 思考 / 探索</span><a href="#thinking">向下阅读 ↓</a><button type="button" id="particle-toggle" aria-pressed="true">暂停粒子 Ⅱ</button></div>
@@ -26,6 +26,24 @@ description: "我是崔之行，北邮计算机本科生。这里有我的 AI �
   </section>
 </div>
 <section class="journal" id="writing"><div class="journal-head"><div><p class="story-index">THE JOURNAL / RECENT WRITING</p><h2>最近的记录<span>。</span></h2></div><a href="{{ '/archive/' | relative_url }}">全部文章 ↗</a></div>
-  <div class="journal-list">{% for post in site.posts limit:6 %}<a class="journal-row" href="{{ post.url | relative_url }}"><span class="journal-date">{{ post.date | date: '%Y.%m.%d' }}</span><span class="journal-title">{{ post.title | escape }}</span><span class="journal-cat">{{ post.categories | first }}</span><span class="journal-arrow">↗</span></a>{% endfor %}</div>
-  <div class="journal-explore"><a href="{{ '/worldview/' | relative_url }}"><small>01 / WORLDVIEW</small><strong>世界观</strong><span>一层搭一层，看我如何理解世界 ↗</span></a><a href="{{ '/research/' | relative_url }}"><small>02 / RESEARCH</small><strong>研究</strong><span>正在走的主线与做研究的想问题方式 ↗</span></a><a href="{{ '/sparks/' | relative_url }}"><small>03 / SPARKS</small><strong>灵感火花</strong><span>收集那些转瞬即逝的念头 ↗</span></a><a href="{{ '/notes/' | relative_url }}"><small>04 / NOTES</small><strong>随笔</strong><span>不在体系里的那些文字 ↗</span></a><a href="{{ '/resume/' | relative_url }}"><small>05 / ABOUT</small><strong>了解我</strong><span>经历、项目与正在做的事 ↗</span></a></div>
+<div class="start-here">
+  {% assign key = "map-of-my-worldview" %}{% assign lead = site.posts | where_exp: "p", "p.slug == key" | first %}
+  {% assign key = "how-i-maintain-my-beliefs" %}{% assign s1 = site.posts | where_exp: "p", "p.slug == key" | first %}
+  {% assign key = "human-intelligence-as-bottleneck" %}{% assign s2 = site.posts | where_exp: "p", "p.slug == key" | first %}
+  {% assign key = "hackathon-two-mindsets" %}{% assign s3 = site.posts | where_exp: "p", "p.slug == key" | first %}
+  {% if lead %}
+  <a class="start-lead" href="{{ lead.url | relative_url }}">
+    <small>Start here / 从这里读起</small>
+    <strong>{{ lead.title }}</strong>
+    <span>{{ lead.description | default: lead.excerpt | strip_html | truncate: 90 }}</span>
+  </a>
+  {% endif %}
+  <div class="start-side">
+    {% if s1 %}<a href="{{ s1.url | relative_url }}"><small>世界观 · 规矩</small>{{ s1.title }}<span>↗</span></a>{% endif %}
+    {% if s3 %}<a href="{{ s3.url | relative_url }}"><small>研究 · 思考</small>{{ s3.title }}<span>↗</span></a>{% endif %}
+    {% if s2 %}<a href="{{ s2.url | relative_url }}"><small>世界观 · 最新一层</small>{{ s2.title }}<span>↗</span></a>{% endif %}
+  </div>
+</div>
+  <div class="journal-list">{% for post in site.posts limit:6 %}<a class="journal-row" href="{{ post.url | relative_url }}"><span class="journal-date">{{ post.date | date: '%Y.%m.%d' }}</span><span class="journal-title">{{ post.title | escape }}</span><span class="journal-cat">{% assign where = "" %}{% for l in site.data.atlas.worldview.layers %}{% for it in l.posts %}{% if it.slug == post.slug %}{% assign where = "世界观" %}{% endif %}{% endfor %}{% endfor %}{% for g in site.data.atlas.research.groups %}{% for it in g.posts %}{% if it.slug == post.slug %}{% assign where = "研究" %}{% endif %}{% endfor %}{% endfor %}{% for s in site.data.atlas.notes.sections %}{% for sl in s.slugs %}{% if sl == post.slug %}{% assign where = "随笔" %}{% endif %}{% endfor %}{% endfor %}{{ where }}</span><span class="journal-arrow">↗</span></a>{% endfor %}</div>
+  <div class="journal-explore"><a href="{{ '/worldview/' | relative_url }}"><small>01 / WORLDVIEW</small><strong>世界观</strong><span>一层搭一层，看我如何理解世界 ↗</span></a><a href="{{ '/research/' | relative_url }}"><small>02 / RESEARCH</small><strong>研究</strong><span>正在走的主线与做研究的想问题方式 ↗</span></a><a href="{{ '/sparks/' | relative_url }}"><small>03 / SPARKS</small><strong>火花</strong><span>收集那些转瞬即逝的念头 ↗</span></a><a href="{{ '/notes/' | relative_url }}"><small>04 / NOTES</small><strong>随笔</strong><span>不在体系里的那些文字 ↗</span></a><a href="{{ '/about/' | relative_url }}"><small>05 / ABOUT</small><strong>关于我</strong><span>这个博客为什么存在 ↗</span></a><a href="{{ '/resume/' | relative_url }}"><small>06 / WORK</small><strong>做过的事</strong><span>项目、研究与作品 ↗</span></a></div>
 </section>
