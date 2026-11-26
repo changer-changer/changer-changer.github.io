@@ -28,3 +28,48 @@
   .start-here { grid-template-columns: 1fr; gap: 1rem; margin-top: 2rem; padding-top: 1.4rem; }
   .journal-row { padding: 1.6rem 0; }
 }
+
+/* ============================================================
+   开场与版式的细化
+   ============================================================ */
+
+/* 标题改成实心墨字。原来的雕刻线只铺在文字框内，末尾一笔会被切掉。 */
+#hello.story-scene .hero-inscription h1 > span {
+  background: none; -webkit-text-fill-color: currentColor; -webkit-text-stroke: 0 transparent;
+}
+#hello .hero-inscription h1 { font-size: clamp(3rem, 5.4vw, 5.8rem); line-height: 1.22; letter-spacing: .05em; }
+#hello .hero-inscription h1 .inscription-greeting { color: #7a827a; font-size: .56em; letter-spacing: .42em; margin-bottom: .28em; }
+#hello .hero-inscription h1 .inscription-name { color: #171b17; }
+#hello .inscription-kicker { margin-bottom: clamp(2.6rem, 6.5vh, 4.6rem); letter-spacing: .28em; color: #4f574f; }
+#hello .inscription-intro { font-size: clamp(.98rem, 1.08vw, 1.1rem); line-height: 2.05; letter-spacing: .06em; color: #3d443d; margin-top: clamp(2rem, 5vh, 3.2rem); max-width: 29.5em; }
+#hello .inscription-links { margin-top: 2.4rem; gap: 2.6rem; }
+#hello .inscription-links a { font-size: .92rem; letter-spacing: .1em; padding-bottom: .6rem; border-color: #8f978f; transition: color .3s, border-color .3s, gap .35s var(--ease-out); display: inline-flex; align-items: center; }
+#hello .inscription-links a:hover { color: #171b17; border-color: #171b17; gap: 1rem; }
+
+/* 第二、三屏的说明文字 */
+.story-copy .story-lead { line-height: 2.05; }
+.story-copy .story-links a { font-size: .95rem; }
+
+/* 记录区的标题 */
+.journal-head { padding-bottom: 2.6rem; }
+.journal-head h2 { letter-spacing: -.045em; }
+.journal-head > a { font-size: .9rem; letter-spacing: .06em; border-bottom: 1px solid var(--line); padding-bottom: .3rem; }
+
+/* 页尾卡片：说明文字略大，卡片内边距统一 */
+.journal-explore a { padding: 1.9rem 1.8rem; min-height: 12.5rem; }
+.journal-explore strong { font-size: clamp(1.6rem, 2vw, 1.9rem); letter-spacing: -.02em; }
+.journal-explore span { font-size: .86rem; line-height: 1.7; }
+
+@media (max-width: 760px) {
+  #hello .hero-inscription h1 { font-size: clamp(2.5rem, 11.5vw, 3.9rem); }
+  #hello .inscription-kicker { margin-bottom: 1.8rem; }
+  #hello .inscription-intro { line-height: 1.95; }
+  .journal-explore a { min-height: 10.5rem; }
+}
+
+/* 离开首屏后导航变成深色底，左上角的名字要跟着变亮（原来仍是深色，等于看不见） */
+.page-kind-home:not(.hero-bright) .home-wordmark { color: #f0f1eb; }
+.page-kind-home:not(.hero-bright) .home-wordmark small { color: #a9b0a6; }
+
+/* 第二屏：文字后面加一层更实的暗底，和粒子拉开距离 */
+#thinking .story-copy::before { content: ""; position: absolute; z-index: -1; inset: -3rem -6rem; pointer-events: none; background: radial-gradient(ellipse at 40% 50%, rgba(11,13,11,.96), rgba(11,13,11,.88) 46%, transparent 76%); }
